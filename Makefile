@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+         #
+#    By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/07 09:56:21 by rcompain          #+#    #+#              #
-#    Updated: 2026/04/07 08:28:40 by rcompain         ###   ########.fr        #
+#    Updated: 2026/04/07 16:06:50 by rcompain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,10 @@ LIBFT_A		= $(LIBFT_DIR)/libft.a
 # ——— Sources ——————————————————————————————————————————————————————————————— #
 SRC			= $(SRC_DIR)/main.c \
 			  $(SRC_DIR)/init/init_program.c \
-			  $(SRC_DIR)/exit/exit_program.c
+			  $(SRC_DIR)/exit/exit_program.c \
+			  $(SRC_DIR)/draw/draw.c \
+			  librt/vec_norm.c \
+			  librt/vec_operator.c
 
 OBJ			= ${SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o}
 
@@ -48,13 +51,6 @@ $(BOLD)$(ORANGE)  ██$(DIM)║ ╚═╝ $(BOLD)██$(DIM)║$(BOLD)██$
 $(DIM)$(ORANGE)  ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝$(RED)╚═╝  ╚═╝   ╚═╝  $(R)
 $(DIM)                    by pchazal & rcompain — 42 Angoulême\n\n$(R)
 
-$(BOLD)$(ORANGE)\n  ███$(DIM)▌   $(BOLD)███$(DIM)▌$(BOLD)██$(DIM)▌$(BOLD)███$(DIM)▌   $(BOLD)██$(DIM)▌$(BOLD)██$(DIM)▌$(RED)$(BOLD)██████$(DIM)▌ $(BOLD)████████$(DIM)▌$(R)
-$(BOLD)$(ORANGE)  ████$(DIM)▌ $(BOLD)████$(DIM)▌$(BOLD)██$(DIM)▌$(BOLD)████$(DIM)▌  $(BOLD)██$(DIM)▌$(BOLD)██$(DIM)▌$(RED)$(BOLD)██$(DIM)▌  $(BOLD)██$(DIM)▌   $(BOLD)██$(DIM)▌$(R)
-$(BOLD)$(ORANGE)  ██$(DIM)▌$(BOLD)████$(DIM)▌$(BOLD)██$(DIM)▌$(BOLD)██$(DIM)▌$(BOLD)██$(DIM)▌$(BOLD)██$(DIM)▌ $(BOLD)██$(DIM)▌$(BOLD)██$(DIM)▌$(RED)$(BOLD)██████$(DIM)▌    $(BOLD)██$(DIM)▌$(R)
-$(BOLD)$(ORANGE)  ██$(DIM)▌ $(BOLD)██$(DIM)▌ $(BOLD)██$(DIM)▌$(BOLD)██$(DIM)▌$(BOLD)██$(DIM)▌ $(BOLD)██$(DIM)▌$(BOLD)██$(DIM)▌$(BOLD)██$(DIM)▌$(RED)$(BOLD)██$(DIM)▌  $(BOLD)██$(DIM)▌   $(BOLD)██$(DIM)▌$(R)
-$(BOLD)$(ORANGE)  ██$(DIM)▌ ▀▀▘ $(BOLD)██$(DIM)▌$(BOLD)██$(DIM)▌$(BOLD)██$(DIM)▌  $(BOLD)████$(DIM)▌$(BOLD)██$(DIM)▌$(RED)$(BOLD)██$(DIM)▌  $(BOLD)██$(DIM)▌   $(BOLD)██$(DIM)▌$(R)
-$(DIM)$(ORANGE)  ▀▀▘     ▀▀▘▀▀▘▀▀▘  ▀▀▀▀▘▀▀▘$(RED)▀▀▘  ▀▀▘   ▀▀▘  $(R)
-$(DIM)                    by pchazal & rcompain — 42 Angoulême\n\n$(R)
 endef
 export BANNER
 
