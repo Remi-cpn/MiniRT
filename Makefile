@@ -1,14 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/11/07 09:56:21 by rcompain          #+#    #+#              #
-#    Updated: 2026/04/07 16:06:50 by rcompain         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
 NAME		= minirt
 CC			= cc
@@ -19,18 +8,29 @@ MLX 		= $(MLX_DIR)/libmlx.so
 SRC_DIR		= src
 OBJ_DIR		= obj
 INC_DIR		= include
+LIBRT_DIR		= librt
 LIBFT_DIR	= libft
 LIBFT_A		= $(LIBFT_DIR)/libft.a
 
-# ——— Sources ——————————————————————————————————————————————————————————————— #
-SRC			= $(SRC_DIR)/main.c \
-			  $(SRC_DIR)/init/init_program.c \
-			  $(SRC_DIR)/exit/exit_program.c \
-			  $(SRC_DIR)/draw/draw.c \
-			  librt/vec_norm.c \
-			  librt/vec_operator.c
+# --- Sous-dossiers sources --------------------------------------------------
+SUB_DIRS := draw exit init
 
-OBJ			= ${SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o}
+# ——— Sources ——————————————————————————————————————————————————————————————— #
+SRC_INIT	= init_program.c
+
+SRC_EXIT	= exit_program.c
+
+SRC_DRAW	= draw.c
+
+SRC_LRT		= vec_norm.c vec_operator.c
+
+VPATH := $(SRC_DIR) \
+         $(addprefix $(SRC_DIR)/, $(SUB_DIRS)) \
+         $(LIBRT_DIR)
+
+SRCS		= $(SRC_INIT) $(SRC_EXIT) $(SRC_DRAW) $(SRC_LRT)
+
+OBJ			= ${SRCS:%.c=$(OBJ_DIR)/%.o}
 
 # ——— Colors ———————————————————————————————————————————————————————————————— #
 R           = \033[0m
@@ -62,7 +62,7 @@ $(NAME): $(OBJ)
 	@printf "\r\033[2K$(CYAN)📝 Sources     $(BOLD)$(GREEN)[OK]$(R)\n"
 	@printf "$(BOLD)$(GREEN)\n    ✅  minirt compiled successfully\n\n$(R)"
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
 	@printf "\r\033[2K$(CYAN)📝 Compiling   %s$(R)" "$<"
