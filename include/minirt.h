@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/07 08:30:27 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/07 11:10:12 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,16 @@ typedef struct s_data
 	mlx_window_create_info	win_info;
 	mlx_window				win;
 }	t_data;
+
+typedef enum e_key
+{
+	ESC = 41,
+}	t_key;
+
+typedef enum e_event
+{
+	CROSS = 0,
+}	t_event;
 
 /* ——— Function prototypes —————————————————————————————————————————————————— */
 t_data					init_program(void);
