@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   librt.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 14:07:20 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/07 16:20:39 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/08 13:15:45 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBRT_H
 # define LIBRT_H
 
-#include "math.h"
+# include "math.h"
 
 /* ——— Structs —————————————————————————————————————————————————————————————— */
 

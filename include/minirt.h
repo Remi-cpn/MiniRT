@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/07 11:10:12 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/08 13:20:20 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 /* ——— Lib Intern ——————————————————————————————————————————————————————————— */
 # include "../libft/libft.h"
 # include "exit.h"
+# include "librt.h"
+# include "world.h"
 
 /* ——— Lib Graphique ———————————————————————————————————————————————————————— */
 # include "../MacroLibX/includes/mlx.h"
