@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:34:44 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/07 13:40:39 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/08 17:35:35 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 void	test(const t_data *d)
 {
 	mlx_color	pixels[40 * 40];
-	int		i;
-	int		x;
-	int		y;
+	int			i;
+	int			x;
+	int			y;
 
 	ft_memset(pixels, 0, sizeof(mlx_color));
 	i = 0;
@@ -51,17 +51,16 @@ void    update(void *param)
 	test(d);
 }
 
-void    window_hook(int event, void *param)
+void	window_hook(int event, void *param)
 {
-    //ft_printf("%d", event);
-    if (event == CROSS)
-        exit_prog(param, 0, NULL);
+	if (event == CROSS)
+		exit_prog(param, 0, NULL);
 }
 
-void    key_hook(int key, void *param)
+void	key_hook(int key, void *param)
 {
-    if (key == ESC)
-        exit_prog(param, 0, NULL);
+	if (key == ESC)
+		exit_prog(param, 0, NULL);
 }
 
 int	main(void)
@@ -69,9 +68,9 @@ int	main(void)
 	t_data	d;
 
 	d = init_program();
-    mlx_on_event(d.mlx_init, d.win, MLX_KEYDOWN, key_hook, &d);
-    mlx_on_event(d.mlx_init, d.win, MLX_WINDOW_EVENT, window_hook, &d);
+	mlx_on_event(d.mlx_init, d.win, MLX_KEYDOWN, key_hook, &d);
+	mlx_on_event(d.mlx_init, d.win, MLX_WINDOW_EVENT, window_hook, &d);
 	mlx_pixel_put(d.mlx_init, d.win, 10, 10, (mlx_color){ .rgba = 0xFF0000FF});
-    mlx_add_loop_hook(d.mlx_init, update, &d);
-    mlx_loop(d.mlx_init);
+	mlx_add_loop_hook(d.mlx_init, update, &d);
+	mlx_loop(d.mlx_init);
 }

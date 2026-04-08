@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/08 13:20:20 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/08 20:51:04 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ typedef struct s_data
 	mlx_window				win;
 }	t_data;
 
+typedef struct t_ray
+{
+	t_vec	origin;
+	t_vec	dir;
+}	t_ray;
+
 typedef enum e_key
 {
 	ESC = 41,
@@ -45,6 +51,9 @@ typedef enum e_event
 }	t_event;
 
 /* ——— Function prototypes —————————————————————————————————————————————————— */
-t_data					init_program(void);
+t_data	init_program(void);
 
-#endif // !DEBUG
+t_ray	pixel_ray(t_world *w, t_data *d, int x_pixel, int y_pixel);
+void	draw(t_data *data, t_world *world);
+
+#endif

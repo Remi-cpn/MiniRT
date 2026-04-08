@@ -8,7 +8,7 @@ MLX 		= $(MLX_DIR)/libmlx.so
 SRC_DIR		= src
 OBJ_DIR		= obj
 INC_DIR		= include
-LIBRT_DIR		= librt
+LIBRT_DIR	= librt
 LIBFT_DIR	= libft
 LIBFT_A		= $(LIBFT_DIR)/libft.a
 
@@ -16,19 +16,21 @@ LIBFT_A		= $(LIBFT_DIR)/libft.a
 SUB_DIRS := draw exit init
 
 # ——— Sources ——————————————————————————————————————————————————————————————— #
-SRC_INIT	= init_program.c
+SRC_INIT	= init_program.c \
+			  init_world.c
 
 SRC_EXIT	= exit_program.c
 
 SRC_DRAW	= draw.c
 
-SRC_LRT		= vec_norm.c vec_operator.c
+SRC_LRT		= vec_norm.c \
+			  vec_operator.c
 
 VPATH := $(SRC_DIR) \
          $(addprefix $(SRC_DIR)/, $(SUB_DIRS)) \
          $(LIBRT_DIR)
 
-SRCS		= $(SRC_INIT) $(SRC_EXIT) $(SRC_DRAW) $(SRC_LRT)
+SRCS		= main.c $(SRC_INIT) $(SRC_EXIT) $(SRC_DRAW) $(SRC_LRT)
 
 OBJ			= ${SRCS:%.c=$(OBJ_DIR)/%.o}
 
@@ -58,7 +60,7 @@ export BANNER
 all: banner $(MLX) $(LIBFT_A) $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) -I$(INC_DIR) $(OBJ) $(LIBFT_A) $(MLX) -o $(NAME) -lSDL2
+	@$(CC) $(CFLAGS) -I$(INC_DIR) $(OBJ) $(LIBFT_A) $(MLX) -o $(NAME) -lSDL2 -lm
 	@printf "\r\033[2K$(CYAN)📝 Sources     $(BOLD)$(GREEN)[OK]$(R)\n"
 	@printf "$(BOLD)$(GREEN)\n    ✅  minirt compiled successfully\n\n$(R)"
 

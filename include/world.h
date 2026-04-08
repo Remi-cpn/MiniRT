@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:17:11 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/08 13:26:42 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/08 17:50:57 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define WORLD_H
 
 # include "librt.h"
+
+# define FOV 70
 
 /* ——— Variable prototypes —————————————————————————————————————————————————— */
 typedef struct s_data	t_data;
@@ -23,6 +25,7 @@ typedef struct s_camera
 {
 	t_vec	pos;
 	t_vec	dir;
+	int		fov;
 }	t_camera;
 
 typedef struct s_sphere
@@ -35,6 +38,7 @@ typedef struct s_sphere
 typedef struct s_world
 {
 	t_sphere	*sphere;
+	t_camera	cam;
 }	t_world;
 
 /* ——— Function prototypes —————————————————————————————————————————————————— */
