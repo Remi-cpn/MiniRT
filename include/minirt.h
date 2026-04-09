@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/09 15:02:03 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/09 15:37:24 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef enum e_key
 	S = 22,
 	UP = 82,
 	DOWN = 81,
+	WHEEL_F = 1,
+	WHEEL_B = 2,
 }	t_key;
 
 typedef enum e_event
@@ -76,5 +78,11 @@ t_data	init_program(void);
 t_ray	pixel_ray(t_world *w, t_data *d, int x_pixel, int y_pixel);
 void	draw(t_data *d, t_world *w);
 int		hit_sphere(t_world *w, t_ray ray);
+
+void	window_hook(int event, void *param);
+void	key_hook_up(int key, void *param);
+void	key_hook_down(int key, void *param);
+void	mouse_hook_wheel(int event, void *param);
+void	mouse_hook(int event, void *param);
 
 #endif

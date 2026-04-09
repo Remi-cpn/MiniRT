@@ -32,7 +32,7 @@ VPATH := $(SRC_DIR) \
          $(addprefix $(SRC_DIR)/, $(SUB_DIRS)) \
          $(LIBRT_DIR)
 
-SRCS		= main.c $(SRC_INIT) $(SRC_EXIT) $(SRC_DRAW) $(SRC_LRT)
+SRCS		= main.c hook.c $(SRC_INIT) $(SRC_EXIT) $(SRC_DRAW) $(SRC_LRT)
 
 OBJ			= ${SRCS:%.c=$(OBJ_DIR)/%.o}
 
