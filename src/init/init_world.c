@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 08:42:27 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/08 17:51:06 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/09 09:06:04 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ t_world	init_world(t_data *data)
 
 	(void)data;
 	ft_memset(&w, 0, sizeof(t_world));
-	w.sphere->center = (t_vec){0, 0, 0};
-	w.sphere->radius = 1;
-	w.sphere->color = (t_color){255, 0, 0};
+	w.sphere.center = (t_vec){0, 0, 0};
+	w.sphere.radius = 1;
+	w.sphere.color = (t_color){255, 0, 0};
 	w.cam.pos = (t_vec){0, 0, -5};
 	w.cam.dir = (t_vec){0, 0, 1};
 	w.cam.fov = FOV;

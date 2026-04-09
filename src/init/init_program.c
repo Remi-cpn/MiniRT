@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:15:57 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/07 08:30:31 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/09 09:00:57 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ t_data	init_program(void)
 
 	ft_memset(&d, 0, sizeof(t_data));
 	init_mlx(&d);
+	d.world = init_world(&d);
 	return (d);
 }

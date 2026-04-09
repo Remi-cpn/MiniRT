@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:17:11 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/08 17:50:57 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/09 09:05:05 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_sphere
 
 typedef struct s_world
 {
-	t_sphere	*sphere;
+	t_sphere	sphere;
 	t_camera	cam;
 }	t_world;
 
