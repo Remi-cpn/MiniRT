@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/09 09:32:37 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/09 15:02:03 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,23 @@
 # include "stdio.h"
 
 /* ——— Structs data ————————————————————————————————————————————————————————— */
+typedef struct s_imput
+{
+	bool d;
+	bool a;
+	bool w;
+	bool s;
+	bool up;
+	bool down;
+}	t_imput;
+
 typedef struct s_data
 {
 	mlx_context				mlx_init;
 	mlx_window_create_info	win_info;
 	mlx_window				win;
+	mlx_image				img;
+	t_imput					imput;
 	t_world					world;
 }	t_data;
 
@@ -47,6 +59,10 @@ typedef enum e_key
 	ESC = 41,
 	D = 7,
 	A = 4,
+	W = 26,
+	S = 22,
+	UP = 82,
+	DOWN = 81,
 }	t_key;
 
 typedef enum e_event

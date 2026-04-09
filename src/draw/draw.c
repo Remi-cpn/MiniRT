@@ -3,66 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 12:02:25 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/09 09:43:09 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/09 15:04:15 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
-#include "../../MacroLibX/includes/mlx_extended.h"
 
-/* Check if a ray hits a sphere */
-/* a = dir² */
-/* b = 2 * (oc · dir) */
-/* c = oc² - radius² */
-/* discriminant = b² - 4ac */
-int	hit_sphere(t_world *w, t_ray ray)
+static void	pos_cam(t_data *d)
 {
-	t_vec			oc;
-	t_second_degret	sd;
-	double			discriminant;
-
-	sd.a = vec_dot(ray.dir, ray.dir);
-	oc = vec_sub(ray.origin, w->sphere.center);
-	sd.b = 2 * vec_dot(oc, ray.dir);
-	sd.c = vec_dot(oc, oc) - w->sphere.radius * w->sphere.radius;
-	discriminant = sd.b * sd.b - 4 * sd.a * sd.c;
-	if (discriminant < 0)
-		return (0);
-	return (1);
+	if (d->imput.a == true)
+		d->world.cam.pos.x += 0.5;
+	if (d->imput.d == true)
+		d->world.cam.pos.x -= 0.5;
+	if (d->imput.w == true)
+		d->world.cam.pos.z += 0.5;
+	if (d->imput.s == true)
+		d->world.cam.pos.z -= 0.5;
+	if (d->imput.up == true)
+		d->world.cam.pos.y += 0.5;
+	if (d->imput.down == true)
+		d->world.cam.pos.y -= 0.5;
 }
 
-/* Create a ray for a pixel */
-/* Formule: norm x and y = (pixel_position - width / 2) / (half_width / 2) */
-t_ray	pixel_ray(t_world *w, t_data *d, int x_pixel, int y_pixel)
+static void	put_image(t_data *d, mlx_color *pixels)
 {
-	t_ray	ray;
-	double	z;
-	double	x_norm;
-	double	y_norm;
-	double	rasio;
-
-	ray.origin = w->cam.pos;
-	rasio = (double)d->win_info.width / (double)d->win_info.height;
-	x_norm = (x_pixel - (double)d->win_info.width / 2)
-		/ ((double)d->win_info.width / 2);
-	y_norm = (y_pixel - (double)d->win_info.height / 2)
-		/ ((double)d->win_info.height / 2);
-	z = 1 / tan(w->cam.fov / 2);
-	ray.dir = (t_vec){x_norm * rasio, y_norm, z};
-	return (ray);
-}
-
-void	draw(t_data *d, t_world *w)
-{
-	mlx_color	pixels[d->win_info.width * d->win_info.height];
 	int			i;
 	int			x;
 	int			y;
+	
+	i = 0;
+	y = -1;
+	while (++y < d->win_info.height)
+	{
+		x = -1;
+		while (++x < d->win_info.width)
+		{
+			mlx_set_image_pixel(d->mlx_init, d->img, x, y, pixels[i]);
+			i++;
+		}
+	}
+}
 
-	ft_memset(pixels, 0, sizeof(mlx_color));
+static void	set_pixel(t_data *d, t_world *w, mlx_color *pixels)
+{
+	int			i;
+	int			x;
+	int			y;
+	
 	i = 0;
 	y = -1;
 	while (++y < d->win_info.height)
@@ -73,13 +63,23 @@ void	draw(t_data *d, t_world *w)
 			if (hit_sphere(w, pixel_ray(w, d, x, y)))
 				pixels[i].rgba = 0xFF0000FF;
 			else
-				pixels[i].rgba = 0xFF000000;
-			if (w->cam.pos.x > 0)
-				pixels[i].rgba = 0xFF00FF00;
+				pixels[i].rgba = 0x000000FF;
 			i++;
 		}
 	}
-	mlx_pixel_put_region(d->mlx_init, d->win, 0, 0,
-		d->win_info.width, d->win_info.height, pixels);
-	printf("draw cam x: %f\n", w->cam.pos.x);
+}
+
+void	draw(t_data *d, t_world *w)
+{
+	mlx_color	*pixels;
+
+	pixels = ft_calloc(d->win_info.width * d->win_info.height, sizeof(mlx_color));
+	if (!pixels)
+		return ;
+	pos_cam(d);
+	set_pixel(d, w, pixels);
+	put_image(d, pixels);
+	mlx_clear_window(d->mlx_init, d->win, (mlx_color){.rgba = 0x000000FF});
+	mlx_put_image_to_window(d->mlx_init, d->win, d->img, 0, 0);
+	free(pixels);
 }

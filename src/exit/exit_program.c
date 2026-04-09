@@ -23,6 +23,8 @@ void	exit_prog(t_data *data, int exit_code, char *error_message)
 {
 	if (error_message)
 		print_error(error_message);
+	if (data->img)
+		mlx_destroy_image(data->mlx_init, data->img);
 	if (data->win)
 		mlx_destroy_window(data->mlx_init, data->win);
 	if (data->mlx_init)
