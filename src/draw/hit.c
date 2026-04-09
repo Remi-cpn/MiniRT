@@ -30,5 +30,7 @@ int	hit_sphere(t_world *w, t_ray ray)
 	discriminant = sd.b * sd.b - 4 * sd.a * sd.c;
 	if (discriminant < 0)
 		return (0);
+	if ((-sd.b + sqrt(discriminant)) / (2 * sd.a) < 0)
+		return (0);
 	return (1);
 }

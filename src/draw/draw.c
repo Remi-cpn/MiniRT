@@ -6,26 +6,26 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 12:02:25 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/09 15:04:15 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/09 15:26:45 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 
-static void	pos_cam(t_data *d)
+static void	pos_cam(t_data *d, double speed_move)
 {
 	if (d->imput.a == true)
-		d->world.cam.pos.x += 0.5;
+		d->world.cam.pos.x -= speed_move;
 	if (d->imput.d == true)
-		d->world.cam.pos.x -= 0.5;
+		d->world.cam.pos.x += speed_move;
 	if (d->imput.w == true)
-		d->world.cam.pos.z += 0.5;
+		d->world.cam.pos.z += speed_move;
 	if (d->imput.s == true)
-		d->world.cam.pos.z -= 0.5;
+		d->world.cam.pos.z -= speed_move;
 	if (d->imput.up == true)
-		d->world.cam.pos.y += 0.5;
+		d->world.cam.pos.y -= speed_move;
 	if (d->imput.down == true)
-		d->world.cam.pos.y -= 0.5;
+		d->world.cam.pos.y += speed_move;
 }
 
 static void	put_image(t_data *d, mlx_color *pixels)
@@ -76,7 +76,7 @@ void	draw(t_data *d, t_world *w)
 	pixels = ft_calloc(d->win_info.width * d->win_info.height, sizeof(mlx_color));
 	if (!pixels)
 		return ;
-	pos_cam(d);
+	pos_cam(d, 0.2);
 	set_pixel(d, w, pixels);
 	put_image(d, pixels);
 	mlx_clear_window(d->mlx_init, d->win, (mlx_color){.rgba = 0x000000FF});
