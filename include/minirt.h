@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/09 09:00:36 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/09 09:32:37 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 /* ——— Lib Extern ——————————————————————————————————————————————————————————— */
 # include "stdlib.h"
 # include "unistd.h"
+# include "stdio.h"
 
 /* ——— Structs data ————————————————————————————————————————————————————————— */
 typedef struct s_data
@@ -44,6 +45,8 @@ typedef struct t_ray
 typedef enum e_key
 {
 	ESC = 41,
+	D = 7,
+	A = 4,
 }	t_key;
 
 typedef enum e_event

@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:34:44 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/09 09:01:52 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/09 09:32:41 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,19 @@ void	update(void *param)
 void	window_hook(int event, void *param)
 {
 	if (event == CROSS)
-		exit_prog(param, 0, NULL);
+		exit_prog((t_data *)param, 0, NULL);
 }
 
 void	key_hook(int key, void *param)
 {
+	ft_printf("Key pressed: %d\n", key);
 	if (key == ESC)
-		exit_prog(param, 0, NULL);
+		exit_prog((t_data *)param, 0, NULL);
+	if (key == D)
+		((t_data *)param)->world.cam.pos.x += 10.0;
+	if (key == A)
+		((t_data *)param)->world.cam.pos.x -= 10.0;
+	printf("cam x: %f\n", ((t_data *)param)->world.cam.pos.x);
 }
 
 int	main(void)

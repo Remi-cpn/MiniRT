@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 12:02:25 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/09 09:09:51 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/09 09:43:09 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,12 @@ void	draw(t_data *d, t_world *w)
 				pixels[i].rgba = 0xFF0000FF;
 			else
 				pixels[i].rgba = 0xFF000000;
+			if (w->cam.pos.x > 0)
+				pixels[i].rgba = 0xFF00FF00;
 			i++;
 		}
 	}
 	mlx_pixel_put_region(d->mlx_init, d->win, 0, 0,
 		d->win_info.width, d->win_info.height, pixels);
+	printf("draw cam x: %f\n", w->cam.pos.x);
 }
