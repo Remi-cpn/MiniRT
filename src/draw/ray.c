@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 14:15:33 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/09 14:15:56 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/10 10:09:36 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ t_ray	pixel_ray(t_world *w, t_data *d, int x_pixel, int y_pixel)
 	rasio = (double)d->win_info.width / (double)d->win_info.height;
 	x_norm = (x_pixel - (double)d->win_info.width / 2)
 		/ ((double)d->win_info.width / 2);
-	y_norm = (y_pixel - (double)d->win_info.height / 2)
-		/ ((double)d->win_info.height / 2);
+	// J'ai du inverser le y pour que ca soit dans le bon sens...
+	y_norm = ((y_pixel - (double)d->win_info.height / 2)
+		/ ((double)d->win_info.height / 2)) * -1;
 	z = 1 / tan(w->cam.fov / 2);
 	ray.dir = (t_vec){x_norm * rasio, y_norm, z};
 	return (ray);

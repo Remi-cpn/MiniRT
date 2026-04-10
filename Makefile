@@ -23,7 +23,8 @@ SRC_EXIT	= exit_program.c
 
 SRC_DRAW	= draw.c \
 			  ray.c \
-			  hit.c
+			  hit.c \
+			  pixel_color.c
 
 SRC_LRT		= vec_norm.c \
 			  vec_operator.c

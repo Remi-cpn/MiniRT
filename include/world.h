@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:17:11 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/10 08:55:41 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/10 09:50:30 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@
 typedef struct s_data	t_data;
 
 /* ——— Struct prototypes ———————————————————————————————————————————————————— */
+typedef enum e_obj
+{
+	OBJ_NONE,
+	OBJ_SPHERE,
+	OBJ_PLANE,
+}	t_obj;
+
 typedef struct s_light
 {
 	t_vec	pos;
@@ -34,6 +41,13 @@ typedef struct s_camera
 	int		fov;
 }	t_camera;
 
+typedef struct s_plane
+{
+	t_vec	point;
+	t_vec	normal;
+	t_color	color;
+}	t_plane;
+
 typedef struct s_sphere
 {
 	t_vec	center;
@@ -44,8 +58,10 @@ typedef struct s_sphere
 typedef struct s_world
 {
 	t_sphere	sphere;
+	t_plane		plane;
 	t_camera	cam;
 	t_light		light;
+	double		ambient_light;
 }	t_world;
 
 /* ——— Function prototypes —————————————————————————————————————————————————— */

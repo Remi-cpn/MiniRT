@@ -6,11 +6,28 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 14:16:56 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/10 08:34:54 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/10 09:41:51 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
+
+/* Check if a ray hits a plane */
+/* P = origin + t * dir */
+/* t = (point - origin) · normal / (dir · normal) */
+double	hit_plane(t_world *w, t_ray ray)
+{
+	double	t;
+	double	dir;
+	t_vec	po;
+
+	dir = vec_dot(ray.dir, w->plane.normal);
+	po = vec_sub(w->plane.point, ray.origin);
+	t = vec_dot(po, w->plane.normal) / dir;
+	if (t < 0 || dir == 0)
+		return (-1);
+	return (t);
+}
 
 /* Check if a ray hits a sphere */
 /* a = dir² */
