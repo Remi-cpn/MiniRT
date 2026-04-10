@@ -1,7 +1,33 @@
-#include "project_name.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/06 13:34:44 by rcompain          #+#    #+#             */
+/*   Updated: 2026/04/09 17:01:14 by rcompain         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/minirt.h"
+#include "../MacroLibX/includes/mlx.h"
+
+void	update(void *param)
+{
+	draw((t_data *)param, &((t_data *)param)->world);
+}
 
 int	main(void)
 {
-	write(1, "HELLO", 4);
-	return (0);
+	t_data	d;
+
+	d = init_program();
+	mlx_on_event(d.mlx_init, d.win, MLX_KEYDOWN, key_hook_down, &d);
+	mlx_on_event(d.mlx_init, d.win, MLX_KEYUP, key_hook_up, &d);
+	mlx_on_event(d.mlx_init, d.win, MLX_WINDOW_EVENT, window_hook, &d);
+	mlx_on_event(d.mlx_init, d.win, MLX_MOUSEDOWN, mouse_hook, &d);
+    mlx_on_event(d.mlx_init, d.win, MLX_MOUSEWHEEL, mouse_hook_wheel, &d);
+	mlx_add_loop_hook(d.mlx_init, update, &d);
+	mlx_loop(d.mlx_init);
 }

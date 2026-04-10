@@ -1,92 +1,106 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: rcompain <rcompain@42angouleme.fr>         +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/11/07 09:56:21 by rcompain          #+#    #+#              #
-#    Updated: 2026/04/06 10:11:11 by rcompain         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-# **************************************************************************** #
-#                                   SETTINGS                                   #
-# **************************************************************************** #
 
 NAME		= minirt
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g -I MacroLibX/includes
 RM			= rm -f
-
-# **************************************************************************** #
-#                                   PATHS                                      #
-# **************************************************************************** #
-
+MLX_DIR 	= MacroLibX
+MLX 		= $(MLX_DIR)/libmlx.so
 SRC_DIR		= src
 OBJ_DIR		= obj
 INC_DIR		= include
+LIBRT_DIR	= librt
 LIBFT_DIR	= libft
 LIBFT_A		= $(LIBFT_DIR)/libft.a
 
-# **************************************************************************** #
-#                                   SOURCES                                    #
-# **************************************************************************** #
+# --- Sous-dossiers sources --------------------------------------------------
+SUB_DIRS := draw exit init
 
-SRC			= $(SRC_DIR)/main.c
+# ——— Sources ——————————————————————————————————————————————————————————————— #
+SRC_INIT	= init_program.c \
+			  init_world.c
 
-OBJ			= ${SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o}
+SRC_EXIT	= exit_program.c
 
-# **************************************************************************** #
-#                                   RULES                                      #
-# **************************************************************************** #
+SRC_DRAW	= draw.c \
+			  ray.c \
+			  hit.c \
+			  pixel_color.c
 
-all: banner $(LIBFT_A) $(NAME)
+SRC_LRT		= vec_norm.c \
+			  vec_operator.c
+
+VPATH := $(SRC_DIR) \
+         $(addprefix $(SRC_DIR)/, $(SUB_DIRS)) \
+         $(LIBRT_DIR)
+
+SRCS		= main.c hook.c $(SRC_INIT) $(SRC_EXIT) $(SRC_DRAW) $(SRC_LRT)
+
+OBJ			= ${SRCS:%.c=$(OBJ_DIR)/%.o}
+
+# ——— Colors ———————————————————————————————————————————————————————————————— #
+R           = \033[0m
+BOLD        = \033[22m\033[1m
+DIM         = \033[2m
+GREEN       = \033[32m
+CYAN        = \033[36m
+ORANGE      = \033[38;5;183m
+RED         = \033[38;5;210m
+
+# ——— Banner ———————————————————————————————————————————————————————————————— #
+define BANNER
+$(BOLD)$(ORANGE)\n  ███$(DIM)╗   $(BOLD)███$(DIM)╗$(BOLD)██$(DIM)╗$(BOLD)███$(DIM)╗   $(BOLD)██$(DIM)╗$(BOLD)██$(DIM)╗$(RED)$(BOLD)██████$(DIM)╗ $(BOLD)████████$(DIM)╗$(R)
+$(BOLD)$(ORANGE)  ████$(DIM)╗ $(BOLD)████$(DIM)║$(BOLD)██$(DIM)║$(BOLD)████$(DIM)╗  $(BOLD)██$(DIM)║$(BOLD)██$(DIM)║$(RED)$(BOLD)██$(DIM)╔══$(BOLD)██$(DIM)╗$(BOLD)╚══██$(DIM)╔══╝$(R)
+$(BOLD)$(ORANGE)  ██$(DIM)╔$(BOLD)████$(DIM)╔$(BOLD)██$(DIM)║$(BOLD)██$(DIM)║$(BOLD)██$(DIM)╔$(BOLD)██$(DIM)╗ $(BOLD)██$(DIM)║$(BOLD)██$(DIM)║$(RED)$(BOLD)██████$(DIM)╔╝   $(BOLD)██$(DIM)║$(R)
+$(BOLD)$(ORANGE)  ██$(DIM)║╚$(BOLD)██$(DIM)╔╝$(BOLD)██$(DIM)║$(BOLD)██$(DIM)║$(BOLD)██$(DIM)║╚$(BOLD)██$(DIM)╗$(BOLD)██$(DIM)║$(BOLD)██$(DIM)║$(RED)$(BOLD)██$(DIM)╔══$(BOLD)██$(DIM)╗   $(BOLD)██$(DIM)║$(R)
+$(BOLD)$(ORANGE)  ██$(DIM)║ ╚═╝ $(BOLD)██$(DIM)║$(BOLD)██$(DIM)║$(BOLD)██$(DIM)║ ╚$(BOLD)████$(DIM)║$(BOLD)██$(DIM)║$(RED)$(BOLD)██$(DIM)║  $(BOLD)██$(DIM)║   $(BOLD)██$(DIM)║$(R)
+$(DIM)$(ORANGE)  ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝$(RED)╚═╝  ╚═╝   ╚═╝  $(R)
+$(DIM)                    by pchazal & rcompain — 42 Angoulême\n\n$(R)
+
+endef
+export BANNER
+
+# ——— Rules ————————————————————————————————————————————————————————————————— #
+all: banner $(MLX) $(LIBFT_A) $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) -I$(INC_DIR) $(OBJ) $(LIBFT_A) -o $(NAME)
-	@echo "\r\033[2K$(CYAN)📝 Compiled project files: $(BOLD)$(GREEN)[OK]$(RESET)"
-	@echo "$(BOLD) $(GREEN)\n         Project compiled successfully ✅$(RESET)\n"
+	@$(CC) $(CFLAGS) -I$(INC_DIR) $(OBJ) $(LIBFT_A) $(MLX) -o $(NAME) -lSDL2 -lm
+	@printf "\r\033[2K$(CYAN)📝 Sources     $(BOLD)$(GREEN)[OK]$(R)\n"
+	@printf "$(BOLD)$(GREEN)\n    ✅  minirt compiled successfully\n\n$(R)"
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
-	@printf "\r\033[2K$(CYAN)📝 Compiled project files: %s$(RESET)" "$<"
-
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+	@printf "\r\033[2K$(CYAN)📝 Compiling   %s$(R)" "$<"
 
 $(LIBFT_A):
 	@make -s -C $(LIBFT_DIR)
-	@echo "\r\033[2K$(CYAN)📚 Compiled library files: $(BOLD)$(GREEN)[OK]$(RESET)"
+	@printf "\r\033[2K$(CYAN)📚 Libft       $(BOLD)$(GREEN)[OK]$(R)\n"
 
+$(MLX):
+	@printf "$(DIM)$(CYAN)⚙  Building MacroLibX...$(R)\n"
+	@make -s -C $(MLX_DIR)
+	@printf "\r\033[2K$(CYAN)🖼  MacroLibX   $(BOLD)$(GREEN)[OK]$(R)\n"
+
+banner:
+	@printf "$$BANNER"
+
+# ——— Cleanup ——————————————————————————————————————————————————————————————— #
 clean:
 	@make clean -s -C $(LIBFT_DIR)
 	@$(RM) -r $(OBJ_DIR)
-	@echo "$(CYAN)Object files removed$(RESET)"
+	@printf "$(CYAN)🗑  Object files removed$(R)\n"
 
 fclean: clean
 	@make fclean -s -C $(LIBFT_DIR)
 	@$(RM) $(NAME)
-	@echo "$(CYAN)Executable removed$(RESET)"
+	@printf "$(CYAN)🗑  Executable removed$(R)\n"
 
 re: fclean all
 
-# **************************************************************************** #
-#                                   DECO & COLORS                              #
-# **************************************************************************** #
+mlxclean:
+	@make clean -s -C $(MLX_DIR)
 
-GREEN		= \033[32m
-CYAN		= \033[36m
-ORANGE  = \033[38;5;214m
-RESET		= \033[0m
+mlxfclean:
+	@make fclean -s -C $(MLX_DIR)
 
-BOLD		=\033[1m
-
-BANNER = \
-"$(BOLD)$(ORANGE)\n\n  	          Compilation ...  $(RESET)\n"\
-
-banner:
-	@echo $(BANNER)
-
-.PHONY: all clean fclean re banner
-
+.PHONY: all clean fclean re banner mlxclean mlxfclean
