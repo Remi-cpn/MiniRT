@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:34:44 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/09 17:01:14 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/10 15:17:26 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ void	update(void *param)
 	draw((t_data *)param, &((t_data *)param)->world);
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_data	d;
 
+	if (ac != 2)
+		return (1);
 	d = init_program();
 	mlx_on_event(d.mlx_init, d.win, MLX_KEYDOWN, key_hook_down, &d);
 	mlx_on_event(d.mlx_init, d.win, MLX_KEYUP, key_hook_up, &d);

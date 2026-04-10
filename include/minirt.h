@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/10 09:46:54 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/10 15:35:13 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "exit.h"
 # include "librt.h"
 # include "world.h"
+# include "parsing.h"
 
 /* ——— Lib Graphique ———————————————————————————————————————————————————————— */
 # include "../MacroLibX/includes/mlx.h"
@@ -28,7 +29,7 @@
 # include "stdio.h"
 
 /* ——— Structs data ————————————————————————————————————————————————————————— */
-typedef struct s_imput
+typedef struct s_input
 {
 	bool d;
 	bool a;
@@ -36,16 +37,18 @@ typedef struct s_imput
 	bool s;
 	bool up;
 	bool down;
-}	t_imput;
+}	t_input;
 
 typedef struct s_data
 {
-	mlx_context				mlx_init;
+	mlx_context				mlx;
 	mlx_window_create_info	win_info;
 	mlx_window				win;
 	mlx_image				img;
-	t_imput					imput;
-	t_world					world;
+	t_input					input;
+	t_world					map;
+	int						width;
+	int						height;
 }	t_data;
 
 typedef struct t_ray

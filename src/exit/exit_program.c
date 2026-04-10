@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_program.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:22:44 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/07 08:28:37 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/10 15:57:04 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@ void	print_error(char *message)
 	ft_putstr_fd("Error: ", 2);
 	ft_putstr_fd(message, 2);
 	ft_putstr_fd("\n", 2);
+}
+
+void	exit_prog_pars(t_parsing *p, int exit_code, char *error_message)
+{
+	if (error_message)
+		print_error(error_message);
+	if (p->lines)
+		ft_freedb_ptr(p->lines);
+	exit(exit_code);
 }
 
 void	exit_prog(t_data *data, int exit_code, char *error_message)
