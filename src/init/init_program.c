@@ -11,11 +11,11 @@
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
-static t_imput	init_imput(void)
+static t_input	init_input(void)
 {
-	t_imput	i;
+	t_input	i;
 	
-	ft_memset(&i, 0, sizeof(t_imput));
+	ft_memset(&i, 0, sizeof(t_input));
 	return (i);
 }
 
@@ -51,6 +51,6 @@ t_data	init_program(void)
 	ft_memset(&d, 0, sizeof(t_data));
 	init_mlx(&d);
 	d.world = init_world(&d);
-	d.imput = init_imput();
+	d.input = init_input();
 	return (d);
 }

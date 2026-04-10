@@ -32,3 +32,19 @@ t_world	init_world(t_data *data)
 	w.ambient_light = 0.05;
 	return (w);
 }
+
+t_camera	*init_cam(double width, double height, double fov, double focal)
+{
+	t_camera	*cam;
+
+	if (height == 0 || width == 0 || fov == 0 || focal == 0)
+		return (NULL);
+	cam = malloc(sizeof(t_camera));
+	ft_memset(cam, 0, sizeof(t_camera));
+	cam->fov = fov;
+	vec_init(&cam->origin, 0, 0, 0);
+	vec_init(&cam->hor, fov * ( width / height), 0, 0);
+	vec_init(&cam->ver, 0, fov, 0);
+	vec_init(&cam->corner, 0 - cam->hor.x / 2, 0 - cam->ver.y / 2, focal);
+	return (cam);
+}

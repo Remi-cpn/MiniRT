@@ -28,7 +28,7 @@
 # include "stdio.h"
 
 /* ——— Structs data ————————————————————————————————————————————————————————— */
-typedef struct s_imput
+typedef struct s_input
 {
 	bool d;
 	bool a;
@@ -36,16 +36,18 @@ typedef struct s_imput
 	bool s;
 	bool up;
 	bool down;
-}	t_imput;
+}	t_input;
 
 typedef struct s_data
 {
-	mlx_context				mlx_init;
+	mlx_context				mlx;
 	mlx_window_create_info	win_info;
 	mlx_window				win;
 	mlx_image				img;
-	t_imput					imput;
-	t_world					world;
+	t_input					input;
+	t_world					map;
+	int						width;
+	int						height;
 }	t_data;
 
 typedef struct t_ray

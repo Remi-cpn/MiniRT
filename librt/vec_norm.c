@@ -10,8 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/librt.h"
+#include "../include/librt.h"
 #include <math.h>
+
+void	vec_normalize(t_vec *v)
+{
+	*v = vec_mult_scalar(*v, 1.0 / vec_norm(*v));
+}
 
 double	vec_norm(t_vec v)
 {
@@ -25,4 +30,11 @@ double	vec_square(t_vec v)
 	const double	z = v.z;
 
 	return (x * x + y * y + z * z);
+}
+
+void	vec_init(t_vec *v, double x, double y, double z)
+{
+	v->x = x;
+	v->y = y;
+	v->z = z;
 }

@@ -14,6 +14,7 @@
 # define WORLD_H
 
 # include "librt.h"
+# include "../MacroLibX/includes/mlx.h"
 
 # define FOV 70
 
@@ -26,34 +27,70 @@ typedef enum e_obj
 	OBJ_NONE,
 	OBJ_SPHERE,
 	OBJ_PLANE,
+	OBJ_CYLINDER,
 }	t_obj;
 
-typedef struct s_light
+typedef struct	s_camera
 {
-	t_vec	pos;
-	t_color	color;
-}	t_light;
-
-typedef struct s_camera
-{
-	t_vec	pos;
-	t_vec	dir;
-	int		fov;
-}	t_camera;
+	t_point	origin;
+	t_point	corner;
+	t_vec	hor;
+	t_vec	ver;
+	double	fov;
+	double	focal;
+}				t_camera;
 
 typedef struct s_plane
 {
-	t_vec	point;
+	t_point	point;
 	t_vec	normal;
-	t_color	color;
 }	t_plane;
 
 typedef struct s_sphere
 {
-	t_vec	center;
+	t_point	center;
 	double	radius;
-	t_color	color;
 }	t_sphere;
+
+typedef struct s_cylinder {
+	t_point	center;
+	t_vec	axis;
+	double	radius;
+	double	height;
+}   t_cylinder;
+
+typedef struct s_light {
+	t_point		position;
+	mlx_color	color;
+	double		intensity;
+}   t_light;
+
+typedef struct s_object {
+	t_obj				type;
+	mlx_color			color;
+	union {
+		t_sphere        sphere;
+		t_plane         plane;
+		t_cylinder      cylinder;
+	}                   shape;
+}   t_object;
+
+typedef struct s_hit {
+	double		t;
+	t_point		point;
+	t_vec		normal;
+	t_object	*object;
+	int			hit;
+}   t_hit;
+
+typedef struct s_scene {
+	t_camera	camera;
+	t_object	*objects;
+	int			nb_obj;
+	t_light		lights;
+	mlx_color	ambient;
+	double		ambient_ratio;
+}   t_scene;
 
 typedef struct s_world
 {
