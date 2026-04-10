@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:17:11 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/09 09:05:05 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/10 08:55:41 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@
 typedef struct s_data	t_data;
 
 /* ——— Struct prototypes ———————————————————————————————————————————————————— */
+typedef struct s_light
+{
+	t_vec	pos;
+	t_color	color;
+}	t_light;
+
 typedef struct s_camera
 {
 	t_vec	pos;
@@ -39,6 +45,7 @@ typedef struct s_world
 {
 	t_sphere	sphere;
 	t_camera	cam;
+	t_light		light;
 }	t_world;
 
 /* ——— Function prototypes —————————————————————————————————————————————————— */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/09 16:54:10 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/10 08:34:47 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_data	init_program(void);
 
 t_ray	pixel_ray(t_world *w, t_data *d, int x_pixel, int y_pixel);
 void	draw(t_data *d, t_world *w);
-int		hit_sphere(t_world *w, t_ray ray);
+double	hit_sphere(t_world *w, t_ray ray);
 
 void	window_hook(int event, void *param);
 void	key_hook_up(int key, void *param);

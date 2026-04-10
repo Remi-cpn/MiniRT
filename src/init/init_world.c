@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_world.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 08:42:27 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/09 16:57:05 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/10 09:07:35 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ t_world	init_world(t_data *data)
 	w.cam.pos = (t_vec){0, 0, -5};
 	w.cam.dir = (t_vec){0, 0, 1};
 	w.cam.fov = FOV;
+	w.light.pos = (t_vec){2, 2, -2};
+	w.light.color = (t_color){255, 255, 255};
 	return (w);
 }

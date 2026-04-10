@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 14:16:56 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/09 14:17:21 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/10 08:34:54 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 /* b = 2 * (oc · dir) */
 /* c = oc² - radius² */
 /* discriminant = b² - 4ac */
-int	hit_sphere(t_world *w, t_ray ray)
+double	hit_sphere(t_world *w, t_ray ray)
 {
 	t_vec			oc;
 	t_second_degret	sd;
+	double			t;
 	double			discriminant;
 
 	sd.a = vec_dot(ray.dir, ray.dir);
@@ -29,8 +30,7 @@ int	hit_sphere(t_world *w, t_ray ray)
 	sd.c = vec_dot(oc, oc) - w->sphere.radius * w->sphere.radius;
 	discriminant = sd.b * sd.b - 4 * sd.a * sd.c;
 	if (discriminant < 0)
-		return (0);
-	if ((-sd.b + sqrt(discriminant)) / (2 * sd.a) < 0)
-		return (0);
-	return (1);
+		return (-1);
+	t = (-sd.b - sqrt(discriminant)) / (2 * sd.a);
+	return (t);
 }
