@@ -34,6 +34,7 @@ t_world	init_world(t_data *d)
 
 	(void)d;
 	ft_memset(&w, 0, sizeof(t_world));
+	d->map.ambient_ratio = (double)d->win_info.width / (double)d->win_info.height;
 	init_cam(d->map.ambient_ratio, 2.0, 1.0);
 	return (w);
 }

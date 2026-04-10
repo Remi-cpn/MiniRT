@@ -42,7 +42,6 @@ static void	init_mlx(t_data *d)
 	d->img = mlx_new_image(d->mlx, d->win_info.width, d->win_info.height);
 	if (!d->img)
 		exit_prog(d, ERROR_MLX_WINDOW, "mlx_new_image failed");
-	d->map.ambient_ratio = (double)d->win_info.width / (double)d->win_info.height;
 }
 
 t_data	init_program(void)
