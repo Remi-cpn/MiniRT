@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 08:42:27 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/10 10:10:28 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/10 10:23:51 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ t_world	init_world(t_data *data)
 	w.cam.fov = FOV;
 	w.light.pos = (t_vec){2, 2, -2};
 	w.light.color = (t_color){255, 255, 255};
-	w.ambient_light = 0.15;
+	w.ambient_light = 0.05;
 	return (w);
 }

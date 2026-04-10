@@ -6,11 +6,26 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 09:46:02 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/10 10:05:28 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/10 10:23:10 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
+
+static int	shadow_ray(t_world *w, t_vec p, t_vec light_dir)
+{
+	t_ray	shadow_ray;
+	double	t_sphere;
+	double	t_plane;
+
+	shadow_ray.dir = light_dir;
+	shadow_ray.origin = vec_add(p, vec_mult_scalar(shadow_ray.dir, 0.001));
+	t_sphere = hit_sphere(w, shadow_ray);
+	t_plane = hit_plane(w, shadow_ray);
+	if (t_sphere > 0 || t_plane > 0)
+		return (1);
+	return (0);
+}
 
 static void	set_color(t_world *w, mlx_color *color, t_obj *hit,
 	double light_intensity)
@@ -49,7 +64,7 @@ static double	light(t_world *w, t_vec p, t_vec normal)
 	light_dir = vec_mult_scalar(light_dir, 1 / len);
 	light_intensity = vec_dot(normal, light_dir);
 	// pas de couleur negative ca fou la merde
-	if (light_intensity < 0)
+	if (light_intensity < 0 || shadow_ray(w, p, light_dir))
 		light_intensity = 0;
 	light_intensity += w->ambient_light;
 	if (light_intensity > 1)
