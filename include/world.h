@@ -83,23 +83,15 @@ typedef struct s_hit {
 	int			hit;
 }   t_hit;
 
-typedef struct s_scene {
+typedef struct s_world {
 	t_camera	camera;
 	t_object	*objects;
 	int			nb_obj;
 	t_light		lights;
 	mlx_color	ambient;
 	double		ambient_ratio;
-}   t_scene;
+}   t_world;
 
-typedef struct s_world
-{
-	t_sphere	sphere;
-	t_plane		plane;
-	t_camera	cam;
-	t_light		light;
-	double		ambient_light;
-}	t_world;
 
 /* ——— Function prototypes —————————————————————————————————————————————————— */
 t_world	init_world(t_data *data);

@@ -46,8 +46,6 @@ typedef struct s_data
 	mlx_image				img;
 	t_input					input;
 	t_world					map;
-	int						width;
-	int						height;
 }	t_data;
 
 typedef struct t_ray
