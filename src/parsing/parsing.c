@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 14:58:56 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/10 16:00:37 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/10 16:37:30 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@ static int	check_file_name(char *file_name)
 	return (1);
 }
 
-static void	pars_file(t_data *d, char *file_name)
+static void	pars_file(t_parsing *p, char *file_name)
 {
 	int		fd;
 	char	*str;
 
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
-		exit_prog(d, ERROR_FILE_NAME, ERROE_FILE_NAME_MSG);
+		exit_prog_pars(p, ERROR_FILE_NAME, ERROE_FILE_NAME_MSG);
 	str = ft_get_next_line(fd);
 	while (str)
 	{
 		if (str[0] != '\n')
-			
+			pars_line(p, file_name);
 		ft_freenull((void **)&str);
 		str = ft_get_next_line(fd);
 	}
@@ -40,12 +40,14 @@ static void	pars_file(t_data *d, char *file_name)
 	close(fd);
 }
 
-void	parsing(t_data *d, char *file_name)
+t_parsing	parsing(char *file_name)
 {
-	int	count;
+	t_parsing	p;
 	
 	if (check_file_name(file_name))
-		exit_prog(d, ERROR_FILE_NAME, ERROE_FILE_NAME_MSG);
-	count = count_line(d, file_name);
-	pars_file(d, file_name);
+		exit_prog_pars(p, ERROR_FILE_NAME, ERROE_FILE_NAME_MSG);
+	ft_memset(&p, 0, sizeof(t_parsing));
+	p.count_line = count_line(&p, file_name);
+	pars_file(&p, file_name);
+	return (p);
 }
