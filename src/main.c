@@ -25,11 +25,11 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (1);
 	d = init_program();
-	mlx_on_event(d.mlx_init, d.win, MLX_KEYDOWN, key_hook_down, &d);
-	mlx_on_event(d.mlx_init, d.win, MLX_KEYUP, key_hook_up, &d);
-	mlx_on_event(d.mlx_init, d.win, MLX_WINDOW_EVENT, window_hook, &d);
-	mlx_on_event(d.mlx_init, d.win, MLX_MOUSEDOWN, mouse_hook, &d);
-    mlx_on_event(d.mlx_init, d.win, MLX_MOUSEWHEEL, mouse_hook_wheel, &d);
-	mlx_add_loop_hook(d.mlx_init, update, &d);
-	mlx_loop(d.mlx_init);
+	mlx_on_event(d.mlx, d.win, MLX_KEYDOWN, key_hook_down, &d);
+	mlx_on_event(d.mlx, d.win, MLX_KEYUP, key_hook_up, &d);
+	mlx_on_event(d.mlx, d.win, MLX_WINDOW_EVENT, window_hook, &d);
+	mlx_on_event(d.mlx, d.win, MLX_MOUSEDOWN, mouse_hook, &d);
+    mlx_on_event(d.mlx, d.win, MLX_MOUSEWHEEL, mouse_hook_wheel, &d);
+	mlx_add_loop_hook(d.mlx, update, &d);
+	mlx_loop(d.mlx);
 }

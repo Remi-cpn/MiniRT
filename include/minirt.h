@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/10 15:35:13 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/10 16:09:15 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ typedef struct s_data
 	mlx_image				img;
 	t_input					input;
 	t_world					map;
-	int						width;
-	int						height;
 }	t_data;
 
 typedef struct t_ray
