@@ -20,7 +20,7 @@ t_world	init_world(t_data *data)
 	ft_memset(&w, 0, sizeof(t_world));
 	w.sphere.center = (t_vec){0, 0, 0};
 	w.sphere.radius = 1;
-	w.sphere.color = (t_color){255, 0, 0};
+	w.sphere.color = (t_color){255, 255, 255};
 	w.plane.point = (t_vec){0, -1.5, 0};
 	w.plane.normal = (t_vec){0, 1, 0};
 	w.plane.color = (t_color){0, 0, 255};

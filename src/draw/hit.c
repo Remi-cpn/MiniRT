@@ -38,7 +38,8 @@ double	hit_sphere(t_world *w, t_ray ray)
 {
 	t_vec			oc;
 	t_second_degret	sd;
-	double			t;
+	double			t1;
+	double			t2;
 	double			discriminant;
 
 	sd.a = vec_dot(ray.dir, ray.dir);
@@ -48,6 +49,9 @@ double	hit_sphere(t_world *w, t_ray ray)
 	discriminant = sd.b * sd.b - 4 * sd.a * sd.c;
 	if (discriminant < 0)
 		return (-1);
-	t = (-sd.b - sqrt(discriminant)) / (2 * sd.a);
-	return (t);
+	t1 = (-sd.b - sqrt(discriminant)) / (2 * sd.a);
+	t2 = (-sd.b + sqrt(discriminant)) / (2 * sd.a);
+	if (t1 >= 0)
+		return (t1);
+	return (t2);
 }

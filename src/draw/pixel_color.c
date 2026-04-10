@@ -32,7 +32,7 @@ static void	set_color(t_world *w, mlx_color *color, t_obj *hit,
 {
 	if (*hit == OBJ_NONE)
 	{
-		color->rgba = 0x000000FF;
+		color->rgba = 0x81CEFAFF;
 		return ;
 	}
 	else if (*hit == OBJ_PLANE)
