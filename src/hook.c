@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 15:32:17 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/11 14:44:13 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/11 15:45:54 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 void	mouse_hook_wheel(int event, void *param)
 {
 	if (event == 1)
-		((t_data *)param)->map.camera.fov -= 1;
+		((t_data *)param)->map.camera.fov -= 0.01;
 	if (event == 2)
-		((t_data *)param)->map.camera.fov += 1;
+		((t_data *)param)->map.camera.fov += 0.01;
 }
 
 

@@ -12,24 +12,18 @@
 
 #include "../../include/minirt.h"
 
-/* Create a ray for a pixel */
-/* Formule: norm x and y = (pixel_position - width / 2) / (half_width / 2) */
-t_ray	pixel_ray(t_world *w, t_data *d, int x_pixel, int y_pixel)
+t_ray	get_ray(t_camera cam, double i_hor, double i_ver)
 {
-	t_ray	ray;
-	double	z;
-	double	x_norm;
-	double	y_norm;
-	double	rasio;
+	t_ray   ray;
+	t_vec   temp1;
+	t_vec	temp2;
 
-	ray.origin = w->cam.pos;
-	rasio = (double)d->win_info.width / (double)d->win_info.height;
-	x_norm = (x_pixel - (double)d->win_info.width / 2)
-		/ ((double)d->win_info.width / 2);
-	// J'ai du inverser le y pour que ca soit dans le bon sens...
-	y_norm = ((y_pixel - (double)d->win_info.height / 2)
-		/ ((double)d->win_info.height / 2)) * -1;
-	z = 1 / tan(w->cam.fov / 2);
-	ray.dir = (t_vec){x_norm * rasio, y_norm, z};
+	ray.origin = cam.origin;
+	temp1 = vec_mult_scalar(cam.hor, i_hor);
+	temp2 = vec_mult_scalar(cam.ver, i_ver);
+	ray.dir = vec_add(cam.corner, temp1);
+	ray.dir = vec_add(ray.dir, temp2);
+	ray.dir = vec_sub(ray.dir, cam.origin);
+	vec_normalize(&ray.dir);
 	return (ray);
 }

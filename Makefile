@@ -22,9 +22,10 @@ SRC_INIT	= init_program.c \
 SRC_EXIT	= exit_program.c
 
 SRC_DRAW	= draw.c \
-			  ray.c \
+			  get_colors.c \
 			  hit.c \
-			  pixel_color.c
+			  light_calc.c \
+			  ray.c
 
 SRC_LRT		= vec_norm.c \
 			  vec_operator.c

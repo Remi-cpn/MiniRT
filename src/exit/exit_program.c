@@ -6,11 +6,12 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:22:44 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/11 15:42:25 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/11 15:45:40 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
+#include <stdlib.h>
 
 void	print_error(char *message)
 {
@@ -48,6 +49,9 @@ void	exit_prog(t_data *data, int exit_code, char *error_message)
 {
 	if (error_message)
 		print_error(error_message);
+	free(data->pixels);
+	if (data->map.objects)
+		free(data->map.objects);
 	if (data->img)
 		mlx_destroy_image(data->mlx, data->img);
 	if (data->win)

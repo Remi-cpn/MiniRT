@@ -28,6 +28,9 @@
 # include "unistd.h"
 # include "stdio.h"
 
+/* ——— DEFINE     ——————————————————————————————————————————————————————————— */
+# define RENDER_DIST 1000.0
+
 /* ——— Structs data ————————————————————————————————————————————————————————— */
 typedef struct s_input
 {
@@ -77,12 +80,14 @@ typedef enum e_event
 /* ——— Function prototypes —————————————————————————————————————————————————— */
 t_data	init_program(void);
 
-t_ray	pixel_ray(t_world *w, t_data *d, int x_pixel, int y_pixel);
+t_ray	get_ray(t_camera cam, double i_hor, double i_ver);
 void	draw(t_data *d, t_world *w);
 void	pixel_color(t_world *w, t_ray ray, mlx_color *color);
+void	light(t_world *w, t_hit *hit, mlx_color *color);
+t_hit	find_closest_hit(t_world *w, t_ray ray, int flag_dist);
 
-double	hit_sphere(t_world *w, t_ray ray);
-double	hit_plane(t_world *w, t_ray ray);
+double	hit_sphere(t_sphere sphere, t_ray ray);
+double	hit_plane(t_plane plane, t_ray ray);
 
 void	window_hook(int event, void *param);
 void	key_hook_up(int key, void *param);

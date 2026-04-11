@@ -11,47 +11,42 @@
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
+#include <math.h>
 
-/* Check if a ray hits a plane */
-/* P = origin + t * dir */
-/* t = (point - origin) · normal / (dir · normal) */
-double	hit_plane(t_world *w, t_ray ray)
+double	hit_plane(t_plane plane, t_ray ray)
 {
 	double	t;
 	double	dir;
 	t_vec	po;
 
-	dir = vec_dot(ray.dir, w->plane.normal);
-	po = vec_sub(w->plane.point, ray.origin);
-	t = vec_dot(po, w->plane.normal) / dir;
-	if (t < 0 || dir == 0)
-		return (-1);
+	dir = vec_dot(plane.normal, ray.dir);
+	if (fabs(dir) < 0.0001)
+		return (-1.0);
+	po = vec_sub(plane.point, ray.origin);
+	t = vec_dot(po, plane.normal) / dir;
+	if (t < 0)
+		return (-1.0);
 	return (t);
 }
 
-/* Check if a ray hits a sphere */
-/* a = dir² */
-/* b = 2 * (oc · dir) */
-/* c = oc² - radius² */
-/* discriminant = b² - 4ac */
-double	hit_sphere(t_world *w, t_ray ray)
+double	hit_sphere(t_sphere sphere, t_ray ray)
 {
-	t_vec			oc;
-	t_second_degret	sd;
-	double			t1;
-	double			t2;
-	double			discriminant;
+	t_vec	oc;
+	double	coeff[3];
+	double	t;
+	double	discriminant;
 
-	sd.a = vec_dot(ray.dir, ray.dir);
-	oc = vec_sub(ray.origin, w->sphere.center);
-	sd.b = 2 * vec_dot(oc, ray.dir);
-	sd.c = vec_dot(oc, oc) - w->sphere.radius * w->sphere.radius;
-	discriminant = sd.b * sd.b - 4 * sd.a * sd.c;
+	oc = vec_sub(ray.origin, sphere.center);
+	coeff[0] = vec_dot(ray.dir, ray.dir);
+	coeff[1] = vec_dot(oc, ray.dir);
+	coeff[2] = vec_dot(oc, oc) - sphere.radius * sphere.radius;
+	discriminant = coeff[1] * coeff[1] - coeff[0] * coeff[2];
 	if (discriminant < 0)
-		return (-1);
-	t1 = (-sd.b - sqrt(discriminant)) / (2 * sd.a);
-	t2 = (-sd.b + sqrt(discriminant)) / (2 * sd.a);
-	if (t1 >= 0)
-		return (t1);
-	return (t2);
+		return (-1.0);
+	t = (-coeff[1] - sqrt(discriminant)) / coeff[0];
+	if (t < 0.001)
+		t = (-coeff[1] + sqrt(discriminant)) / coeff[0];
+	if (t < 0.001)
+		return (-1.0);
+	return (t);
 }
