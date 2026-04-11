@@ -13,7 +13,7 @@ LIBFT_DIR	= libft
 LIBFT_A		= $(LIBFT_DIR)/libft.a
 
 # --- Sous-dossiers sources --------------------------------------------------
-SUB_DIRS := draw exit init
+SUB_DIRS := draw exit init parsing
 
 # ——— Sources ——————————————————————————————————————————————————————————————— #
 SRC_INIT	= init_program.c \
@@ -30,11 +30,18 @@ SRC_DRAW	= draw.c \
 SRC_LRT		= vec_norm.c \
 			  vec_operator.c
 
+SRC_PARSING = parsing.c \
+			  parsing_line.c \
+			  utils.c \
+			  str_to_type_valid.c \
+			  format_unique.c \
+			  format_form.c
+
 VPATH := $(SRC_DIR) \
          $(addprefix $(SRC_DIR)/, $(SUB_DIRS)) \
          $(LIBRT_DIR)
 
-SRCS		= main.c hook.c $(SRC_INIT) $(SRC_EXIT) $(SRC_DRAW) $(SRC_LRT)
+SRCS		= main.c hook.c $(SRC_INIT) $(SRC_EXIT) $(SRC_DRAW) $(SRC_LRT) $(SRC_PARSING)
 
 OBJ			= ${SRCS:%.c=$(OBJ_DIR)/%.o}
 

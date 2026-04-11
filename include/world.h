@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:17:11 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/10 09:50:30 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/11 17:14:01 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct	s_camera
 	t_point	corner;
 	t_vec	hor;
 	t_vec	ver;
+	t_vec	dir;
 	double	fov;
 	double	focal;
 }				t_camera;
@@ -97,6 +98,6 @@ typedef struct s_world {
 
 
 /* ——— Function prototypes —————————————————————————————————————————————————— */
-t_world	init_world(t_data *data);
+void	init_world(t_data *data, t_world *world);
 
 #endif

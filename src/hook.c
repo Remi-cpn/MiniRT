@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 15:32:17 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/09 17:00:01 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/11 15:45:54 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	mouse_hook_wheel(int event, void *param)
 	if (event == 2)
 		((t_data *)param)->map.camera.fov += 0.01;
 }
+
 
 void	mouse_hook(int event, void *param)
 {

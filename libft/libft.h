@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:51:16 by rcompain          #+#    #+#             */
-/*   Updated: 2026/03/06 18:09:54 by tseche           ###   ########.fr       */
+/*   Updated: 2026/04/11 15:08:22 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdlib.h>
 # include <stdint.h>
 # include <stdbool.h>
+
+# define BUFFER_SIZE 42
 
 /* ------------------------------- STRUCTURES ------------------------------- */
 
@@ -32,6 +34,7 @@ typedef struct s_list
 
 int			ft_atoi(const char *s);
 long int	ft_atol(const char *s);
+double		ft_atof(const char *s);
 void		ft_bzero(void *s, size_t n);
 void		*ft_calloc(size_t size, size_t size_bytes);
 int			ft_isalnum(int c);
@@ -107,6 +110,9 @@ int			ft_putnbrbase(int nbr, char *base);
 int			ft_putchar(char c);
 int			ft_putadrbase(uintptr_t nbr);
 int			ft_putnbr(long int nbr);
+
+/* -------------------------- FONCTIONS GET_NEXT_LINE ---------------------- */
+char		*ft_get_next_line(int fd);
 # endif
 
 #endif
