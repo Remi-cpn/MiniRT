@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/11 11:21:08 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/11 14:42:40 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/11 16:05:41 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ int	str_to_type_valid(char *s, int type)
 		return (int_valid(s));
 	else if (type == LONG)
 		return (long_valid(s));
-	else if (type == FLOAT)
-		return (float_valid(s));
-	else if (type == DOUBLE)
-		return (double_valid(s));
+	// else if (type == FLOAT)
+	// 	return (float_valid(s));
+	// else if (type == DOUBLE)
+	// 	return (double_valid(s));
 	return (0);
 }

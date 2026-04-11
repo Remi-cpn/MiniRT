@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 14:58:56 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/11 14:38:33 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/11 15:53:36 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,14 @@ t_world	parsing(t_data *d, char *file_name)
 	t_parsing	p;
 	t_world		w;
 
+	(void)d;
 	ft_memset(&p, 0, sizeof(t_parsing));
 	p.fd = -1;
 	ft_memset(&w, 0, sizeof(t_world));
 	if (!check_file_name(file_name))
-		exit_prog_pars(p, ERROR_FILE_NAME, ERROR_FILE_NAME_MSG);
+		exit_prog_pars(&p, ERROR_FILE_NAME, ERROR_FILE_NAME_MSG);
 	p.count_line = count_line(&p, file_name);
+	w.nb_obj = p.count_line;
 	pars_file(&p, &w, file_name);
 	free_parsing(&p);
 	return (w);

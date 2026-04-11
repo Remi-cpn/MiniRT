@@ -6,12 +6,18 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/11 09:57:59 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/11 16:01:34 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
+
+/* ——— Lib Extern ——————————————————————————————————————————————————————————— */
+# include "stdlib.h"
+# include "unistd.h"
+# include "stdio.h"
+# include "stdbool.h"
 
 /* ——— Lib Intern ——————————————————————————————————————————————————————————— */
 # include "../libft/libft.h"
@@ -23,23 +29,18 @@
 /* ——— Lib Graphique ———————————————————————————————————————————————————————— */
 # include "../MacroLibX/includes/mlx.h"
 
-/* ——— Lib Extern ——————————————————————————————————————————————————————————— */
-# include "stdlib.h"
-# include "unistd.h"
-# include "stdio.h"
-
 /* ——— DEFINE     ——————————————————————————————————————————————————————————— */
 # define RENDER_DIST 1000.0
 
 /* ——— Structs data ————————————————————————————————————————————————————————— */
 typedef struct s_input
 {
-	bool d;
-	bool a;
-	bool w;
-	bool s;
-	bool up;
-	bool down;
+	bool	d;
+	bool	a;
+	bool	w;
+	bool	s;
+	bool	up;
+	bool	down;
 }	t_input;
 
 typedef struct s_data

@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 16:45:33 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/11 14:00:51 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/11 16:06:27 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	add_cam(t_parsing *p, t_world *w, char **line_split)
 {
 	if (p->cam == true)
-		exit_prog_pars(*p, ERROR_FILE_CAM, ERROR_FILE_CAM_MSG);
+		exit_prog_pars(p, ERROR_FILE_CAM, ERROR_FILE_CAM_MSG);
 	p->cam = true;
 	if (line_split[1] && line_split[2] && line_split[3] && !line_split[4])
 	{
@@ -25,18 +25,18 @@ void	add_cam(t_parsing *p, t_world *w, char **line_split)
 		w->camera.fov = ft_atof(line_split[3]);
 	}
 	else
-		exit_prog_pars(*p, ERROR_FILE_CAM, ERROR_FILE_CAM_ARGS_MSG);
+		exit_prog_pars(p, ERROR_FILE_CAM, ERROR_FILE_CAM_ARGS_MSG);
 	if (w->camera.fov <= 0.0 || w->camera.fov >= 180.0
 		|| w->camera.hor.x < -1.0 || w->camera.hor.x > 1.0
 		|| w->camera.hor.y < -1.0 || w->camera.hor.y > 1.0
 		|| w->camera.hor.z < -1.0 || w->camera.hor.z > 1.0)
-		exit_prog_pars(*p, ERROR_FILE_CAM, ERROR_FILE_CAM_ARGS_MSG);
+		exit_prog_pars(p, ERROR_FILE_CAM, ERROR_FILE_CAM_ARGS_MSG);
 }
 
 void	add_light(t_parsing *p, t_world *w, char **line_split)
 {
 	if (p->light == true)
-		exit_prog_pars(*p, ERROR_FILE_LIGHT, ERROR_FILE_LIGHT_MSG);
+		exit_prog_pars(p, ERROR_FILE_LIGHT, ERROR_FILE_LIGHT_MSG);
 	p->light = true;
 	if (line_split[1] && line_split[2] && line_split[3] && !line_split[4])
 	{
@@ -45,15 +45,15 @@ void	add_light(t_parsing *p, t_world *w, char **line_split)
 		w->lights.color = get_color(p, line_split[3]);
 	}
 	else
-		exit_prog_pars(*p, ERROR_FILE_LIGHT, ERROR_FILE_LIGHT_ARGS_MSG);
+		exit_prog_pars(p, ERROR_FILE_LIGHT, ERROR_FILE_LIGHT_ARGS_MSG);
 	if (w->lights.intensity < 0.0 || w->lights.intensity > 1.0)
-		exit_prog_pars(*p, ERROR_FILE_LIGHT, ERROR_FILE_LIGHT_ARGS_MSG);
+		exit_prog_pars(p, ERROR_FILE_LIGHT, ERROR_FILE_LIGHT_ARGS_MSG);
 }
 
 void	add_al(t_parsing *p, t_world *w, char **line_split)
 {
 	if (p->al == true)
-		exit_prog_pars(*p, ERROR_FILE_AL, ERROR_FILE_AL_MSG);
+		exit_prog_pars(p, ERROR_FILE_AL, ERROR_FILE_AL_MSG);
 	p->al = true;
 	if (line_split[1] && line_split[2] && !line_split[3])
 	{
@@ -61,9 +61,7 @@ void	add_al(t_parsing *p, t_world *w, char **line_split)
 		w->ambient = get_color(p, line_split[2]);
 	}
 	else
-		exit_prog_pars(*p, ERROR_FILE_AL, ERROR_FILE_AL_ARGS_MSG);
-	if (w->ambient_ratio < 0.0 || w->ambient_ratio > 1.0 || w->ambient.r < 0
-		|| w->ambient.r > 255 || w->ambient.g < 0 || w->ambient.g > 255
-		|| w->ambient.b < 0 || w->ambient.b > 255)
-		exit_prog_pars(*p, ERROR_FILE_AL, ERROR_FILE_AL_ARGS_MSG);
+		exit_prog_pars(p, ERROR_FILE_AL, ERROR_FILE_AL_ARGS_MSG);
+	if (w->ambient_ratio < 0.0 || w->ambient_ratio > 1.0)
+		exit_prog_pars(p, ERROR_FILE_AL, ERROR_FILE_AL_ARGS_MSG);
 }
