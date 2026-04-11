@@ -19,7 +19,7 @@ static int	shadow_ray(t_world *w, t_vec p, t_vec light_dir)
 
 	shadow_ray.dir = light_dir;
 	shadow_ray.origin = vec_add(p, vec_mult_scalar(shadow_ray.dir, 0.001));
-	hit = find_closest_hit(w, shadow_ray);
+	hit = find_closest_hit(w, shadow_ray, 1);
 	if (hit.hit && hit.t > 0)
 		return (1);
 	return (0);
@@ -27,34 +27,34 @@ static int	shadow_ray(t_world *w, t_vec p, t_vec light_dir)
 
 static void	init_vars(t_world *w, double *ambient, double *diffuse)
 {
-	ambient[0] = (w->ambient.r / 255.0) * w->ambient_ratio;
-	ambient[1] = (w->ambient.g / 255.0) * w->ambient_ratio;
-	ambient[2] = (w->ambient.b / 255.0) * w->ambient_ratio;
-	diffuse[0] = 0;
-	diffuse[1] = 0;
-	diffuse[2] = 0;
+	ambient[R] = (w->ambient.r / 255.0) * w->ambient_ratio;
+	ambient[G] = (w->ambient.g / 255.0) * w->ambient_ratio;
+	ambient[B] = (w->ambient.b / 255.0) * w->ambient_ratio;
+	diffuse[R] = 0;
+	diffuse[G] = 0;
+	diffuse[B] = 0;
 }
 
 static void	set_light(double *light, double *ambient, double *diffuse)
 {
-	light[0] = ambient[0] + diffuse[0];
-	light[1] = ambient[1] + diffuse[1];
-	light[2] = ambient[2] + diffuse[2];
-	if (light[0] > 1.0)
-		light[0] = 1.0;
-	if (light[1] > 1.0)
-		light[1] = 1.0;
-	if (light[2] > 1.0)
-		light[2] = 1.0;
+	light[R] = ambient[R] + diffuse[R];
+	light[G] = ambient[G] + diffuse[G];
+	light[B] = ambient[B] + diffuse[B];
+	if (light[R] > 1.0)
+		light[R] = 1.0;
+	if (light[G] > 1.0)
+		light[G] = 1.0;
+	if (light[B] > 1.0)
+		light[B] = 1.0;
 }
 
 void	light(t_world *w, t_hit *hit, mlx_color *color)
 {
 	t_vec	light_dir;
 	double	coef_diffuse;
-	double	diffuse[3];
-	double	ambient[3];
-	double	light[3];
+	double	diffuse[RGB];
+	double	ambient[RGB];
+	double	light[RGB];
 
 	init_vars(w, ambient, diffuse);
 	light_dir = vec_sub(w->lights.position, hit->point);
@@ -62,13 +62,13 @@ void	light(t_world *w, t_hit *hit, mlx_color *color)
 	coef_diffuse = vec_dot(hit->normal, light_dir);
 	if (!(coef_diffuse <= 0 || shadow_ray(w, hit->point, light_dir)))
 	{
-		diffuse[0] = (w->lights.color.r / 255.0) * coef_diffuse * w->lights.intensity;
-		diffuse[1] = (w->lights.color.g / 255.0) * coef_diffuse * w->lights.intensity;
-		diffuse[2] = (w->lights.color.b / 255.0) * coef_diffuse * w->lights.intensity;
+		diffuse[R] = (w->lights.color.r / 255.0) * coef_diffuse * w->lights.intensity;
+		diffuse[G] = (w->lights.color.g / 255.0) * coef_diffuse * w->lights.intensity;
+		diffuse[B] = (w->lights.color.b / 255.0) * coef_diffuse * w->lights.intensity;
 	}
 	set_light(light, ambient, diffuse);
-	color->r = hit->object->color.r * light[0];
-	color->g = hit->object->color.g * light[1];
-	color->b = hit->object->color.b * light[2];
+	color->r = hit->object->color.r * light[R];
+	color->g = hit->object->color.g * light[G];
+	color->b = hit->object->color.b * light[B];
 	color->a = 255;
 }

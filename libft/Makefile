@@ -97,7 +97,7 @@ OBJECTS = ${SOURCES:.c=.o}
 # **************************************************************************** #
 
 %.o: %.c
-	@${CC} ${FLAG} -c $< -o $@
+	@${CC} ${FLAGS} -c $< -o $@
 	@printf "\r\033[2K$(CYAN)Compiled files: %s$(RESET)" "$<"
 	@sleep 0.02
 

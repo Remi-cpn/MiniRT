@@ -14,15 +14,11 @@ static double	get_intersection_t(t_object *obj, t_ray ray)
 
 static void	fill_hit_details(t_hit *hit, t_ray ray)
 {
-	double	len;
-
 	hit->point = vec_add(ray.origin, vec_mult_scalar(ray.dir, hit->t));
-
 	if (hit->object->type == OBJ_SPHERE)
 	{
 		hit->normal = vec_sub(hit->point, hit->object->shape.sphere.center);
-		len = vec_norm(hit->normal);
-		hit->normal = vec_mult_scalar(hit->normal, 1.0 / len);
+		vec_normalize(&hit->normal);
 	}
 	else if (hit->object->type == OBJ_PLANE)
 		hit->normal = hit->object->shape.plane.normal;
@@ -30,7 +26,7 @@ static void	fill_hit_details(t_hit *hit, t_ray ray)
 	// 	hit->normal = ???
 }
 
-t_hit	find_closest_hit(t_world *w, t_ray ray)
+t_hit	find_closest_hit(t_world *w, t_ray ray, int flag_dist)
 {
 	t_hit	closest;
 	double	t;
@@ -49,7 +45,7 @@ t_hit	find_closest_hit(t_world *w, t_ray ray)
 			closest.hit = 1;
 		}
 	}
-	if (closest.hit)
+	if (closest.hit && flag_dist == 0)
 		fill_hit_details(&closest, ray);
 	return (closest);
 }
@@ -58,7 +54,7 @@ void	pixel_color(t_world *w, t_ray ray, mlx_color *color)
 {
 	t_hit	hit;
 
-	hit = find_closest_hit(w, ray);
+	hit = find_closest_hit(w, ray, 0);
 	if (!hit.hit)
 	{
 		color->rgba = 0x81CEFAFF;

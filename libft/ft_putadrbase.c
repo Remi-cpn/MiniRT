@@ -19,11 +19,6 @@ static int	ft_putadrbase_rec(unsigned long int nbr, char *base)
 
 	count = 0;
 	len_base = ft_strlen(base);
-	if (nbr < 0)
-	{
-		count += write(1, "-", 1);
-		nbr = nbr * -1;
-	}
 	if (nbr >= len_base)
 		count += ft_putadrbase_rec(nbr / len_base, base);
 	count += ft_putchar(base[(nbr % len_base)]);

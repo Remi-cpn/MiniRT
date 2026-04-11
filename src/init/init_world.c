@@ -13,19 +13,17 @@
 #include "../../include/minirt.h"
 #include <stdlib.h>
 
-static t_camera	*init_cam(double ratio, double fov, double focal)
+static t_camera	init_cam(double ratio, double fov, double focal)
 {
-	t_camera	*cam;
+	t_camera	cam;
 
 	if (ratio <= 0 || fov == 0 || focal == 0)
-		return (NULL);
-	cam = malloc(sizeof(t_camera));
-	ft_memset(cam, 0, sizeof(t_camera));
-	cam->fov = fov;
-	vec_init(&cam->origin, 0, 0, -5);
-	vec_init(&cam->hor, fov * ratio, 0, 0);
-	vec_init(&cam->ver, 0, fov, 0);
-	vec_init(&cam->corner, 0 - cam->hor.x / 2, 0 - cam->ver.y / 2, -focal);
+		return ((t_camera){.focal = -1.0});
+	cam.fov = fov;
+	vec_init(&cam.origin, 0, 0, -5);
+	vec_init(&cam.hor, fov * ratio, 0, 0);
+	vec_init(&cam.ver, 0, fov, 0);
+	vec_init(&cam.corner, 0 - cam.hor.x / 2, 0 - cam.ver.y / 2, -focal);
 	return (cam);
 }
 
@@ -42,8 +40,10 @@ t_world	init_world(t_data *d)
 		d->pixels = NULL;
 		exit_prog(d, ERROR_MALLOC, ERROR_MALLOC_MSG);
 	}
-	init_cam(d->map.ambient_ratio, 2.0, 1.0);
-	w.nb_obj = 1;
+	w.camera = init_cam(d->map.ambient_ratio, 2.0, 1.0);
+	if (w.camera.focal == -1.0)
+		exit_prog(d, ERROR_MALLOC, ERROR_MALLOC_MSG);
+	w.nb_obj = 2;
 	w.objects = ft_calloc(sizeof(t_object), w.nb_obj);
 	if (!w.objects)
 	{

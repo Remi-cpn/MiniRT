@@ -16,6 +16,11 @@
 # include "librt.h"
 # include "../MacroLibX/includes/mlx.h"
 
+# define RGB 3
+# define R 0
+# define G 1
+# define B 2
+
 /* ——— Variable prototypes —————————————————————————————————————————————————— */
 typedef struct s_data	t_data;
 
