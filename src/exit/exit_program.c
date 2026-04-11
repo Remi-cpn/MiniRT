@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
+#include <stdlib.h>
 
 void	print_error(char *message)
 {
@@ -23,11 +24,14 @@ void	exit_prog(t_data *data, int exit_code, char *error_message)
 {
 	if (error_message)
 		print_error(error_message);
+	free(data->pixels);
+	if (data->map.objects)
+		free(data->map.objects);
 	if (data->img)
-		mlx_destroy_image(data->mlx_init, data->img);
+		mlx_destroy_image(data->mlx, data->img);
 	if (data->win)
-		mlx_destroy_window(data->mlx_init, data->win);
-	if (data->mlx_init)
-		mlx_destroy_context(data->mlx_init);
+		mlx_destroy_window(data->mlx, data->win);
+	if (data->mlx)
+		mlx_destroy_context(data->mlx);
 	exit(exit_code);
 }

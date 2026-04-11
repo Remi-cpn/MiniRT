@@ -12,22 +12,6 @@
 
 #include "../../include/minirt.h"
 
-static void	pos_cam(t_data *d, double speed_move)
-{
-	if (d->imput.a == true)
-		d->world.cam.pos.x -= speed_move;
-	if (d->imput.d == true)
-		d->world.cam.pos.x += speed_move;
-	if (d->imput.w == true)
-		d->world.cam.pos.z += speed_move;
-	if (d->imput.s == true)
-		d->world.cam.pos.z -= speed_move;
-	if (d->imput.up == true)
-		d->world.cam.pos.y += speed_move;
-	if (d->imput.down == true)
-		d->world.cam.pos.y -= speed_move;
-}
-
 static void	put_image(t_data *d, mlx_color *pixels)
 {
 	int			i;
@@ -41,7 +25,7 @@ static void	put_image(t_data *d, mlx_color *pixels)
 		x = -1;
 		while (++x < d->win_info.width)
 		{
-			mlx_set_image_pixel(d->mlx_init, d->img, x, y, pixels[i]);
+			mlx_set_image_pixel(d->mlx, d->img, x, y, pixels[i]);
 			i++;
 		}
 	}
@@ -49,36 +33,30 @@ static void	put_image(t_data *d, mlx_color *pixels)
 
 static void	set_pixel(t_data *d, t_world *w, mlx_color *pixels)
 {
-	int			i;
 	int			x;
 	int			y;
+	double		inv_x;
+	double		norm_y;
 	t_ray		ray;
 
-	i = 0;
 	y = -1;
+	inv_x = 1.0 / d->win_info.width;
 	while (++y < d->win_info.height)
 	{
 		x = -1;
+		norm_y = 1.0 - (double)y / d->win_info.height;
 		while (++x < d->win_info.width)
 		{
-			ray = pixel_ray(w, d, x, y);
-			pixel_color(w, ray, &pixels[i]);
-			i++;
+			ray = get_ray(w->camera, (double)x * inv_x, norm_y);
+			pixel_color(w, ray, &pixels[(y * d->win_info.width + x)]);
 		}
 	}
 }
 
 void	draw(t_data *d, t_world *w)
 {
-	mlx_color	*pixels;
-
-	pixels = ft_calloc(d->win_info.width * d->win_info.height, sizeof(mlx_color));
-	if (!pixels)
-		return ;
-	pos_cam(d, 0.2);
-	set_pixel(d, w, pixels);
-	put_image(d, pixels);
-	mlx_clear_window(d->mlx_init, d->win, (mlx_color){.rgba = 0x000000FF});
-	mlx_put_image_to_window(d->mlx_init, d->win, d->img, 0, 0);
-	free(pixels);
+	set_pixel(d, w, d->pixels);
+	put_image(d, d->pixels);
+	mlx_clear_window(d->mlx, d->win, (mlx_color){.rgba = 0x000000FF});
+	mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
 }

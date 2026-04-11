@@ -13,9 +13,30 @@
 #include "../include/minirt.h"
 #include "../MacroLibX/includes/mlx.h"
 
+// static bool	moove_cam(t_data *d, double speed_move)
+// {
+// 	if (d->input.a == true)
+// 		d->map.camera.origin.x -= speed_move;
+// 	else if (d->input.d == true)
+// 		d->map.camera.origin.x += speed_move;
+// 	else if (d->input.w == true)
+// 		d->map.camera.origin.z += speed_move;
+// 	else if (d->input.s == true)
+// 		d->map.camera.origin.z -= speed_move;
+// 	else if (d->input.up == true)
+// 		d->map.camera.origin.y += speed_move;
+// 	else if (d->input.down == true)
+// 		d->map.camera.origin.y -= speed_move;
+// 	else
+// 		return (0);
+// 	return (1);
+// }
+
 void	update(void *param)
 {
-	draw((t_data *)param, &((t_data *)param)->world);
+	// if (!moove_cam((t_data *)param, 0.2))
+	// 	return;
+	draw((t_data *)param, &((t_data *)param)->map);
 }
 
 int	main(void)

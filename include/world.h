@@ -16,8 +16,6 @@
 # include "librt.h"
 # include "../MacroLibX/includes/mlx.h"
 
-# define FOV 70
-
 /* ——— Variable prototypes —————————————————————————————————————————————————— */
 typedef struct s_data	t_data;
 
