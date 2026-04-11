@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 18:25:29 by rcompain          #+#    #+#             */
-/*   Updated: 2025/11/07 12:36:26 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/11 15:14:25 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@ static int	ft_putadrbase_rec(unsigned long int nbr, char *base)
 
 	count = 0;
 	len_base = ft_strlen(base);
-	if (nbr < 0)
-	{
-		count += write(1, "-", 1);
-		nbr = nbr * -1;
-	}
 	if (nbr >= len_base)
 		count += ft_putadrbase_rec(nbr / len_base, base);
 	count += ft_putchar(base[(nbr % len_base)]);

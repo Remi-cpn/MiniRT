@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: von <von@student.42.fr>                    +#+  +:+       +#+         #
+#    By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/14 17:34:44 by rcompain          #+#    #+#              #
-#    Updated: 2026/02/28 04:14:18 by von              ###   ########.fr        #
+#    Updated: 2026/04/11 15:10:24 by rcompain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ FLAGS = -Werror -Wextra -Wall -g
 
 SRC = 		ft_atoi.c \
 			ft_atol.c \
+			ft_atof.c \
 			ft_bzero.c \
 			ft_calloc.c \
 			ft_isalnum.c \
@@ -56,6 +57,7 @@ SRC = 		ft_atoi.c \
 			ft_count_word.c \
 			ft_occurence.c \
 			ft_strndup.c \
+			ft_get_next_line.c \
 
 SRC_PUT =	ft_putchar_fd.c \
 			ft_putendl_fd.c \
@@ -97,7 +99,7 @@ OBJECTS = ${SOURCES:.c=.o}
 # **************************************************************************** #
 
 %.o: %.c
-	@${CC} ${FLAG} -c $< -o $@
+	@${CC} ${FLAGS} -c $< -o $@
 	@printf "\r\033[2K$(CYAN)Compiled files: %s$(RESET)" "$<"
 	@sleep 0.02
 

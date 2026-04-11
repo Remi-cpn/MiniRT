@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 14:58:56 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/10 16:37:30 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/11 14:38:33 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,35 @@ static int	check_file_name(char *file_name)
 	return (1);
 }
 
-static void	pars_file(t_parsing *p, char *file_name)
+static void	pars_file(t_parsing *p, t_world *w, char *file_name)
 {
-	int		fd;
-	char	*str;
-
-	fd = open(file_name, O_RDONLY);
-	if (fd < 0)
-		exit_prog_pars(p, ERROR_FILE_NAME, ERROE_FILE_NAME_MSG);
-	str = ft_get_next_line(fd);
-	while (str)
+	p->fd = open(file_name, O_RDONLY);
+	if (p->fd < 0)
+		exit_prog_pars(p, ERROR_FILE_NAME, ERROR_FILE_NAME_MSG);
+	p->line = ft_get_next_line(p->fd);
+	while (p->line)
 	{
-		if (str[0] != '\n')
-			pars_line(p, file_name);
-		ft_freenull((void **)&str);
-		str = ft_get_next_line(fd);
+		if (p->line[0] != '\n')
+			pars_line(p, w, p->line);
+		ft_freenull((void **)&p->line);
+		p->line = ft_get_next_line(p->fd);
 	}
-	//finir la lecture de gnl pour 0 leak;
-	close(fd);
+	close(p->fd);
+	p->fd = -1;
 }
 
-t_parsing	parsing(char *file_name)
+t_world	parsing(t_data *d, char *file_name)
 {
 	t_parsing	p;
-	
-	if (check_file_name(file_name))
-		exit_prog_pars(p, ERROR_FILE_NAME, ERROE_FILE_NAME_MSG);
+	t_world		w;
+
 	ft_memset(&p, 0, sizeof(t_parsing));
+	p.fd = -1;
+	ft_memset(&w, 0, sizeof(t_world));
+	if (!check_file_name(file_name))
+		exit_prog_pars(p, ERROR_FILE_NAME, ERROR_FILE_NAME_MSG);
 	p.count_line = count_line(&p, file_name);
-	pars_file(&p, file_name);
-	return (p);
+	pars_file(&p, &w, file_name);
+	free_parsing(&p);
+	return (w);
 }

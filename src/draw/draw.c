@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 12:02:25 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/10 10:11:15 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/11 15:43:27 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 static void	pos_cam(t_data *d, double speed_move)
 {
-	if (d->imput.a == true)
-		d->world.cam.pos.x -= speed_move;
-	if (d->imput.d == true)
-		d->world.cam.pos.x += speed_move;
-	if (d->imput.w == true)
-		d->world.cam.pos.z += speed_move;
-	if (d->imput.s == true)
-		d->world.cam.pos.z -= speed_move;
-	if (d->imput.up == true)
-		d->world.cam.pos.y += speed_move;
-	if (d->imput.down == true)
-		d->world.cam.pos.y -= speed_move;
+	if (d->input.a == true)
+		d->map.camera.pos.x -= speed_move;
+	if (d->input.d == true)
+		d->map.camera.pos.x += speed_move;
+	if (d->input.w == true)
+		d->map.camera.pos.z += speed_move;
+	if (d->input.s == true)
+		d->map.camera.pos.z -= speed_move;
+	if (d->input.up == true)
+		d->map.camera.pos.y += speed_move;
+	if (d->input.down == true)
+		d->map.camera.pos.y -= speed_move;
 }
 
 static void	put_image(t_data *d, mlx_color *pixels)
