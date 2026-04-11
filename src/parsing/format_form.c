@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/11 12:40:03 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/11 15:50:02 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/11 16:50:55 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 
 void	add_sp(t_parsing *p, t_object *o, char **line_split)
 {
-	if (line_split[1] && line_split[2] && line_split[3] && line_split[4]
-		&& !line_split[5])
+	if (line_split[1] && line_split[2] && line_split[3] && !line_split[4])
 	{
 		o->type = OBJ_SPHERE;
 		o->shape.sphere.center = get_vec(p, line_split[1]);

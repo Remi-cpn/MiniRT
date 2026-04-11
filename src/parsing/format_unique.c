@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 16:45:33 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/11 16:06:27 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/11 17:14:14 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	add_cam(t_parsing *p, t_world *w, char **line_split)
 	if (line_split[1] && line_split[2] && line_split[3] && !line_split[4])
 	{
 		w->camera.origin = get_vec(p, line_split[1]);
-		w->camera.hor = get_vec(p, line_split[2]);
+		w->camera.dir = get_vec(p, line_split[2]);
 		w->camera.fov = ft_atof(line_split[3]);
 	}
 	else

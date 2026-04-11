@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:22:44 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/11 15:45:40 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/11 17:01:53 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,39 @@ void	print_error(char *message)
 	ft_putstr_fd("\n", 2);
 }
 
+void	free_array(char **s)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return ;
+	if (!*s)
+	{
+		free(s);
+		return ;
+	}
+	while (s[i])
+	{
+		s[i] = ft_freenull(s[i]);
+		i++;
+	}
+	s = ft_freenull(s);
+}
+
 void	free_parsing(t_parsing *p)
 {
 	if (p->line)
 	{
 		while (p->line)
 		{
-			ft_freenull((void **)&p->line);
+			p->line = ft_freenull(p->line);
 			p->line = ft_get_next_line(p->fd);
 		}
 		close(p->fd);
 	}
 	if (p->line_split)
-		ft_freedb_ptr((void **)&p->line_split);
+		free_array(p->line_split);
 }
 
 void	exit_prog_pars(t_parsing *p, int exit_code, char *error_message)
