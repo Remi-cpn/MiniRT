@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atof.c                                          :+:      :+:    :+:   */
+/*   ft_atod.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/11 09:28:19 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/12 13:35:49 by rcompain         ###   ########.fr       */
+/*   Created: 2026/04/12 13:30:24 by rcompain          #+#    #+#             */
+/*   Updated: 2026/04/12 13:34:36 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	get_sign(const char *s, int *i)
 	return (sign);
 }
 
-float	ft_atof(const char *s)
+double	ft_atod(const char *s)
 {
 	int		i;
 	double	result;
@@ -50,5 +50,5 @@ float	ft_atof(const char *s)
 			dec *= 0.1;
 		}
 	}
-	return ((float)(result * sign));
+	return (result * sign);
 }

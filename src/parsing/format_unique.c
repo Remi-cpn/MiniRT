@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 16:45:33 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/11 17:14:14 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/12 13:47:17 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ void	add_cam(t_parsing *p, t_world *w, char **line_split)
 	p->cam = true;
 	if (line_split[1] && line_split[2] && line_split[3] && !line_split[4])
 	{
+		if (!double_valid(line_split[3]))
+			exit_prog_pars(p, ERROR_FILE_CAM, ERROR_FILE_CAM_ARGS_MSG);
 		w->camera.origin = get_vec(p, line_split[1]);
 		w->camera.dir = get_vec(p, line_split[2]);
-		w->camera.fov = ft_atof(line_split[3]);
+		w->camera.fov = ft_atod(line_split[3]);
 	}
 	else
 		exit_prog_pars(p, ERROR_FILE_CAM, ERROR_FILE_CAM_ARGS_MSG);
@@ -40,8 +42,10 @@ void	add_light(t_parsing *p, t_world *w, char **line_split)
 	p->light = true;
 	if (line_split[1] && line_split[2] && line_split[3] && !line_split[4])
 	{
+		if (!double_valid(line_split[2]))
+			exit_prog_pars(p, ERROR_FILE_LIGHT, ERROR_FILE_LIGHT_ARGS_MSG);
 		w->lights.position = get_vec(p, line_split[1]);
-		w->lights.intensity = ft_atof(line_split[2]);
+		w->lights.intensity = ft_atod(line_split[2]);
 		w->lights.color = get_color(p, line_split[3]);
 	}
 	else
@@ -57,7 +61,9 @@ void	add_al(t_parsing *p, t_world *w, char **line_split)
 	p->al = true;
 	if (line_split[1] && line_split[2] && !line_split[3])
 	{
-		w->ambient_ratio = ft_atof(line_split[1]);
+		if (!double_valid(line_split[1]))
+			exit_prog_pars(p, ERROR_FILE_AL, ERROR_FILE_AL_ARGS_MSG);
+		w->ambient_ratio = ft_atod(line_split[1]);
 		w->ambient = get_color(p, line_split[2]);
 	}
 	else

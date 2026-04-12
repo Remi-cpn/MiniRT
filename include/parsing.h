@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 15:11:23 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/11 16:05:14 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/12 13:45:59 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,11 @@ void		add_light(t_parsing *p, t_world *w, char **line_split);
 void		add_sp(t_parsing *p, t_object *o, char **line_split);
 void		add_pl(t_parsing *p, t_object *o, char **line_split);
 void		add_cy(t_parsing *p, t_object *o, char **line_split);
+
+/* Valid functions */
+int			int_valid(char *s);
+int			long_valid(char *s);
+int			float_valid(char *s);
+int			double_valid(char *s);
 
 #endif
