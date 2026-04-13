@@ -13,11 +13,11 @@
 #ifndef PARSING_H
 # define PARSING_H
 
-# include "minirt.h"
-
 /* ——— Lib Extern ——————————————————————————————————————————————————————————— */
 # include <fcntl.h>
 # include <stdbool.h>
+# include "../MacroLibX/includes/mlx.h"
+# include "minirt.h"
 
 /* ——— Define ——————————————————————————————————————————————————————————————— */
 # define TYPE 1

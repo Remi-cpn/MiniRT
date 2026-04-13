@@ -13,11 +13,14 @@ LIBFT_DIR	= libft
 LIBFT_A		= $(LIBFT_DIR)/libft.a
 
 # --- Sous-dossiers sources --------------------------------------------------
-SUB_DIRS := draw exit init parsing
+SUB_DIRS := draw exit mooves init parsing
 
 # ——— Sources ——————————————————————————————————————————————————————————————— #
 SRC_INIT	= init_program.c \
 			  init_world.c
+
+SRC_MOOV	= hook.c \
+			  camera.c
 
 SRC_EXIT	= exit_program.c
 
@@ -41,7 +44,7 @@ VPATH := $(SRC_DIR) \
          $(addprefix $(SRC_DIR)/, $(SUB_DIRS)) \
          $(LIBRT_DIR)
 
-SRCS		= main.c hook.c $(SRC_INIT) $(SRC_EXIT) $(SRC_DRAW) $(SRC_LRT) $(SRC_PARSING)
+SRCS		= main.c $(SRC_MOOV) $(SRC_INIT) $(SRC_EXIT) $(SRC_DRAW) $(SRC_LRT) $(SRC_PARSING)
 
 OBJ			= ${SRCS:%.c=$(OBJ_DIR)/%.o}
 
