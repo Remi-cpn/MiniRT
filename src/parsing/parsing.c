@@ -6,12 +6,25 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 14:58:56 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/11 16:49:18 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/12 13:18:36 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 #include "../../include/parsing.h"
+
+static int	init_nb_obj(t_parsing *p)
+{
+	int	nb_obj;
+
+	if (p->count_line < 3)
+		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
+	else if (p->count_line == 3)
+		nb_obj = 0;
+	else
+		nb_obj = p->count_line - 3;
+	return (nb_obj);
+}
 
 static int	check_file_name(char *file_name)
 {
@@ -52,17 +65,14 @@ t_world	parsing(t_data *d, char *file_name)
 	if (!check_file_name(file_name))
 		exit_prog_pars(&p, ERROR_FILE_NAME, ERROR_FILE_NAME_MSG);
 	p.count_line = count_line(&p, file_name);
-	if (p.count_line < 3)
-		exit_prog_pars(&p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
-	else if (p.count_line == 3)
-		w.nb_obj = 0;
-	else
-		w.nb_obj = p.count_line - 3;
+	w.nb_obj = init_nb_obj(&p);
 	if (w.nb_obj > 0)
 		w.objects = ft_calloc(w.nb_obj, sizeof(t_object));
 	if (w.nb_obj > 0 && !w.objects)
 		exit_prog_pars(&p, ERROR_MALLOC, ERROR_MALLOC_MSG);
 	pars_file(&p, &w, file_name);
+	if (p.cam == false || p.al == false || p.light == false)
+		exit_prog_pars(&p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
 	init_world(d, &w);
 	free_parsing(&p);
 	return (w);

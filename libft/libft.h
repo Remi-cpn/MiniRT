@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:51:16 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/11 15:08:22 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/12 13:31:38 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ typedef struct s_list
 
 int			ft_atoi(const char *s);
 long int	ft_atol(const char *s);
-double		ft_atof(const char *s);
+float		ft_atof(const char *s);
+double		ft_atod(const char *s);
 void		ft_bzero(void *s, size_t n);
 void		*ft_calloc(size_t size, size_t size_bytes);
 int			ft_isalnum(int c);
