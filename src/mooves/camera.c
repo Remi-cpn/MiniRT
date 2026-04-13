@@ -23,7 +23,7 @@ static void	rotate_moovement(t_data *d, t_camera *cam, double speed_init)
 {
 	double	speed;
 
-	speed = speed_init / 10;
+	speed = speed_init / 5;
 	if (d->input.up == true)
 		cam->dir = vec_add(vec_mult_scalar(cam->dir, cos(speed)), vec_mult_scalar(cam->ver_n, -sin(speed)));	
 	else if (d->input.down == true)
@@ -38,9 +38,9 @@ static void	rotate_moovement(t_data *d, t_camera *cam, double speed_init)
 static void	update_fov(t_data *d, t_camera *cam, double speed)
 {
 	if (d->input.i == true)
-		cam->focal += speed;
+		cam->fov += speed * 10;
 	else if (d->input.o == true)
-		cam->focal -= speed;
+		cam->fov -= speed* 10;
 }
 
 bool	update_cam(t_data *d, double speed)

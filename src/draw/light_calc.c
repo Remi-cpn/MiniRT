@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pixel_color.c                                      :+:      :+:    :+:   */
+/*   light_calc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 09:46:02 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/10 10:23:10 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/13 15:58:40 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	light(t_world *w, t_hit *hit, mlx_color *color)
 	light_dir = vec_sub(w->lights.position, hit->point);
 	vec_normalize(&light_dir);
 	coef_diffuse = vec_dot(hit->normal, light_dir);
-	if (!(coef_diffuse <= 0 || shadow_ray(w, hit->point, light_dir)))
+	if (!(coef_diffuse <= 0.001 || shadow_ray(w, hit->point, light_dir)))
 	{
 		diffuse[R] = (w->lights.color.r / 255.0) * coef_diffuse * w->lights.intensity;
 		diffuse[G] = (w->lights.color.g / 255.0) * coef_diffuse * w->lights.intensity;

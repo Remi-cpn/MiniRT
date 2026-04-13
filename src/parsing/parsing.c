@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 14:58:56 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/12 13:18:36 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/13 15:40:47 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ t_world	parsing(t_data *d, char *file_name)
 	t_world		w;
 
 	ft_memset(&p, 0, sizeof(t_parsing));
+	free_parsing(&p);
 	p.fd = -1;
 	ft_memset(&w, 0, sizeof(t_world));
 	if (!check_file_name(file_name))

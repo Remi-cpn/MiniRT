@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 13:36:26 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/13 16:02:20 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef enum e_key
 	LEFT = 80,
 	RIGHT = 79,
 	I = 12,
-	O = 15,
+	O = 18,
 	LCTRL = 224,
 	SPACE = 44,
 	WHEEL_F = 1,
