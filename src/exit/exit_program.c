@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_program.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:22:44 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/11 17:01:53 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/13 11:44:46 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,6 @@ void	print_error(char *message)
 	ft_putstr_fd("Error: ", 2);
 	ft_putstr_fd(message, 2);
 	ft_putstr_fd("\n", 2);
-}
-
-void	free_array(char **s)
-{
-	int	i;
-
-	i = 0;
-	if (!s)
-		return ;
-	if (!*s)
-	{
-		free(s);
-		return ;
-	}
-	while (s[i])
-	{
-		s[i] = ft_freenull(s[i]);
-		i++;
-	}
-	s = ft_freenull(s);
 }
 
 void	free_parsing(t_parsing *p)
@@ -52,7 +32,7 @@ void	free_parsing(t_parsing *p)
 		close(p->fd);
 	}
 	if (p->line_split)
-		free_array(p->line_split);
+		ft_free_array(p->line_split);
 }
 
 void	exit_prog_pars(t_parsing *p, int exit_code, char *error_message)

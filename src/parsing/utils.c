@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 15:28:41 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/12 13:49:14 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/13 12:14:28 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_vec	get_vec(t_parsing *p, char *s)
 	if (!double_valid(sp[0]) || !double_valid(sp[1]) || !double_valid(sp[2]))
 		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
 	vec_init(&vec, ft_atod(sp[0]), ft_atod(sp[1]), ft_atod(sp[2]));
-	free_array(sp);
+	ft_free_array(sp);
 	return (vec);
 }
 
@@ -42,7 +42,7 @@ mlx_color	get_color(t_parsing *p, char *s)
 	v[0] = ft_atoi(sp[0]);
 	v[1] = ft_atoi(sp[1]);
 	v[2] = ft_atoi(sp[2]);
-	free_array(sp);
+	ft_free_array(sp);
 	if (v[0] < 0 || v[0] > 255 || v[1] < 0 || v[1] > 255
 		|| v[2] < 0 || v[2] > 255)
 		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
