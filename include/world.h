@@ -38,7 +38,9 @@ typedef struct	s_camera
 	t_point	origin;
 	t_point	corner;
 	t_vec	hor;
+	t_vec	hor_n;
 	t_vec	ver;
+	t_vec	ver_n;
 	t_vec	dir;
 	double	fov;
 	double	focal;
@@ -98,6 +100,7 @@ typedef struct s_world {
 
 
 /* ——— Function prototypes —————————————————————————————————————————————————— */
-void	init_world(t_data *data, t_world *world);
+void	calcul_viewport(t_camera *cam, double ratio);
+void	init_world(t_data *d, t_world *w);
 
 #endif

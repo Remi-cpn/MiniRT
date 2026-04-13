@@ -6,18 +6,18 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 15:11:23 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 11:37:24 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/13 15:13:25 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-# include "minirt.h"
-
 /* ——— Lib Extern ——————————————————————————————————————————————————————————— */
 # include <fcntl.h>
 # include <stdbool.h>
+# include "../MacroLibX/includes/mlx.h"
+# include "minirt.h"
 
 /* ——— Define ——————————————————————————————————————————————————————————————— */
 # define TYPE 1
