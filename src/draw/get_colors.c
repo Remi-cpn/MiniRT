@@ -7,23 +7,31 @@ static double	get_intersection_t(t_object *obj, t_ray ray)
 		return (hit_sphere(obj->shape.sphere, ray));
 	else if (obj->type == OBJ_PLANE)
 		return (hit_plane(obj->shape.plane, ray));
-	// else if (obj->type == OBJ_CYLINDER)
-	// 	return (hit_cylinder_t(&obj->shape.cylinder, ray));
+	else if (obj->type == OBJ_CYLINDER)
+	 	return (hit_cylinder(obj->shape.cylinder, ray));
 	return (-1.0);
 }
 
 static void	fill_hit_details(t_hit *hit, t_ray ray)
 {
+	t_vec	oc;
+	t_vec	new_center;
+
 	hit->point = vec_add(ray.origin, vec_mult_scalar(ray.dir, hit->t));
 	if (hit->object->type == OBJ_SPHERE)
-	{
 		hit->normal = vec_sub(hit->point, hit->object->shape.sphere.center);
-		vec_normalize(&hit->normal);
-	}
 	else if (hit->object->type == OBJ_PLANE)
 		hit->normal = hit->object->shape.plane.normal;
-	// else if (hit->object->type == OBJ_CYLINDER)
-	// 	hit->normal = ???
+	else if (hit->object->type == OBJ_CYLINDER)
+	{
+		oc = vec_sub(hit->point, hit->object->shape.cylinder.center);
+		new_center = vec_mult_scalar(hit->object->shape.cylinder.axis,
+			vec_dot(oc, hit->object->shape.cylinder.axis));
+	 	hit->normal = vec_sub(oc, new_center);
+	}
+	if (hit->object->type == OBJ_SPHERE || hit->object->type == OBJ_PLANE
+		|| hit->object->type == OBJ_CYLINDER)
+		vec_normalize(&hit->normal);
 }
 
 t_hit	find_closest_hit(t_world *w, t_ray ray, int flag_dist)

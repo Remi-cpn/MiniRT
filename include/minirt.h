@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 11:24:50 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/13 13:36:26 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ t_hit	find_closest_hit(t_world *w, t_ray ray, int flag_dist);
 
 double	hit_sphere(t_sphere sphere, t_ray ray);
 double	hit_plane(t_plane plane, t_ray ray);
+double	hit_cylinder(t_cylinder cylinder, t_ray ray);
 
 void	window_hook(int event, void *param);
 void	key_hook_up(int key, void *param);
