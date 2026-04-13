@@ -6,13 +6,13 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 09:46:02 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 15:58:40 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/13 16:59:34 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 
-static int	shadow_ray(t_world *w, t_vec p, t_vec light_dir)
+static int	shadow_ray(t_world *w, t_vec p, t_vec light_dir, double light_n)
 {
 	t_ray	shadow_ray;
 	t_hit	hit;
@@ -20,7 +20,7 @@ static int	shadow_ray(t_world *w, t_vec p, t_vec light_dir)
 	shadow_ray.dir = light_dir;
 	shadow_ray.origin = vec_add(p, vec_mult_scalar(shadow_ray.dir, 0.001));
 	hit = find_closest_hit(w, shadow_ray, 1);
-	if (hit.hit && hit.t > 0)
+	if (hit.hit && hit.t > 0 && hit.t < light_n)
 		return (1);
 	return (0);
 }
@@ -55,12 +55,14 @@ void	light(t_world *w, t_hit *hit, mlx_color *color)
 	double	diffuse[RGB];
 	double	ambient[RGB];
 	double	light[RGB];
+	double	light_n;
 
 	init_vars(w, ambient, diffuse);
 	light_dir = vec_sub(w->lights.position, hit->point);
+	light_n = vec_norm(light_dir);
 	vec_normalize(&light_dir);
 	coef_diffuse = vec_dot(hit->normal, light_dir);
-	if (!(coef_diffuse <= 0.001 || shadow_ray(w, hit->point, light_dir)))
+	if (!(coef_diffuse <= 0.001 || shadow_ray(w, hit->point, light_dir, light_n)))
 	{
 		diffuse[R] = (w->lights.color.r / 255.0) * coef_diffuse * w->lights.intensity;
 		diffuse[G] = (w->lights.color.g / 255.0) * coef_diffuse * w->lights.intensity;

@@ -32,6 +32,8 @@ static void	fill_hit_details(t_hit *hit, t_ray ray)
 	if (hit->object->type == OBJ_SPHERE || hit->object->type == OBJ_PLANE
 		|| hit->object->type == OBJ_CYLINDER)
 		vec_normalize(&hit->normal);
+	if (vec_dot(hit->normal, ray.dir) > 0)
+    	hit->normal = vec_mult_scalar(hit->normal, -1.0);
 }
 
 t_hit	find_closest_hit(t_world *w, t_ray ray, int flag_dist)
