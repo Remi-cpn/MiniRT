@@ -1,3 +1,14 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/04/13 11:16:05 by rcompain          #+#    #+#              #
+#    Updated: 2026/04/13 12:18:32 by rcompain         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME		= minirt
 CC			= cc
@@ -10,9 +21,10 @@ OBJ_DIR		= obj
 INC_DIR		= include
 LIBRT_DIR	= librt
 LIBFT_DIR	= libft
+LIBRT_A		= $(LIBRT_DIR)/librt.a
 LIBFT_A		= $(LIBFT_DIR)/libft.a
 
-# --- Sous-dossiers sources --------------------------------------------------
+# --- Sous-dossiers sources ------------------------------------------------- #
 SUB_DIRS := draw exit init parsing
 
 # ——— Sources ——————————————————————————————————————————————————————————————— #
@@ -27,21 +39,16 @@ SRC_DRAW	= draw.c \
 			  light_calc.c \
 			  ray.c
 
-SRC_LRT		= vec_norm.c \
-			  vec_operator.c
-
 SRC_PARSING = parsing.c \
 			  parsing_line.c \
 			  utils.c \
-			  str_to_type_valid.c \
 			  format_unique.c \
 			  format_form.c
 
 VPATH := $(SRC_DIR) \
-         $(addprefix $(SRC_DIR)/, $(SUB_DIRS)) \
-         $(LIBRT_DIR)
+         $(addprefix $(SRC_DIR)/, $(SUB_DIRS))
 
-SRCS		= main.c hook.c $(SRC_INIT) $(SRC_EXIT) $(SRC_DRAW) $(SRC_LRT) $(SRC_PARSING)
+SRCS		= main.c hook.c $(SRC_INIT) $(SRC_EXIT) $(SRC_DRAW) $(SRC_PARSING)
 
 OBJ			= ${SRCS:%.c=$(OBJ_DIR)/%.o}
 
@@ -68,10 +75,10 @@ endef
 export BANNER
 
 # ——— Rules ————————————————————————————————————————————————————————————————— #
-all: banner $(MLX) $(LIBFT_A) $(NAME)
+all: banner $(MLX) $(LIBFT_A) $(LIBRT_A) $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) -I$(INC_DIR) $(OBJ) $(LIBFT_A) $(MLX) -o $(NAME) -lSDL2 -lm
+	@$(CC) $(CFLAGS) -I$(INC_DIR) $(OBJ) $(LIBRT_A) $(LIBFT_A) $(MLX) -o $(NAME) -lSDL2 -lm
 	@printf "\r\033[2K$(CYAN)📝 Sources     $(BOLD)$(GREEN)[OK]$(R)\n"
 	@printf "$(BOLD)$(GREEN)\n    ✅  minirt compiled successfully\n\n$(R)"
 
@@ -84,6 +91,10 @@ $(LIBFT_A):
 	@make -s -C $(LIBFT_DIR)
 	@printf "\r\033[2K$(CYAN)📚 Libft       $(BOLD)$(GREEN)[OK]$(R)\n"
 
+$(LIBRT_A):
+	@make -s -C $(LIBRT_DIR)
+	@printf "\r\033[2K$(CYAN)🪐 Librt       $(BOLD)$(GREEN)[OK]$(R)\n"
+
 $(MLX):
 	@printf "$(DIM)$(CYAN)⚙  Building MacroLibX...$(R)\n"
 	@make -s -C $(MLX_DIR)
@@ -95,11 +106,13 @@ banner:
 # ——— Cleanup ——————————————————————————————————————————————————————————————— #
 clean:
 	@make clean -s -C $(LIBFT_DIR)
+	@make clean -s -C $(LIBRT_DIR)
 	@$(RM) -r $(OBJ_DIR)
 	@printf "$(CYAN)🗑  Object files removed$(R)\n"
 
 fclean: clean
 	@make fclean -s -C $(LIBFT_DIR)
+	@make fclean -s -C $(LIBRT_DIR)
 	@$(RM) $(NAME)
 	@printf "$(CYAN)🗑  Executable removed$(R)\n"
 

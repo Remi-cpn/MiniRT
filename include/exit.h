@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:24:21 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/11 16:57:05 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/13 11:50:04 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,5 @@ void	print_error(char *message);
 void	exit_prog(t_data *data, int exit_code, char *error_message);
 void	exit_prog_pars(t_parsing *p, int exit_code, char *error_message);
 void	free_parsing(t_parsing *p);
-void	free_array(char **s);
 
 #endif

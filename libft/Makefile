@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+         #
+#    By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/14 17:34:44 by rcompain          #+#    #+#              #
-#    Updated: 2026/04/12 13:31:55 by rcompain         ###   ########.fr        #
+#    Updated: 2026/04/13 11:44:34 by rcompain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,7 @@ SRC_MEM = 	ft_memchr.c \
 			ft_freenull.c \
 			ft_realloc.c \
 			ft_freedbptr.c \
+			ft_free_array.c \
 
 SRC_LST =	ft_lstnew.c \
 			ft_lstadd_front.c \

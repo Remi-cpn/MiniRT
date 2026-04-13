@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:17:11 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/11 17:14:01 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/13 11:22:52 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WORLD_H
 # define WORLD_H
 
-# include "librt.h"
+# include "minirt.h"
 # include "../MacroLibX/includes/mlx.h"
 
 # define RGB 3

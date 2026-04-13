@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/11 16:01:34 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/13 11:24:50 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 /* ——— Lib Intern ——————————————————————————————————————————————————————————— */
 # include "../libft/libft.h"
+# include "../librt/librt.h"
 # include "exit.h"
-# include "librt.h"
 # include "world.h"
 # include "parsing.h"
 
