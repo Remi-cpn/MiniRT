@@ -28,7 +28,6 @@ void	calcul_viewport(t_camera *cam, double ratio)
 	static const t_vec	up = {.x = 0, .y = 1, .z = 0};
 	static const t_vec	depth = {.x = 0, .y = 0, .z = 1};
 
-	// vec_normalize(&cam->dir);
 	cam->focal = 1.0;
 	cam->hor_n = vec_vectoriel(cam->dir, up);
 	if (vec_square(cam->hor_n) < 0.0001)
