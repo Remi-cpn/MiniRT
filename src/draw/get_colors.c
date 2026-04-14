@@ -6,10 +6,9 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 14:19:12 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/14 16:16:51 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/14 16:36:34 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../include/minirt.h"
 
@@ -20,7 +19,7 @@ static double	get_intersection_t(t_object *obj, t_ray ray)
 	else if (obj->type == OBJ_PLANE)
 		return (hit_plane(obj->shape.plane, ray));
 	else if (obj->type == OBJ_CYLINDER)
-	 	return (hit_cylinder(obj->shape.cylinder, ray));
+		return (hit_cylinder(obj->shape.cylinder, ray));
 	return (-1.0);
 }
 
@@ -29,10 +28,10 @@ static void	fill_hit_details_cylinder(t_hit *hit)
 	t_vec	oc;
 	t_vec	new_center;
 	double	proj;
-	
+
 	oc = vec_sub(hit->point, hit->object->shape.cylinder.center);
 	new_center = vec_mult_scalar(hit->object->shape.cylinder.axis,
-		vec_dot(oc, hit->object->shape.cylinder.axis));
+			vec_dot(oc, hit->object->shape.cylinder.axis));
 	proj = vec_dot(oc, hit->object->shape.cylinder.axis);
 	if (fabs(proj - hit->object->shape.cylinder.height / 2.0) < 0.001)
 		hit->normal = hit->object->shape.cylinder.axis;
@@ -50,12 +49,12 @@ static void	fill_hit_details(t_hit *hit, t_ray ray)
 	else if (hit->object->type == OBJ_PLANE)
 		hit->normal = hit->object->shape.plane.normal;
 	else if (hit->object->type == OBJ_CYLINDER)
-	 	fill_hit_details_cylinder(hit);
+		fill_hit_details_cylinder(hit);
 	if (hit->object->type == OBJ_SPHERE || hit->object->type == OBJ_PLANE
 		|| hit->object->type == OBJ_CYLINDER)
 		vec_normalize(&hit->normal);
 	if (vec_dot(hit->normal, ray.dir) > 0)
-    	hit->normal = vec_mult_scalar(hit->normal, -1.0);
+		hit->normal = vec_mult_scalar(hit->normal, -1.0);
 }
 
 t_hit	find_closest_hit(t_world *w, t_ray ray, int flag_dist)

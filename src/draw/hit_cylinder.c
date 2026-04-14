@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 15:20:07 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/14 15:20:36 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/14 16:41:30 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,17 @@ B_vec = w - (w·v)*v       // composante de w perpendiculaire à l'axe
 a = A_vec · A_vec
 b = 2 * (A_vec · B_vec)
 c = B_vec · B_vec - r²*/
-static void coeff_cyl(double coeff[3], t_cylinder cylinder, t_ray ray)
+static void	coeff_cyl(double coeff[3], t_cylinder cylinder, t_ray ray)
 {
-	t_vec	oc; // ray.origin - cylinder.center
-	t_vec	a_vec;   // ray.dir - (ray.dir · cylinder.axis) * cylinder.axis
-    t_vec	b_vec;   // oc - (oc · cylinder.axis) * cylinder.axis
+	t_vec	oc;
+	t_vec	a_vec;
+	t_vec	b_vec;
 
 	oc = vec_sub(ray.origin, cylinder.center);
 	a_vec = vec_sub(ray.dir, vec_mult_scalar(cylinder.axis,
-		vec_dot(ray.dir, cylinder.axis)));
+				vec_dot(ray.dir, cylinder.axis)));
 	b_vec = vec_sub(oc, vec_mult_scalar(cylinder.axis,
-		vec_dot(oc, cylinder.axis)));
+				vec_dot(oc, cylinder.axis)));
 	coeff[0] = vec_dot(a_vec, a_vec);
 	coeff[1] = vec_dot(a_vec, b_vec);
 	coeff[2] = vec_dot(b_vec, b_vec) - cylinder.radius * cylinder.radius;
@@ -92,8 +92,8 @@ double	hit_tube(t_cylinder cylinder, t_ray ray)
 double	hit_cylinder(t_cylinder cylinder, t_ray ray)
 {
 	double	t_tube;
-	double	t_cap1; // cap bas
-	double	t_cap2; // cap haut
+	double	t_cap1;
+	double	t_cap2;
 	double	t;
 	t_plane	cap;
 
@@ -102,12 +102,14 @@ double	hit_cylinder(t_cylinder cylinder, t_ray ray)
 	if (t_tube != -1.0)
 		t = t_tube;
 	cap.normal = vec_mult_scalar(cylinder.axis, -1);
-	cap.point = vec_add(cylinder.center, vec_mult_scalar(vec_mult_scalar(cylinder.axis, -1) , cylinder.height / 2.0));
+	cap.point = vec_add(cylinder.center, vec_mult_scalar(
+				vec_mult_scalar(cylinder.axis, -1), cylinder.height / 2.0));
 	t_cap1 = hit_cap(cap, ray, cylinder.radius);
 	if (t_cap1 != -1.0 && (t == -1.0 || t_cap1 < t))
 		t = t_cap1;
 	cap.normal = cylinder.axis;
-	cap.point = vec_add(cylinder.center, vec_mult_scalar(cylinder.axis, cylinder.height / 2.0));
+	cap.point = vec_add(cylinder.center,
+			vec_mult_scalar(cylinder.axis, cylinder.height / 2.0));
 	t_cap2 = hit_cap(cap, ray, cylinder.radius);
 	if (t_cap2 != -1.0 && (t == -1.0 || t_cap2 < t))
 		t = t_cap2;

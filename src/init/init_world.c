@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 08:42:27 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 15:49:32 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/14 16:28:20 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,11 @@ void	calcul_viewport(t_camera *cam, double ratio)
 
 void	init_world(t_data *d, t_world *w)
 {
-	d->pixels = ft_calloc(d->win_info.width * d->win_info.height, sizeof(mlx_color));
+	d->pixels = ft_calloc(d->win_info.width * d->win_info.height,
+			sizeof(mlx_color));
 	if (!d->pixels)
 		exit_prog(d, ERROR_MALLOC, ERROR_MALLOC_MSG);
 	vec_normalize(&(w->camera.dir));
-	calcul_viewport(&(w->camera), (double)d->win_info.width / (double)d->win_info.height);
+	calcul_viewport(&(w->camera), (double)d->win_info.width
+		/ (double)d->win_info.height);
 }
-
