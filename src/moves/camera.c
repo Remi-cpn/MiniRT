@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 14:17:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/14 16:27:35 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/14 17:05:27 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ static void	linear_movement(t_data *d, t_camera *cam, double speed)
 {
 	if (d->input.w == true)
 		cam->origin = vec_add(cam->origin, vec_mult_scalar(cam->dir, speed));
-	else if (d->input.s == true)
+	if (d->input.s == true)
 		cam->origin = vec_add(cam->origin, vec_mult_scalar(cam->dir, -speed));
-	else if (d->input.a == true)
+	if (d->input.a == true)
 		cam->origin = vec_add(cam->origin, vec_mult_scalar(cam->hor_n, -speed));
-	else if (d->input.d == true)
+	if (d->input.d == true)
 		cam->origin = vec_add(cam->origin, vec_mult_scalar(cam->hor_n, speed));
-	else if (d->input.ctrl == true)
+	if (d->input.ctrl == true)
 		cam->origin = vec_add(cam->origin, vec_mult_scalar(cam->ver_n, -speed));
-	else if (d->input.space == true)
+	if (d->input.space == true)
 		cam->origin = vec_add(cam->origin, vec_mult_scalar(cam->ver_n, speed));
 }
 
@@ -41,7 +41,7 @@ static void	rotate_movement(t_data *d, t_camera *cam, double speed_init)
 	else if (d->input.down == true)
 		cam->dir = vec_add(vec_mult_scalar(cam->dir, cos(speed)),
 				vec_mult_scalar(cam->ver_n, sin(speed)));
-	else if (d->input.left == true)
+	if (d->input.left == true)
 		cam->dir = vec_add(vec_mult_scalar(cam->dir, cos(speed)),
 				vec_mult_scalar(cam->hor_n, -sin(speed)));
 	else if (d->input.right == true)

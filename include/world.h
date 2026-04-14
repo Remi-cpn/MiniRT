@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:17:11 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 12:41:02 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/14 17:16:43 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@
 typedef struct s_data	t_data;
 
 /* ——— Struct prototypes ———————————————————————————————————————————————————— */
+typedef struct s_light_managment
+{
+	double	diffuse[RGB];
+	double	ambient[RGB];
+	double	light[RGB];
+}	t_light_managment;
+
 typedef enum e_obj
 {
 	OBJ_NONE,

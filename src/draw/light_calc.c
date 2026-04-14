@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 09:46:02 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/14 16:45:36 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/14 17:18:27 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,27 +54,27 @@ void	light(t_world *w, t_hit *hit, mlx_color *color)
 {
 	t_vec	light_dir;
 	double	coef_diffuse;
-	double	diffuse[RGB];
-	double	ambient[RGB];
-	double	light[RGB];
+	double	light_norm;
+	t_light_managment	l;
 
-	init_vars(w, ambient, diffuse);
+	init_vars(w, l.ambient, l.diffuse);
 	light_dir = vec_sub(w->lights.position, hit->point);
+	light_norm = vec_norm(light_dir);
 	vec_normalize(&light_dir);
 	coef_diffuse = vec_dot(hit->normal, light_dir);
 	if (!(coef_diffuse <= 0.001 || shadow_ray(w, hit, light_dir,
-				vec_norm(light_dir))))
+				light_norm)))
 	{
-		diffuse[R] = (w->lights.color.r / 255.0) * coef_diffuse
+		l.diffuse[R] = (w->lights.color.r / 255.0) * coef_diffuse
 			* w->lights.intensity;
-		diffuse[G] = (w->lights.color.g / 255.0) * coef_diffuse
+		l.diffuse[G] = (w->lights.color.g / 255.0) * coef_diffuse
 			* w->lights.intensity;
-		diffuse[B] = (w->lights.color.b / 255.0) * coef_diffuse
+		l.diffuse[B] = (w->lights.color.b / 255.0) * coef_diffuse
 			* w->lights.intensity;
 	}
-	set_light(light, ambient, diffuse);
-	color->r = hit->object->color.r * light[R];
-	color->g = hit->object->color.g * light[G];
-	color->b = hit->object->color.b * light[B];
+	set_light(l.light, l.ambient, l.diffuse);
+	color->r = hit->object->color.r * l.light[R];
+	color->g = hit->object->color.g * l.light[G];
+	color->b = hit->object->color.b * l.light[B];
 	color->a = 255;
 }

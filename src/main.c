@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:34:44 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 15:58:35 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/14 17:19:28 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void	update(void *param)
 {
-	if (!update_cam((t_data *)param, 0.2))
+	if (!update_cam((t_data *)param, 0.3))
 		return ;
 	draw((t_data *)param, &((t_data *)param)->map);
 }
