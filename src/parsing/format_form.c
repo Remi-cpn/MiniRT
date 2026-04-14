@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   format_form.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/11 12:40:03 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/12 13:48:18 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/14 16:59:52 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,11 @@ void	add_pl(t_parsing *p, t_object *o, char **line_split)
 		o->type = OBJ_PLANE;
 		o->shape.plane.point = get_vec(p, line_split[1]);
 		o->shape.plane.normal = get_vec(p, line_split[2]);
+		if (fabs(vec_norm(o->shape.plane.normal) - 1.0) > 0.001)
+			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_PL_ARGS_MSG);
 		o->color = get_color(p, line_split[3]);
 	}
 	else
-		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_PL_ARGS_MSG);
-	if (o->shape.plane.normal.x < -1.0 || o->shape.plane.normal.x > 1.0
-		|| o->shape.plane.normal.y < -1.0 || o->shape.plane.normal.y > 1.0
-		|| o->shape.plane.normal.z < -1.0 || o->shape.plane.normal.z > 1.0)
 		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_PL_ARGS_MSG);
 }
 
@@ -57,15 +55,14 @@ void	add_cy(t_parsing *p, t_object *o, char **line_split)
 		o->type = OBJ_CYLINDER;
 		o->shape.cylinder.center = get_vec(p, line_split[1]);
 		o->shape.cylinder.axis = get_vec(p, line_split[2]);
+		if (fabs(vec_norm(o->shape.cylinder.axis) - 1.0) > 0.001)
+			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_PL_ARGS_MSG);
 		o->shape.cylinder.radius = ft_atod(line_split[3]) / 2.0;
 		o->shape.cylinder.height = ft_atod(line_split[4]);
 		o->color = get_color(p, line_split[5]);
 	}
 	else
 		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_CY_ARGS_MSG);
-	if (o->shape.cylinder.radius <= 0.0 || o->shape.cylinder.height <= 0.0
-		|| o->shape.cylinder.axis.x < -1.0 || o->shape.cylinder.axis.x > 1.0
-		|| o->shape.cylinder.axis.y < -1.0 || o->shape.cylinder.axis.y > 1.0
-		|| o->shape.cylinder.axis.z < -1.0 || o->shape.cylinder.axis.z > 1.0)
+	if (o->shape.cylinder.radius <= 0.0 || o->shape.cylinder.height <= 0.0)
 		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_CY_ARGS_MSG);
 }
