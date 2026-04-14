@@ -6,7 +6,7 @@
 #    By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/13 11:16:05 by rcompain          #+#    #+#              #
-#    Updated: 2026/04/13 15:14:19 by rcompain         ###   ########.fr        #
+#    Updated: 2026/04/14 13:48:28 by rcompain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,13 +25,13 @@ LIBRT_A		= $(LIBRT_DIR)/librt.a
 LIBFT_A		= $(LIBFT_DIR)/libft.a
 
 # --- Sous-dossiers sources --------------------------------------------------
-SUB_DIRS := draw exit mooves init parsing
+SUB_DIRS := draw exit moves init parsing
 
 # ——— Sources ——————————————————————————————————————————————————————————————— #
 SRC_INIT	= init_program.c \
 			  init_world.c
 
-SRC_MOOV	= hook.c \
+SRC_MOVE	= hook.c \
 			  camera.c
 
 SRC_EXIT	= exit_program.c
@@ -51,7 +51,7 @@ SRC_PARSING = parsing.c \
 VPATH := $(SRC_DIR) \
          $(addprefix $(SRC_DIR)/, $(SUB_DIRS))
 
-SRCS		= main.c $(SRC_MOOV) $(SRC_INIT) $(SRC_EXIT) $(SRC_DRAW) $(SRC_LRT) $(SRC_PARSING)
+SRCS		= main.c $(SRC_MOVE) $(SRC_INIT) $(SRC_EXIT) $(SRC_DRAW) $(SRC_LRT) $(SRC_PARSING)
 
 OBJ			= ${SRCS:%.c=$(OBJ_DIR)/%.o}
 

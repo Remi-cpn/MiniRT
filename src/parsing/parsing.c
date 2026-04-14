@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 14:58:56 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 15:40:47 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:43:51 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static int	init_nb_obj(t_parsing *p)
 {
 	int	nb_obj;
 
+	nb_obj = 0;
 	if (p->count_line < 3)
 		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
 	else if (p->count_line == 3)
