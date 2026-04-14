@@ -6,7 +6,7 @@
 #    By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/13 11:16:05 by rcompain          #+#    #+#              #
-#    Updated: 2026/04/14 13:48:28 by rcompain         ###   ########.fr        #
+#    Updated: 2026/04/14 15:21:44 by rcompain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,9 @@ SRC_EXIT	= exit_program.c
 
 SRC_DRAW	= draw.c \
 			  get_colors.c \
-			  hit.c \
+			  hit_cylinder.c \
+			  hit_plane.c \
+			  hit_sphere.c \
 			  light_calc.c \
 			  ray.c
 
