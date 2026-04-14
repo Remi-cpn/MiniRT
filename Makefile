@@ -12,7 +12,7 @@
 
 NAME		= minirt
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g -I MacroLibX/includes -O3
+CFLAGS		= -Wall -Wextra -Werror -g -I MacroLibX/includes -O2 -fno-omit-frame-pointer
 RM			= rm -f
 MLX_DIR 	= MacroLibX
 MLX 		= $(MLX_DIR)/libmlx.so

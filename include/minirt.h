@@ -28,6 +28,7 @@
 
 /* ——— Lib Graphique ———————————————————————————————————————————————————————— */
 # include "../MacroLibX/includes/mlx.h"
+# include "../MacroLibX/includes/mlx_extended.h"
 
 /* ——— DEFINE     ——————————————————————————————————————————————————————————— */
 # define RENDER_DIST 1000.0
@@ -97,7 +98,7 @@ t_ray	get_ray(t_camera cam, double i_hor, double i_ver);
 void	draw(t_data *d, t_world *w);
 void	pixel_color(t_world *w, t_ray ray, mlx_color *color);
 void	light(t_world *w, t_hit *hit, mlx_color *color);
-t_hit	find_closest_hit(t_world *w, t_ray ray, int flag_dist);
+t_hit	find_closest_hit(t_world *w, t_ray ray, int flag_dist, double light_dist);
 
 double	hit_sphere(t_sphere sphere, t_ray ray);
 double	hit_plane(t_plane plane, t_ray ray);

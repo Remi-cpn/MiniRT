@@ -36,7 +36,7 @@ static void	fill_hit_details(t_hit *hit, t_ray ray)
     	hit->normal = vec_mult_scalar(hit->normal, -1.0);
 }
 
-t_hit	find_closest_hit(t_world *w, t_ray ray, int flag_dist)
+t_hit	find_closest_hit(t_world *w, t_ray ray, int flag_dist, double light_dist)
 {
 	t_hit	closest;
 	double	t;
@@ -54,6 +54,8 @@ t_hit	find_closest_hit(t_world *w, t_ray ray, int flag_dist)
 			closest.object = &w->objects[i];
 			closest.hit = 1;
 		}
+		if (flag_dist && closest.t > 0.001 && closest.t < light_dist)
+			return (closest);
 	}
 	if (closest.hit && flag_dist == 0)
 		fill_hit_details(&closest, ray);
@@ -64,7 +66,7 @@ void	pixel_color(t_world *w, t_ray ray, mlx_color *color)
 {
 	t_hit	hit;
 
-	hit = find_closest_hit(w, ray, 0);
+	hit = find_closest_hit(w, ray, 0, 0);
 	if (!hit.hit)
 	{
 		color->rgba = 0x81CEFAFF;

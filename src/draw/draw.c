@@ -12,25 +12,6 @@
 
 #include "../../include/minirt.h"
 
-static void	put_image(t_data *d, mlx_color *pixels)
-{
-	int			i;
-	int			x;
-	int			y;
-
-	i = 0;
-	y = -1;
-	while (++y < d->win_info.height)
-	{
-		x = -1;
-		while (++x < d->win_info.width)
-		{
-			mlx_set_image_pixel(d->mlx, d->img, x, y, pixels[i]);
-			i++;
-		}
-	}
-}
-
 static void	set_pixel(t_data *d, t_world *w, mlx_color *pixels)
 {
 	int			x;
@@ -56,7 +37,7 @@ static void	set_pixel(t_data *d, t_world *w, mlx_color *pixels)
 void	draw(t_data *d, t_world *w)
 {
 	set_pixel(d, w, d->pixels);
-	put_image(d, d->pixels);
+	mlx_set_image_region(d->mlx, d->img, 0, 0, d->win_info.width, d->win_info.height, d->pixels);
 	mlx_clear_window(d->mlx, d->win, (mlx_color){.rgba = 0x000000FF});
 	mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
 }

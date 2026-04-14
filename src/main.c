@@ -15,9 +15,17 @@
 
 static void	update(void *param)
 {
-	if (!update_cam((t_data *)param, 0.2))
-		return ;
-	draw((t_data *)param, &((t_data *)param)->map);
+	t_data *d = (t_data *)param;
+	static bool need_redraw = true;
+
+	if (update_cam(d, 0.2))
+		need_redraw = true;
+
+	if (need_redraw)
+	{
+		draw(d, &d->map);
+		need_redraw = false;
+	}
 }
 
 int	main(int ac, char **av)

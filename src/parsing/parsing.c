@@ -17,6 +17,7 @@ static int	init_nb_obj(t_parsing *p)
 {
 	int	nb_obj;
 
+	nb_obj = 0;
 	if (p->count_line < 3)
 		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
 	else if (p->count_line == 3)

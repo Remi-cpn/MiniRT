@@ -19,7 +19,7 @@ static int	shadow_ray(t_world *w, t_vec p, t_vec light_dir, double light_n)
 
 	shadow_ray.dir = light_dir;
 	shadow_ray.origin = vec_add(p, vec_mult_scalar(shadow_ray.dir, 0.001));
-	hit = find_closest_hit(w, shadow_ray, 1);
+	hit = find_closest_hit(w, shadow_ray, 1, light_n);
 	if (hit.hit && hit.t > 0 && hit.t < light_n)
 		return (1);
 	return (0);
