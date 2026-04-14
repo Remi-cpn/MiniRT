@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 14:58:56 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/12 13:18:36 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:43:51 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static int	init_nb_obj(t_parsing *p)
 {
 	int	nb_obj;
 
+	nb_obj = 0;
 	if (p->count_line < 3)
 		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
 	else if (p->count_line == 3)
@@ -60,6 +61,7 @@ t_world	parsing(t_data *d, char *file_name)
 	t_world		w;
 
 	ft_memset(&p, 0, sizeof(t_parsing));
+	free_parsing(&p);
 	p.fd = -1;
 	ft_memset(&w, 0, sizeof(t_world));
 	if (!check_file_name(file_name))

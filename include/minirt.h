@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 13:36:26 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/13 16:02:20 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ typedef struct s_input
 	bool	s;
 	bool	up;
 	bool	down;
+	bool	left;
+	bool	right;
+	bool	i;
+	bool	o;
+	bool	ctrl;
+	bool	space;
 }	t_input;
 
 typedef struct s_data
@@ -69,6 +75,12 @@ typedef enum e_key
 	S = 22,
 	UP = 82,
 	DOWN = 81,
+	LEFT = 80,
+	RIGHT = 79,
+	I = 12,
+	O = 18,
+	LCTRL = 224,
+	SPACE = 44,
 	WHEEL_F = 1,
 	WHEEL_B = 2,
 }	t_key;
@@ -96,5 +108,7 @@ void	key_hook_up(int key, void *param);
 void	key_hook_down(int key, void *param);
 void	mouse_hook_wheel(int event, void *param);
 void	mouse_hook(int event, void *param);
+
+bool	update_cam(t_data *d, double speed);
 
 #endif

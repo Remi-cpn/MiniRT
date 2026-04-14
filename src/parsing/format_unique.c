@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   format_unique.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 16:45:33 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/12 13:47:17 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/13 15:36:00 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ void	add_cam(t_parsing *p, t_world *w, char **line_split)
 	}
 	else
 		exit_prog_pars(p, ERROR_FILE_CAM, ERROR_FILE_CAM_ARGS_MSG);
-	if (w->camera.fov <= 0.0 || w->camera.fov >= 180.0
-		|| w->camera.hor.x < -1.0 || w->camera.hor.x > 1.0
-		|| w->camera.hor.y < -1.0 || w->camera.hor.y > 1.0
-		|| w->camera.hor.z < -1.0 || w->camera.hor.z > 1.0)
+	if (w->camera.fov <= 0.0 || w->camera.fov >= 180.0)
 		exit_prog_pars(p, ERROR_FILE_CAM, ERROR_FILE_CAM_ARGS_MSG);
 }
 
