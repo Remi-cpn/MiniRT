@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 14:19:12 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/14 14:19:13 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/14 16:16:51 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,33 @@ static double	get_intersection_t(t_object *obj, t_ray ray)
 	return (-1.0);
 }
 
-static void	fill_hit_details(t_hit *hit, t_ray ray)
+static void	fill_hit_details_cylinder(t_hit *hit)
 {
 	t_vec	oc;
 	t_vec	new_center;
+	double	proj;
+	
+	oc = vec_sub(hit->point, hit->object->shape.cylinder.center);
+	new_center = vec_mult_scalar(hit->object->shape.cylinder.axis,
+		vec_dot(oc, hit->object->shape.cylinder.axis));
+	proj = vec_dot(oc, hit->object->shape.cylinder.axis);
+	if (fabs(proj - hit->object->shape.cylinder.height / 2.0) < 0.001)
+		hit->normal = hit->object->shape.cylinder.axis;
+	else if (fabs(proj + hit->object->shape.cylinder.height / 2.0) < 0.001)
+		hit->normal = vec_mult_scalar(hit->object->shape.cylinder.axis, -1.0);
+	else
+		hit->normal = vec_sub(oc, new_center);
+}
 
+static void	fill_hit_details(t_hit *hit, t_ray ray)
+{
 	hit->point = vec_add(ray.origin, vec_mult_scalar(ray.dir, hit->t));
 	if (hit->object->type == OBJ_SPHERE)
 		hit->normal = vec_sub(hit->point, hit->object->shape.sphere.center);
 	else if (hit->object->type == OBJ_PLANE)
 		hit->normal = hit->object->shape.plane.normal;
 	else if (hit->object->type == OBJ_CYLINDER)
-	{
-		oc = vec_sub(hit->point, hit->object->shape.cylinder.center);
-		new_center = vec_mult_scalar(hit->object->shape.cylinder.axis,
-			vec_dot(oc, hit->object->shape.cylinder.axis));
-	 	hit->normal = vec_sub(oc, new_center);
-	}
+	 	fill_hit_details_cylinder(hit);
 	if (hit->object->type == OBJ_SPHERE || hit->object->type == OBJ_PLANE
 		|| hit->object->type == OBJ_CYLINDER)
 		vec_normalize(&hit->normal);

@@ -1,17 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit.c                                              :+:      :+:    :+:   */
+/*   hit_cylinder.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/09 14:16:56 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 17:05:33 by rcompain         ###   ########.fr       */
+/*   Created: 2026/04/14 15:20:07 by rcompain          #+#    #+#             */
+/*   Updated: 2026/04/14 15:20:36 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 #include <math.h>
+
+static double	hit_cap(t_plane plane, t_ray ray, double radius)
+{
+	t_vec	hit_point;
+	double	t;
+	double	dir;
+	t_vec	po;
+	t_vec	diff;
+
+	dir = vec_dot(plane.normal, ray.dir);
+	if (fabs(dir) < 0.0001)
+		return (-1.0);
+	po = vec_sub(plane.point, ray.origin);
+	t = vec_dot(po, plane.normal) / dir;
+	if (t < 0.001)
+		return (-1.0);
+	hit_point = vec_add(ray.origin, vec_mult_scalar(ray.dir, t));
+	diff = vec_sub(hit_point, plane.point);
+	if (vec_dot(diff, diff) > radius * radius)
+		return (-1.0);
+	return (t);
+}
 
 /* A_vec = D - (D·v)*v       // composante de D perpendiculaire à l'axe
 B_vec = w - (w·v)*v       // composante de w perpendiculaire à l'axe
@@ -43,7 +65,7 @@ projection = (P(t) - C) · v
 hit_point = ray.origin + ray.dir * t
 proj = (hit_point - cylinder.center) . cylinder.axis
 */
-double	hit_cylinder(t_cylinder cylinder, t_ray ray)
+double	hit_tube(t_cylinder cylinder, t_ray ray)
 {
 	t_vec	hit_point;
 	double	coeff[3];
@@ -67,40 +89,27 @@ double	hit_cylinder(t_cylinder cylinder, t_ray ray)
 	return (t);
 }
 
-double	hit_plane(t_plane plane, t_ray ray)
+double	hit_cylinder(t_cylinder cylinder, t_ray ray)
 {
+	double	t_tube;
+	double	t_cap1; // cap bas
+	double	t_cap2; // cap haut
 	double	t;
-	double	dir;
-	t_vec	po;
+	t_plane	cap;
 
-	dir = vec_dot(plane.normal, ray.dir);
-	if (fabs(dir) < 0.0001)
-		return (-1.0);
-	po = vec_sub(plane.point, ray.origin);
-	t = vec_dot(po, plane.normal) / dir;
-	if (t < 0.001)
-		return (-1.0);
-	return (t);
-}
-
-double	hit_sphere(t_sphere sphere, t_ray ray)
-{
-	t_vec	oc;
-	double	coeff[3];
-	double	t;
-	double	discriminant;
-
-	oc = vec_sub(ray.origin, sphere.center);
-	coeff[0] = vec_dot(ray.dir, ray.dir);
-	coeff[1] = vec_dot(oc, ray.dir);
-	coeff[2] = vec_dot(oc, oc) - sphere.radius * sphere.radius;
-	discriminant = coeff[1] * coeff[1] - coeff[0] * coeff[2];
-	if (discriminant < 0)
-		return (-1.0);
-	t = (-coeff[1] - sqrt(discriminant)) / coeff[0];
-	if (t < 0.001)
-		t = (-coeff[1] + sqrt(discriminant)) / coeff[0];
-	if (t < 0.001)
-		return (-1.0);
+	t = -1.0;
+	t_tube = hit_tube(cylinder, ray);
+	if (t_tube != -1.0)
+		t = t_tube;
+	cap.normal = vec_mult_scalar(cylinder.axis, -1);
+	cap.point = vec_add(cylinder.center, vec_mult_scalar(vec_mult_scalar(cylinder.axis, -1) , cylinder.height / 2.0));
+	t_cap1 = hit_cap(cap, ray, cylinder.radius);
+	if (t_cap1 != -1.0 && (t == -1.0 || t_cap1 < t))
+		t = t_cap1;
+	cap.normal = cylinder.axis;
+	cap.point = vec_add(cylinder.center, vec_mult_scalar(cylinder.axis, cylinder.height / 2.0));
+	t_cap2 = hit_cap(cap, ray, cylinder.radius);
+	if (t_cap2 != -1.0 && (t == -1.0 || t_cap2 < t))
+		t = t_cap2;
 	return (t);
 }
