@@ -16,13 +16,20 @@ CFLAGS		= -Wall -Wextra -Werror -g -I MacroLibX/includes -O3
 RM			= rm -f
 MLX_DIR 	= MacroLibX
 MLX 		= $(MLX_DIR)/libmlx.so
-SRC_DIR		= src
-OBJ_DIR		= obj
-INC_DIR		= include
 LIBRT_DIR	= librt
 LIBFT_DIR	= libft
 LIBRT_A		= $(LIBRT_DIR)/librt.a
 LIBFT_A		= $(LIBFT_DIR)/libft.a
+
+# ——— Dossier cible ————————————————————————————————————————————————————————— #
+CC_DIR		= Mandatory
+ifeq ($(MAKECMDGOALS),bonus)
+CC_DIR		= Bonus
+endif
+
+SRC_DIR		= $(CC_DIR)/src
+OBJ_DIR		= obj/$(CC_DIR)
+INC_DIR		= $(CC_DIR)/include
 
 # --- Sous-dossiers sources --------------------------------------------------
 SUB_DIRS := draw exit moves init parsing
@@ -112,7 +119,7 @@ banner:
 clean:
 	@make clean -s -C $(LIBFT_DIR)
 	@make clean -s -C $(LIBRT_DIR)
-	@$(RM) -r $(OBJ_DIR)
+	@$(RM) -r obj
 	@printf "$(CYAN)🗑  Object files removed$(R)\n"
 
 fclean: clean
@@ -120,6 +127,8 @@ fclean: clean
 	@make fclean -s -C $(LIBRT_DIR)
 	@$(RM) $(NAME)
 	@printf "$(CYAN)🗑  Executable removed$(R)\n"
+
+bonus: banner $(MLX) $(LIBFT_A) $(LIBRT_A) $(NAME)
 
 re: fclean all
 
@@ -129,4 +138,4 @@ mlxclean:
 mlxfclean:
 	@make fclean -s -C $(MLX_DIR)
 
-.PHONY: all clean fclean re banner mlxclean mlxfclean
+.PHONY: all bonus clean fclean re banner mlxclean mlxfclean
