@@ -10,7 +10,7 @@
 /* ——— Define ——————————————————————————————————————————————————————————————— */
 # define SOLAR_MASS 1.989e30
 # define _G 6.67259e-11
-# define DT 0.5
+# define DT 0.01
 
 typedef struct s_object t_object;
 typedef struct s_world t_world;

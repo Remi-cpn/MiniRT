@@ -15,7 +15,7 @@ static void	calc_new_pos(t_vec *cur_pos, t_vec *prev_pos, t_physics *param)
 	vec_init(&tmp_pos, cur_pos->x, cur_pos->y, cur_pos->z);
 	term1 = vec_mult_scalar(tmp_pos, 2.0);
 	term3 = vec_mult_scalar(param->acc, DT * DT);
-	new_pos = vec_add(vec_sub(term1, *cur_pos), term3);
+	new_pos = vec_add(vec_sub(term1, *prev_pos), term3);
 	vec_init(cur_pos, new_pos.x, new_pos.y, new_pos.z);
 	vec_init(prev_pos, tmp_pos.x, tmp_pos.y, tmp_pos.z);
 }
@@ -30,12 +30,12 @@ void	calc_acc(t_object *o, int nb_obj)
 	t_vec		dir;
 
 	i = -1;
-	j = -1;
 	while (++i < nb_obj)
 	{
 		if (o[i].physics_enabled == false)
 			continue ;
 		vec_init(&acc_tot, 0, 0, 0);
+		j = -1;
 		while (++j < nb_obj)
 		{
 			if (o[j].physics_enabled == false || j == i)
@@ -46,7 +46,7 @@ void	calc_acc(t_object *o, int nb_obj)
 				continue ;
 			vec_normalize(&dir);
 			F = _G * o[j].shape.sphere.param.mass / (dist * dist);
-			vec_add(acc_tot, vec_mult_scalar(dir, F));
+			acc_tot = vec_add(acc_tot, vec_mult_scalar(dir, F));
 		}
 		vec_init(&o[i].shape.sphere.param.acc, acc_tot.x, acc_tot.y, acc_tot.z);
 	}

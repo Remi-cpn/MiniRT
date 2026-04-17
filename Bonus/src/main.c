@@ -19,7 +19,7 @@ static void	update(void *param)
 
 	d = (t_data *)param;
 	update_cam(d, 0.3);
-	for (int i = 0; i < 60; i++)
+	// for (int i = 0; i < 60; i++)
 		recalcul_physics(&d->map);
 	draw(d, &d->map);
 }
