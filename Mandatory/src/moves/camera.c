@@ -13,6 +13,7 @@
 #include "../../include/minirt.h"
 #include <math.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 static void	linear_movement(t_data *d, t_camera *cam, double speed)
 {
@@ -58,6 +59,15 @@ static void	update_fov(t_data *d, t_camera *cam, double speed)
 		cam->fov -= speed * 10;
 }
 
+static void	reparse(t_data *d)
+{
+	free(d->map.objects);
+	d->map.objects = NULL;
+	d->map.nb_obj = 0;
+	d->map = parsing(d, d->filename);
+	d->input.r = false;
+}
+
 bool	update_cam(t_data *d, double speed)
 {
 	if (d->input.a == true || d->input.w == true
@@ -69,6 +79,8 @@ bool	update_cam(t_data *d, double speed)
 		rotate_movement(d, &d->map.camera, speed);
 	else if (d->input.i == true || d->input.o == true)
 		update_fov(d, &(d->map.camera), speed);
+	else if (d->input.r == true)
+		reparse(d);
 	else
 		return (false);
 	calcul_viewport(&d->map.camera, (double)d->win_info.width

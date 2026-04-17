@@ -27,6 +27,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (1);
 	d = init_program();
+	d.filename = av[1];
 	d.map = parsing(&d, av[1]);
 	mlx_on_event(d.mlx, d.win, MLX_KEYDOWN, key_hook_down, &d);
 	mlx_on_event(d.mlx, d.win, MLX_KEYUP, key_hook_up, &d);
