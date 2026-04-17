@@ -50,6 +50,8 @@ void	key_hook_up(int key, void *param)
 		((t_data *)param)->input.ctrl = false;
 	else if (key == SPACE)
 		((t_data *)param)->input.space = false;
+	// else if (key == _R)
+	// 	((t_data *)param)->input.r = false;
 }
 
 void	key_hook_down(int key, void *param)
@@ -74,4 +76,6 @@ void	key_hook_down(int key, void *param)
 		((t_data *)param)->input.ctrl = true;
 	else if (key == SPACE)
 		((t_data *)param)->input.space = true;
+	else if (key == _R)
+		((t_data *)param)->input.r = true;
 }
