@@ -45,7 +45,8 @@ void	calcul_viewport(t_camera *cam, double ratio)
 
 void	init_world(t_data *d, t_world *w)
 {
-	d->pixels = ft_calloc(d->win_info.width * d->win_info.height,
+	if (!d->pixels)
+		d->pixels = ft_calloc(d->win_info.width * d->win_info.height,
 			sizeof(mlx_color));
 	if (!d->pixels)
 		exit_prog(d, ERROR_MALLOC, ERROR_MALLOC_MSG);

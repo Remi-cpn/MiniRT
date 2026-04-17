@@ -35,5 +35,7 @@ void	pars_line(t_parsing *p, t_world *w, char *line)
 	else
 		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
 	ft_free_array(p->line_split);
+	if (i == w->nb_obj)
+		i = 0;
 	p->line_split = NULL;
 }
