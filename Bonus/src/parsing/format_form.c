@@ -28,7 +28,7 @@ void	add_sp(t_parsing *p, t_object *o, char **line_split)
 		{
 			o->physics_enabled = true;
 			o->shape.sphere.param.cur_pos = o->shape.sphere.center;
-			o->shape.sphere.param.mass = get_mass(p, line_split[4]);
+			o->shape.sphere.param.mass = get_mass(line_split[4]);
 			o->shape.sphere.param.prev_pos = get_vec(p, line_split[5]);
 			vec_init(&o->shape.sphere.param.acc, 0, 0, 0);
 		}
