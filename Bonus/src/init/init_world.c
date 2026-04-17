@@ -43,6 +43,20 @@ void	calcul_viewport(t_camera *cam, double ratio)
 	cam->corner = vec_add(cam->corner, vec_mult_scalar(cam->dir, cam->focal));
 }
 
+
+static void	init_prev_pos(t_object *o, int nb_obj)
+{
+	int	i;
+
+	i = -1;
+	while (++i < nb_obj)
+	{
+		if (!o[i].physics_enabled)
+			continue ;
+		o[i].shape.sphere.param.prev_pos = vec_add(vec_sub(o[i].shape.sphere.param.cur_pos, vec_mult_scalar(o[i].shape.sphere.param.prev_pos, DT)), vec_mult_scalar(o[i].shape.sphere.param.acc, 0.5 * DT * DT));
+	}
+}
+
 void	init_world(t_data *d, t_world *w)
 {
 	if (!d->pixels)
@@ -53,4 +67,6 @@ void	init_world(t_data *d, t_world *w)
 	vec_normalize(&(w->camera.dir));
 	calcul_viewport(&(w->camera), (double)d->win_info.width
 		/ (double)d->win_info.height);
+	calc_acc(w->objects, w->nb_obj);
+	init_prev_pos(w->objects, w->nb_obj);
 }

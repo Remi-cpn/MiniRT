@@ -39,7 +39,8 @@ SRC_INIT	= init_program.c \
 			  init_world.c
 
 SRC_MOVE	= hook.c \
-			  camera.c
+			  camera.c \
+			  physics.c
 
 SRC_EXIT	= exit_program.c
 

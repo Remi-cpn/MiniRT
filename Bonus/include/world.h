@@ -14,6 +14,7 @@
 # define WORLD_H
 
 # include "minirt.h"
+# include "physics.h"
 # include "../../MacroLibX/includes/mlx.h"
 
 # define RGB 3
@@ -42,15 +43,16 @@ typedef enum e_obj
 
 typedef struct	s_camera
 {
-	t_point	origin;
-	t_point	corner;
-	t_vec	hor;
-	t_vec	hor_n;
-	t_vec	ver;
-	t_vec	ver_n;
-	t_vec	dir;
-	double	fov;
-	double	focal;
+	t_physics	param;
+	t_point		origin;
+	t_point		corner;
+	t_vec		hor;
+	t_vec		hor_n;
+	t_vec		ver;
+	t_vec		ver_n;
+	t_vec		dir;
+	double		fov;
+	double		focal;
 }				t_camera;
 
 typedef struct s_plane
@@ -61,8 +63,9 @@ typedef struct s_plane
 
 typedef struct s_sphere
 {
-	t_point	center;
-	double	radius;
+	t_point		center;
+	double		radius;
+	t_physics	param;
 }	t_sphere;
 
 typedef struct s_cylinder {
@@ -81,6 +84,7 @@ typedef struct s_light {
 typedef struct s_object {
 	t_obj				type;
 	mlx_color			color;
+	bool				physics_enabled;
 	union {
 		t_sphere        sphere;
 		t_plane         plane;

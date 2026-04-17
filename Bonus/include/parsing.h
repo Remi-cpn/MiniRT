@@ -56,6 +56,7 @@ void		pars_line(t_parsing *p, t_world *w, char *line);
 int			count_line(t_parsing *p, char *file_name);
 mlx_color	get_color(t_parsing *p, char *s);
 t_vec		get_vec(t_parsing *p, char *s);
+double		get_mass(t_parsing *p, char *s);
 
 /* Formatters functions */
 void		add_al(t_parsing *p, t_world *w, char **line_split);

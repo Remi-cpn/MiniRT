@@ -15,14 +15,26 @@
 
 void	add_sp(t_parsing *p, t_object *o, char **line_split)
 {
-	if (line_split[1] && line_split[2] && line_split[3] && !line_split[4])
+	if (line_split[1] && line_split[2] && line_split[3])
 	{
 		if (!double_valid(line_split[2]))
 			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);
 		o->type = OBJ_SPHERE;
+		o->physics_enabled = false;
 		o->shape.sphere.center = get_vec(p, line_split[1]);
 		o->shape.sphere.radius = ft_atod(line_split[2]) / 2.0;
 		o->color = get_color(p, line_split[3]);
+		if (line_split[4] && line_split[5])
+		{
+			o->physics_enabled = true;
+			o->shape.sphere.param.cur_pos = o->shape.sphere.center;
+			o->shape.sphere.param.mass = get_mass(p, line_split[4]);
+			o->shape.sphere.param.prev_pos = get_vec(p, line_split[5]);
+			vec_init(&o->shape.sphere.param.acc, 0, 0, 0);
+		}
+		else if ((line_split[4] && !line_split[5])
+				|| (line_split[5]  && !line_split[4]))
+			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);
 	}
 	else
 		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);

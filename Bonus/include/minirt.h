@@ -25,6 +25,7 @@
 # include "exit.h"
 # include "world.h"
 # include "parsing.h"
+# include "physics.h"
 
 /* ——— Lib Graphique ———————————————————————————————————————————————————————— */
 # include "../../MacroLibX/includes/mlx.h"

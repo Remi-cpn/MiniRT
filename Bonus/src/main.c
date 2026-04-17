@@ -15,8 +15,8 @@
 
 static void	update(void *param)
 {
-	if (!update_cam((t_data *)param, 0.3))
-		return ;
+	update_cam((t_data *)param, 0.3);
+
 	draw((t_data *)param, &((t_data *)param)->map);
 }
 
