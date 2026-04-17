@@ -47,6 +47,7 @@ typedef struct s_input
 	bool	o;
 	bool	ctrl;
 	bool	space;
+	bool	r;
 }	t_input;
 
 typedef struct s_data
@@ -58,6 +59,7 @@ typedef struct s_data
 	t_input					input;
 	t_world					map;
 	mlx_color				*pixels;
+	char					*filename;
 }	t_data;
 
 typedef struct t_ray
@@ -83,6 +85,7 @@ typedef enum e_key
 	SPACE = 44,
 	WHEEL_F = 1,
 	WHEEL_B = 2,
+	_R = 21
 }	t_key;
 
 typedef enum e_event
