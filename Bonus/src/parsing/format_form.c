@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   format_form.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/11 12:40:03 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/14 16:59:52 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/19 12:13:48 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ void	add_sp(t_parsing *p, t_object *o, char **line_split)
 		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);
 	if (o->shape.sphere.radius <= 0.0)
 		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);
+	o->texture.type = TEX_DAM;
+	o->texture.color2.r = 0;
+	o->texture.color2.g = 255;
+	o->texture.color2.b = 255;
+	o->texture.scale = 10.0;
 }
 
 void	add_pl(t_parsing *p, t_object *o, char **line_split)

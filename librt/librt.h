@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   librt.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 14:07:20 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 11:40:50 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/19 11:46:03 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define P_INT_MIN "2147483648"
 # define P_LONG_MAX "9223372036854775807"
 # define P_LONG_MIN "9223372036854775808"
+# define PI 3.14159265358979323846
 
 /* ——— Struct prototypes ———————————————————————————————————————————————————— */
 typedef struct s_vec

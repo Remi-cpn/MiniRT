@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_colors.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 14:19:12 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/14 16:36:34 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/19 12:11:45 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,9 @@ void	pixel_color(t_world *w, t_ray ray, mlx_color *color)
 		color->rgba = 0x81CEFAFF;
 		return ;
 	}
+	if (hit.object->texture.type != TEX_NONE)
+		hit.pixel_color = get_texture(hit);
+	else
+		hit.pixel_color = hit.object->color;
 	light(w, &hit, color);
 }
