@@ -1,0 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   librt.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/07 14:07:20 by rcompain          #+#    #+#             */
+/*   Updated: 2026/04/13 11:40:50 by rcompain         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef LIBRT_H
+# define LIBRT_H
+
+# include "math.h"
+# include "../libft/libft.h"
+
+# define P_INT_MAX "2147483647"
+# define P_INT_MIN "2147483648"
+# define P_LONG_MAX "9223372036854775807"
+# define P_LONG_MIN "9223372036854775808"
+
+/* ——— Struct prototypes ———————————————————————————————————————————————————— */
+typedef struct s_vec
+{
+	double	x;
+	double	y;
+	double	z;
+}	t_vec;
+
+typedef t_vec t_point;
+
+/* ——— Function prototypes —————————————————————————————————————————————————— */
+/* Vec functions */
+double	vec_norm(t_vec v);
+double	vec_square(t_vec v);
+double	vec_dot(t_vec v1, t_vec v2);
+void	vec_normalize(t_vec *v);
+void	vec_init(t_vec *v, double x, double y, double z);
+t_vec	vec_mult_scalar(t_vec v, double d);
+t_vec	vec_add(t_vec v1, t_vec v2);
+t_vec	vec_sub(t_vec v1, t_vec v2);
+
+/* Valid functions */
+int		int_valid(char *s);
+int		long_valid(char *s);
+int		float_valid(char *s);
+int		double_valid(char *s);
+
+#endif

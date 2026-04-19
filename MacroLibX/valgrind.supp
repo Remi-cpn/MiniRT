@@ -1,0 +1,410 @@
+{
+   name
+   Memcheck:Leak
+   fun:*
+   ...
+   obj:*libmlx*
+   ...
+}
+{
+   name
+   Memcheck:Cond
+   fun:*
+   ...
+   obj:*libmlx*
+   ...
+}
+{
+   name
+   Memcheck:Value8
+   fun:*
+   ...
+   obj:*libmlx*
+   ...
+}
+{
+   name
+   Memcheck:Addr4
+   fun:*
+   ...
+   obj:*libmlx*
+   ...
+}
+{
+   name
+   Memcheck:Leak
+   fun:*
+   ...
+   obj:*SDL*
+   ...
+}
+{
+   name
+   Memcheck:Leak
+   fun:*
+   ...
+   obj:*X11*
+   ...
+}
+{
+   name
+   Memcheck:Leak
+   fun:*
+   ...
+   obj:*nvidia.so*
+   ...
+}
+{
+   name
+   Memcheck:Leak
+   fun:*
+   obj:*
+   ...
+   fun:X11*
+   ...
+}
+{
+   name
+   Memcheck:Leak
+   fun:*alloc
+   obj:*
+   ...
+   fun:SDL*
+   ...
+}
+{
+	memcheck_malloc_suppressions
+	Memcheck:Leak
+	fun:malloc
+	...
+	obj:/var/cache/nscd/passwd
+}
+{
+	memcheck_calloc_suppressions
+	Memcheck:Leak
+	fun:calloc
+	...
+	obj:/var/cache/nscd/passwd
+}
+{
+	memcheck_realloc_suppressions
+	Memcheck:Leak
+	fun:realloc
+	...
+	obj:/var/cache/nscd/passwd
+}
+{
+	dl_catch_exception_suppressions
+	Memcheck:Leak
+	...
+	fun:_dl_catch_exception
+	...
+}
+{
+	dl_catch_exception_suppressions_addr8
+	Memcheck:Addr8
+	...
+	fun:_dl_catch_exception
+	...
+}
+{
+	dlopen_malloc-suppressions
+	Memcheck:Leak
+	match-leak-kinds: definite
+	fun:malloc
+	...
+	fun:_dl_open
+	...
+}
+{
+	_dl_init_suppressions
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:_Znwm
+	...
+	fun:_dl_init
+}
+{
+	dbus_suppressions
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	...
+	fun:_dbus*
+	...
+}
+{
+   dbus_memory_leak
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libdbus-1.so.*
+   ...
+   fun:dbus*
+   ...
+}
+{
+   name
+   Memcheck:Leak
+   fun:*
+   ...
+   obj:*libnvidia-glcore.so*
+   ...
+}
+{
+   name
+   Memcheck:Leak
+   fun:*
+   ...
+   obj:*libdbus-1.so*
+   ...
+}
+{
+   vulkan_lvp_leaks
+   Memcheck:Leak
+   fun:*
+   ...
+   obj:*libvulkan_lvp.so*
+   ...
+}
+{
+   vulkan_intel_leaks
+   Memcheck:Leak
+   fun:*
+   ...
+   obj:*libvulkan_intel.so*
+   ...
+}
+{
+   vulkan_base_leaks
+   Memcheck:Leak
+   fun:*
+   ...
+   obj:*libvulkan.so*
+   ...
+}
+{
+   vulkan_mesa_leaks
+   Memcheck:Leak
+   fun:*
+   ...
+   obj:*libVkLayer_MESA_device_select.so*
+   ...
+}
+{
+   vulkan_read_errors
+   Memcheck:Addr1
+   ...
+   obj:*libvulkan*
+   ...
+}
+{
+   vulkan_read_errors_intel
+   Memcheck:Addr1
+   ...
+   obj:*libvulkan_intel.so*
+   ...
+}
+{
+   nvidia_thread_read_errors
+   Memcheck:Addr1
+   ...
+   obj:*libnvidia-glcore.so*
+   ...
+   fun:start_thread
+   ...
+}
+{
+   nvidia_specific_thread_error
+   Memcheck:Addr1
+   obj:*libnvidia-glcore.so.550.120*
+   obj:*libnvidia-glcore.so.550.120*
+   fun:start_thread
+   fun:clone
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:*
+   fun:call_init.part.0
+   fun:call_init
+   fun:_dl_init
+   fun:_dl_catch_exception
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:rindex
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:*
+   fun:call_init.part.0
+   fun:call_init
+   fun:_dl_init
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:*
+   fun:call_init.part.0
+   fun:call_init
+   fun:_dl_init
+   fun:_dl_catch_exception
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:rawmemchr
+   fun:_IO_str_init_static_internal
+   fun:_IO_strfile_read
+   fun:sscanf
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:*
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:*
+   fun:call_init.part.0
+   fun:call_init
+   fun:_dl_init
+   fun:_dl_catch_exception
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:rindex
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:*
+   fun:call_init.part.0
+   fun:call_init
+   fun:_dl_init
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:rawmemchr
+   fun:_IO_str_init_static_internal
+   fun:_IO_strfile_read
+   fun:sscanf
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:*
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__vfscanf_internal
+   fun:sscanf
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:*
+   fun:call_init.part.0
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   fun:_ZN3mlx14DescriptorPool4InitEv
+   fun:_ZN3mlx21DescriptorPoolManager16GetAvailablePoolERKNS_15ShaderSetLayoutENS_10ShaderTypeE
+   fun:_ZN3mlx12Render2DPass4InitEv
+   fun:_ZN3mlx12RenderPasses4InitENS_12NonOwningPtrINS_7TextureEEE
+   fun:_ZN3mlx13SceneRenderer4InitENS_12NonOwningPtrINS_7TextureEEE
+   fun:_ZN3mlx15GraphicsSupportC1EPK22mlx_window_create_infoi
+   fun:_ZN3mlx11Application17NewGraphicsSuportEPK22mlx_window_create_info
+   fun:mlx_new_window
+   fun:init_mlx
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.570.211.01
+   obj:*
+   fun:call_init.part.0
+   fun:call_init
+   fun:_dl_init
+   fun:_dl_catch_exception
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.570.211.01
+   fun:kvfEndCommandBuffer
+   fun:_ZN3mlx8Renderer8EndFrameEv
+   fun:_ZN3mlx15GraphicsSupport6RenderEv
+   fun:_ZN3mlx11Application3RunEv
+   fun:mlx_loop
+   fun:main
+}
