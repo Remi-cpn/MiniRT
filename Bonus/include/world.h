@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:17:11 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/19 12:10:32 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/20 18:12:32 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_uv
 {
 	double	u;
 	double	v;
+	int		case_idx;
 }	t_uv;
 
 typedef struct s_texture

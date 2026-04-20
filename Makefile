@@ -6,7 +6,7 @@
 #    By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/13 11:16:05 by rcompain          #+#    #+#              #
-#    Updated: 2026/04/19 10:37:16 by rcompain         ###   ########.fr        #
+#    Updated: 2026/04/20 18:16:46 by rcompain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ SRC_SCENE	= draw.c \
 			  ray.c
 
 ifeq ($(MAKECMDGOALS),bonus)
-SRC_SCENE	+= textures.c
+SRC_SCENE	+= textures_cb.c
 endif
 
 SRC_PARSING = parsing.c \

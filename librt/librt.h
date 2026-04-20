@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 14:07:20 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/19 11:46:03 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/20 17:35:47 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	vec_init(t_vec *v, double x, double y, double z);
 t_vec	vec_mult_scalar(t_vec v, double d);
 t_vec	vec_add(t_vec v1, t_vec v2);
 t_vec	vec_sub(t_vec v1, t_vec v2);
+t_vec	vec_vectoriel(t_vec u, t_vec v);
 
 /* Valid functions */
 int		int_valid(char *s);

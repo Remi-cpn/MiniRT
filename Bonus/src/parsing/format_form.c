@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/11 12:40:03 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/19 12:13:48 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/20 17:56:03 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 void	add_sp(t_parsing *p, t_object *o, char **line_split)
 {
-	if (line_split[1] && line_split[2] && line_split[3] && !line_split[4])
+	if (line_split[1] && line_split[2] && line_split[3] && (!line_split[4]
+			|| (line_split[4] && line_split[5] && !line_split[6])))
 	{
 		if (!double_valid(line_split[2]))
 			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);
@@ -23,21 +24,26 @@ void	add_sp(t_parsing *p, t_object *o, char **line_split)
 		o->shape.sphere.center = get_vec(p, line_split[1]);
 		o->shape.sphere.radius = ft_atod(line_split[2]) / 2.0;
 		o->color = get_color(p, line_split[3]);
+		if (line_split[4])
+		{
+			if (!double_valid(line_split[4]))
+				exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);
+			o->texture.type = TEX_DAM;
+			o->texture.scale = ft_atod(line_split[4]);
+			o->texture.color2 = get_color(p, line_split[5]);
+		}
 	}
 	else
 		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);
-	if (o->shape.sphere.radius <= 0.0)
+	if (o->shape.sphere.radius <= 0.0
+		|| (line_split[4] && o->texture.scale <= 0))
 		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);
-	o->texture.type = TEX_DAM;
-	o->texture.color2.r = 0;
-	o->texture.color2.g = 255;
-	o->texture.color2.b = 255;
-	o->texture.scale = 10.0;
 }
 
 void	add_pl(t_parsing *p, t_object *o, char **line_split)
 {
-	if (line_split[1] && line_split[2] && line_split[3] && !line_split[4])
+	if (line_split[1] && line_split[2] && line_split[3] && (!line_split[4]
+			|| (line_split[4] && line_split[5] && !line_split[6])))
 	{
 		o->type = OBJ_PLANE;
 		o->shape.plane.point = get_vec(p, line_split[1]);
@@ -45,9 +51,19 @@ void	add_pl(t_parsing *p, t_object *o, char **line_split)
 		if (fabs(vec_norm(o->shape.plane.normal) - 1.0) > 0.001)
 			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_PL_ARGS_MSG);
 		o->color = get_color(p, line_split[3]);
+		if (line_split[4])
+		{
+			if (!double_valid(line_split[4]))
+				exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_PL_ARGS_MSG);
+			o->texture.type = TEX_DAM;
+			o->texture.scale = ft_atod(line_split[4]);
+			o->texture.color2 = get_color(p, line_split[5]);
+		}
 	}
 	else
 		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_PL_ARGS_MSG);
+	if (line_split[4] && o->texture.scale <= 0)
+		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);
 }
 
 void	add_cy(t_parsing *p, t_object *o, char **line_split)
