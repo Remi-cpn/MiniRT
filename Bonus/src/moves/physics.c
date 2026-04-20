@@ -3,7 +3,9 @@
 # include "../../include/minirt.h"
 # include "../../include/physics.h"
 # include "../../include/world.h"
+#include <stdio.h>
 
+/* verlet : new_pos = (2 * cur) - prev + acc*dt^2*/
 static void	calc_new_pos(t_vec *cur_pos, t_vec *prev_pos, t_physics *param)
 {
 	t_vec	tmp_pos;
@@ -24,10 +26,11 @@ void	calc_acc(t_object *o, int nb_obj)
 {
 	int			i;
 	int			j;
-	long int	dist;
+	double 		dist;
 	double		F;
 	t_vec		acc_tot;
 	t_vec		dir;
+	// static int	count = 0;
 
 	i = -1;
 	while (++i < nb_obj)
@@ -40,13 +43,22 @@ void	calc_acc(t_object *o, int nb_obj)
 		{
 			if (o[j].physics_enabled == false || j == i)
 				continue ;
-			dir = vec_sub(o[j].shape.sphere.center, o[i].shape.sphere.center);
+			dir = vec_sub(o[j].shape.sphere.param.cur_pos, o[i].shape.sphere.param.cur_pos);
 			dist = vec_norm(dir);
 			if (dist < 0.001)
 				continue ;
 			vec_normalize(&dir);
 			F = _G * o[j].shape.sphere.param.mass / (dist * dist);
-			acc_tot = vec_add(acc_tot, vec_mult_scalar(dir, F));
+			t_vec tmp = vec_mult_scalar(dir, F);
+			acc_tot = vec_add(acc_tot, tmp);
+			// if (count % 100 == 0)
+			// {
+			// 	// t_vec p = o[i].shape.sphere.param.acc;
+			// 	printf("G : %e\t%e\t%0.01f\n", _G, o[j].shape.sphere.param.mass, dist);
+			// 	printf("F : %e\n", F);
+			// 	printf("vecteur dir * F = %0.1f, %0.1f, %0.1f\n", dir.x, dir.y, dir.z);
+			// 	i++;
+			// }
 		}
 		vec_init(&o[i].shape.sphere.param.acc, acc_tot.x, acc_tot.y, acc_tot.z);
 	}

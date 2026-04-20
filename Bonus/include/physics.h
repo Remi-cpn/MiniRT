@@ -7,9 +7,14 @@
 #include "world.h"
 # include <math.h>
 
+/* ——— Units ——————————————————————————————————————————————————————————— */
+// Distance : 1 unit = 1 AU (Astronomical Unit) = 1.496e11 m
+// Mass : 1 unit = 1 solar mass  = 1.989e30 kg
+// Times : 1 unit = 1 day = 86400 s
+
 /* ——— Define ——————————————————————————————————————————————————————————————— */
 # define SOLAR_MASS 1.989e30
-# define _G 6.67259e-11
+#define _G 2.959122e-4
 # define DT 0.01
 
 typedef struct s_object t_object;

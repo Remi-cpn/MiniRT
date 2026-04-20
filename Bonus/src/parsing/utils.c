@@ -12,13 +12,16 @@
 
 #include "../../include/minirt.h"
 #include "../../include/parsing.h"
+#include <stdio.h>
 
 double	get_mass(char *s)
 {
     double	mass_kg;
 
     mass_kg = strtod(s, NULL);
-    return (mass_kg / (double)SOLAR_MASS);
+	// printf("mass_kg : %e\n", mass_kg);
+    // return (mass_kg / SOLAR_MASS);
+	return (mass_kg);
 }
 
 t_vec	get_vec(t_parsing *p, char *s)
