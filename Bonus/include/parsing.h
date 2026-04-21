@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 15:11:23 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 15:13:25 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/21 11:17:29 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,18 @@ typedef enum e_type
 
 /* ——— Function prototypes —————————————————————————————————————————————————— */
 t_world		parsing(t_data *d, char *file_name);
-void		pars_line(t_parsing *p, t_world *w, char *line);
+void 		pars_line_dispatch(t_parsing *p, t_world *w, char *l, bool solar);
 int			count_line(t_parsing *p, char *file_name);
 mlx_color	get_color(t_parsing *p, char *s);
 t_vec		get_vec(t_parsing *p, char *s);
+double		get_mass(char *s);
 
 /* Formatters functions */
 void		add_al(t_parsing *p, t_world *w, char **line_split);
 void		add_cam(t_parsing *p, t_world *w, char **line_split);
 void		add_light(t_parsing *p, t_world *w, char **line_split);
 void		add_sp(t_parsing *p, t_object *o, char **line_split);
+void		add_sp_solar(t_parsing *p, t_object *o, char **line_split);
 void		add_pl(t_parsing *p, t_object *o, char **line_split);
 void		add_cy(t_parsing *p, t_object *o, char **line_split);
 

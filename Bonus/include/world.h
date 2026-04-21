@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:17:11 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/20 18:12:32 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/21 11:35:18 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "minirt.h"
 # include "../../MacroLibX/includes/mlx.h"
+# include "physics.h"
 
 # define RGB 3
 # define R 0
@@ -22,7 +23,8 @@
 # define B 2
 
 /* ——— Variable prototypes —————————————————————————————————————————————————— */
-typedef struct s_data	t_data;
+typedef struct s_data		t_data;
+typedef struct s_physics	t_physics;
 
 /* ——— Textures ————————————————————————————————————————————————————————————— */
 typedef enum e_tex_type
@@ -70,15 +72,15 @@ typedef enum e_obj
 
 typedef struct s_camera
 {
-	t_point	origin;
-	t_point	corner;
-	t_vec	hor;
-	t_vec	hor_n;
-	t_vec	ver;
-	t_vec	ver_n;
-	t_vec	dir;
-	double	fov;
-	double	focal;
+	t_point		origin;
+	t_point		corner;
+	t_vec		hor;
+	t_vec		hor_n;
+	t_vec		ver;
+	t_vec		ver_n;
+	t_vec		dir;
+	double		fov;
+	double		focal;
 }	t_camera;
 
 typedef struct s_plane
@@ -89,8 +91,9 @@ typedef struct s_plane
 
 typedef struct s_sphere
 {
-	t_point	center;
-	double	radius;
+	t_point		center;
+	double		radius;
+	t_physics	param;
 }	t_sphere;
 
 typedef struct s_cylinder
@@ -106,13 +109,14 @@ typedef struct s_object
 	t_obj				type;
 	mlx_color			color;
 	t_texture			texture;
+	bool				physics_enabled;
 	union u_shape
 	{
 		t_sphere		sphere;
 		t_plane			plane;
 		t_cylinder		cylinder;
 	}	shape;
-}	t_object;
+}   t_object;
 
 /* ——— Ray —————————————————————————————————————————————————————————————————— */
 typedef struct s_hit

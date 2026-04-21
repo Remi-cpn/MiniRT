@@ -6,12 +6,21 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 15:28:41 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 12:14:28 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/21 11:17:19 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 #include "../../include/parsing.h"
+#include <stdio.h>
+
+double	get_mass(char *s)
+{
+    double	mass_kg;
+
+    mass_kg = strtod(s, NULL);
+	return (mass_kg);
+}
 
 t_vec	get_vec(t_parsing *p, char *s)
 {

@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 16:02:20 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/21 11:15:00 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "exit.h"
 # include "world.h"
 # include "parsing.h"
+# include "physics.h"
 
 /* ——— Lib Graphique ———————————————————————————————————————————————————————— */
 # include "../../MacroLibX/includes/mlx.h"
@@ -60,6 +61,7 @@ typedef struct s_data
 	t_world					map;
 	mlx_color				*pixels;
 	char					*filename;
+	bool					solar_file;
 }	t_data;
 
 typedef struct t_ray

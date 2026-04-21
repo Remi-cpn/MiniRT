@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+         #
+#    By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/13 11:16:05 by rcompain          #+#    #+#              #
-#    Updated: 2026/04/20 18:16:46 by rcompain         ###   ########.fr        #
+#    Updated: 2026/04/21 11:41:50 by rcompain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,9 @@ CC_DIR		= Mandatory
 ifeq ($(MAKECMDGOALS),bonus)
 CC_DIR		= Bonus
 endif
+ifeq ($(MAKECMDGOALS),solar)
+CC_DIR		= Bonus_solar
+endif
 
 SRC_DIR		= $(CC_DIR)/src
 OBJ_DIR		= obj/$(CC_DIR)
@@ -39,7 +42,7 @@ SRC_INIT	= init_program.c \
 			  init_world.c
 
 SRC_MOVE	= hook.c \
-			  camera.c
+			  camera.c \
 
 SRC_EXIT	= exit_program.c
 
@@ -51,15 +54,20 @@ SRC_SCENE	= draw.c \
 			  light_calc.c \
 			  ray.c
 
-ifeq ($(MAKECMDGOALS),bonus)
-SRC_SCENE	+= textures_cb.c
-endif
-
 SRC_PARSING = parsing.c \
 			  parsing_line.c \
 			  utils.c \
 			  format_unique.c \
-			  format_form.c
+			  format_form_rt.c
+
+ifeq ($(MAKECMDGOALS),bonus)
+SRC_SCENE	+= textures_cb.c \
+
+SRC_PARSING	+= format_form_solar.c \
+
+SRC_MOVE	+= physics.c \
+
+endif
 
 VPATH := $(SRC_DIR) \
          $(addprefix $(SRC_DIR)/, $(SUB_DIRS))

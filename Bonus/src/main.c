@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:34:44 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/15 15:29:28 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/21 11:35:57 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,23 @@
 
 static void	update(void *param)
 {
-	if (!update_cam((t_data *)param, 0.3))
+	t_data	*d;
+	int		i;
+	int		speed_sim;
+
+	d = (t_data *)param;
+	if (d->solar_file == false)
+	{
+		if (update_cam(d, 0.3))
+			draw(d, &d->map);
 		return ;
-	draw((t_data *)param, &((t_data *)param)->map);
+	}
+	i = -1;
+	update_cam(d, 0.3);
+	speed_sim = 120;
+	while (++i < speed_sim)
+		recalcul_physics(&d->map);
+	draw(d, &d->map);
 }
 
 int	main(int ac, char **av)
