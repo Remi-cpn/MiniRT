@@ -47,10 +47,8 @@ static void	coeff_cyl(double coeff[3], t_cylinder cylinder, t_ray ray)
 	t_vec	b_vec;
 
 	oc = vec_sub(ray.origin, cylinder.center);
-	a_vec = vec_sub(ray.dir, vec_mult_scalar(cylinder.axis,
-				vec_dot(ray.dir, cylinder.axis)));
-	b_vec = vec_sub(oc, vec_mult_scalar(cylinder.axis,
-				vec_dot(oc, cylinder.axis)));
+	a_vec = vec_sub(ray.dir, vec_proj(ray.dir, cylinder.axis));
+	b_vec = vec_sub(oc, vec_proj(oc, cylinder.axis));
 	coeff[0] = vec_dot(a_vec, a_vec);
 	coeff[1] = vec_dot(a_vec, b_vec);
 	coeff[2] = vec_dot(b_vec, b_vec) - cylinder.radius * cylinder.radius;
