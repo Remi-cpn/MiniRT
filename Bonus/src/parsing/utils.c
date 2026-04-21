@@ -41,24 +41,27 @@ mlx_color	get_color(t_parsing *p, char *s)
 {
 	mlx_color	color;
 	char		**sp;
-	int			v[3];
+	int			v[4];
 
 	sp = ft_split(s, ',');
-	if (!sp || !sp[0] || !sp[1] || !sp[2] || sp[3])
+	if (!sp || !sp[0] || !sp[1] || !sp[2] || (sp[3] && sp[4]))
 		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
-	if (!int_valid(sp[0]) || !int_valid(sp[1]) || !int_valid(sp[2]))
+	if (!int_valid(sp[0]) || !int_valid(sp[1]) || !int_valid(sp[2]) || (sp[3] && !int_valid(sp[3])))
 		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
 	v[0] = ft_atoi(sp[0]);
 	v[1] = ft_atoi(sp[1]);
 	v[2] = ft_atoi(sp[2]);
+	v[3] = 255;
+	if (sp[3])
+		v[3] = ft_atoi(sp[3]);
 	ft_free_array(sp);
 	if (v[0] < 0 || v[0] > 255 || v[1] < 0 || v[1] > 255
-		|| v[2] < 0 || v[2] > 255)
+		|| v[2] < 0 || v[2] > 255 || (sp[3] && (v[3] < 0 || v[3] > 255)))
 		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
 	color.r = v[0];
 	color.g = v[1];
 	color.b = v[2];
-	color.a = 255;
+	color.a = v[3];
 	return (color);
 }
 
