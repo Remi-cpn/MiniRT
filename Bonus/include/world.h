@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:17:11 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/21 14:04:29 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/21 16:10:41 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,12 @@ typedef struct s_world
 /* ——— Function prototypes —————————————————————————————————————————————————— */
 void		calcul_viewport(t_camera *cam, double ratio);
 void		init_world(t_data *d, t_world *w);
+
+/* Textures */
 mlx_color	get_texture(t_hit hit);
+t_uv		get_uv_sp(t_hit hit);
+t_uv		get_uv_pl(t_hit hit);
+t_uv		get_uv_cy(t_hit hit);
+t_uv		get_uv_caps(t_hit hit);
 
 #endif
