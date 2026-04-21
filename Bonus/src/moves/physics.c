@@ -1,9 +1,7 @@
 
 
-# include "../../include/minirt.h"
 # include "../../include/physics.h"
 # include "../../include/world.h"
-#include <stdio.h>
 
 /* verlet : new_pos = (2 * cur) - prev + acc*dt^2*/
 static void	calc_new_pos(t_vec *cur_pos, t_vec *prev_pos, t_physics *param)
@@ -22,45 +20,43 @@ static void	calc_new_pos(t_vec *cur_pos, t_vec *prev_pos, t_physics *param)
 	vec_init(prev_pos, tmp_pos.x, tmp_pos.y, tmp_pos.z);
 }
 
+static void	apply_pair_force(t_object *o, int i, int j, t_vec *acc_tot)
+{
+	t_vec	dir;
+	double	dist;
+	double	f_i;
+	double	f_j;
+
+	dir = vec_sub(o[j].shape.sphere.param.cur_pos,
+		o[i].shape.sphere.param.cur_pos);
+	dist = vec_norm(dir);
+	if (dist < 0.001)
+		return ;
+	vec_normalize(&dir);
+	dist = dist * dist;
+	f_i = _G * o[j].shape.sphere.param.mass / dist;
+	f_j = _G * o[i].shape.sphere.param.mass / dist;
+	acc_tot[i] = vec_add(acc_tot[i], vec_mult_scalar(dir, f_i));
+	acc_tot[j] = vec_add(acc_tot[j], vec_mult_scalar(dir, -f_j));
+}
+
 void	calc_acc(t_object *o, int nb_obj)
 {
 	int			i;
 	int			j;
-	double 		dist;
-	double		F;
-	t_vec		acc_tot;
-	t_vec		dir;
-	// static int	count = 0;
+	t_vec		acc_tot[nb_obj];
 
+	ft_memset(acc_tot, 0, sizeof(t_vec) * nb_obj);
 	i = -1;
 	while (++i < nb_obj)
-	{
+ {
 		if (o[i].physics_enabled == false)
 			continue ;
-		vec_init(&acc_tot, 0, 0, 0);
-		j = -1;
+		j = i;
 		while (++j < nb_obj)
-		{
-			if (o[j].physics_enabled == false || j == i)
-				continue ;
-			dir = vec_sub(o[j].shape.sphere.param.cur_pos, o[i].shape.sphere.param.cur_pos);
-			dist = vec_norm(dir);
-			if (dist < 0.001)
-				continue ;
-			vec_normalize(&dir);
-			F = _G * o[j].shape.sphere.param.mass / (dist * dist);
-			t_vec tmp = vec_mult_scalar(dir, F);
-			acc_tot = vec_add(acc_tot, tmp);
-			// if (count % 100 == 0)
-			// {
-			// 	// t_vec p = o[i].shape.sphere.param.acc;
-			// 	printf("G : %e\t%e\t%0.01f\n", _G, o[j].shape.sphere.param.mass, dist);
-			// 	printf("F : %e\n", F);
-			// 	printf("vecteur dir * F = %0.1f, %0.1f, %0.1f\n", dir.x, dir.y, dir.z);
-			// 	i++;
-			// }
-		}
-		vec_init(&o[i].shape.sphere.param.acc, acc_tot.x, acc_tot.y, acc_tot.z);
+			if (o[j].physics_enabled == true)
+				apply_pair_force(o, i, j, acc_tot);
+		vec_init(&o[i].shape.sphere.param.acc, acc_tot[i].x, acc_tot[i].y, acc_tot[i].z);
 	}
 }
 
