@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:34:44 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/21 11:35:57 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/21 14:43:57 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	update(void *param)
 	}
 	i = -1;
 	update_cam(d, 0.3);
-	speed_sim = 120;
+	speed_sim = 600;
 	while (++i < speed_sim)
 		recalcul_physics(&d->map);
 	draw(d, &d->map);

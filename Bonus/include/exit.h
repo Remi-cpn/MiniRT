@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:24:21 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 11:50:04 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/21 15:11:20 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define ERROR_FILE_LIGHT -7
 # define ERROR_FILE_AL -8
 # define ERROR_FILE_OBJ -9
+# define ERROR_FILE_TEX -10
 
 /* Exit messages */
 # define ERROR_MLX_INIT_MSG "Failed to initialize MLX context"
@@ -44,6 +45,7 @@
 # define ERROR_FILE_SP_ARGS_MSG "Sphere must be defined with valid arguments"
 # define ERROR_FILE_PL_ARGS_MSG "Plane must be defined with valid arguments"
 # define ERROR_FILE_CY_ARGS_MSG "Cylinder must be defined with valid arguments"
+# define ERROR_FILE_TEX_MSG "Incorrect file texture name"
 
 /* ——— Variable prototypes —————————————————————————————————————————————————— */
 typedef struct s_data		t_data;

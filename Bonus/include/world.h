@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:17:11 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/21 11:35:18 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/21 14:04:29 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,16 @@ typedef enum e_tex_type
 {
 	TEX_NONE,
 	TEX_DAM, // Damier
+	TEX_IMG, // Texture image
 }	t_tex_type;
+
+typedef struct s_img
+{
+	int			width;
+	int			height;
+	mlx_color	*pixels;
+	mlx_image	mlx;
+}	t_img;
 
 typedef struct s_uv
 {
@@ -45,6 +54,7 @@ typedef struct s_texture
 	t_tex_type	type;
 	mlx_color	color2;
 	double		scale;
+	t_img		img;
 }	t_texture;
 
 /* ——— Objects —————————————————————————————————————————————————————————————— */

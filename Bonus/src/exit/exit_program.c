@@ -6,12 +6,28 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:22:44 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 11:44:46 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/21 15:48:34 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 #include <stdlib.h>
+
+static void free_obj(mlx_context m, t_world *w)
+{
+	int	i;
+
+	i = 0;
+	while (i < w->nb_obj)
+	{
+		if (w->objects[i].texture.img.mlx)
+			mlx_destroy_image(m, w->objects[i].texture.img.mlx);
+		if (w->objects[i].texture.img.pixels)
+			free(w->objects[i].texture.img.pixels);
+		i++;
+	}
+	free(w->objects);
+}
 
 void	print_error(char *message)
 {
@@ -39,6 +55,8 @@ void	exit_prog_pars(t_parsing *p, int exit_code, char *error_message)
 {
 	if (error_message)
 		print_error(error_message);
+	if (p->world->objects)
+		free_obj(p->mlx, p->world);
 	free_parsing(p);
 	if (exit_code < 0)
 		exit (EXIT_ERROR);
@@ -51,7 +69,7 @@ void	exit_prog(t_data *data, int exit_code, char *error_message)
 		print_error(error_message);
 	free(data->pixels);
 	if (data->map.objects)
-		free(data->map.objects);
+		free_obj(data->mlx, &(data->map));
 	if (data->img)
 		mlx_destroy_image(data->mlx, data->img);
 	if (data->win)

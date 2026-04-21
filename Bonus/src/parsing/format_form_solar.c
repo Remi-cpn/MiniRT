@@ -26,8 +26,7 @@ static void	pars_solar(t_parsing *p, t_object *o, char *mass, char *velocity)
 
 void	add_sp_solar(t_parsing *p, t_object *o, char **line_split)
 {
-	if (line_split[1] && line_split[2] && line_split[3] && (!line_split[4]
-			|| (line_split[4] && line_split[5] && !line_split[6])))
+	if (check_idx_string_tab(line_split, 3) || check_idx_string_tab(line_split, 5))
 	{
 		if (!double_valid(line_split[2]))
 			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);

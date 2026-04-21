@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 15:11:23 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/21 11:17:29 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/21 15:43:54 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct s_parsing
 	bool		cam;
 	bool		al;
 	bool		light;
+	mlx_context mlx;
+	t_world		*world;
 }	t_parsing;
 
 typedef enum e_type

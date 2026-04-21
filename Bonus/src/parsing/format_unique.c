@@ -18,7 +18,7 @@ void	add_cam(t_parsing *p, t_world *w, char **line_split)
 	if (p->cam == true)
 		exit_prog_pars(p, ERROR_FILE_CAM, ERROR_FILE_CAM_MSG);
 	p->cam = true;
-	if (line_split[1] && line_split[2] && line_split[3] && !line_split[4])
+	if (check_idx_string_tab(line_split, 3))
 	{
 		if (!double_valid(line_split[3]))
 			exit_prog_pars(p, ERROR_FILE_CAM, ERROR_FILE_CAM_ARGS_MSG);
@@ -37,7 +37,7 @@ void	add_light(t_parsing *p, t_world *w, char **line_split)
 	if (p->light == true)
 		exit_prog_pars(p, ERROR_FILE_LIGHT, ERROR_FILE_LIGHT_MSG);
 	p->light = true;
-	if (line_split[1] && line_split[2] && line_split[3] && !line_split[4])
+	if (check_idx_string_tab(line_split, 3))
 	{
 		if (!double_valid(line_split[2]))
 			exit_prog_pars(p, ERROR_FILE_LIGHT, ERROR_FILE_LIGHT_ARGS_MSG);
@@ -56,7 +56,7 @@ void	add_al(t_parsing *p, t_world *w, char **line_split)
 	if (p->al == true)
 		exit_prog_pars(p, ERROR_FILE_AL, ERROR_FILE_AL_MSG);
 	p->al = true;
-	if (line_split[1] && line_split[2] && !line_split[3])
+	if (check_idx_string_tab(line_split, 2))
 	{
 		if (!double_valid(line_split[1]))
 			exit_prog_pars(p, ERROR_FILE_AL, ERROR_FILE_AL_ARGS_MSG);
