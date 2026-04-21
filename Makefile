@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+         #
+#    By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/13 11:16:05 by rcompain          #+#    #+#              #
-#    Updated: 2026/04/14 15:21:44 by rcompain         ###   ########.fr        #
+#    Updated: 2026/04/20 18:16:46 by rcompain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ OBJ_DIR		= obj/$(CC_DIR)
 INC_DIR		= $(CC_DIR)/include
 
 # --- Sous-dossiers sources --------------------------------------------------
-SUB_DIRS := draw exit moves init parsing
+SUB_DIRS := scene exit moves init parsing
 
 # ——— Sources ——————————————————————————————————————————————————————————————— #
 SRC_INIT	= init_program.c \
@@ -43,13 +43,17 @@ SRC_MOVE	= hook.c \
 
 SRC_EXIT	= exit_program.c
 
-SRC_DRAW	= draw.c \
+SRC_SCENE	= draw.c \
 			  get_colors.c \
 			  hit_cylinder.c \
 			  hit_plane.c \
 			  hit_sphere.c \
 			  light_calc.c \
 			  ray.c
+
+ifeq ($(MAKECMDGOALS),bonus)
+SRC_SCENE	+= textures_cb.c
+endif
 
 SRC_PARSING = parsing.c \
 			  parsing_line.c \
@@ -60,7 +64,7 @@ SRC_PARSING = parsing.c \
 VPATH := $(SRC_DIR) \
          $(addprefix $(SRC_DIR)/, $(SUB_DIRS))
 
-SRCS		= main.c $(SRC_MOVE) $(SRC_INIT) $(SRC_EXIT) $(SRC_DRAW) $(SRC_LRT) $(SRC_PARSING)
+SRCS		= main.c $(SRC_MOVE) $(SRC_INIT) $(SRC_EXIT) $(SRC_SCENE) $(SRC_LRT) $(SRC_PARSING)
 
 OBJ			= ${SRCS:%.c=$(OBJ_DIR)/%.o}
 

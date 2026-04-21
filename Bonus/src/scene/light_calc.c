@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light_calc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 09:46:02 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/14 17:18:27 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/19 12:14:23 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ static void	set_light(double *light, double *ambient, double *diffuse)
 
 void	light(t_world *w, t_hit *hit, mlx_color *color)
 {
-	t_vec	light_dir;
-	double	coef_diffuse;
-	double	light_norm;
+	t_vec				light_dir;
+	double				coef_diffuse;
+	double				light_norm;
 	t_light_managment	l;
 
 	init_vars(w, l.ambient, l.diffuse);
@@ -73,8 +73,8 @@ void	light(t_world *w, t_hit *hit, mlx_color *color)
 			* w->lights.intensity;
 	}
 	set_light(l.light, l.ambient, l.diffuse);
-	color->r = hit->object->color.r * l.light[R];
-	color->g = hit->object->color.g * l.light[G];
-	color->b = hit->object->color.b * l.light[B];
+	color->r = hit->pixel_color.r * l.light[R];
+	color->g = hit->pixel_color.g * l.light[G];
+	color->b = hit->pixel_color.b * l.light[B];
 	color->a = 255;
 }
