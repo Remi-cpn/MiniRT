@@ -44,7 +44,7 @@ static void	init_prev_pos(t_object *o, int nb_obj)
 		if (!o[i].physics_enabled)
 			continue ;
 		object = &o[i].shape.sphere.param;
-		object->acc = vec_add(vec_sub(object->cur_pos,
+		object->prev_pos = vec_add(vec_sub(object->cur_pos,
 			vec_mult_scalar(object->prev_pos, DT)),
 			vec_mult_scalar(object->acc, 0.5 * DT * DT));
 	}
