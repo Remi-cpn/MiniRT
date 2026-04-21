@@ -1,5 +1,6 @@
 
 
+# include "../../include/minirt.h"
 # include "../../include/physics.h"
 # include "../../include/world.h"
 
