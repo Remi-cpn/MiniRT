@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+         #
+#    By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/14 17:34:44 by rcompain          #+#    #+#              #
-#    Updated: 2026/04/20 17:36:00 by rcompain         ###   ########.fr        #
+#    Updated: 2026/04/21 09:41:19 by rcompain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRC_VEC =	vec/vec_add.c \
 			vec/vec_normalize.c \
 			vec/vec_square.c \
 			vec/vec_sub.c \
-			vec/vec_vectoriel.c
+			vec/vec_vectoriel.c \
+			vec/vec_proj.c
 
 SRC_PAR =	parsing/double_valid.c \
 			parsing/float_valid.c \

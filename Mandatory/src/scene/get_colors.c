@@ -30,8 +30,7 @@ static void	fill_hit_details_cylinder(t_hit *hit)
 	double	proj;
 
 	oc = vec_sub(hit->point, hit->object->shape.cylinder.center);
-	new_center = vec_mult_scalar(hit->object->shape.cylinder.axis,
-			vec_dot(oc, hit->object->shape.cylinder.axis));
+	new_center = vec_proj(oc, hit->object->shape.cylinder.axis);
 	proj = vec_dot(oc, hit->object->shape.cylinder.axis);
 	if (fabs(proj - hit->object->shape.cylinder.height / 2.0) < 0.001)
 		hit->normal = hit->object->shape.cylinder.axis;
