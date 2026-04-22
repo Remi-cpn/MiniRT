@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_manager.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 16:08:04 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/21 16:41:26 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/22 16:09:25 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static mlx_color	get_img(t_hit hit, t_uv uv)
 	int			y;
 
 	img = &hit.object->texture.img;
-	x = (int)(uv.u * img->width) % img->width;
+	x = (int)((1.0 - uv.u) * img->width) % img->width;
 	y = (int)((1.0 - uv.v) * img->height) % img->height;
 	pixel = img->pixels[y * img->width + x];
 	return (pixel);
