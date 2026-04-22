@@ -40,6 +40,8 @@ void	exit_prog_pars(t_parsing *p, int exit_code, char *error_message)
 	if (error_message)
 		print_error(error_message);
 	free_parsing(p);
+	if (p->mlx)
+		mlx_destroy_context(p->mlx);
 	if (exit_code < 0)
 		exit (EXIT_ERROR);
 	exit(exit_code);
@@ -49,7 +51,8 @@ void	exit_prog(t_data *data, int exit_code, char *error_message)
 {
 	if (error_message)
 		print_error(error_message);
-	free(data->pixels);
+	if (data->pixels)
+		free(data->pixels);
 	if (data->map.objects)
 		free(data->map.objects);
 	if (data->img)

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   exit_program.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:22:44 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/21 15:48:34 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/22 16:24:10 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 #include <stdlib.h>
 
-static void free_obj(mlx_context m, t_world *w)
+static void	free_obj(mlx_context m, t_world *w)
 {
 	int	i;
 
@@ -57,25 +57,28 @@ void	exit_prog_pars(t_parsing *p, int exit_code, char *error_message)
 		print_error(error_message);
 	if (p->world->objects)
 		free_obj(p->mlx, p->world);
+	if (p->mlx)
+		mlx_destroy_context(p->mlx);
 	free_parsing(p);
 	if (exit_code < 0)
 		exit (EXIT_ERROR);
 	exit(exit_code);
 }
 
-void	exit_prog(t_data *data, int exit_code, char *error_message)
+void	exit_prog(t_data *d, int exit_code, char *error_message)
 {
 	if (error_message)
 		print_error(error_message);
-	free(data->pixels);
-	if (data->map.objects)
-		free_obj(data->mlx, &(data->map));
-	if (data->img)
-		mlx_destroy_image(data->mlx, data->img);
-	if (data->win)
-		mlx_destroy_window(data->mlx, data->win);
-	if (data->mlx)
-		mlx_destroy_context(data->mlx);
+	if (d->pixels)
+		free(d->pixels);
+	if (d->map.objects)
+		free_obj(d->mlx, &(d->map));
+	if (d->img)
+		mlx_destroy_image(d->mlx, d->img);
+	if (d->win)
+		mlx_destroy_window(d->mlx, d->win);
+	if (d->mlx)
+		mlx_destroy_context(d->mlx);
 	if (exit_code < 0)
 		exit (EXIT_ERROR);
 	exit(exit_code);
