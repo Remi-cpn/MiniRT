@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:17:11 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/21 16:10:41 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/22 18:26:02 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct s_uv
 	double	u;
 	double	v;
 	int		case_idx;
+	t_vec	tangent;
+	t_vec	bitangent;
 }	t_uv;
 
 typedef struct s_texture
@@ -55,6 +57,8 @@ typedef struct s_texture
 	mlx_color	color2;
 	double		scale;
 	t_img		img;
+	bool		bump_m;
+	t_img		bump_map;
 }	t_texture;
 
 /* ——— Objects —————————————————————————————————————————————————————————————— */
@@ -155,10 +159,12 @@ void		calcul_viewport(t_camera *cam, double ratio);
 void		init_world(t_data *d, t_world *w);
 
 /* Textures */
-mlx_color	get_texture(t_hit hit);
+mlx_color	get_texture(t_hit *hit);
 t_uv		get_uv_sp(t_hit hit);
 t_uv		get_uv_pl(t_hit hit);
 t_uv		get_uv_cy(t_hit hit);
 t_uv		get_uv_caps(t_hit hit);
+mlx_color	get_pixel_img(t_img *img, t_uv uv);
+void		get_bump_map(t_hit *hit, t_uv uv);
 
 #endif

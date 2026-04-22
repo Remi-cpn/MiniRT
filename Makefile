@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+         #
+#    By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/13 11:16:05 by rcompain          #+#    #+#              #
-#    Updated: 2026/04/21 16:34:40 by rcompain         ###   ########.fr        #
+#    Updated: 2026/04/22 17:55:44 by rcompain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,8 @@ SRC_PARSING = parsing.c \
 
 ifeq ($(MAKECMDGOALS),bonus)
 SRC_SCENE	+= textures_cb.c \
-			   textures_manager.c
+			   textures_manager.c \
+			   textures_bump_map.c
 
 SRC_PARSING	+= format_form_solar.c \
 

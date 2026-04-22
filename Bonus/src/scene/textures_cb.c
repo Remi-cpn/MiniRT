@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_cb.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 10:38:04 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/21 16:10:00 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/22 18:27:42 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,16 @@
 t_uv	get_uv_caps(t_hit hit)
 {
 	t_uv				uv;
-	t_vec				axis;
 	static const t_vec	up = {.x = 0, .y = 1, .z = 0};
 	static const t_vec	depth = {.x = 0, .y = 0, .z = 1};
 
-	axis = vec_vectoriel(hit.object->shape.cylinder.axis, up);
-	if (vec_square(axis) < 0.0001)
-		axis = vec_vectoriel(hit.object->shape.cylinder.axis, depth);
-	vec_normalize(&axis);
-	uv.u = vec_dot(hit.point, axis);
-	axis = vec_vectoriel(hit.object->shape.cylinder.axis, axis);
-	uv.v = vec_dot(hit.point, axis);
+	uv.tangent = vec_vectoriel(hit.object->shape.cylinder.axis, up);
+	if (vec_square(uv.tangent) < 0.0001)
+		uv.tangent = vec_vectoriel(hit.object->shape.cylinder.axis, depth);
+	vec_normalize(&uv.tangent);
+	uv.u = vec_dot(hit.point, uv.tangent);
+	uv.bitangent = vec_vectoriel(hit.object->shape.cylinder.axis, uv.tangent);
+	uv.v = vec_dot(hit.point, uv.bitangent);
 	if (hit.object->texture.type == TEX_IMG)
 		return (uv);
 	uv.case_idx = (int)floor(uv.u / hit.object->texture.scale)
@@ -52,6 +51,9 @@ t_uv	get_uv_cy(t_hit hit)
 
 	if (fabs(vec_dot(hit.normal, hit.object->shape.cylinder.axis)) > 0.999)
 		return (get_uv_caps(hit));
+	uv.tangent = vec_vectoriel(hit.object->shape.cylinder.axis, hit.normal);
+	vec_normalize(&uv.tangent);
+	uv.bitangent = hit.object->shape.cylinder.axis;
 	uv.u = 0.5 + atan2(hit.normal.z, hit.normal.x) / (2 * PI);
 	d = vec_sub(hit.point, hit.object->shape.cylinder.center);
 	proj = vec_dot(d, hit.object->shape.cylinder.axis);
@@ -72,17 +74,16 @@ t_uv	get_uv_cy(t_hit hit)
 t_uv	get_uv_pl(t_hit hit)
 {
 	t_uv				uv;
-	t_vec				axis;
 	static const t_vec	up = {.x = 0, .y = 1, .z = 0};
 	static const t_vec	depth = {.x = 0, .y = 0, .z = 1};
 
-	axis = vec_vectoriel(hit.normal, up);
-	if (vec_square(axis) < 0.0001)
-		axis = vec_vectoriel(hit.normal, depth);
-	vec_normalize(&axis);
-	uv.u = vec_dot(hit.point, axis);
-	axis = vec_vectoriel(hit.normal, axis);
-	uv.v = vec_dot(hit.point, axis);
+	uv.tangent = vec_vectoriel(hit.normal, up);
+	if (vec_square(uv.tangent) < 0.0001)
+		uv.tangent = vec_vectoriel(hit.normal, depth);
+	vec_normalize(&uv.tangent);
+	uv.u = vec_dot(hit.point, uv.tangent);
+	uv.bitangent = vec_vectoriel(hit.normal, uv.tangent);
+	uv.v = vec_dot(hit.point, uv.bitangent);
 	if (hit.object->texture.type == TEX_IMG)
 		return (uv);
 	uv.case_idx = (int)floor(uv.u / hit.object->texture.scale)
@@ -94,8 +95,15 @@ t_uv	get_uv_pl(t_hit hit)
 v = 0,5 + asin(Py) / (PI)*/
 t_uv	get_uv_sp(t_hit hit)
 {
-	t_uv	uv;
+	t_uv				uv;
+	static const t_vec	up = {.x = 0, .y = 1, .z = 0};
+	static const t_vec	depth = {.x = 0, .y = 0, .z = 1};
 
+	uv.tangent = vec_vectoriel(hit.normal, up);
+	if (vec_square(uv.tangent) < 0.0001)
+		uv.tangent = vec_vectoriel(hit.normal, depth);
+	vec_normalize(&uv.tangent);
+	uv.bitangent = vec_vectoriel(hit.normal, uv.tangent);
 	uv.u = 0.5 + atan2(hit.normal.z, hit.normal.x) / (2 * PI);
 	uv.v = 0.5 + asin(hit.normal.y) / PI;
 	if (hit.object->texture.type == TEX_IMG)
