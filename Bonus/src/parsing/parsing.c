@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 14:58:56 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/21 15:44:30 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/23 10:26:39 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	pars_file(t_parsing *p, t_world *w, char *file_name, bool solar)
 	p->line = ft_get_next_line(p->fd);
 	while (p->line)
 	{
-		if (p->line[0] != '\n')
+		if (p->line[0] != '\n' && p->line[0] != '#')
 		{
 			if (p->line[ft_strlen(p->line) - 1] == '\n')
 				p->line[ft_strlen(p->line) - 1] = '\0';

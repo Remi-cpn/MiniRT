@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_manager.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 16:08:04 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/22 18:40:50 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/23 11:49:09 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
