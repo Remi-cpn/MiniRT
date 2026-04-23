@@ -67,9 +67,10 @@ t_world	parsing(t_data *d, char *file_name)
 
 	ft_memset(&p, 0, sizeof(t_parsing));
 	p.fd = -1;
-	p.mlx = d->mlx; // pour avoir acces a mlx depuis le parsing
+	p.mlx = d->mlx;
 	ft_memset(&w, 0, sizeof(t_world));
-	p.world = &w; // Pointeur sur world pour exit depuis parsing
+	p.world = &w;
+	p.data = d;
 	if (!check_file_name(d, file_name))
 		exit_prog_pars(&p, ERROR_FILE_NAME, ERROR_FILE_NAME_MSG);
 	p.count_line = count_line(&p, file_name);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:24:21 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/21 15:11:20 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/22 19:37:48 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define ERROR_FILE_AL -8
 # define ERROR_FILE_OBJ -9
 # define ERROR_FILE_TEX -10
+# define ERROR_FILE_BUMP -10
 
 /* Exit messages */
 # define ERROR_MLX_INIT_MSG "Failed to initialize MLX context"
@@ -46,6 +47,7 @@
 # define ERROR_FILE_PL_ARGS_MSG "Plane must be defined with valid arguments"
 # define ERROR_FILE_CY_ARGS_MSG "Cylinder must be defined with valid arguments"
 # define ERROR_FILE_TEX_MSG "Incorrect file texture name"
+# define ERROR_FILE_BUMP_MSG "Incorrect file bump_map name"
 
 /* ——— Variable prototypes —————————————————————————————————————————————————— */
 typedef struct s_data		t_data;

@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:17:11 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/22 18:26:02 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/22 19:44:33 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct s_img
 	int			width;
 	int			height;
 	mlx_color	*pixels;
-	mlx_image	mlx;
 }	t_img;
 
 typedef struct s_uv

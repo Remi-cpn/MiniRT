@@ -6,7 +6,7 @@
 #    By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/13 11:16:05 by rcompain          #+#    #+#              #
-#    Updated: 2026/04/22 17:55:44 by rcompain         ###   ########.fr        #
+#    Updated: 2026/04/22 19:27:53 by rcompain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,7 @@ SRC_SCENE	+= textures_cb.c \
 			   textures_bump_map.c
 
 SRC_PARSING	+= format_form_solar.c \
+			   textures.c
 
 SRC_MOVE	+= physics.c \
 
