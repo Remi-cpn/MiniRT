@@ -35,11 +35,17 @@ static t_vec	shadow_ray(t_world *w, t_hit *hit_origin, t_vec light_dir,
 	t_ray	shadow_ray;
 	t_hit	hit;
 	t_vec	attenuation;
+	t_vec	diff;
 
+	if (hit_origin->object && hit_origin->object->type == OBJ_SPHERE)
+	{
+		diff = vec_sub(w->lights.position, hit_origin->object->shape.sphere.center);
+		if (vec_norm(diff) < hit_origin->object->shape.sphere.radius)
+			return ((t_vec){1.0, 1.0, 1.0});
+	}
 	vec_init(&attenuation, 1.0, 1.0, 1.0);
 	shadow_ray.dir = light_dir;
-	shadow_ray.origin = vec_add(hit_origin->point,
-			vec_mult_scalar(hit_origin->normal, 0.001));
+	shadow_ray.origin = vec_add(hit_origin->point, vec_mult_scalar(hit_origin->normal, 0.001));
 	while (1)
 	{
 		hit = find_closest_hit(w, shadow_ray, 1);
@@ -91,10 +97,10 @@ void	light(t_world *w, t_hit *hit, mlx_color *color)
 	light_norm = vec_norm(light_dir);
 	vec_normalize(&light_dir);
 	coef_diffuse = vec_dot(hit->normal, light_dir);
-	if (coef_diffuse <= 0.001 && is_light_inside(w))
+	if (coef_diffuse <= EPS && is_light_inside(w))
 		coef_diffuse = fabs(coef_diffuse);
 	shadow =  shadow_ray(w, hit, light_dir, light_norm);
-	if (coef_diffuse > 0.001 && (shadow.x > 0.0 || shadow.y > 0.0 || shadow.z > 0.0))
+	if (coef_diffuse > EPS && (shadow.x > 0.0 || shadow.y > 0.0 || shadow.z > 0.0))
 	{
 		l.diffuse[R] = (w->lights.color.r / 255.0) * coef_diffuse
 			* w->lights.intensity * shadow.x;
