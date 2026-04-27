@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 16:08:04 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/23 11:49:09 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/27 10:15:15 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static t_uv	get_uv(t_hit hit)
 	return (uv);
 }
 
-static mlx_color	get_dam(t_hit hit, t_uv uv)
+static mlx_color	get_checkboard(t_hit hit, t_uv uv)
 {
 	if (uv.case_idx % 2 == 0)
 		return (hit.object->color);
@@ -56,7 +56,7 @@ mlx_color	get_texture(t_hit *hit)
 		if (hit->object->texture.bump_m == true)
 			get_bump_map(hit, uv);
 	}
-	else if (hit->object->texture.type == TEX_DAM)
-		pixel = get_dam(*hit, uv);
+	else if (hit->object->texture.type == TEX_CB)
+		pixel = get_checkboard(*hit, uv);
 	return (pixel);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:17:11 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/22 19:44:33 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/27 10:15:05 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef struct s_physics	t_physics;
 typedef enum e_tex_type
 {
 	TEX_NONE,
-	TEX_DAM, // Damier
-	TEX_IMG, // Texture image
+	TEX_CB,
+	TEX_IMG,
 }	t_tex_type;
 
 typedef struct s_img

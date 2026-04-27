@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/11 12:40:03 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/21 11:50:35 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/27 10:28:02 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static void	pars_solar(t_parsing *p, t_object *o, char *mass, char *velocity)
 
 void	add_sp_solar(t_parsing *p, t_object *o, char **line_split)
 {
-	if (check_idx_string_tab(line_split, 3) || check_idx_string_tab(line_split, 5))
+	if (check_idx_string_tab(line_split, 3) || check_idx_string_tab(line_split, 4)
+		|| check_idx_string_tab(line_split, 6))
 	{
 		if (!double_valid(line_split[2]))
 			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);
@@ -35,8 +36,9 @@ void	add_sp_solar(t_parsing *p, t_object *o, char **line_split)
 		o->shape.sphere.center = get_vec(p, line_split[1]);
 		o->shape.sphere.radius = ft_atod(line_split[2]) / 2.0;
 		o->color = get_color(p, line_split[3]);
-		if (line_split[4])
-			pars_solar(p, o, line_split[4], line_split[5]);
+		pars_texture_map(p, &(o->texture), line_split[4], NULL);
+		if (line_split[5])
+			pars_solar(p, o, line_split[5], line_split[6]);
 	}
 	else
 		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 19:26:57 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/22 20:03:36 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/27 10:28:10 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	pars_chessboard(t_parsing *p, t_object *o, char *scale, char *color)
 {
 	if (double_valid(scale))
 	{
-		o->texture.type = TEX_DAM;
+		o->texture.type = TEX_CB;
 		o->texture.scale = ft_atod(scale);
 		o->texture.color2 = get_color(p, color);
 		if (o->texture.scale > 0)
