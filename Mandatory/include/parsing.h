@@ -40,6 +40,7 @@ typedef struct s_parsing
 	bool		cam;
 	bool		al;
 	bool		light;
+	mlx_context	mlx;
 }	t_parsing;
 
 typedef enum e_type

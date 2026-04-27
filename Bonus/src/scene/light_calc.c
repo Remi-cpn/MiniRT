@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light_calc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 09:46:02 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/19 12:14:23 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/27 09:57:36 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,11 @@ void	light(t_world *w, t_hit *hit, mlx_color *color)
         }
 	}
 	set_light(l.light, l.ambient, l.diffuse, l.specular);
-	color->r = hit->pixel_color.r * l.light[R];
-	color->g = hit->pixel_color.g * l.light[G];
-	color->b = hit->pixel_color.b * l.light[B];
+	color->r = 255 * pow(hit->pixel_color.r * l.light[R] / 255, GAMMA);
+	color->g = 255 * pow(hit->pixel_color.g * l.light[G] / 255, GAMMA);
+	color->b = 255 * pow(hit->pixel_color.b * l.light[B] / 255, GAMMA);
+	//color->r = hit->pixel_color.r * l.light[R];
+	//color->g = hit->pixel_color.g * l.light[G];
+	//color->b = hit->pixel_color.b * l.light[B];
 	color->a = 255;
 }

@@ -3,38 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   format_form_rt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/11 12:40:03 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/21 11:12:07 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/22 19:36:32 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 #include "../../include/parsing.h"
 
-static void	pars_chessboard(t_parsing *p, t_object *o, char *scale, char *color)
-{
-	if (double_valid(scale))
-	{
-		o->texture.type = TEX_DAM;
-		o->texture.scale = ft_atod(scale);
-		o->texture.color2 = get_color(p, color);
-		if (o->texture.scale > 0)
-			return ;
-	}
-	if (o->type == OBJ_SPHERE)
-		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);
-	if (o->type == OBJ_PLANE)
-		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_PL_ARGS_MSG);
-	if (o->type == OBJ_CYLINDER)
-		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_CY_ARGS_MSG);
-}
-
 void	add_sp(t_parsing *p, t_object *o, char **line_split)
 {
-	if (line_split[1] && line_split[2] && line_split[3] && (!line_split[4]
-			|| (line_split[4] && line_split[5] && !line_split[6])))
+	if (check_idx_string_tab(line_split, 3) || check_idx_string_tab(line_split, 4)
+		|| check_idx_string_tab(line_split, 5))
 	{
 		if (!double_valid(line_split[2]))
 			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);
@@ -42,8 +24,10 @@ void	add_sp(t_parsing *p, t_object *o, char **line_split)
 		o->shape.sphere.center = get_vec(p, line_split[1]);
 		o->shape.sphere.radius = ft_atod(line_split[2]) / 2.0;
 		o->color = get_color(p, line_split[3]);
-		if (line_split[4])
+		if (line_split[4] && double_valid(line_split[4]) && line_split[5])
 			pars_chessboard(p, o, line_split[4], line_split[5]);
+		else if (line_split[4])
+			pars_texture_map(p, &(o->texture), line_split[4], line_split[5]);
 	}
 	else
 		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);
@@ -53,8 +37,8 @@ void	add_sp(t_parsing *p, t_object *o, char **line_split)
 
 void	add_pl(t_parsing *p, t_object *o, char **line_split)
 {
-	if (line_split[1] && line_split[2] && line_split[3] && (!line_split[4]
-			|| (line_split[4] && line_split[5] && !line_split[6])))
+	if (check_idx_string_tab(line_split, 3) || check_idx_string_tab(line_split, 4)
+		|| check_idx_string_tab(line_split, 5))
 	{
 		o->type = OBJ_PLANE;
 		o->shape.plane.point = get_vec(p, line_split[1]);
@@ -62,8 +46,10 @@ void	add_pl(t_parsing *p, t_object *o, char **line_split)
 		if (fabs(vec_norm(o->shape.plane.normal) - 1.0) > 0.001)
 			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_PL_ARGS_MSG);
 		o->color = get_color(p, line_split[3]);
-		if (line_split[4])
+		if (line_split[4] && double_valid(line_split[4]) && line_split[5])
 			pars_chessboard(p, o, line_split[4], line_split[5]);
+		else if (line_split[4])
+			pars_texture_map(p, &(o->texture), line_split[4], line_split[5]);
 	}
 	else
 		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_PL_ARGS_MSG);
@@ -71,9 +57,8 @@ void	add_pl(t_parsing *p, t_object *o, char **line_split)
 
 void	add_cy(t_parsing *p, t_object *o, char **line_split)
 {
-	if (line_split[1] && line_split[2] && line_split[3] && line_split[4]
-		&& line_split[5] && (!line_split[6]
-			|| (line_split[6] && line_split[7] && !line_split[8])))
+	if (check_idx_string_tab(line_split, 5) || check_idx_string_tab(line_split, 6)
+		|| check_idx_string_tab(line_split, 7))
 	{
 		if (!double_valid(line_split[3]) || !double_valid(line_split[4]))
 			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_CY_ARGS_MSG);
@@ -85,8 +70,10 @@ void	add_cy(t_parsing *p, t_object *o, char **line_split)
 		o->shape.cylinder.radius = ft_atod(line_split[3]) / 2.0;
 		o->shape.cylinder.height = ft_atod(line_split[4]);
 		o->color = get_color(p, line_split[5]);
-		if (line_split[6])
+		if (line_split[6] && double_valid(line_split[6]) && line_split[7])
 			pars_chessboard(p, o, line_split[6], line_split[7]);
+		else if (line_split[6])
+			pars_texture_map(p, &(o->texture), line_split[6], line_split[7]);
 	}
 	else
 		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_CY_ARGS_MSG);

@@ -63,6 +63,7 @@ t_world	parsing(t_data *d, char *file_name)
 	ft_memset(&p, 0, sizeof(t_parsing));
 	free_parsing(&p);
 	p.fd = -1;
+	p.mlx = d->mlx;
 	ft_memset(&w, 0, sizeof(t_world));
 	if (!check_file_name(file_name))
 		exit_prog_pars(&p, ERROR_FILE_NAME, ERROR_FILE_NAME_MSG);

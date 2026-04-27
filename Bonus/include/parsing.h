@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 15:11:23 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/21 11:17:29 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/22 19:35:58 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ typedef struct s_parsing
 	bool		cam;
 	bool		al;
 	bool		light;
+	mlx_context	mlx;
+	t_world		*world;
+	t_data		*data;
 }	t_parsing;
 
 typedef enum e_type
@@ -66,5 +69,11 @@ void		add_sp(t_parsing *p, t_object *o, char **line_split);
 void		add_sp_solar(t_parsing *p, t_object *o, char **line_split);
 void		add_pl(t_parsing *p, t_object *o, char **line_split);
 void		add_cy(t_parsing *p, t_object *o, char **line_split);
+
+/* Textures functions */
+void		pars_chessboard(t_parsing *p, t_object *o, char *scale,
+				char *color);
+void		pars_texture_map(t_parsing *p, t_texture *t, char *texture_file,
+				char *bump_file);
 
 #endif

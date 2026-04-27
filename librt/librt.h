@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 14:07:20 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/21 09:46:04 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/21 14:22:25 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,7 @@ int		int_valid(char *s);
 int		long_valid(char *s);
 int		float_valid(char *s);
 int		double_valid(char *s);
+
+bool 	check_idx_string_tab(char **s, int idx);
 
 #endif

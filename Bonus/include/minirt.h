@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/21 11:15:00 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/23 12:35:25 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@
 
 /* ——— Lib Graphique ———————————————————————————————————————————————————————— */
 # include "../../MacroLibX/includes/mlx.h"
+# include "../../MacroLibX/includes/mlx_extended.h"
 
 /* ——— DEFINE     ——————————————————————————————————————————————————————————— */
 # define RENDER_DIST 1000.0
+# define GAMMA 0.8
 
 /* ——— Structs data ————————————————————————————————————————————————————————— */
 typedef struct s_input

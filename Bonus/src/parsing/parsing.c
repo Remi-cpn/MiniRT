@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 14:58:56 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/21 11:44:51 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/23 10:26:39 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	pars_file(t_parsing *p, t_world *w, char *file_name, bool solar)
 	p->line = ft_get_next_line(p->fd);
 	while (p->line)
 	{
-		if (p->line[0] != '\n')
+		if (p->line[0] != '\n' && p->line[0] != '#')
 		{
 			if (p->line[ft_strlen(p->line) - 1] == '\n')
 				p->line[ft_strlen(p->line) - 1] = '\0';
@@ -66,9 +66,11 @@ t_world	parsing(t_data *d, char *file_name)
 	t_world		w;
 
 	ft_memset(&p, 0, sizeof(t_parsing));
-	free_parsing(&p);
 	p.fd = -1;
+	p.mlx = d->mlx;
 	ft_memset(&w, 0, sizeof(t_world));
+	p.world = &w;
+	p.data = d;
 	if (!check_file_name(d, file_name))
 		exit_prog_pars(&p, ERROR_FILE_NAME, ERROR_FILE_NAME_MSG);
 	p.count_line = count_line(&p, file_name);
