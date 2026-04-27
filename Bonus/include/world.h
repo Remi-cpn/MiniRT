@@ -17,6 +17,8 @@
 # include "../../MacroLibX/includes/mlx.h"
 # include "physics.h"
 
+# define SHININESS 32
+# define KS 0.5
 # define RGB 3
 # define R 0
 # define G 1
@@ -53,6 +55,7 @@ typedef struct s_light_managment
 	double	diffuse[RGB];
 	double	ambient[RGB];
 	double	light[RGB];
+	double	specular[RGB];
 }	t_light_managment;
 
 typedef struct s_light
