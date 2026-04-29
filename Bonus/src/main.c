@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:34:44 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/27 10:39:58 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/28 18:40:37 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	update(void *param)
 	if (d->solar_file == false)
 	{
 		if (update_cam(d, 0.3))
-			draw(d, &d->map);
+			draw(d);
 		return ;
 	}
 	i = -1;
@@ -31,7 +31,7 @@ static void	update(void *param)
 	speed_sim = 60;
 	while (++i < speed_sim)
 		recalcul_physics(&d->map);
-	draw(d, &d->map);
+	draw(d);
 }
 
 int	main(int ac, char **av)
@@ -43,10 +43,11 @@ int	main(int ac, char **av)
 	d = init_program();
 	d.filename = av[1];
 	d.map = parsing(&d, av[1]);
+	init_threads(&d);
 	mlx_on_event(d.mlx, d.win, MLX_KEYDOWN, key_hook_down, &d);
 	mlx_on_event(d.mlx, d.win, MLX_KEYUP, key_hook_up, &d);
 	mlx_on_event(d.mlx, d.win, MLX_WINDOW_EVENT, window_hook, &d);
-	draw(&d, &d.map);
+	draw(&d);
 	mlx_add_loop_hook(d.mlx, update, &d);
 	mlx_loop(d.mlx);
 }

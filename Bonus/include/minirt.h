@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/23 12:35:25 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/29 14:07:05 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 # define MINIRT_H
 
 /* ——— Lib Extern ——————————————————————————————————————————————————————————— */
-# include "stdlib.h"
-# include "unistd.h"
-# include "stdio.h"
-# include "stdbool.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <stdbool.h>
+# include <pthread.h>
+# include <sys/sysinfo.h>
+# include <semaphore.h>
 
 /* ——— Lib Intern ——————————————————————————————————————————————————————————— */
 # include "../../libft/libft.h"
@@ -33,7 +36,31 @@
 
 /* ——— DEFINE     ——————————————————————————————————————————————————————————— */
 # define RENDER_DIST 1000.0
+# define TILE_SIZE 16
 # define GAMMA 0.8
+
+/* ——— Multi Threading —————————————————————————————————————————————————————— */
+typedef struct s_tile
+{
+	int	y;
+	int	x;
+}	t_tile;
+
+typedef struct s_threading
+{
+	int				nbr_threads;
+	pthread_t		*threads;
+	pthread_mutex_t	queue;
+	bool			mutex_ready;
+	pthread_cond_t	cond;
+	bool			cond_ready;
+	sem_t			sem;
+	bool			sem_ready;
+	bool			start;
+	bool			stop;
+	int				index_tile;
+	int				nbr_tiles;
+}	t_threading;
 
 /* ——— Structs data ————————————————————————————————————————————————————————— */
 typedef struct s_input
@@ -64,6 +91,7 @@ typedef struct s_data
 	mlx_color				*pixels;
 	char					*filename;
 	bool					solar_file;
+	t_threading				pool;
 }	t_data;
 
 typedef struct t_ray
@@ -99,9 +127,10 @@ typedef enum e_event
 
 /* ——— Function prototypes —————————————————————————————————————————————————— */
 t_data	init_program(void);
+void	init_threads(t_data *d);
 
 t_ray	get_ray(t_camera cam, double i_hor, double i_ver);
-void	draw(t_data *d, t_world *w);
+void	draw(t_data *d);
 void	pixel_color(t_world *w, t_ray ray, mlx_color *color);
 void	light(t_world *w, t_hit *hit, mlx_color *color);
 t_hit	find_closest_hit(t_world *w, t_ray ray, int flag_dist);
@@ -117,5 +146,8 @@ void	mouse_hook_wheel(int event, void *param);
 void	mouse_hook(int event, void *param);
 
 bool	update_cam(t_data *d, double speed);
+
+void	*routine(void *params);
+void	render_tile(t_data *d, t_world *w, int x, int y);
 
 #endif
