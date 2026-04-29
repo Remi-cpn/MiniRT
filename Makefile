@@ -51,6 +51,7 @@ SRC_SCENE	= draw.c \
 			  hit_cylinder.c \
 			  hit_plane.c \
 			  hit_sphere.c \
+			  hit_cone.c \
 			  light_calc.c \
 			  ray.c
 

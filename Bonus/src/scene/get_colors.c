@@ -20,6 +20,8 @@ static double	get_intersection_t(t_object *obj, t_ray ray)
 		return (hit_plane(obj->shape.plane, ray));
 	else if (obj->type == OBJ_CYLINDER)
 		return (hit_cylinder(obj->shape.cylinder, ray));
+	else if (obj->type == OBJ_CONE)
+		return (hit_cone(obj->shape.cone, ray));
 	return (-1.0);
 }
 
@@ -40,6 +42,23 @@ static void	fill_hit_details_cylinder(t_hit *hit)
 		hit->normal = vec_sub(oc, new_center);
 }
 
+
+static void	fill_hit_details_cone(t_hit *hit)
+{
+	t_vec	co;
+	t_vec	v;
+	double	k;
+	double	dot;
+
+	co = vec_sub(hit->point, hit->object->shape.cone.apex);
+	v = hit->object->shape.cone.axis; // doit être normalisé
+	k = pow(tan(hit->object->shape.cone.angle), 2);
+
+	dot = vec_dot(co, v);
+	hit->normal = vec_sub(co, vec_mult_scalar(v, (1 + k) * dot));
+	vec_normalize(&hit->normal);
+}
+
 static void	fill_hit_details(t_hit *hit, t_ray ray)
 {
 	hit->point = vec_add(ray.origin, vec_mult_scalar(ray.dir, hit->t));
@@ -47,6 +66,8 @@ static void	fill_hit_details(t_hit *hit, t_ray ray)
 		hit->normal = vec_sub(hit->point, hit->object->shape.sphere.center);
 	else if (hit->object->type == OBJ_PLANE)
 		hit->normal = hit->object->shape.plane.normal;
+	else if (hit->object->type == OBJ_CONE)
+		fill_hit_details_cone(hit);
 	else if (hit->object->type == OBJ_CYLINDER)
 		fill_hit_details_cylinder(hit);
 	if (hit->object->type == OBJ_SPHERE || hit->object->type == OBJ_PLANE

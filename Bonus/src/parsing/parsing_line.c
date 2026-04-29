@@ -59,6 +59,8 @@ static void	pars_line_rt(t_parsing *p, t_world *w, char *line)
 		add_pl(p, &w->objects[i++], p->line_split);
 	else if (!ft_strncmp(p->line_split[0], "cy", 2))
 		add_cy(p, &w->objects[i++], p->line_split);
+	else if (!ft_strncmp(p->line_split[0], "co", 2))
+		add_co(p, &w->objects[i++], p->line_split);
 	else
 		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
 	ft_free_array(p->line_split);

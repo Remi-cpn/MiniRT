@@ -13,7 +13,7 @@
 #include "../../include/minirt.h"
 #include <stdlib.h>
 
-static void	free_obj(t_world *w)
+static void	free_obj_and_light(t_world *w)
 {
 	int	i;
 
@@ -24,6 +24,8 @@ static void	free_obj(t_world *w)
 			free(w->objects[i].texture.img.pixels);
 		i++;
 	}
+	if (w->lights)
+		free(w->lights);
 	free(w->objects);
 }
 
@@ -54,7 +56,7 @@ void	exit_prog_pars(t_parsing *p, int exit_code, char *error_message)
 	if (error_message)
 		print_error(error_message);
 	if (p->world->objects)
-		free_obj(p->world);
+		free_obj_and_light(p->world);
 	free_parsing(p);
 	if (p->data)
 	{
@@ -75,7 +77,7 @@ void	exit_prog(t_data *d, int exit_code, char *error_message)
 	if (d->pixels)
 		free(d->pixels);
 	if (d->map.objects)
-		free_obj(&(d->map));
+		free_obj_and_light(&(d->map));
 	if (d->img)
 		mlx_destroy_image(d->mlx, d->img);
 	if (d->win)

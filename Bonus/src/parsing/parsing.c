@@ -11,19 +11,20 @@
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
+#include <stdio.h>
 #include "../../include/parsing.h"
 
-static int	init_nb_obj(t_parsing *p)
+static int	init_nb_obj(t_parsing *p, int nb_light)
 {
 	int	nb_obj;
 
 	nb_obj = 0;
 	if (p->count_line < 3)
 		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
-	else if (p->count_line == 3)
+	else if (p->count_line == 2 + nb_light)
 		nb_obj = 0;
 	else
-		nb_obj = p->count_line - 3;
+		nb_obj = p->count_line - 2 - nb_light;
 	return (nb_obj);
 }
 
@@ -74,13 +75,17 @@ t_world	parsing(t_data *d, char *file_name)
 	if (!check_file_name(d, file_name))
 		exit_prog_pars(&p, ERROR_FILE_NAME, ERROR_FILE_NAME_MSG);
 	p.count_line = count_line(&p, file_name);
-	w.nb_obj = init_nb_obj(&p);
+	w.nb_light = count_light(&p, file_name);
+	w.nb_obj = init_nb_obj(&p, w.nb_light);
+	w.lights = ft_calloc(w.nb_light, sizeof(t_light));
+	if (!w.lights)
+		exit_prog_pars(&p, ERROR_MALLOC, ERROR_MALLOC_MSG);
 	if (w.nb_obj > 0)
 		w.objects = ft_calloc(w.nb_obj, sizeof(t_object));
 	if (w.nb_obj > 0 && !w.objects)
 		exit_prog_pars(&p, ERROR_MALLOC, ERROR_MALLOC_MSG);
 	pars_file(&p, &w, file_name, d->solar_file);
-	if (p.cam == false || p.al == false || p.light == false)
+	if (p.cam == false || p.al == false)
 		exit_prog_pars(&p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
 	init_world(d, &w);
 	free_parsing(&p);

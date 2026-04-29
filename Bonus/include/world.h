@@ -84,6 +84,7 @@ typedef enum e_obj
 	OBJ_SPHERE,
 	OBJ_PLANE,
 	OBJ_CYLINDER,
+	OBJ_CONE,
 }	t_obj;
 
 typedef struct s_camera
@@ -120,6 +121,13 @@ typedef struct s_cylinder
 	double	height;
 }	t_cylinder;
 
+typedef struct s_cone
+{
+	t_point	apex;
+	t_vec	axis;
+	double	angle;
+}	t_cone;
+
 typedef struct s_object
 {
 	t_obj				type;
@@ -129,6 +137,7 @@ typedef struct s_object
 	union u_shape
 	{
 		t_sphere		sphere;
+		t_cone			cone;
 		t_plane			plane;
 		t_cylinder		cylinder;
 	}	shape;
@@ -151,7 +160,8 @@ typedef struct s_world
 	t_camera	camera;
 	t_object	*objects;
 	int			nb_obj;
-	t_light		lights;
+	t_light		*lights;
+	int			nb_light;
 	mlx_color	ambient;
 	double		ambient_ratio;
 }	t_world;

@@ -13,6 +13,37 @@
 #include "../../include/minirt.h"
 #include "../../include/parsing.h"
 
+void	add_co(t_parsing *p, t_object *o, char **line_split)
+{
+	if (check_idx_string_tab(line_split, 4) || check_idx_string_tab(line_split, 5) || check_idx_string_tab(line_split, 6))
+	{
+		if (!double_valid(line_split[3]))
+		{
+			printf("add_co\n");
+			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_CO_ARGS_MSG);
+		}
+		o->type = OBJ_CONE;
+		o->shape.cone.apex = get_vec(p, line_split[1]);
+		o->shape.cone.axis = get_vec(p, line_split[2]);
+		o->shape.cone.angle = ft_atod(line_split[3]) / 2.0;
+		o->color = get_color(p, line_split[4]);
+		if (line_split[5] && double_valid(line_split[5]) && line_split[6])
+		{
+			printf("add_co2\n");
+			pars_chessboard(p, o, line_split[5], line_split[6]);
+		}
+		else if (line_split[5])
+		{
+			printf("add_co3\n");
+			pars_texture_map(p, &(o->texture), line_split[5], line_split[6]);
+		}
+	}
+	else
+		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_CO_ARGS_MSG);
+	if (o->shape.cone.angle <= EPS)
+		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_CO_ARGS_MSG);
+}
+
 void	add_sp(t_parsing *p, t_object *o, char **line_split)
 {
 	if (check_idx_string_tab(line_split, 3) || check_idx_string_tab(line_split, 4)
