@@ -76,27 +76,20 @@ static void    calc_one_light(t_world *w, t_hit *hit, t_light *light, t_light_ma
 	light_norm = vec_norm(light_dir);
 	vec_normalize(&light_dir);
 	coef_diffuse = vec_dot(hit->normal, light_dir);
-
-	if (coef_diffuse <= 0.001 || shadow_ray(w, hit, light_dir, light_norm))
+	if (!(coef_diffuse <= 0.001 || shadow_ray(w, hit, light_dir,
+					light_norm)))
 	{
-		// printf("SKIP light pos=%.1f,%.1f,%.1f | coef=%.4f | shadow=%d\n",
-		// 		light->position.x, light->position.y, light->position.z,
-		// 		coef_diffuse, shadow_ray(w, hit, light_dir, light_norm));
-		return ;
-	}
-	// printf("HIT  light pos=%.1f,%.1f,%.1f | coef=%.4f\n",
-	// 		light->position.x, light->position.y, light->position.z,
-	// 		coef_diffuse);
-	l->diffuse[R] += (light->color.r / 255.0) * coef_diffuse * light->intensity;
-	l->diffuse[G] += (light->color.g / 255.0) * coef_diffuse * light->intensity;
-	l->diffuse[B] += (light->color.b / 255.0) * coef_diffuse * light->intensity;
-	coef_specular = calc_specular(hit, coef_diffuse, light_dir, w->camera.origin);
-	if (coef_specular > EPS)
-	{
-		coef_specular = pow(coef_specular, SHININESS) * KS * light->intensity;
-		l->specular[R] += (light->color.r / 255.0) * coef_specular;
-		l->specular[G] += (light->color.g / 255.0) * coef_specular;
-		l->specular[B] += (light->color.b / 255.0) * coef_specular;
+		l->diffuse[R] += (light->color.r / 255.0) * coef_diffuse * light->intensity;
+		l->diffuse[G] += (light->color.g / 255.0) * coef_diffuse * light->intensity;
+		l->diffuse[B] += (light->color.b / 255.0) * coef_diffuse * light->intensity;
+		coef_specular = calc_specular(hit, coef_diffuse, light_dir, w->camera.origin);
+		if (coef_specular > EPS)
+		{
+			coef_specular = pow(coef_specular, SHININESS) * KS * light->intensity;
+			l->specular[R] += (light->color.r / 255.0) * coef_specular;
+			l->specular[G] += (light->color.g / 255.0) * coef_specular;
+			l->specular[B] += (light->color.b / 255.0) * coef_specular;
+		}
 	}
 }
 
@@ -111,11 +104,7 @@ void    light(t_world *w, t_hit *hit, mlx_color *color)
 		calc_one_light(w, hit, &w->lights[i], &l);
 	set_light(l.light, l.ambient, l.diffuse, l.specular);
 	color->r = 255 * pow((hit->pixel_color.r / 255.0) * l.light[R], GAMMA);
-	color->g = 255 * pow((hit->pixel_color.g / 255.0) * l.light[G] / 255, GAMMA);
-	color->b = 255 * pow((hit->pixel_color.b /255.0) * l.light[B] / 255, GAMMA);
-	// printf("FINAL r=%d g=%d b=%d\n",
-	// 		(int)(255 * pow(hit->pixel_color.r * l.light[R] / 255, GAMMA)),
-	// 		(int)(255 * pow(hit->pixel_color.g * l.light[G] / 255, GAMMA)),
-	// 		(int)(255 * pow(hit->pixel_color.b * l.light[B] / 255, GAMMA)));
+	color->g = 255 * pow((hit->pixel_color.g / 255.0) * l.light[G], GAMMA);
+	color->b = 255 * pow((hit->pixel_color.b /255.0) * l.light[B], GAMMA);
 	color->a = 255;
 }
