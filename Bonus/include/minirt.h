@@ -22,14 +22,18 @@
 /* ——— Lib Intern ——————————————————————————————————————————————————————————— */
 # include "../../libft/libft.h"
 # include "../../librt/librt.h"
-# include "exit.h"
 # include "world.h"
-# include "parsing.h"
-# include "physics.h"
+# include "parsing.h"  
+# include "exit.h"  
 
 /* ——— Lib Graphique ———————————————————————————————————————————————————————— */
 # include "../../MacroLibX/includes/mlx.h"
 # include "../../MacroLibX/includes/mlx_extended.h"
+
+/* ——— Forward Declare —————————————————————————————————————————————————— */
+typedef struct s_world t_world;
+typedef struct s_data t_data;
+typedef struct s_object t_object;
 
 /* ——— DEFINE     ——————————————————————————————————————————————————————————— */
 # define RENDER_DIST 1000.0
@@ -66,7 +70,7 @@ typedef struct s_data
 	bool					solar_file;
 }	t_data;
 
-typedef struct t_ray
+typedef struct s_ray
 {
 	t_vec	origin;
 	t_vec	dir;
@@ -111,6 +115,8 @@ double	hit_plane(t_plane plane, t_ray ray);
 double	hit_cylinder(t_cylinder cylinder, t_ray ray);
 double	hit_cone(t_cone cone, t_ray ray);
 
+void	calc_one_light(t_world *w, t_hit *hit, t_light *light,
+			t_light_managment *l);
 void	window_hook(int event, void *param);
 void	key_hook_up(int key, void *param);
 void	key_hook_down(int key, void *param);

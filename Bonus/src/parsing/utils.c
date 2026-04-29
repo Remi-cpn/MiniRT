@@ -16,9 +16,9 @@
 
 double	get_mass(char *s)
 {
-    double	mass_kg;
+	double	mass_kg;
 
-    mass_kg = strtod(s, NULL);
+	mass_kg = strtod(s, NULL);
 	return (mass_kg);
 }
 

@@ -69,7 +69,7 @@ static void	pars_line_rt(t_parsing *p, t_world *w, char *line)
 	p->line_split = NULL;
 }
 
-void pars_line_dispatch(t_parsing *p, t_world *w, char *l, bool solar)
+void	pars_line_dispatch(t_parsing *p, t_world *w, char *l, bool solar)
 {
 	if (solar == true)
 		pars_line_solar(p, w, l);

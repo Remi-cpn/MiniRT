@@ -53,6 +53,8 @@ SRC_SCENE	= draw.c \
 			  hit_sphere.c \
 			  hit_cone.c \
 			  light_calc.c \
+			  light_merge.c \
+			  fill_hit.c \
 			  ray.c
 
 SRC_PARSING = parsing.c \

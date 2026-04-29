@@ -78,11 +78,9 @@ t_world	parsing(t_data *d, char *file_name)
 	w.nb_light = count_light(&p, file_name);
 	w.nb_obj = init_nb_obj(&p, w.nb_light);
 	w.lights = ft_calloc(w.nb_light, sizeof(t_light));
-	if (!w.lights)
-		exit_prog_pars(&p, ERROR_MALLOC, ERROR_MALLOC_MSG);
 	if (w.nb_obj > 0)
 		w.objects = ft_calloc(w.nb_obj, sizeof(t_object));
-	if (w.nb_obj > 0 && !w.objects)
+	if (!w.lights || (w.nb_obj > 0 && !w.objects))
 		exit_prog_pars(&p, ERROR_MALLOC, ERROR_MALLOC_MSG);
 	pars_file(&p, &w, file_name, d->solar_file);
 	if (p.cam == false || p.al == false)

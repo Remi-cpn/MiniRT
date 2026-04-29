@@ -35,6 +35,7 @@ void	add_cam(t_parsing *p, t_world *w, char **line_split)
 void	add_light(t_parsing *p, t_world *w, char **line_split)
 {
 	static int	i = 0;
+
 	if (check_idx_string_tab(line_split, 3))
 	{
 		if (!double_valid(line_split[2]))
