@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:22:44 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/28 15:10:57 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/01 10:29:03 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	destroy_pool(t_data *d)
 	free(d->pool.threads);
 }
 
-static void	free_obj(t_world *w)
+static void	free_obj_and_light(t_world *w)
 {
 	int	i;
 
@@ -50,6 +50,8 @@ static void	free_obj(t_world *w)
 			free(w->objects[i].texture.bump_map.pixels);
 		i++;
 	}
+	if (w->lights)
+		free(w->lights);
 	free(w->objects);
 }
 
@@ -80,7 +82,7 @@ void	exit_prog_pars(t_parsing *p, int exit_code, char *error_message)
 	if (error_message)
 		print_error(error_message);
 	if (p->world->objects)
-		free_obj(p->world);
+		free_obj_and_light(p->world);
 	free_parsing(p);
 	if (p->data)
 	{
@@ -101,7 +103,7 @@ void	exit_prog(t_data *d, int exit_code, char *error_message)
 	if (d->pixels)
 		free(d->pixels);
 	if (d->map.objects)
-		free_obj(&(d->map));
+		free_obj_and_light(&(d->map));
 	if (d->pool.nbr_threads)
 		destroy_pool(d);
 	if (d->img)

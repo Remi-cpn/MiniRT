@@ -17,18 +17,18 @@
 # include <fcntl.h>
 # include <stdbool.h>
 # include "../../MacroLibX/includes/mlx.h"
-# include "minirt.h"
+# include "../../librt/librt.h"
+
 
 /* ——— Define ——————————————————————————————————————————————————————————————— */
 # define TYPE 1
 # define COLOR 2
 # define POS 3
 
-/* ——— Variable prototypes —————————————————————————————————————————————————— */
-typedef struct s_data		t_data;
-typedef struct s_world		t_world;
-typedef struct s_vec		t_vec;
-typedef struct s_object		t_object;
+/* ——— Forward declare —————————————————————————————————————————————————— */
+typedef struct s_data t_data;
+typedef struct s_world t_world;
+typedef struct s_object t_object;
 
 /* ——— Struct prototypes ———————————————————————————————————————————————————— */
 typedef struct s_parsing
@@ -39,7 +39,6 @@ typedef struct s_parsing
 	int			count_line;
 	bool		cam;
 	bool		al;
-	bool		light;
 	mlx_context	mlx;
 	t_world		*world;
 	t_data		*data;
@@ -55,8 +54,9 @@ typedef enum e_type
 
 /* ——— Function prototypes —————————————————————————————————————————————————— */
 t_world		parsing(t_data *d, char *file_name);
-void 		pars_line_dispatch(t_parsing *p, t_world *w, char *l, bool solar);
+void		pars_line_dispatch(t_parsing *p, t_world *w, char *l, bool solar);
 int			count_line(t_parsing *p, char *file_name);
+int			count_light(t_parsing *p, char *file_name);
 mlx_color	get_color(t_parsing *p, char *s);
 t_vec		get_vec(t_parsing *p, char *s);
 double		get_mass(char *s);
@@ -69,6 +69,7 @@ void		add_sp(t_parsing *p, t_object *o, char **line_split);
 void		add_sp_solar(t_parsing *p, t_object *o, char **line_split);
 void		add_pl(t_parsing *p, t_object *o, char **line_split);
 void		add_cy(t_parsing *p, t_object *o, char **line_split);
+void		add_co(t_parsing *p, t_object *o, char **line_split);
 
 /* Textures functions */
 void		pars_chessboard(t_parsing *p, t_object *o, char *scale,

@@ -34,21 +34,23 @@ void	add_cam(t_parsing *p, t_world *w, char **line_split)
 
 void	add_light(t_parsing *p, t_world *w, char **line_split)
 {
-	if (p->light == true)
-		exit_prog_pars(p, ERROR_FILE_LIGHT, ERROR_FILE_LIGHT_MSG);
-	p->light = true;
+	static int	i = 0;
+
 	if (check_idx_string_tab(line_split, 3))
 	{
 		if (!double_valid(line_split[2]))
 			exit_prog_pars(p, ERROR_FILE_LIGHT, ERROR_FILE_LIGHT_ARGS_MSG);
-		w->lights.position = get_vec(p, line_split[1]);
-		w->lights.intensity = ft_atod(line_split[2]);
-		w->lights.color = get_color(p, line_split[3]);
+		w->lights[i].position = get_vec(p, line_split[1]);
+		w->lights[i].intensity = ft_atod(line_split[2]);
+		w->lights[i].color = get_color(p, line_split[3]);
 	}
 	else
 		exit_prog_pars(p, ERROR_FILE_LIGHT, ERROR_FILE_LIGHT_ARGS_MSG);
-	if (w->lights.intensity < 0.0 || w->lights.intensity > 1.0)
+	if (w->lights[i].intensity < 0.0 || w->lights[i].intensity > 1.0)
 		exit_prog_pars(p, ERROR_FILE_LIGHT, ERROR_FILE_LIGHT_ARGS_MSG);
+	++i;
+	if (i == w->nb_light)
+		i = 0;
 }
 
 void	add_al(t_parsing *p, t_world *w, char **line_split)

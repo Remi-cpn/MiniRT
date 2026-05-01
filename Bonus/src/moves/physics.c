@@ -1,8 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   physics.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
+/*   Updated: 2026/04/23 12:35:25 by rcompain         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-
-# include "../../include/minirt.h"
-# include "../../include/physics.h"
-# include "../../include/world.h"
+#include "../../include/physics.h"
+#include "../../include/world.h"
+#include <stdlib.h>
 
 /* verlet : new_pos = (2 * cur) - prev + acc*dt^2*/
 static void	calc_new_pos(t_vec *cur_pos, t_vec *prev_pos, t_physics *param)
@@ -11,7 +21,6 @@ static void	calc_new_pos(t_vec *cur_pos, t_vec *prev_pos, t_physics *param)
 	t_vec	new_pos;
 	t_vec	term1;
 	t_vec	term3;
-
 
 	vec_init(&tmp_pos, cur_pos->x, cur_pos->y, cur_pos->z);
 	term1 = vec_mult_scalar(tmp_pos, 2.0);
@@ -29,7 +38,7 @@ static void	apply_pair_force(t_object *o, int i, int j, t_vec *acc_tot)
 	double	f_j;
 
 	dir = vec_sub(o[j].shape.sphere.param.cur_pos,
-		o[i].shape.sphere.param.cur_pos);
+			o[i].shape.sphere.param.cur_pos);
 	dist = vec_norm(dir);
 	if (dist < 0.001)
 		return ;
@@ -45,20 +54,22 @@ void	calc_acc(t_object *o, int nb_obj)
 {
 	int			i;
 	int			j;
-	t_vec		acc_tot[nb_obj];
+	t_vec		*acc_tot;
 
-	ft_memset(acc_tot, 0, sizeof(t_vec) * nb_obj);
+	acc_tot = ft_calloc(sizeof(t_vec), nb_obj);
 	i = -1;
 	while (++i < nb_obj)
- {
+	{
 		if (o[i].physics_enabled == false)
 			continue ;
 		j = i;
 		while (++j < nb_obj)
 			if (o[j].physics_enabled == true)
 				apply_pair_force(o, i, j, acc_tot);
-		vec_init(&o[i].shape.sphere.param.acc, acc_tot[i].x, acc_tot[i].y, acc_tot[i].z);
+		vec_init(&o[i].shape.sphere.param.acc, acc_tot[i].x,
+			acc_tot[i].y, acc_tot[i].z);
 	}
+	free(acc_tot);
 }
 
 void	recalcul_physics(t_world *w)
@@ -80,6 +91,7 @@ void	recalcul_physics(t_world *w)
 	while (++i < w->nb_obj)
 	{
 		if (w->objects[i].physics_enabled)
-			w->objects[i].shape.sphere.center = w->objects[i].shape.sphere.param.cur_pos;
+			w->objects[i].shape.sphere.center
+				= w->objects[i].shape.sphere.param.cur_pos;
 	}
 }

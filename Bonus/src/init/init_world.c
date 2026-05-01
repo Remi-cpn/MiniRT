@@ -45,8 +45,8 @@ static void	init_prev_pos(t_object *o, int nb_obj)
 			continue ;
 		object = &o[i].shape.sphere.param;
 		object->prev_pos = vec_add(vec_sub(object->cur_pos,
-			vec_mult_scalar(object->prev_pos, DT)),
-			vec_mult_scalar(object->acc, 0.5 * DT * DT));
+					vec_mult_scalar(object->prev_pos, DT)),
+				vec_mult_scalar(object->acc, 0.5 * DT * DT));
 	}
 }
 
@@ -54,7 +54,7 @@ void	init_world(t_data *d, t_world *w)
 {
 	if (!d->pixels)
 		d->pixels = ft_calloc(d->win_info.width * d->win_info.height,
-			sizeof(mlx_color));
+				sizeof(mlx_color));
 	if (!d->pixels)
 		exit_prog(d, ERROR_MALLOC, ERROR_MALLOC_MSG);
 	vec_normalize(&(w->camera.dir));

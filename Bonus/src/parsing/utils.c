@@ -16,9 +16,9 @@
 
 double	get_mass(char *s)
 {
-    double	mass_kg;
+	double	mass_kg;
 
-    mass_kg = strtod(s, NULL);
+	mass_kg = strtod(s, NULL);
 	return (mass_kg);
 }
 
@@ -29,9 +29,15 @@ t_vec	get_vec(t_parsing *p, char *s)
 
 	sp = ft_split(s, ',');
 	if (!sp || !sp[0] || !sp[1] || !sp[2] || sp[3])
+	{
+		printf("get_vec1\n");
 		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
+	}
 	if (!double_valid(sp[0]) || !double_valid(sp[1]) || !double_valid(sp[2]))
+	{
+		printf("get_vec1\n");
 		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
+	}
 	vec_init(&vec, ft_atod(sp[0]), ft_atod(sp[1]), ft_atod(sp[2]));
 	ft_free_array(sp);
 	return (vec);
@@ -60,6 +66,28 @@ mlx_color	get_color(t_parsing *p, char *s)
 	color.b = v[2];
 	color.a = 255;
 	return (color);
+}
+
+int	count_light(t_parsing *p, char *file_name)
+{
+	int		fd;
+	char	*str;
+	int		count;
+
+	count = 0;
+	fd = open(file_name, O_RDONLY);
+	if (fd < 0)
+		exit_prog_pars(p, ERROR_FILE_NAME, ERROR_FILE_NAME_MSG);
+	str = ft_get_next_line(fd);
+	while (str)
+	{
+		if (str[0] == 'L')
+			count++;
+		str = ft_freenull(str);
+		str = ft_get_next_line(fd);
+	}
+	close(fd);
+	return (count);
 }
 
 int	count_line(t_parsing *p, char *file_name)

@@ -13,20 +13,21 @@
 #ifndef WORLD_H
 # define WORLD_H
 
-# include "minirt.h"
+# include "../../librt/librt.h"
 # include "../../MacroLibX/includes/mlx.h"
 # include "physics.h"
 
-# define SHININESS 32
+# define SHINY 32
 # define KS 0.5
 # define RGB 3
 # define R 0
 # define G 1
 # define B 2
 
-/* ——— Variable prototypes —————————————————————————————————————————————————— */
+
+/* ——— Forward Declare —————————————————————————————————————————————————— */
 typedef struct s_data		t_data;
-typedef struct s_physics	t_physics;
+typedef struct s_ray		t_ray;
 
 /* ——— Textures ————————————————————————————————————————————————————————————— */
 typedef enum e_tex_type
@@ -84,6 +85,7 @@ typedef enum e_obj
 	OBJ_SPHERE,
 	OBJ_PLANE,
 	OBJ_CYLINDER,
+	OBJ_CONE,
 }	t_obj;
 
 typedef struct s_camera
@@ -120,6 +122,13 @@ typedef struct s_cylinder
 	double	height;
 }	t_cylinder;
 
+typedef struct s_cone
+{
+	t_point	apex;
+	t_vec	axis;
+	double	angle;
+}	t_cone;
+
 typedef struct s_object
 {
 	t_obj				type;
@@ -129,10 +138,11 @@ typedef struct s_object
 	union u_shape
 	{
 		t_sphere		sphere;
+		t_cone			cone;
 		t_plane			plane;
 		t_cylinder		cylinder;
 	}	shape;
-}   t_object;
+}	t_object;
 
 /* ——— Ray —————————————————————————————————————————————————————————————————— */
 typedef struct s_hit
@@ -151,7 +161,8 @@ typedef struct s_world
 	t_camera	camera;
 	t_object	*objects;
 	int			nb_obj;
-	t_light		lights;
+	t_light		*lights;
+	int			nb_light;
 	mlx_color	ambient;
 	double		ambient_ratio;
 }	t_world;
@@ -159,6 +170,7 @@ typedef struct s_world
 /* ——— Function prototypes —————————————————————————————————————————————————— */
 void		calcul_viewport(t_camera *cam, double ratio);
 void		init_world(t_data *d, t_world *w);
+void		fill_hit_details(t_hit *hit, t_ray ray);
 
 /* Textures */
 mlx_color	get_texture(t_hit *hit);
