@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 12:02:25 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/28 18:34:18 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/01 14:17:26 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ void	draw(t_data *d)
 	int	i;
 
 	pthread_mutex_lock(&d->pool.queue);
-	d->pool.index_tile = 0;
+	d->pool.job_idx = 0;
 	d->pool.start = true;
+	d->pool.mod = RENDER;
+	d->pool.nbr_jobs = d->pool.nbr_tiles;
 	pthread_cond_broadcast(&d->pool.cond);
 	pthread_mutex_unlock(&d->pool.queue);
 	i = -1;
-	while (++i < d->pool.nbr_tiles)
+	while (++i < d->pool.nbr_jobs)
 		sem_wait(&d->pool.sem);
 	put_image(d, d->pixels);
 	mlx_clear_window(d->mlx, d->win, (mlx_color){.rgba = 0x000000FF});

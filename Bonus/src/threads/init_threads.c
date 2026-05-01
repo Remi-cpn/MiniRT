@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 14:20:15 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/28 18:39:33 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/01 14:16:58 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ void	init_threads(t_data *d)
 		if (pthread_create(&(d->pool.threads[i]), NULL, routine, d) != 0)
 			exit_prog(d, ERROR_THREAD, ERROR_THREAD_MSG);
 	}
-	d->pool.nbr_tiles = ((d->win_info.width + TILE_SIZE - 1) / TILE_SIZE) * ((d->win_info.height + TILE_SIZE - 1) / TILE_SIZE);
+	d->pool.nbr_tiles = ((d->win_info.width + TILE_SIZE - 1) / TILE_SIZE)
+		* ((d->win_info.height + TILE_SIZE - 1) / TILE_SIZE);
 }
