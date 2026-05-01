@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/01 08:53:00 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/01 15:51:45 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,17 @@ typedef struct s_object t_object;
 # define GAMMA 0.8
 
 /* ——— Multi Threading —————————————————————————————————————————————————————— */
+typedef enum e_mod
+{
+	PHYS_ACC,
+	PHYS_SUN,
+	PHYS_POS,
+	RENDER
+}	t_mod;
+
 typedef struct s_threading
 {
+	t_mod			mod;
 	int				nbr_threads;
 	pthread_t		*threads;
 	pthread_mutex_t	queue;
@@ -57,7 +66,8 @@ typedef struct s_threading
 	bool			sem_ready;
 	bool			start;
 	bool			stop;
-	int				index_tile;
+	int				job_idx;
+	int				nbr_jobs;
 	int				nbr_tiles;
 }	t_threading;
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   physics.c                                          :+:      :+:    :+:   */
+/*   calc_acc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/23 12:35:25 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/01 16:20:22 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,62 +29,61 @@ static t_vec	gravity_from(t_physics *dst, t_physics *src)
 	return (acc);
 }
 
-static void	calc_acc_obj(t_world *w)
+void	calc_acc_sun(t_world *w, int i)
 {
 	t_vec	acc;
-	int		i;
 	int		j;
 
-	i = -1;
-	while (++i < w->nb_obj)
-	{
-		if (!w->objects[i].physics_enabled)
-			continue ;
-		vec_init(&acc, 0, 0, 0);
-		j = -1;
-		while (++j < w->nb_obj)
-			if (j != i && w->objects[j].physics_enabled)
-				acc = vec_add(acc, gravity_from(
-							&w->objects[i].shape.sphere.param,
-							&w->objects[j].shape.sphere.param));
-		j = -1;
-		while (++j < w->nb_sun)
+	vec_init(&acc, 0, 0, 0);
+	j = -1;
+	while (++j < w->nb_sun)
+		if (j != i)
 			acc = vec_add(acc, gravity_from(
-						&w->objects[i].shape.sphere.param,
+						&w->suns[i].param,
 						&w->suns[j].param));
-		w->objects[i].shape.sphere.param.acc = acc;
-	}
-
+	j = -1;
+	while (++j < w->nb_obj)
+		if (w->objects[j].physics_enabled)
+			acc = vec_add(acc, gravity_from(
+						&w->suns[i].param,
+						&w->objects[j].shape.sphere.param));
+	w->suns[i].param.acc = acc;
 }
 
-static void	calc_acc_sol(t_world *w)
+void	calc_acc_obj(t_world *w, t_object *o, int nbr_obj, int i)
 {
-	t_vec	acc;
-	int		i;
 	int		j;
+	t_vec	acc;
+
+	j = -1;
+	ft_memset(&acc, 0, sizeof(t_vec));
+	while (++j < nbr_obj)
+	{
+		if (j == i || !o[j].physics_enabled)
+			continue ;
+		acc = vec_add(acc, gravity_from(
+					&o[i].shape.sphere.param,
+					&o[j].shape.sphere.param));
+	}
+	j = -1;
+	while (++j < w->nb_sun)
+	{
+		acc = vec_add(acc, gravity_from(
+					&o[i].shape.sphere.param,
+					&w->suns[j].param));
+	}
+	vec_init(&o[i].shape.sphere.param.acc, acc.x, acc.y, acc.z);
+}
+
+void	calc_acc(t_world *w, t_object *o, int nbr_obj)
+{
+	int		i;
 
 	i = -1;
-	while (++i < w->nb_sun)
+	while (++i < nbr_obj)
 	{
-		vec_init(&acc, 0, 0, 0);
-		j = -1;
-		while (++j < w->nb_sun)
-			if (j != i)
-				acc = vec_add(acc, gravity_from(
-							&w->suns[i].param,
-							&w->suns[j].param));
-		j = -1;
-		while (++j < w->nb_obj)
-			if (w->objects[j].physics_enabled)
-				acc = vec_add(acc, gravity_from(
-							&w->suns[i].param,
-							&w->objects[j].shape.sphere.param));
-		w->suns[i].param.acc = acc;
+		if (o[i].physics_enabled == false)
+			continue ;
+		calc_acc_obj(w, o, nbr_obj, i);
 	}
-}
-
-void	calc_acc(t_world *w)
-{
-	calc_acc_obj(w);
-	calc_acc_sol(w);
 }

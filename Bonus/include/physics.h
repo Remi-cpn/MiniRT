@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   physics.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:17:11 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/27 10:15:05 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/01 16:18:29 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 // Times : 1 unit = 1 day = 86400 s
 
 /* ——— Forward Declare —————————————————————————————————————————————————— */
+typedef struct s_data	t_data;
 typedef struct s_object	t_object;
 typedef struct s_world	t_world;
 
@@ -43,7 +44,10 @@ typedef struct s_physics
 }	t_physics;
 
 /* ——— Functions prototypes ————————————————————————————————————————————————— */
-void	calc_acc(t_world *w);
-void	recalcul_physics(t_world *w);
+void	calc_acc(t_world *w, t_object *o, int nb_obj);
+void	recalcul_physics(t_data *d, t_world *w);
+void	recalcul_pos_obj(t_world *w, int i);
+void	calc_acc_obj(t_world *w, t_object *o, int nbr_obj, int i);
+void	calc_acc_sun(t_world *w, int i);
 
 #endif
