@@ -31,7 +31,7 @@ typedef struct s_world	t_world;
 
 /* ——— Define ——————————————————————————————————————————————————————————————— */
 # define SOLAR_MASS 1.989e30
-# define _G 2.959122e-4
+# define _G 2.959122e8
 # define DT 0.01
 
 /* ——— Struct prototypes ———————————————————————————————————————————————————— */

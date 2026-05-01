@@ -39,8 +39,8 @@ typedef struct s_data t_data;
 typedef struct s_object t_object;
 
 /* ——— DEFINE     ——————————————————————————————————————————————————————————— */
-# define RENDER_DIST 1000.0
-# define SHADOW_DIST 100.0
+# define RENDER_DIST 5000000.0
+# define SHADOW_DIST 200000.0
 # define TILE_SIZE 128
 # define GAMMA 0.8
 

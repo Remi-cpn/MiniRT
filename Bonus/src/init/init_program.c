@@ -26,8 +26,8 @@ static mlx_window_create_info	init_window_info(void)
 
 	ft_memset(&win_info, 0, sizeof(mlx_window_create_info));
 	win_info.title = "MiniRT";
-	win_info.width = 1920;
-	win_info.height = 1200;
+	win_info.width = 800;
+	win_info.height = 600;
 	return (win_info);
 }
 
