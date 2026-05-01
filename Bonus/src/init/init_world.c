@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_world.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 08:42:27 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/21 12:01:19 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/01 16:17:55 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	init_world(t_data *d, t_world *w)
 		/ (double)d->win_info.height);
 	if (d->solar_file == true)
 	{
-		calc_acc(w->objects, w->nb_obj);
+		calc_acc(w, w->objects, w->nb_obj);
 		init_prev_pos(w->objects, w->nb_obj);
 	}
 }

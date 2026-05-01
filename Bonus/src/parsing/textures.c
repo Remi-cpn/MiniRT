@@ -12,6 +12,7 @@
 
 #include "../../include/minirt.h"
 #include "../../include/parsing.h"
+#include <stdio.h>
 
 static int	set_img(t_parsing *p, t_img *img, char *file_name)
 {

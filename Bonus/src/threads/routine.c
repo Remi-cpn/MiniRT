@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 15:11:14 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/01 13:56:18 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/01 16:12:47 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ static void	dispatch_work(t_data *d, int idx)
 	int	y;
 
 	if (d->pool.mod == PHYS_ACC)
-		calc_acc_obj(d->map.objects, d->map.nb_obj, idx);
+		calc_acc_obj(&d->map, d->map.objects, d->map.nb_obj, idx);
+	else if (d->pool.mod == PHYS_SUN)
+		calc_acc_sun(&d->map, idx);
 	else if (d->pool.mod == PHYS_POS)
 		recalcul_pos_obj(&d->map, idx);
 	else

@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/01 14:16:46 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/01 15:51:45 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_object t_object;
 
 /* ——— DEFINE     ——————————————————————————————————————————————————————————— */
 # define RENDER_DIST 1000.0
+# define SHADOW_DIST 100.0
 # define TILE_SIZE 16
 # define GAMMA 0.8
 
@@ -47,6 +48,7 @@ typedef struct s_object t_object;
 typedef enum e_mod
 {
 	PHYS_ACC,
+	PHYS_SUN,
 	PHYS_POS,
 	RENDER
 }	t_mod;

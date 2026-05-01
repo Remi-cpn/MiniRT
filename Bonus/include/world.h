@@ -101,6 +101,15 @@ typedef struct s_camera
 	double		focal;
 }	t_camera;
 
+typedef struct s_sun
+{
+	t_physics	param;
+	double		radius;
+	mlx_color	color;
+	double		intensity;
+	t_texture	texture;
+}   t_sun;
+
 typedef struct s_plane
 {
 	t_point	point;
@@ -152,6 +161,7 @@ typedef struct s_hit
 	t_vec		normal;
 	t_object	*object;
 	int			hit;
+	int			sun_idx;
 	mlx_color	pixel_color;
 }	t_hit;
 
@@ -163,6 +173,8 @@ typedef struct s_world
 	int			nb_obj;
 	t_light		*lights;
 	int			nb_light;
+	t_sun		*suns;
+	int			nb_sun;
 	mlx_color	ambient;
 	double		ambient_ratio;
 }	t_world;

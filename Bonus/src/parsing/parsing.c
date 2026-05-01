@@ -74,13 +74,13 @@ t_world	parsing(t_data *d, char *file_name)
 	p.data = d;
 	if (!check_file_name(d, file_name))
 		exit_prog_pars(&p, ERROR_FILE_NAME, ERROR_FILE_NAME_MSG);
-	p.count_line = count_line(&p, file_name);
-	w.nb_light = count_light(&p, file_name);
+	p.count_line = count_line(&p, file_name, &w);
 	w.nb_obj = init_nb_obj(&p, w.nb_light);
 	w.lights = ft_calloc(w.nb_light, sizeof(t_light));
+	w.suns = ft_calloc(w.nb_sun, sizeof(t_sun));
 	if (w.nb_obj > 0)
 		w.objects = ft_calloc(w.nb_obj, sizeof(t_object));
-	if (!w.lights || (w.nb_obj > 0 && !w.objects))
+	if (!w.lights || !w.suns || (w.nb_obj > 0 && !w.objects))
 		exit_prog_pars(&p, ERROR_MALLOC, ERROR_MALLOC_MSG);
 	pars_file(&p, &w, file_name, d->solar_file);
 	if (p.cam == false || p.al == false)

@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:17:11 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/01 14:50:25 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/01 16:18:29 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ typedef struct s_physics
 }	t_physics;
 
 /* ——— Functions prototypes ————————————————————————————————————————————————— */
-void	calc_acc(t_object *o, int nb_obj);
+void	calc_acc(t_world *w, t_object *o, int nb_obj);
 void	recalcul_physics(t_data *d, t_world *w);
 void	recalcul_pos_obj(t_world *w, int i);
-void	calc_acc_obj(t_object *o, int nbr_obj, int i);
+void	calc_acc_obj(t_world *w, t_object *o, int nbr_obj, int i);
+void	calc_acc_sun(t_world *w, int i);
 
 #endif

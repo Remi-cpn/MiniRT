@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 15:11:23 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/01 13:27:35 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/01 15:29:56 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@
 # define POS 3
 
 /* ——— Forward declare —————————————————————————————————————————————————— */
-typedef struct s_data	t_data;
-typedef struct s_world	t_world;
-typedef struct s_object	t_object;
+typedef struct s_data t_data;
+typedef struct s_world t_world;
+typedef struct s_object t_object;
+typedef struct s_sun t_sun;
+typedef struct s_texture t_texture;
 
 /* ——— Struct prototypes ———————————————————————————————————————————————————— */
 typedef struct s_parsing
@@ -55,8 +57,7 @@ typedef enum e_type
 /* ——— Function prototypes —————————————————————————————————————————————————— */
 t_world		parsing(t_data *d, char *file_name);
 void		pars_line_dispatch(t_parsing *p, t_world *w, char *l, bool solar);
-int			count_line(t_parsing *p, char *file_name);
-int			count_light(t_parsing *p, char *file_name);
+int			count_line(t_parsing *p, char *file_name, t_world *w);
 mlx_color	get_color(t_parsing *p, char *s);
 t_vec		get_vec(t_parsing *p, char *s);
 double		get_mass(char *s);
@@ -70,6 +71,7 @@ void		add_sp_solar(t_parsing *p, t_object *o, char **line_split);
 void		add_pl(t_parsing *p, t_object *o, char **line_split);
 void		add_cy(t_parsing *p, t_object *o, char **line_split);
 void		add_co(t_parsing *p, t_object *o, char **line_split);
+void		add_so(t_parsing *p, t_sun *s, char **l);
 
 /* Textures functions */
 void		pars_chessboard(t_parsing *p, t_object *o, char *scale,
