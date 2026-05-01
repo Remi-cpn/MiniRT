@@ -6,21 +6,11 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 08:42:27 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/14 16:28:20 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/21 12:01:19 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
-
-t_vec	vec_vectoriel(t_vec u, t_vec v)
-{
-	t_vec	w;
-
-	w.x = (u.y * v.z) - (u.z * v.y);
-	w.y = (u.z * v.x) - (u.x * v.z);
-	w.z = (u.x * v.y) - (u.y * v.x);
-	return (w);
-}
 
 void	calcul_viewport(t_camera *cam, double ratio)
 {
@@ -35,12 +25,29 @@ void	calcul_viewport(t_camera *cam, double ratio)
 	vec_normalize(&cam->hor_n);
 	cam->ver_n = vec_vectoriel(cam->hor_n, cam->dir);
 	vec_normalize(&cam->ver_n);
-	fov_rad = 2 * tan(cam->fov * 3.14159265358979323846 / 360.0);
+	fov_rad = 2 * tan(cam->fov * PI / 360.0);
 	cam->hor = vec_mult_scalar(cam->hor_n, ratio * fov_rad);
 	cam->ver = vec_mult_scalar(cam->ver_n, fov_rad);
 	cam->corner = vec_sub(cam->origin, vec_mult_scalar(cam->hor, 0.5));
 	cam->corner = vec_sub(cam->corner, vec_mult_scalar(cam->ver, 0.5));
 	cam->corner = vec_add(cam->corner, vec_mult_scalar(cam->dir, cam->focal));
+}
+
+static void	init_prev_pos(t_object *o, int nb_obj)
+{
+	int			i;
+	t_physics	*object;
+
+	i = -1;
+	while (++i < nb_obj)
+	{
+		if (!o[i].physics_enabled)
+			continue ;
+		object = &o[i].shape.sphere.param;
+		object->prev_pos = vec_add(vec_sub(object->cur_pos,
+			vec_mult_scalar(object->prev_pos, DT)),
+			vec_mult_scalar(object->acc, 0.5 * DT * DT));
+	}
 }
 
 void	init_world(t_data *d, t_world *w)
@@ -53,4 +60,9 @@ void	init_world(t_data *d, t_world *w)
 	vec_normalize(&(w->camera.dir));
 	calcul_viewport(&(w->camera), (double)d->win_info.width
 		/ (double)d->win_info.height);
+	if (d->solar_file == true)
+	{
+		calc_acc(w->objects, w->nb_obj);
+		init_prev_pos(w->objects, w->nb_obj);
+	}
 }

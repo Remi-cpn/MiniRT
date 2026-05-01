@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 15:11:23 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 15:13:25 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/22 19:35:58 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ typedef struct s_parsing
 	bool		cam;
 	bool		al;
 	bool		light;
+	mlx_context	mlx;
+	t_world		*world;
+	t_data		*data;
 }	t_parsing;
 
 typedef enum e_type
@@ -52,17 +55,25 @@ typedef enum e_type
 
 /* ——— Function prototypes —————————————————————————————————————————————————— */
 t_world		parsing(t_data *d, char *file_name);
-void		pars_line(t_parsing *p, t_world *w, char *line);
+void 		pars_line_dispatch(t_parsing *p, t_world *w, char *l, bool solar);
 int			count_line(t_parsing *p, char *file_name);
 mlx_color	get_color(t_parsing *p, char *s);
 t_vec		get_vec(t_parsing *p, char *s);
+double		get_mass(char *s);
 
 /* Formatters functions */
 void		add_al(t_parsing *p, t_world *w, char **line_split);
 void		add_cam(t_parsing *p, t_world *w, char **line_split);
 void		add_light(t_parsing *p, t_world *w, char **line_split);
 void		add_sp(t_parsing *p, t_object *o, char **line_split);
+void		add_sp_solar(t_parsing *p, t_object *o, char **line_split);
 void		add_pl(t_parsing *p, t_object *o, char **line_split);
 void		add_cy(t_parsing *p, t_object *o, char **line_split);
+
+/* Textures functions */
+void		pars_chessboard(t_parsing *p, t_object *o, char *scale,
+				char *color);
+void		pars_texture_map(t_parsing *p, t_texture *t, char *texture_file,
+				char *bump_file);
 
 #endif

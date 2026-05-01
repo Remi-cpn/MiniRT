@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 08:42:27 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/14 16:28:20 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/21 09:46:45 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	calcul_viewport(t_camera *cam, double ratio)
 	vec_normalize(&cam->hor_n);
 	cam->ver_n = vec_vectoriel(cam->hor_n, cam->dir);
 	vec_normalize(&cam->ver_n);
-	fov_rad = 2 * tan(cam->fov * 3.14159265358979323846 / 360.0);
+	fov_rad = 2 * tan(cam->fov * PI / 360.0);
 	cam->hor = vec_mult_scalar(cam->hor_n, ratio * fov_rad);
 	cam->ver = vec_mult_scalar(cam->ver_n, fov_rad);
 	cam->corner = vec_sub(cam->origin, vec_mult_scalar(cam->hor, 0.5));

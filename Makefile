@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+         #
+#    By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/13 11:16:05 by rcompain          #+#    #+#              #
-#    Updated: 2026/04/14 15:21:44 by rcompain         ###   ########.fr        #
+#    Updated: 2026/04/22 19:27:53 by rcompain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,24 +26,27 @@ CC_DIR		= Mandatory
 ifeq ($(MAKECMDGOALS),bonus)
 CC_DIR		= Bonus
 endif
+ifeq ($(MAKECMDGOALS),solar)
+CC_DIR		= Bonus_solar
+endif
 
 SRC_DIR		= $(CC_DIR)/src
 OBJ_DIR		= obj/$(CC_DIR)
 INC_DIR		= $(CC_DIR)/include
 
 # --- Sous-dossiers sources --------------------------------------------------
-SUB_DIRS := draw exit moves init parsing
+SUB_DIRS := scene exit moves init parsing
 
 # ——— Sources ——————————————————————————————————————————————————————————————— #
 SRC_INIT	= init_program.c \
 			  init_world.c
 
 SRC_MOVE	= hook.c \
-			  camera.c
+			  camera.c \
 
 SRC_EXIT	= exit_program.c
 
-SRC_DRAW	= draw.c \
+SRC_SCENE	= draw.c \
 			  get_colors.c \
 			  hit_cylinder.c \
 			  hit_plane.c \
@@ -55,12 +58,24 @@ SRC_PARSING = parsing.c \
 			  parsing_line.c \
 			  utils.c \
 			  format_unique.c \
-			  format_form.c
+			  format_form_rt.c
+
+ifeq ($(MAKECMDGOALS),bonus)
+SRC_SCENE	+= textures_cb.c \
+			   textures_manager.c \
+			   textures_bump_map.c
+
+SRC_PARSING	+= format_form_solar.c \
+			   textures.c
+
+SRC_MOVE	+= physics.c \
+
+endif
 
 VPATH := $(SRC_DIR) \
          $(addprefix $(SRC_DIR)/, $(SUB_DIRS))
 
-SRCS		= main.c $(SRC_MOVE) $(SRC_INIT) $(SRC_EXIT) $(SRC_DRAW) $(SRC_LRT) $(SRC_PARSING)
+SRCS		= main.c $(SRC_MOVE) $(SRC_INIT) $(SRC_EXIT) $(SRC_SCENE) $(SRC_LRT) $(SRC_PARSING)
 
 OBJ			= ${SRCS:%.c=$(OBJ_DIR)/%.o}
 
