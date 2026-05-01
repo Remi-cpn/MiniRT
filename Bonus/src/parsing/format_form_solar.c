@@ -12,6 +12,7 @@
 
 #include "../../include/minirt.h"
 #include "../../include/parsing.h"
+#include <stdio.h>
 
 static void	pars_solar(t_parsing *p, t_object *o, char *mass, char *velocity)
 {
@@ -30,7 +31,7 @@ void	add_sp_solar(t_parsing *p, t_object *o, char **l_split)
 		|| check_idx_string_tab(l_split, 5) || check_idx_string_tab(l_split, 6))
 	{
 		if (!double_valid(l_split[2]))
-			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SO_ARGS_MSG);
+			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);
 		o->type = OBJ_SPHERE;
 		o->physics_enabled = false;
 		o->shape.sphere.center = get_vec(p, l_split[1]);
@@ -44,9 +45,9 @@ void	add_sp_solar(t_parsing *p, t_object *o, char **l_split)
 			pars_solar(p, o, l_split[5], l_split[6]);
 	}
 	else
-		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SO_ARGS_MSG);
+		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);
 	if (o->shape.sphere.radius <= 0.0)
-		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SO_ARGS_MSG);
+		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);
 }
 
 void	add_so(t_parsing *p, t_sun *s, char **l)
@@ -60,7 +61,8 @@ void	add_so(t_parsing *p, t_sun *s, char **l)
 		s->color          = get_color(p, l[3]);
 		s->intensity      = ft_atod(l[4]);
 		s->param.mass     = get_mass(l[5]);
-		s->param.prev_pos = vec_sub(s->param.cur_pos, get_vec(p, l[6]));
+		s->param.prev_pos = vec_sub(s->param.cur_pos,
+				vec_mult_scalar(get_vec(p, l[6]), DT));
 		vec_init(&s->param.acc, 0, 0, 0);
 		if (l[7])
 			pars_texture_map(p, &(s->texture), l[7], NULL);
@@ -68,5 +70,5 @@ void	add_so(t_parsing *p, t_sun *s, char **l)
 	else
 		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SO_ARGS_MSG);
 	if (s->radius <= 0.0 || s->param.mass < 0 || s->intensity < 0)
-		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);
+		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SO_ARGS_MSG);
 }

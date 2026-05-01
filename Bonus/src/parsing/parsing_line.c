@@ -26,7 +26,7 @@ static void	pars_line_solar(t_parsing *p, t_world *w, char *line)
 		add_al(p, w, p->line_split);
 	else if (!ft_strncmp(p->line_split[0], "C", 1))
 		add_cam(p, w, p->line_split);
-	else if (!ft_strncmp(p->line_split[0], "so", 1))
+	else if (!ft_strncmp(p->line_split[0], "so", 2))
 		add_so(p, &w->suns[j++], p->line_split);
 	else if (!ft_strncmp(p->line_split[0], "sp", 2))
 		add_sp_solar(p, &w->objects[i++], p->line_split);

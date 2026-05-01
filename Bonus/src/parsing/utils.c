@@ -109,7 +109,7 @@ int	count_line(t_parsing *p, char *file_name, t_world *w)
 	{
 		if (str[0] != '\n')
 			count++;
-		if (str[0] == 's' && str[0] =='o')
+		if (str[0] == 's' && str[1] =='o')
 			count_so++;
 		if (str[0] == 'L')
 			count_light++;

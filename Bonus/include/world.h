@@ -161,6 +161,7 @@ typedef struct s_hit
 	t_vec		normal;
 	t_object	*object;
 	int			hit;
+	int			sun_idx;
 	mlx_color	pixel_color;
 }	t_hit;
 

@@ -3,7 +3,7 @@ C 0,1,2 0,-0.3,-1 70
 
 # so  <position_x,y,z>  <diameter>  <R,G,B> <intensity>  <mass>  <velocity_x,y,z> <texture> 
 # Sun
-so 0,0,0 0.5 255,255,0 0.8 1.0 0,0,0 texture_map/2k_sun.png 
+so 0,0,0 0.5 255,240,200 0.8 1.0 0,0,0 texture_map/2k_sun.png 
 
 # Mercury
 sp 0.387,0,0 0.02 200,200,200 texture_map/2k_mercury.png 1.65e-7 0,0.0274,0
@@ -30,4 +30,5 @@ sp 19.191,0,0 0.12 180,220,255 texture_map/2k_uranus.png 4.37e-5 0,0.00392,0
 sp 30.07,0,0 0.12 100,150,255 texture_map/2k_neptune.png 5.15e-5 0,0.00313,0
 
 # Backgroud
-sp 0,0,0 900 0,0,0 texture_map/8k_stars_milky_way.jpg
+sp 0,0,0 900 255,255,255 
+#texture_map/8k_stars_milky_way.jpg

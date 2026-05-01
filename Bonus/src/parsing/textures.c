@@ -18,7 +18,6 @@ static int	set_img(t_parsing *p, t_img *img, char *file_name)
 {
 	mlx_image	i;
 
-	printf("file_name : '%s'\n", file_name);
 	i = mlx_new_image_from_file(p->mlx, file_name,
 			&(img->width), &(img->height));
 	if (!i)

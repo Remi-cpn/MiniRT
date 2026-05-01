@@ -22,7 +22,7 @@ static int	shadow_ray(t_world *w, t_hit *hit_origin, t_vec light_dir,
 	shadow_ray.origin = vec_add(hit_origin->point,
 			vec_mult_scalar(hit_origin->normal, 0.01));
 	hit = find_closest_hit(w, shadow_ray, 1);
-	if (hit.hit && hit.t > 0 && hit.t < light_n)
+	if (hit.hit && hit.t > 0 && hit.t < light_n && hit.t < SHADOW_DIST)
 		return (1);
 	return (0);
 }
