@@ -22,13 +22,13 @@ static void	update(void *param)
 	d = (t_data *)param;
 	if (d->solar_file == false)
 	{
-		update_cam(d, 0.3);
+		update_cam(d, 150);
 		draw(d);
 		return ;
 	}
 	i = -1;
-	update_cam(d, 0.3);
-	speed_sim = 60;
+	update_cam(d, 150);
+	speed_sim = 1;
 	while (++i < speed_sim)
 		recalcul_physics(d, &d->map);
 	draw(d);

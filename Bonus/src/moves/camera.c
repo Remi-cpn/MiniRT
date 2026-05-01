@@ -35,7 +35,7 @@ static void	rotate_movement(t_data *d, t_camera *cam, double speed_init)
 {
 	double	speed;
 
-	speed = speed_init / 5;
+	speed = speed_init / 1500;
 	if (d->input.up == true)
 		cam->dir = vec_add(vec_mult_scalar(cam->dir, cos(speed)),
 				vec_mult_scalar(cam->ver_n, -sin(speed)));
