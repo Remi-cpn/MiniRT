@@ -44,7 +44,6 @@ typedef struct s_physics
 }	t_physics;
 
 /* ——— Functions prototypes ————————————————————————————————————————————————— */
-void	calc_acc(t_world *w, t_object *o, int nb_obj);
 void	recalcul_physics(t_data *d, t_world *w);
 void	recalcul_pos_obj(t_world *w, int i);
 void	calc_acc_obj(t_world *w, t_object *o, int nbr_obj, int i);

@@ -74,16 +74,3 @@ void	calc_acc_obj(t_world *w, t_object *o, int nbr_obj, int i)
 	}
 	vec_init(&o[i].shape.sphere.param.acc, acc.x, acc.y, acc.z);
 }
-
-void	calc_acc(t_world *w, t_object *o, int nbr_obj)
-{
-	int		i;
-
-	i = -1;
-	while (++i < nbr_obj)
-	{
-		if (o[i].physics_enabled == false)
-			continue ;
-		calc_acc_obj(w, o, nbr_obj, i);
-	}
-}

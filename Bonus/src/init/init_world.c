@@ -33,23 +33,6 @@ void	calcul_viewport(t_camera *cam, double ratio)
 	cam->corner = vec_add(cam->corner, vec_mult_scalar(cam->dir, cam->focal));
 }
 
-static void	init_prev_pos(t_object *o, int nb_obj)
-{
-	int			i;
-	t_physics	*object;
-
-	i = -1;
-	while (++i < nb_obj)
-	{
-		if (!o[i].physics_enabled)
-			continue ;
-		object = &o[i].shape.sphere.param;
-		object->prev_pos = vec_add(vec_sub(object->cur_pos,
-					vec_mult_scalar(object->prev_pos, DT)),
-				vec_mult_scalar(object->acc, 0.5 * DT * DT));
-	}
-}
-
 void	init_world(t_data *d, t_world *w)
 {
 	if (!d->pixels)
@@ -60,9 +43,4 @@ void	init_world(t_data *d, t_world *w)
 	vec_normalize(&(w->camera.dir));
 	calcul_viewport(&(w->camera), (double)d->win_info.width
 		/ (double)d->win_info.height);
-	if (d->solar_file == true)
-	{
-		calc_acc(w, w->objects, w->nb_obj);
-		init_prev_pos(w->objects, w->nb_obj);
-	}
 }
