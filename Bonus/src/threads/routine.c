@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 15:11:14 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/28 18:21:08 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/01 08:54:18 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	render_tile(t_data *d, t_world *w, int x, int y)
 		}
 		y++;
 	}
-	sem_post(&d->pool.sem);
 }
 
 void	*routine(void *params)
@@ -61,6 +60,7 @@ void	*routine(void *params)
 		y = (idx / tile_per_row) * TILE_SIZE;
 		pthread_mutex_unlock(&d->pool.queue);
 		render_tile(d, &d->map, x, y);
+		sem_post(&d->pool.sem);
 		pthread_mutex_lock(&d->pool.queue);
 	}
 	pthread_mutex_unlock(&d->pool.queue);

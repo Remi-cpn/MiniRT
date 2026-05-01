@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/29 14:07:05 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/01 08:53:00 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,6 @@
 # define GAMMA 0.8
 
 /* ——— Multi Threading —————————————————————————————————————————————————————— */
-typedef struct s_tile
-{
-	int	y;
-	int	x;
-}	t_tile;
-
 typedef struct s_threading
 {
 	int				nbr_threads;

@@ -6,7 +6,7 @@
 #    By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/13 11:16:05 by rcompain          #+#    #+#              #
-#    Updated: 2026/04/28 18:31:55 by rcompain         ###   ########.fr        #
+#    Updated: 2026/05/01 09:32:32 by rcompain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ SRC_PARSING = parsing.c \
 SRC_THREADS	=
 
 ifeq ($(MAKECMDGOALS),bonus)
-SRC_SCENE	+= textures_cb.c \
+SRC_SCENE	+= textures_uv.c \
 			   textures_manager.c \
 			   textures_bump_map.c
 
