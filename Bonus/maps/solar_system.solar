@@ -1,9 +1,9 @@
 A 0.2 255,255,255
 C 0,1,2 0,-0.3,-1 70
-L 0,0,3 0.8 255,255,255
 
+# so  <position_x,y,z>  <diameter>  <R,G,B> <intensity>  <mass>  <velocity_x,y,z> <texture> 
 # Sun
-sp 0,0,0 0.5 255,255,0 texture_map/2k_sun.png 1.0 0,0,0
+so 0,0,0 0.5 255,255,0 0.8 1.0 0,0,0 texture_map/2k_sun.png 
 
 # Mercury
 sp 0.387,0,0 0.02 200,200,200 texture_map/2k_mercury.png 1.65e-7 0,0.0274,0

@@ -43,12 +43,21 @@ static void	set_light(double *light, double *ambient,
 void	light(t_world *w, t_hit *hit, mlx_color *color)
 {
 	t_light_managment	l;
+	t_light				sun;
 	int					i;
 
 	init_vars(w, l.ambient, l.diffuse, l.specular);
 	i = -1;
 	while (++i < w->nb_light)
 		calc_one_light(w, hit, &w->lights[i], &l);
+	i = -1;
+	while (++i < w->nb_sun)
+	{
+		sun.position = w->suns[i].param.cur_pos;
+		sun.color = w->suns[i].color;
+		sun.intensity = w->suns[i].intensity;
+		calc_one_light(w, hit, &sun, &l);
+	}
 	set_light(l.light, l.ambient, l.diffuse, l.specular);
 	color->r = 255 * pow((hit->pixel_color.r / 255.0) * l.light[R], GAMMA);
 	color->g = 255 * pow((hit->pixel_color.g / 255.0) * l.light[G], GAMMA);

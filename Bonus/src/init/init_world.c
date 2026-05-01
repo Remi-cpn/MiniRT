@@ -62,7 +62,7 @@ void	init_world(t_data *d, t_world *w)
 		/ (double)d->win_info.height);
 	if (d->solar_file == true)
 	{
-		calc_acc(w->objects, w->nb_obj);
+		calc_acc(w);
 		init_prev_pos(w->objects, w->nb_obj);
 	}
 }

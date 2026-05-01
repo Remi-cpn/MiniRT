@@ -52,6 +52,8 @@ static void	free_obj_and_light(t_world *w)
 	}
 	if (w->lights)
 		free(w->lights);
+	if (w->suns)
+		free(w->suns);
 	free(w->objects);
 }
 

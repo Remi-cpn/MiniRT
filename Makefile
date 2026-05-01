@@ -65,6 +65,7 @@ SRC_SCENE	+= textures_uv.c \
 			   textures_bump_map.c \
 			   light_merge.c \
 			   fill_hit.c \
+			   calc_acc.c \
 			   hit_cone.c
 
 SRC_PARSING	+= format_form_solar.c \

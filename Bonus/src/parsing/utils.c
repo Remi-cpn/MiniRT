@@ -90,13 +90,17 @@ int	count_light(t_parsing *p, char *file_name)
 	return (count);
 }
 
-int	count_line(t_parsing *p, char *file_name)
+int	count_line(t_parsing *p, char *file_name, t_world *w)
 {
 	int		fd;
 	char	*str;
 	int		count;
+	int		count_so;
+	int		count_light;
 
 	count = 0;
+	count_so = 0;
+	count_light = 0;
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		exit_prog_pars(p, ERROR_FILE_NAME, ERROR_FILE_NAME_MSG);
@@ -105,9 +109,15 @@ int	count_line(t_parsing *p, char *file_name)
 	{
 		if (str[0] != '\n')
 			count++;
+		if (str[0] == 's' && str[0] =='o')
+			count_so++;
+		if (str[0] == 'L')
+			count_light++;
 		str = ft_freenull(str);
 		str = ft_get_next_line(fd);
 	}
 	close(fd);
+	w->nb_sun = count_so;
+	w->nb_light = count_light;
 	return (count);
 }
