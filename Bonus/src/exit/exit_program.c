@@ -6,12 +6,36 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:22:44 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/22 20:05:18 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/28 15:10:57 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 #include <stdlib.h>
+
+static void	destroy_pool(t_data *d)
+{
+	int	i;
+
+	if (d->pool.mutex_ready)
+	{
+		pthread_mutex_lock(&d->pool.queue);
+		d->pool.stop = true;
+		if (d->pool.cond_ready)
+			pthread_cond_broadcast(&d->pool.cond);
+		pthread_mutex_unlock(&d->pool.queue);
+		pthread_mutex_destroy(&d->pool.queue);
+	}
+	if (d->pool.cond_ready)
+		pthread_cond_destroy(&d->pool.cond);
+	if (d->pool.sem_ready)
+		sem_destroy(&d->pool.sem);
+	i = -1;
+	while (++i < d->pool.nbr_threads && d->pool.threads
+		&& d->pool.threads[i])
+		pthread_join(d->pool.threads[i], NULL);
+	free(d->pool.threads);
+}
 
 static void	free_obj(t_world *w)
 {
@@ -22,6 +46,8 @@ static void	free_obj(t_world *w)
 	{
 		if (w->objects[i].texture.img.pixels)
 			free(w->objects[i].texture.img.pixels);
+		if (w->objects[i].texture.bump_map.pixels)
+			free(w->objects[i].texture.bump_map.pixels);
 		i++;
 	}
 	free(w->objects);
@@ -76,6 +102,8 @@ void	exit_prog(t_data *d, int exit_code, char *error_message)
 		free(d->pixels);
 	if (d->map.objects)
 		free_obj(&(d->map));
+	if (d->pool.nbr_threads)
+		destroy_pool(d);
 	if (d->img)
 		mlx_destroy_image(d->mlx, d->img);
 	if (d->win)

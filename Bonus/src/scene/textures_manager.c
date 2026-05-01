@@ -19,7 +19,11 @@ mlx_color	get_pixel_img(t_img *img, t_uv uv)
 	int			y;
 
 	x = (int)((1.0 - uv.u) * img->width) % img->width;
+	if (x < 0)
+		x += img->width;
 	y = (int)((1.0 - uv.v) * img->height) % img->height;
+	if (y < 0)
+		y += img->height;
 	pixel = img->pixels[y * img->width + x];
 	return (pixel);
 }
