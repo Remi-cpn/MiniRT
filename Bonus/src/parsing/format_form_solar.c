@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   format_form_solar.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/11 12:40:03 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/27 10:28:02 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/01 12:07:57 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	add_sp_solar(t_parsing *p, t_object *o, char **l_split)
 		o->color = get_color(p, l_split[3]);
 		if ((l_split[4] && ! l_split[5]) || (l_split[4] && l_split[5] && l_split[6]))
 			pars_texture_map(p, &(o->texture), l_split[4], NULL);
-		else if (l_split[4] && l_split[5] && !l_split[6])
+		if (l_split[4] && l_split[5] && !l_split[6])
 			pars_solar(p, o, l_split[4], l_split[5]);
 		else if (l_split[4] && l_split[5])
 			pars_solar(p, o, l_split[5], l_split[6]);

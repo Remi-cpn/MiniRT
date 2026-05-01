@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 15:11:14 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/01 08:54:18 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/01 13:56:18 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,31 +35,44 @@ void	render_tile(t_data *d, t_world *w, int x, int y)
 	}
 }
 
+static void	dispatch_work(t_data *d, int idx)
+{
+	int	tile_per_row;
+	int	x;
+	int	y;
+
+	if (d->pool.mod == PHYS_ACC)
+		calc_acc_obj(d->map.objects, d->map.nb_obj, idx);
+	else if (d->pool.mod == PHYS_POS)
+		recalcul_pos_obj(&d->map, idx);
+	else
+	{
+		tile_per_row = (d->win_info.width + TILE_SIZE - 1) / TILE_SIZE;
+		x = (idx % tile_per_row) * TILE_SIZE;
+		y = (idx / tile_per_row) * TILE_SIZE;
+		render_tile(d, &d->map, x, y);
+	}
+}
+
 void	*routine(void *params)
 {
 	t_data	*d;
-	int		y;
-	int		x;
 	int		idx;
-	int		tile_per_row;
 
 	d = (t_data *)params;
 	pthread_mutex_lock(&d->pool.queue);
 	while (d->pool.stop == false)
 	{
 		while ((!d->pool.start
-				|| d->pool.index_tile >= d->pool.nbr_tiles)
+				|| d->pool.job_idx >= d->pool.nbr_jobs)
 			&& !d->pool.stop)
 			pthread_cond_wait(&d->pool.cond, &d->pool.queue);
 		if (d->pool.stop)
 			break ;
-		idx = d->pool.index_tile;
-		d->pool.index_tile++;
-		tile_per_row = (d->win_info.width + TILE_SIZE - 1) / TILE_SIZE;
-		x = (idx % tile_per_row) * TILE_SIZE;
-		y = (idx / tile_per_row) * TILE_SIZE;
+		idx = d->pool.job_idx;
+		d->pool.job_idx++;
 		pthread_mutex_unlock(&d->pool.queue);
-		render_tile(d, &d->map, x, y);
+		dispatch_work(d, idx);
 		sem_post(&d->pool.sem);
 		pthread_mutex_lock(&d->pool.queue);
 	}

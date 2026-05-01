@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 15:11:23 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/22 19:35:58 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/01 13:27:35 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 # define POS 3
 
 /* ——— Forward declare —————————————————————————————————————————————————— */
-typedef struct s_data t_data;
-typedef struct s_world t_world;
-typedef struct s_object t_object;
+typedef struct s_data	t_data;
+typedef struct s_world	t_world;
+typedef struct s_object	t_object;
 
 /* ——— Struct prototypes ———————————————————————————————————————————————————— */
 typedef struct s_parsing
