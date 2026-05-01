@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:22:44 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/01 10:29:03 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/01 16:55:16 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	destroy_pool(t_data *d)
 		if (d->pool.cond_ready)
 			pthread_cond_broadcast(&d->pool.cond);
 		pthread_mutex_unlock(&d->pool.queue);
-		pthread_mutex_destroy(&d->pool.queue);
 	}
 	if (d->pool.cond_ready)
 		pthread_cond_destroy(&d->pool.cond);
@@ -34,6 +33,8 @@ static void	destroy_pool(t_data *d)
 	while (++i < d->pool.nbr_threads && d->pool.threads
 		&& d->pool.threads[i])
 		pthread_join(d->pool.threads[i], NULL);
+	if (d->pool.mutex_ready)
+		pthread_mutex_destroy(&d->pool.queue);
 	free(d->pool.threads);
 }
 
