@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 12:02:25 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 15:22:34 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/28 18:34:18 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,18 @@ static void	put_image(t_data *d, mlx_color *pixels)
 	}
 }
 
-static void	set_pixel(t_data *d, t_world *w, mlx_color *pixels)
+void	draw(t_data *d)
 {
-	int			x;
-	int			y;
-	double		inv_x;
-	double		norm_y;
-	t_ray		ray;
+	int	i;
 
-	y = -1;
-	inv_x = 1.0 / d->win_info.width;
-	while (++y < d->win_info.height)
-	{
-		x = -1;
-		norm_y = 1.0 - (double)y / d->win_info.height;
-		while (++x < d->win_info.width)
-		{
-			ray = get_ray(w->camera, (double)x * inv_x, norm_y);
-			pixel_color(w, ray, &pixels[(y * d->win_info.width + x)]);
-		}
-	}
-}
-
-void	draw(t_data *d, t_world *w)
-{
-	set_pixel(d, w, d->pixels);
+	pthread_mutex_lock(&d->pool.queue);
+	d->pool.index_tile = 0;
+	d->pool.start = true;
+	pthread_cond_broadcast(&d->pool.cond);
+	pthread_mutex_unlock(&d->pool.queue);
+	i = -1;
+	while (++i < d->pool.nbr_tiles)
+		sem_wait(&d->pool.sem);
 	put_image(d, d->pixels);
 	mlx_clear_window(d->mlx, d->win, (mlx_color){.rgba = 0x000000FF});
 	mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);

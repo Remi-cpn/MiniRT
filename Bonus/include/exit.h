@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:24:21 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/22 19:37:48 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/04/28 15:18:05 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define ERROR_FILE_OBJ -9
 # define ERROR_FILE_TEX -10
 # define ERROR_FILE_BUMP -10
+# define ERROR_THREAD -11
+# define ERROR_MUTEX -12
 
 /* Exit messages */
 # define ERROR_MLX_INIT_MSG "Failed to initialize MLX context"
@@ -49,6 +51,8 @@
 # define ERROR_FILE_CO_ARGS_MSG "Cone must be defined with valid arguments"
 # define ERROR_FILE_TEX_MSG "Incorrect file texture name"
 # define ERROR_FILE_BUMP_MSG "Incorrect file bump_map name"
+# define ERROR_THREAD_MSG "Thread creation failed"
+# define ERROR_MUTEX_MSG "Mutex initialization failed"
 
 /* ——— Variable prototypes —————————————————————————————————————————————————— */
 typedef struct s_data		t_data;

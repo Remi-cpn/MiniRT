@@ -6,7 +6,7 @@
 #    By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/13 11:16:05 by rcompain          #+#    #+#              #
-#    Updated: 2026/04/22 19:27:53 by rcompain         ###   ########.fr        #
+#    Updated: 2026/05/01 10:34:15 by rcompain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,9 +25,6 @@ LIBFT_A		= $(LIBFT_DIR)/libft.a
 CC_DIR		= Mandatory
 ifeq ($(MAKECMDGOALS),bonus)
 CC_DIR		= Bonus
-endif
-ifeq ($(MAKECMDGOALS),solar)
-CC_DIR		= Bonus_solar
 endif
 
 SRC_DIR		= $(CC_DIR)/src
@@ -51,10 +48,7 @@ SRC_SCENE	= draw.c \
 			  hit_cylinder.c \
 			  hit_plane.c \
 			  hit_sphere.c \
-			  hit_cone.c \
 			  light_calc.c \
-			  light_merge.c \
-			  fill_hit.c \
 			  ray.c
 
 SRC_PARSING = parsing.c \
@@ -63,22 +57,32 @@ SRC_PARSING = parsing.c \
 			  format_unique.c \
 			  format_form_rt.c
 
+SRC_THREADS	=
+
 ifeq ($(MAKECMDGOALS),bonus)
-SRC_SCENE	+= textures_cb.c \
+SRC_SCENE	+= textures_uv.c \
 			   textures_manager.c \
-			   textures_bump_map.c
+			   textures_bump_map.c \
+			   light_merge.c \
+			   fill_hit.c \
+			   hit_cone.c
 
 SRC_PARSING	+= format_form_solar.c \
 			   textures.c
 
 SRC_MOVE	+= physics.c \
 
+SRC_THREADS	= init_threads.c \
+			  routine.c
+
+SUB_DIRS	+= threads
+
 endif
 
 VPATH := $(SRC_DIR) \
          $(addprefix $(SRC_DIR)/, $(SUB_DIRS))
 
-SRCS		= main.c $(SRC_MOVE) $(SRC_INIT) $(SRC_EXIT) $(SRC_SCENE) $(SRC_LRT) $(SRC_PARSING)
+SRCS		= main.c $(SRC_MOVE) $(SRC_INIT) $(SRC_EXIT) $(SRC_SCENE) $(SRC_LRT) $(SRC_PARSING) $(SRC_THREADS)
 
 OBJ			= ${SRCS:%.c=$(OBJ_DIR)/%.o}
 
@@ -108,7 +112,7 @@ export BANNER
 all: banner $(MLX) $(LIBFT_A) $(LIBRT_A) $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) -I$(INC_DIR) $(OBJ) $(LIBRT_A) $(LIBFT_A) $(MLX) -o $(NAME) -lSDL2 -lm
+	@$(CC) $(CFLAGS) -I$(INC_DIR) $(OBJ) $(LIBRT_A) $(LIBFT_A) $(MLX) -o $(NAME) -lSDL2 -lm -lpthread
 	@printf "\r\033[2K$(CYAN)📝 Sources     $(BOLD)$(GREEN)[OK]$(R)\n"
 	@printf "$(BOLD)$(GREEN)\n    ✅  minirt compiled successfully\n\n$(R)"
 
