@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit_cylinder.c                                     :+:      :+:    :+:   */
+/*   hit_cone.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 15:20:07 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/14 16:41:30 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/02 10:55:05 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,23 @@ double	hit_cone(t_cone cone, t_ray ray)
 {
 	double	coeff[3];
 	double	t;
+	double	t_cap;
 	t_vec	hit;
+	t_plane	cap;
 
+	t = -1.0;
 	get_coeff(cone, ray, coeff);
-	if (!solve_quadratic(coeff[0], coeff[1], coeff[2], &t))
-		return (-1.0);
-	hit = vec_add(ray.origin, vec_mult_scalar(ray.dir, t));
-	if (vec_dot(vec_sub(hit, cone.apex), cone.axis) < EPS)
-		return (-1.0);
+	if (solve_quadratic(coeff[0], coeff[1], coeff[2], &t))
+	{
+		hit = vec_add(ray.origin, vec_mult_scalar(ray.dir, t));
+		if (vec_dot(vec_sub(hit, cone.apex), cone.axis) < EPS
+			|| vec_dot(vec_sub(hit, cone.apex), cone.axis) > cone.height)
+			t = -1.0;
+	}
+	cap.normal = cone.axis;
+	cap.point = vec_add(cone.apex, vec_mult_scalar(cone.axis, cone.height));
+	t_cap = hit_cap(cap, ray, cone.height * tan(cone.angle));
+	if (t_cap != -1.0 && (t == -1.0 || t_cap < t))
+		t = t_cap;
 	return (t);
 }

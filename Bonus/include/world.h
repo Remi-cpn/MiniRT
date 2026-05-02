@@ -136,6 +136,7 @@ typedef struct s_cone
 	t_point	apex;
 	t_vec	axis;
 	double	angle;
+	double	height;
 }	t_cone;
 
 typedef struct s_object

@@ -6,7 +6,7 @@
 #    By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/13 11:16:05 by rcompain          #+#    #+#              #
-#    Updated: 2026/05/01 10:34:15 by rcompain         ###   ########.fr        #
+#    Updated: 2026/05/02 10:40:06 by rcompain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,7 @@ SRC_SCENE	+= textures_uv.c \
 			   light_merge.c \
 			   fill_hit.c \
 			   calc_acc.c \
+			   hit_cap.c \
 			   hit_cone.c
 
 SRC_PARSING	+= format_form_solar.c \
