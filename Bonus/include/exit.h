@@ -50,6 +50,7 @@
 # define ERROR_FILE_PL_ARGS_MSG "Plane must be defined with valid arguments"
 # define ERROR_FILE_CY_ARGS_MSG "Cylinder must be defined with valid arguments"
 # define ERROR_FILE_CO_ARGS_MSG "Cone must be defined with valid arguments"
+# define ERROR_FILE_RI_ARGS_MSG "Ring must be defined with valid arguments"
 # define ERROR_FILE_TEX_MSG "Incorrect file texture name"
 # define ERROR_FILE_BUMP_MSG "Incorrect file bump_map name"
 # define ERROR_THREAD_MSG "Thread creation failed"

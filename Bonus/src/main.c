@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:34:44 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/01 13:25:09 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/02 10:36:16 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ static void	update(void *param)
 	d = (t_data *)param;
 	if (d->solar_file == false)
 	{
-		update_cam(d, 0.6);
+		update_cam(d, 0.6, 10);
 		draw(d);
 		return ;
 	}
 	i = -1;
-	update_cam(d, 150);
+	update_cam(d, 150, 150);
 	speed_sim = 1;
 	while (++i < speed_sim)
 		recalcul_physics(d, &d->map);

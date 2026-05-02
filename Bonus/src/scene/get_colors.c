@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 14:19:12 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/22 16:53:58 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/02 17:26:19 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,25 @@ static void	init_sun_obj(t_object *sun_obj, t_sun *sun)
 	sun_obj->texture = sun->texture;
 	sun_obj->shape.sphere.center = sun->param.cur_pos;
 	sun_obj->shape.sphere.radius = sun->radius;
+}
+
+static void	apply_transparency(t_world *w, t_ray ray, t_hit *hit,
+		mlx_color *color)
+{
+	mlx_color	bg;
+	t_ray		new_ray;
+	double		alpha;
+
+	alpha = hit->pixel_color.a / 255.0;
+	if (alpha >= 1.0)
+		return ;
+	bg.rgba = 0;
+	new_ray.dir = ray.dir;
+	new_ray.origin = vec_add(hit->point, vec_mult_scalar(ray.dir, 0.001));
+	pixel_color(w, new_ray, &bg);
+	color->r = (uint8_t)(alpha * color->r + (1.0 - alpha) * bg.r);
+	color->g = (uint8_t)(alpha * color->g + (1.0 - alpha) * bg.g);
+	color->b = (uint8_t)(alpha * color->b + (1.0 - alpha) * bg.b);
 }
 
 void	pixel_color(t_world *w, t_ray ray, mlx_color *color)
@@ -47,4 +66,5 @@ void	pixel_color(t_world *w, t_ray ray, mlx_color *color)
 	else
 		hit.pixel_color = hit.object->color;
 	light(w, &hit, color);
+	apply_transparency(w, ray, &hit, color);
 }

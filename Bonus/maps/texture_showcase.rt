@@ -52,7 +52,7 @@ cy 6,0,7 0,1,0 2 5 255,255,255 texture_map/2k_saturn.png
 
 # ---- CONES ----
 # Cone gauche — damier
-co -2,-3,6 0,1,0 44 230,230,230 1.0 50,50,180
+co -2,-3,6 0,1,0 44 100 230,230,230 1.0 50,50,180
 
 # Cone droite — texture image (Venus)
-co 2,-3,6 0,1,0 44 255,255,255 texture_map/2k_venus_surface.png
+co 2,-3,6 0,1,0 44 100 255,255,255 texture_map/2k_venus_surface.png

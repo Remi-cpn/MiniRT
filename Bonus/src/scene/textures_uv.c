@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures_cb.c                                      :+:      :+:    :+:   */
+/*   textures_uv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 10:38:04 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/22 18:27:42 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/02 17:28:49 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,17 +88,17 @@ t_uv	get_uv_cy(t_hit hit)
 
 t_uv	get_uv_co(t_hit hit)
 {
-	t_uv    uv;
-	t_vec   d;
-	double  proj;
+	t_uv	uv;
+	t_vec	d;
+	double	proj;
 
 	if (fabs(vec_dot(hit.normal, hit.object->shape.cone.axis)) > 0.999)
 		return (get_uv_caps_cone(hit));
 	uv.tangent = vec_vectoriel(hit.object->shape.cone.axis, hit.normal);
 	vec_normalize(&uv.tangent);
 	uv.bitangent = hit.object->shape.cone.axis;
-	uv.u = 0.5 + atan2(hit.normal.z, hit.normal.x) / (2 * M_PI);
-	d    = vec_sub(hit.point, hit.object->shape.cone.apex);
+	uv.u = 0.5 + atan2(hit.normal.z, hit.normal.x) / (2 * PI);
+	d = vec_sub(hit.point, hit.object->shape.cone.apex);
 	proj = vec_dot(d, hit.object->shape.cone.axis);
 	uv.v = proj;
 	if (hit.object->texture.type == TEX_IMG)
@@ -130,6 +130,30 @@ t_uv	get_uv_pl(t_hit hit)
 		return (uv);
 	uv.case_idx = (int)floor(uv.u / hit.object->texture.scale)
 		+ (int)floor(uv.v / hit.object->texture.scale);
+	return (uv);
+}
+
+t_uv	get_uv_ring(t_hit hit)
+{
+	t_uv				uv;
+	t_vec				diff;
+	double				r;
+	static const t_vec	up = {.x = 0, .y = 1, .z = 0};
+	static const t_vec	depth = {.x = 0, .y = 0, .z = 1};
+
+	uv.tangent = vec_vectoriel(hit.object->shape.ring.normal, up);
+	if (vec_square(uv.tangent) < 0.0001)
+		uv.tangent = vec_vectoriel(hit.object->shape.ring.normal, depth);
+	vec_normalize(&uv.tangent);
+	uv.bitangent = vec_vectoriel(hit.object->shape.ring.normal, uv.tangent);
+	vec_normalize(&uv.bitangent);
+	diff = vec_sub(hit.point, *hit.object->shape.ring.center);
+	uv.u = vec_dot(diff, uv.tangent);
+	uv.v = vec_dot(diff, uv.bitangent);
+	r = sqrt(uv.u * uv.u + uv.v * uv.v);
+	uv.v = 0.5 + atan2(uv.v, uv.u) / (2 * PI);
+	uv.u = (r - hit.object->shape.ring.inner_rad)
+		/ (hit.object->shape.ring.outer_rad - hit.object->shape.ring.inner_rad);
 	return (uv);
 }
 

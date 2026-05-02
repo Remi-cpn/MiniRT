@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/11 12:40:03 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/22 19:36:32 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/02 17:25:18 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,27 @@
 
 void	add_co(t_parsing *p, t_object *o, char **l_split)
 {
-	if (check_idx_string_tab(l_split, 4) || check_idx_string_tab(l_split, 5)
-		|| check_idx_string_tab(l_split, 6))
+	if (check_idx_string_tab(l_split, 5) || check_idx_string_tab(l_split, 6)
+		|| check_idx_string_tab(l_split, 7))
 	{
-		if (!double_valid(l_split[3]))
+		if (!double_valid(l_split[3]) || !double_valid(l_split[4]))
 			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_CO_ARGS_MSG);
 		o->type = OBJ_CONE;
 		o->shape.cone.apex = get_vec(p, l_split[1]);
 		o->shape.cone.axis = get_vec(p, l_split[2]);
-		vec_normalize(&o->shape.cone.axis);
 		if (fabs(vec_norm(o->shape.cone.axis) - 1.0) > 0.001)
 			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_CO_ARGS_MSG);
 		o->shape.cone.angle = ft_atod(l_split[3]) / 2.0;
-		o->color = get_color(p, l_split[4]);
-		if (l_split[5] && double_valid(l_split[5]) && l_split[6])
-			pars_chessboard(p, o, l_split[5], l_split[6]);
-		else if (l_split[5])
-			pars_texture_map(p, &(o->texture), l_split[5], l_split[6]);
+		o->shape.cone.height = ft_atod(l_split[4]);
+		o->color = get_color(p, l_split[5]);
+		if (l_split[6] && double_valid(l_split[6]) && l_split[7])
+			pars_chessboard(p, o, l_split[6], l_split[7]);
+		else if (l_split[6])
+			pars_texture_map(p, &(o->texture), l_split[6], l_split[7]);
 	}
 	else
 		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_CO_ARGS_MSG);
-	if (o->shape.cone.angle <= EPS)
+	if (o->shape.cone.angle <= EPS || o->shape.cone.height <= 0.0)
 		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_CO_ARGS_MSG);
 }
 

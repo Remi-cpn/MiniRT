@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_hit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 12:02:25 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 15:22:34 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/02 12:02:01 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,14 @@ static void	fill_hit_details_cone(t_hit *hit)
 
 	co = vec_sub(hit->point, hit->object->shape.cone.apex);
 	v = hit->object->shape.cone.axis;
-	k = pow(tan(hit->object->shape.cone.angle), 2);
 	dot = vec_dot(co, v);
+	if (fabs(dot - hit->object->shape.cone.height) < 0.001)
+	{
+		hit->normal = v;
+		return ;
+	}
+	k = pow(tan(hit->object->shape.cone.angle), 2);
 	hit->normal = vec_sub(co, vec_mult_scalar(v, (1 + k) * dot));
-	vec_normalize(&hit->normal);
 }
 
 void	fill_hit_details(t_hit *hit, t_ray ray)
@@ -56,8 +60,11 @@ void	fill_hit_details(t_hit *hit, t_ray ray)
 		fill_hit_details_cone(hit);
 	else if (hit->object->type == OBJ_CYLINDER)
 		fill_hit_details_cylinder(hit);
+	else if (hit->object->type == OBJ_RING)
+		hit->normal = hit->object->shape.ring.normal;
 	if (hit->object->type == OBJ_SPHERE || hit->object->type == OBJ_PLANE
-		|| hit->object->type == OBJ_CYLINDER)
+		|| hit->object->type == OBJ_CYLINDER || hit->object->type == OBJ_CONE
+		|| hit->object->type == OBJ_RING)
 		vec_normalize(&hit->normal);
 	if (vec_dot(hit->normal, ray.dir) > 0)
 		hit->normal = vec_mult_scalar(hit->normal, -1.0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 14:17:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/14 17:05:27 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/02 12:13:27 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ static void	rotate_movement(t_data *d, t_camera *cam, double speed_init)
 {
 	double	speed;
 
-	d->cam_target = -1;
-	speed = speed_init / 1500;
+	speed = speed_init;
 	if (d->input.up == true)
 		cam->dir = vec_add(vec_mult_scalar(cam->dir, cos(speed)),
 				vec_mult_scalar(cam->ver_n, -sin(speed)));
@@ -70,7 +69,7 @@ static void	reparse(t_data *d)
 	d->input.r = false;
 }
 
-bool	update_cam(t_data *d, double speed)
+bool	update_cam(t_data *d, double speed, double speed_rot)
 {
 	if (d->input.a == true || d->input.w == true
 		|| d->input.d == true || d->input.s == true
@@ -78,7 +77,7 @@ bool	update_cam(t_data *d, double speed)
 		linear_movement(d, &d->map.camera, speed);
 	else if (d->input.left == true || d->input.right == true
 		|| d->input.down == true || d->input.up == true)
-		rotate_movement(d, &d->map.camera, speed);
+		rotate_movement(d, &d->map.camera, speed_rot);
 	else if (d->input.i == true || d->input.o == true)
 		update_fov(d, &(d->map.camera), speed);
 	else if (d->input.r == true)
