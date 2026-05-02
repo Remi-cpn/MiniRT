@@ -121,6 +121,8 @@ typedef struct s_sphere
 	t_point		center;
 	double		radius;
 	t_physics	param;
+	double		rotation;
+	double		rotation_speed;
 }	t_sphere;
 
 typedef struct s_cylinder

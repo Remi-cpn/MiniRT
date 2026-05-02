@@ -78,4 +78,8 @@ void	key_hook_down(int key, void *param)
 		((t_data *)param)->input.space = true;
 	else if (key == _R)
 		((t_data *)param)->input.r = true;
+	else if (key == N)
+		((t_data *)param)->input.n = true;
+	else if (key == P)
+		((t_data *)param)->input.p = true;
 }

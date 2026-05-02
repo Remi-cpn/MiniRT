@@ -52,5 +52,6 @@ t_data	init_program(void)
 	ft_memset(&d, 0, sizeof(t_data));
 	init_mlx(&d);
 	d.input = init_input();
+	d.cam_target = -1;
 	return (d);
 }
