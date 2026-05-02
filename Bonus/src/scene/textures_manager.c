@@ -38,6 +38,8 @@ static t_uv	get_uv(t_hit hit)
 		uv = get_uv_pl(hit);
 	else if (hit.object->type == OBJ_CYLINDER)
 		uv = get_uv_cy(hit);
+	else if (hit.object->type == OBJ_CONE)
+		uv = get_uv_co(hit);
 	return (uv);
 }
 

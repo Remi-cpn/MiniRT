@@ -66,6 +66,28 @@ t_uv	get_uv_cy(t_hit hit)
 	return (uv);
 }
 
+t_uv	get_uv_co(t_hit hit)
+{
+	t_uv    uv;
+	t_vec   d;
+	double  proj;
+
+	if (fabs(vec_dot(hit.normal, hit.object->shape.cone.axis)) > 0.999)
+		return (get_uv_caps(hit));
+	uv.tangent = vec_vectoriel(hit.object->shape.cone.axis, hit.normal);
+	vec_normalize(&uv.tangent);
+	uv.bitangent = hit.object->shape.cone.axis;
+	uv.u = 0.5 + atan2(hit.normal.z, hit.normal.x) / (2 * M_PI);
+	d    = vec_sub(hit.point, hit.object->shape.cone.apex);
+	proj = vec_dot(d, hit.object->shape.cone.axis);
+	uv.v = proj;
+	if (hit.object->texture.type == TEX_IMG)
+		return (uv);
+	uv.case_idx = (int)(uv.u * hit.object->texture.scale)
+		+ (int)floor(uv.v / hit.object->texture.scale);
+	return (uv);
+}
+
 /* axis1 = cross(normal, up)
    u = dot(hit_point, axis1)
    axis2 = cross(normal, axis1)
