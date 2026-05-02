@@ -68,8 +68,8 @@ void	snap_cam_to_planet(t_data *d, int dir)
 	d->cam_target = target;
 	sp = &d->map.objects[target].shape.sphere;
 	cam = &d->map.camera;
-	vec_init(&cam->origin, sp->center.x, sp->center.y,
-		sp->center.z + sp->radius * 3.0);
+	vec_init(&cam->origin, sp->center.x, sp->center.y + sp->radius * 3.0,
+			sp->center.z + sp->radius * 1.0);
 	cam->dir = vec_sub(sp->center, cam->origin);
 	vec_normalize(&cam->dir);
 	d->input.n = false;
