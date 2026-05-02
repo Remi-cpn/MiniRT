@@ -91,6 +91,30 @@ t_uv	get_uv_pl(t_hit hit)
 	return (uv);
 }
 
+t_uv	get_uv_ring(t_hit hit)
+{
+	t_uv				uv;
+	t_vec				diff;
+	double				r;
+	static const t_vec	up = {.x = 0, .y = 1, .z = 0};
+	static const t_vec	depth = {.x = 0, .y = 0, .z = 1};
+
+	uv.tangent = vec_vectoriel(hit.object->shape.ring.normal, up);
+	if (vec_square(uv.tangent) < 0.0001)
+		uv.tangent = vec_vectoriel(hit.object->shape.ring.normal, depth);
+	vec_normalize(&uv.tangent);
+	uv.bitangent = vec_vectoriel(hit.object->shape.ring.normal, uv.tangent);
+	vec_normalize(&uv.bitangent);
+	diff = vec_sub(hit.point, *hit.object->shape.ring.center);
+	uv.u = vec_dot(diff, uv.tangent);
+	uv.v = vec_dot(diff, uv.bitangent);
+	r = sqrt(uv.u * uv.u + uv.v * uv.v);
+	uv.v = 0.5 + atan2(uv.v, uv.u) / (2 * PI);
+	uv.u = (r - hit.object->shape.ring.inner_rad)
+		/ (hit.object->shape.ring.outer_rad - hit.object->shape.ring.inner_rad);
+	return (uv);
+}
+
 /* u = 0.5 + atan2(Pz, Px) / (2 * PI)
 v = 0,5 + asin(Py) / (PI)*/
 t_uv	get_uv_sp(t_hit hit)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light_merge.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 09:46:02 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/27 09:57:36 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/02 17:07:39 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,24 @@
 static int	shadow_ray(t_world *w, t_hit *hit_origin, t_vec light_dir,
 		double light_n)
 {
-	t_ray	shadow_ray;
+	t_ray	sray;
 	t_hit	hit;
 
-	shadow_ray.dir = light_dir;
-	shadow_ray.origin = vec_add(hit_origin->point,
+	sray.dir = light_dir;
+	sray.origin = vec_add(hit_origin->point,
 			vec_mult_scalar(hit_origin->normal, 0.01));
-	hit = find_closest_hit(w, shadow_ray, 1);
-	if (hit.hit && hit.t > 0 && hit.t < light_n && hit.t < SHADOW_DIST)
-		return (1);
-	return (0);
+	while (1)
+	{
+		hit = find_closest_hit(w, sray, 1);
+		if (!hit.hit || hit.t <= 0 || hit.t >= light_n || hit.t >= SHADOW_DIST)
+			return (0);
+		if (hit.object->texture.type != TEX_IMG)
+			return (1);
+		hit.pixel_color = get_texture(&hit);
+		if (hit.pixel_color.a > 128)
+			return (1);
+		sray.origin = vec_add(hit.point, vec_mult_scalar(light_dir, 0.001));
+	}
 }
 
 static double	calc_specular(t_hit *hit, double coef_diffuse,

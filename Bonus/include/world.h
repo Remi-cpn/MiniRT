@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:17:11 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/02 11:51:28 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/02 14:17:57 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ typedef struct s_camera
 
 typedef struct s_ring
 {
-	t_point		center;
+	t_point		*center;
 	t_vec		normal;
 	double		inner_rad;
 	double		outer_rad;
@@ -203,6 +203,7 @@ t_uv		get_uv_sp(t_hit hit);
 t_uv		get_uv_pl(t_hit hit);
 t_uv		get_uv_cy(t_hit hit);
 t_uv		get_uv_caps(t_hit hit);
+t_uv		get_uv_ring(t_hit hit);
 mlx_color	get_pixel_img(t_img *img, t_uv uv);
 void		get_bump_map(t_hit *hit, t_uv uv);
 

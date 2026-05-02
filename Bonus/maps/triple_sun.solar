@@ -23,13 +23,13 @@ so -300,519.6,0 180 200,220,255 1.0 1.0 -462.3,-266.8,0 texture_map/2k_sun.png
 so -300,-519.6,0 180 255,210,200 1.0 1.0 462.3,-266.8,0 texture_map/2k_sun.png
 
 # Planete 1 — Jupiter, r=5000, avec lune
-sp 5000,0,0 50 255,200,150 texture_map/2k_jupiter.png 9.543e-4 0,421.4,0
-sp 5050,0,0 6 210,210,215 3.69e-8 0,496.6,0
+sp 5000,0,0 50 255,200,150 texture_map/2k_jupiter.png NULL 9.543e-4 0,421.4,0
+sp 5050,0,0 6 210,210,215 3.69e-8 NULL 0,496.6,0
 
 # Planete 2 — Terrestre, r=10000
-sp 10000,0,0 10 100,150,255 texture_map/2k_earth.png 3.003e-6 0,297.9,0
+sp 10000,0,0 10 100,150,255 texture_map/2k_earth.png NULL 3.003e-6 0,297.9,0
 
 # Planete 3 — Neptune, r=20000
-sp 20000,0,0 12 100,150,255 texture_map/2k_neptune.png 5.15e-5 0,210.6,0
+sp 20000,0,0 12 100,150,255 texture_map/2k_neptune.png NULL 5.15e-5 0,210.6,0
 
 sp 0,0,0 9600000 0,0,0 texture_map/8k_stars_milky_way.jpg

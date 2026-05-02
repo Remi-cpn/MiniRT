@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 14:17:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/02 10:33:15 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/02 12:13:27 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,7 @@ static void	rotate_movement(t_data *d, t_camera *cam, double speed_init)
 {
 	double	speed;
 
-<<<<<<< HEAD
 	speed = speed_init;
-=======
-	d->cam_target = -1;
-	speed = speed_init / 1500;
->>>>>>> dev
 	if (d->input.up == true)
 		cam->dir = vec_add(vec_mult_scalar(cam->dir, cos(speed)),
 				vec_mult_scalar(cam->ver_n, -sin(speed)));

@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 15:11:23 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/01 15:29:56 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/02 12:28:02 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void		add_pl(t_parsing *p, t_object *o, char **line_split);
 void		add_cy(t_parsing *p, t_object *o, char **line_split);
 void		add_co(t_parsing *p, t_object *o, char **line_split);
 void		add_so(t_parsing *p, t_sun *s, char **l);
+void		add_ri(t_parsing *p, t_object *o, char **l_split, int idx);
 
 /* Textures functions */
 void		pars_chessboard(t_parsing *p, t_object *o, char *scale,

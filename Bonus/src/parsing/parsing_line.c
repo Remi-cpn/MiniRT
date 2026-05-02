@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 15:49:29 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/21 11:47:31 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/02 12:37:54 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ static void	pars_line_solar(t_parsing *p, t_world *w, char *line)
 		add_so(p, &w->suns[j++], p->line_split);
 	else if (!ft_strncmp(p->line_split[0], "sp", 2))
 		add_sp_solar(p, &w->objects[i++], p->line_split);
+	else if (!ft_strncmp(p->line_split[0], "ri", 2))
+	{
+		add_ri(p, &w->objects[i], p->line_split, i);
+		i++;
+	}
 	else
 		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
 	ft_free_array(p->line_split);
