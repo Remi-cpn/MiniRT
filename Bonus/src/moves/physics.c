@@ -38,6 +38,10 @@ void	recalcul_pos_obj(t_world *w, int i)
 		p = &w->objects[i].shape.sphere.param;
 		calc_new_pos(&p->cur_pos, &p->prev_pos, p);
 		w->objects[i].shape.sphere.center = p->cur_pos;
+		w->objects[i].shape.sphere.rotation
+			+= w->objects[i].shape.sphere.rotation_speed;
+		if (w->objects[i].shape.sphere.rotation > 2 * PI)
+			w->objects[i].shape.sphere.rotation -= 2 * PI;
 	}
 	if (i < w->nb_sun)
 	{
