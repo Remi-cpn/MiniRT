@@ -37,6 +37,26 @@ t_uv	get_uv_caps(t_hit hit)
 	return (uv);
 }
 
+t_uv	get_uv_caps_cone(t_hit hit)
+{
+	t_uv				uv;
+	static const t_vec	up = {.x = 0, .y = 1, .z = 0};
+	static const t_vec	depth = {.x = 0, .y = 0, .z = 1};
+
+	uv.tangent = vec_vectoriel(hit.object->shape.cone.axis, up);
+	if (vec_square(uv.tangent) < 0.0001)
+		uv.tangent = vec_vectoriel(hit.object->shape.cone.axis, depth);
+	vec_normalize(&uv.tangent);
+	uv.u = vec_dot(hit.point, uv.tangent);
+	uv.bitangent = vec_vectoriel(hit.object->shape.cone.axis, uv.tangent);
+	uv.v = vec_dot(hit.point, uv.bitangent);
+	if (hit.object->texture.type == TEX_IMG)
+		return (uv);
+	uv.case_idx = (int)floor(uv.u / hit.object->texture.scale)
+		+ (int)floor(uv.v / hit.object->texture.scale);
+	return (uv);
+}
+
 /*
 	u = 0.5 + atan2(Pz, Px) / (2 * PI)
 	d = hit.point - cylinder.center
@@ -73,7 +93,7 @@ t_uv	get_uv_co(t_hit hit)
 	double  proj;
 
 	if (fabs(vec_dot(hit.normal, hit.object->shape.cone.axis)) > 0.999)
-		return (get_uv_caps(hit));
+		return (get_uv_caps_cone(hit));
 	uv.tangent = vec_vectoriel(hit.object->shape.cone.axis, hit.normal);
 	vec_normalize(&uv.tangent);
 	uv.bitangent = hit.object->shape.cone.axis;
@@ -84,7 +104,7 @@ t_uv	get_uv_co(t_hit hit)
 	if (hit.object->texture.type == TEX_IMG)
 		return (uv);
 	uv.case_idx = (int)(uv.u * hit.object->texture.scale)
-		+ (int)floor(uv.v / hit.object->texture.scale);
+		+ (int)floor(proj / hit.object->texture.scale);
 	return (uv);
 }
 
