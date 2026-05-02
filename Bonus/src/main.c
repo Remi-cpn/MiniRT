@@ -22,7 +22,7 @@ static void	update(void *param)
 	d = (t_data *)param;
 	if (d->solar_file == false)
 	{
-		update_cam(d, 150);
+		update_cam(d, 0.6);
 		draw(d);
 		return ;
 	}
