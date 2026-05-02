@@ -6,7 +6,7 @@
 #    By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/13 11:16:05 by rcompain          #+#    #+#              #
-#    Updated: 2026/05/02 10:40:06 by rcompain         ###   ########.fr        #
+#    Updated: 2026/05/02 11:54:50 by rcompain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRC_SCENE	= draw.c \
 			  hit_cylinder.c \
 			  hit_plane.c \
 			  hit_sphere.c \
+			  hit_cap.c \
 			  light_calc.c \
 			  ray.c
 
@@ -66,7 +67,7 @@ SRC_SCENE	+= textures_uv.c \
 			   light_merge.c \
 			   fill_hit.c \
 			   calc_acc.c \
-			   hit_cap.c \
+			   hit_ring.c \
 			   hit_cone.c
 
 SRC_PARSING	+= format_form_solar.c \

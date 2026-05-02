@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 14:19:12 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/22 16:53:58 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/02 11:53:06 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static double	get_intersection_t(t_object *obj, t_ray ray)
 		return (hit_cylinder(obj->shape.cylinder, ray));
 	else if (obj->type == OBJ_CONE)
 		return (hit_cone(obj->shape.cone, ray));
+	else if (obj->type == OBJ_RING)
+		return (hit_ring(obj->shape.ring, ray));
 	return (-1.0);
 }
 

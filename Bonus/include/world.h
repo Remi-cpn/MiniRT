@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:17:11 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/27 10:15:05 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/02 11:51:28 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef enum e_obj
 	OBJ_PLANE,
 	OBJ_CYLINDER,
 	OBJ_CONE,
+	OBJ_RING,
 }	t_obj;
 
 typedef struct s_camera
@@ -101,6 +102,14 @@ typedef struct s_camera
 	double		focal;
 }	t_camera;
 
+typedef struct s_ring
+{
+	t_point		center;
+	t_vec		normal;
+	double		inner_rad;
+	double		outer_rad;
+}	t_ring;
+
 typedef struct s_sun
 {
 	t_physics	param;
@@ -108,12 +117,12 @@ typedef struct s_sun
 	mlx_color	color;
 	double		intensity;
 	t_texture	texture;
-}   t_sun;
+}	t_sun;
 
 typedef struct s_plane
 {
-	t_point	point;
-	t_vec	normal;
+	t_point		point;
+	t_vec		normal;
 }	t_plane;
 
 typedef struct s_sphere
@@ -151,6 +160,7 @@ typedef struct s_object
 		t_cone			cone;
 		t_plane			plane;
 		t_cylinder		cylinder;
+		t_ring			ring;
 	}	shape;
 }	t_object;
 

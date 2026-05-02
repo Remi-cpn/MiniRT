@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 12:02:25 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/02 11:01:47 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/02 12:02:01 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,11 @@ void	fill_hit_details(t_hit *hit, t_ray ray)
 		fill_hit_details_cone(hit);
 	else if (hit->object->type == OBJ_CYLINDER)
 		fill_hit_details_cylinder(hit);
+	else if (hit->object->type == OBJ_RING)
+		hit->normal = hit->object->shape.ring.normal;
 	if (hit->object->type == OBJ_SPHERE || hit->object->type == OBJ_PLANE
-		|| hit->object->type == OBJ_CYLINDER || hit->object->type == OBJ_CONE)
+		|| hit->object->type == OBJ_CYLINDER || hit->object->type == OBJ_CONE
+		|| hit->object->type == OBJ_RING)
 		vec_normalize(&hit->normal);
 	if (vec_dot(hit->normal, ray.dir) > 0)
 		hit->normal = vec_mult_scalar(hit->normal, -1.0);
