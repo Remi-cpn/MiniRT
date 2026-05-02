@@ -61,33 +61,62 @@ SRC_PARSING = parsing.c \
 SRC_THREADS	=
 
 ifeq ($(MAKECMDGOALS),bonus)
-SRC_SCENE	+= textures_uv.c \
-			   textures_manager.c \
-			   textures_bump_map.c \
-			   light_merge.c \
-			   fill_hit.c \
-			   calc_acc.c \
-			   hit_ring.c \
-			   snap_cam.c \
-			   find_closest_hit.c \
-			   hit_cone.c
+SRC_INIT	= init_program_bonus.c \
+			  init_world_bonus.c
 
-SRC_PARSING	+= format_form_solar.c \
-			   textures.c
+SRC_MOVE	= hook_bonus.c \
+			  camera_bonus.c \
 
-SRC_MOVE	+= physics.c \
+SRC_EXIT	= exit_program_bonus.c
 
-SRC_THREADS	= init_threads.c \
-			  routine.c
+SRC_SCENE	= draw_bonus.c \
+			  get_colors_bonus.c \
+			  hit_cylinder_bonus.c \
+			  hit_plane_bonus.c \
+			  hit_sphere_bonus.c \
+			  hit_cap_bonus.c \
+			  light_calc_bonus.c \
+			  ray_bonus.c \
+			  textures_uv_bonus.c \
+			  textures_manager_bonus.c \
+			  textures_bump_map_bonus.c \
+			  light_merge_bonus.c \
+			  fill_hit_bonus.c \
+			  calc_acc_bonus.c \
+			  hit_ring_bonus.c \
+			  snap_cam_bonus.c \
+			  find_closest_hit_bonus.c \
+			  hit_cone_bonus.c
 
-SUB_DIRS	+= threads
+SRC_PARSING	= parsing_bonus.c \
+			  parsing_line_bonus.c \
+			  utils_bonus.c \
+			  format_unique_bonus.c \
+			  format_form_rt_bonus.c \
+			  format_form_solar_bonus.c \
+			  textures_bonus.c
+
+SRC_MOVE	+= physics_bonus.c \
+
+SRC_THREADS	= init_threads_bonus.c \
+			  routine_bonus.c
+
+SUB_DIRS	+= threads \
+			   scene/hit \
+			   scene/light \
+			   scene/textures \
+			   parsing/format
 
 endif
 
 VPATH := $(SRC_DIR) \
          $(addprefix $(SRC_DIR)/, $(SUB_DIRS))
 
+ifeq ($(MAKECMDGOALS),bonus)
+SRCS		= main_bonus.c $(SRC_MOVE) $(SRC_INIT) $(SRC_EXIT) $(SRC_SCENE) $(SRC_LRT) $(SRC_PARSING) $(SRC_THREADS)
+else
 SRCS		= main.c $(SRC_MOVE) $(SRC_INIT) $(SRC_EXIT) $(SRC_SCENE) $(SRC_LRT) $(SRC_PARSING) $(SRC_THREADS)
+endif
 
 OBJ			= ${SRCS:%.c=$(OBJ_DIR)/%.o}
 
