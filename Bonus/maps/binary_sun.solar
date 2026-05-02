@@ -1,0 +1,44 @@
+# ================================================================
+# binary_stars.solar — 2 Soleils + planetes + lune
+# Deux etoiles egales m=1, separation d=500 u
+#
+# Vitesse orbitale binaire :
+#   G×m/d² = v²/(d/2) → v = sqrt(G×m/(2d))
+#   v = sqrt(2.959122e8 / 1000) = 544.0 u/j
+# Sun1 at (-250,0,0) → v=(0,+544.0,0)
+# Sun2 at (+250,0,0) → v=(0,-544.0,0)
+#
+# Planetes circumbinaires (orbite stable si r > 3.5×250=875 u) :
+#   G×M_total = 2×2.959122e8 = 5.918244e8
+#   v_planete = sqrt(5.918244e8 / r)
+#
+#   P1 (Jupiter) r=4000 : v=sqrt(5.918e8/4000)=384.7 u/j
+#   P2 (Terre)   r=8000 : v=sqrt(5.918e8/8000)=272.0 u/j
+#   P3 (Neptune) r=15000: v=sqrt(5.918e8/15000)=198.6 u/j
+#
+# Lune de P1 (M_p1=9.543e-4, r_hill=216 u) :
+#   G×M_p1 = 282462
+#   Lune1 r_orb=40 : v_rel=sqrt(282462/40)=84.0, v_abs=384.7+84.0=468.7
+#   Lune2 r_orb=70 : v_rel=sqrt(282462/70)=63.5, v_abs=384.7+63.5=448.2
+# ================================================================
+A 0.04 255,255,255
+C 0,5000,-15000 0,-0.3,1 70
+
+# Etoile 1 — gauche, jaune chaude
+so -250,0,0 300 255,240,180 1.0 1.0 0,544.0,0 texture_map/2k_sun.png
+
+# Etoile 2 — droite, blanche chaude
+so 250,0,0 300 255,255,220 1.0 1.0 0,-544.0,0 texture_map/2k_sun.png
+
+# Planete 1 — Jupiter, r=4000, avec 2 lunes
+sp 4000,0,0 50 255,200,150 texture_map/2k_jupiter.png 9.543e-4 0,384.7,0
+sp 4040,0,0 6 210,210,215 3.69e-8 0,468.7,0
+sp 4070,0,0 5 200,195,185 2.41e-8 0,448.2,0
+
+# Planete 2 — Terrestre, r=8000
+sp 8000,0,0 10 100,150,255 texture_map/2k_earth.png 3.003e-6 0,272.0,0
+
+# Planete 3 — Neptune, r=15000
+sp 15000,0,0 12 100,150,255 texture_map/2k_neptune.png 5.15e-5 0,198.6,0
+
+sp 0,0,0 9600000 0,0,0 texture_map/8k_stars_milky_way.jpg

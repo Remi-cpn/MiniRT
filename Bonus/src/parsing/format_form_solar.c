@@ -16,10 +16,14 @@
 
 static void	pars_solar(t_parsing *p, t_object *o, char *mass, char *velocity)
 {
+	t_vec	vel;
+
 	o->physics_enabled = true;
 	o->shape.sphere.param.cur_pos = o->shape.sphere.center;
 	o->shape.sphere.param.mass = get_mass(mass);
-	o->shape.sphere.param.prev_pos = get_vec(p, velocity);
+	vel = get_vec(p, velocity);
+	o->shape.sphere.param.prev_pos = vec_sub(o->shape.sphere.center,
+			vec_mult_scalar(vel, DT));
 	vec_init(&o->shape.sphere.param.acc, 0, 0, 0);
 	if (o->shape.sphere.param.mass < 0)
 		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);

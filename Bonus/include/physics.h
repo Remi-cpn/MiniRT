@@ -31,7 +31,7 @@ typedef struct s_world	t_world;
 
 /* ——— Define ——————————————————————————————————————————————————————————————— */
 # define SOLAR_MASS 1.989e30
-# define _G 2.959122e-4
+# define _G 2.959122e8
 # define DT 0.01
 
 /* ——— Struct prototypes ———————————————————————————————————————————————————— */
@@ -44,7 +44,6 @@ typedef struct s_physics
 }	t_physics;
 
 /* ——— Functions prototypes ————————————————————————————————————————————————— */
-void	calc_acc(t_world *w, t_object *o, int nb_obj);
 void	recalcul_physics(t_data *d, t_world *w);
 void	recalcul_pos_obj(t_world *w, int i);
 void	calc_acc_obj(t_world *w, t_object *o, int nbr_obj, int i);
