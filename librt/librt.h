@@ -54,4 +54,6 @@ int		double_valid(char *s);
 
 bool 	check_idx_string_tab(char **s, int idx);
 
+void	print_error(char *message);
+
 #endif

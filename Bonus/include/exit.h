@@ -61,7 +61,6 @@ typedef struct s_data		t_data;
 typedef struct s_parsing	t_parsing;
 
 /* ——— Function prototypes —————————————————————————————————————————————————— */
-void	print_error(char *message);
 void	exit_prog(t_data *data, int exit_code, char *error_message);
 void	exit_prog_pars(t_parsing *p, int exit_code, char *error_message);
 void	free_parsing(t_parsing *p);

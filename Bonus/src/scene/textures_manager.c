@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_manager.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 16:08:04 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/27 10:15:15 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/02 17:26:54 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static t_uv	get_uv(t_hit hit)
 		uv = get_uv_cy(hit);
 	else if (hit.object->type == OBJ_RING)
 		uv = get_uv_ring(hit);
+	else if (hit.object->type == OBJ_CONE)
+		uv = get_uv_co(hit);
 	return (uv);
 }
 

@@ -107,12 +107,9 @@ int	count_line(t_parsing *p, char *file_name, t_world *w)
 	str = ft_get_next_line(fd);
 	while (str)
 	{
-		if (str[0] != '\n')
-			count++;
-		if (str[0] == 's' && str[1] =='o')
-			count_so++;
-		if (str[0] == 'L')
-			count_light++;
+		count += (str[0] != '\n');
+		count_so += (str[0] == 's' && str[1] == 'o');
+		count_light += (str[0] == 'L');
 		str = ft_freenull(str);
 		str = ft_get_next_line(fd);
 	}

@@ -67,4 +67,6 @@ void	pars_chessboard(t_parsing *p, t_object *o, char *scale, char *color)
 		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_PL_ARGS_MSG);
 	if (o->type == OBJ_CYLINDER)
 		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_CY_ARGS_MSG);
+	if (o->type == OBJ_CONE)
+		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_CO_ARGS_MSG);
 }

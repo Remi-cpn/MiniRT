@@ -87,11 +87,11 @@ void	add_so(t_parsing *p, t_sun *s, char **l)
 	{
 		if (!double_valid(l[2]) || !double_valid(l[4]) || !double_valid(l[5]))
 			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SO_ARGS_MSG);
-		s->param.cur_pos  = get_vec(p, l[1]);
-		s->radius         = ft_atod(l[2]) / 2.0;
-		s->color          = get_color(p, l[3]);
-		s->intensity      = ft_atod(l[4]);
-		s->param.mass     = get_mass(l[5]);
+		s->param.cur_pos = get_vec(p, l[1]);
+		s->radius = ft_atod(l[2]) / 2.0;
+		s->color = get_color(p, l[3]);
+		s->intensity = ft_atod(l[4]);
+		s->param.mass = get_mass(l[5]);
 		s->param.prev_pos = vec_sub(s->param.cur_pos,
 				vec_mult_scalar(get_vec(p, l[6]), DT));
 		vec_init(&s->param.acc, 0, 0, 0);

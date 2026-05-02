@@ -202,6 +202,7 @@ mlx_color	get_texture(t_hit *hit);
 t_uv		get_uv_sp(t_hit hit);
 t_uv		get_uv_pl(t_hit hit);
 t_uv		get_uv_cy(t_hit hit);
+t_uv 		get_uv_co(t_hit hit);
 t_uv		get_uv_caps(t_hit hit);
 t_uv		get_uv_ring(t_hit hit);
 mlx_color	get_pixel_img(t_img *img, t_uv uv);

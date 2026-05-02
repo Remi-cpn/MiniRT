@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/02 12:14:36 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/02 17:21:20 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ double	hit_cylinder(t_cylinder cylinder, t_ray ray);
 double	hit_cone(t_cone cone, t_ray ray);
 double	hit_cap(t_plane plane, t_ray ray, double radius);
 double	hit_ring(t_ring ring, t_ray ray);
+t_hit	find_closest_hit(t_world *w, t_ray ray, int flag_dist);
 
 void	calc_one_light(t_world *w, t_hit *hit, t_light *light,
 			t_light_managment *l);

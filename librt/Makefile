@@ -32,6 +32,7 @@ SRC_PAR =	parsing/double_valid.c \
 			parsing/float_valid.c \
 			parsing/int_valid.c \
 			parsing/long_valid.c \
+			parsing/print_error.c \
 			parsing/check_idx_string.c
 
 SOURCES = $(SRC_VEC) $(SRC_PAR)
