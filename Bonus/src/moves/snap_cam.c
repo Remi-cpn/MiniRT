@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -30,7 +29,8 @@ void	follow_cam(t_data *d)
 	cam->origin.z = sp->center.z + sp->radius * 3.0;
 	cam->dir = vec_sub(sp->center, cam->origin);
 	vec_normalize(&cam->dir);
-	calcul_viewport(cam, (double)d->win_info.width / (double)d->win_info.height);
+	calcul_viewport(cam, (double)d->win_info.width
+		/ (double)d->win_info.height);
 }
 
 static int	find_sphere(t_world *w, int start, int dir)
@@ -57,14 +57,10 @@ void	snap_cam_to_planet(t_data *d, int dir)
 	t_sphere	*sp;
 	t_camera	*cam;
 
-	if (d->cam_target < 0)
-	{
-		if (dir > 0)
-			start = 0;
-		else
-			start = d->map.nb_obj - 1;
-	}
-	else
+	start = d->map.nb_obj - 1;
+	if (d->cam_target < 0 && dir > 0)
+		start = 0;
+	else if (d->cam_target >= 0)
 		start = (d->cam_target + dir + d->map.nb_obj) % d->map.nb_obj;
 	target = find_sphere(&d->map, start, dir);
 	if (target == -1)
@@ -72,12 +68,12 @@ void	snap_cam_to_planet(t_data *d, int dir)
 	d->cam_target = target;
 	sp = &d->map.objects[target].shape.sphere;
 	cam = &d->map.camera;
-	cam->origin.x = sp->center.x;
-	cam->origin.y = sp->center.y;
-	cam->origin.z = sp->center.z + sp->radius * 3.0;
+	vec_init(&cam->origin, sp->center.x, sp->center.y,
+		sp->center.z + sp->radius * 3.0);
 	cam->dir = vec_sub(sp->center, cam->origin);
 	vec_normalize(&cam->dir);
 	d->input.n = false;
 	d->input.p = false;
-	calcul_viewport(cam, (double)d->win_info.width / (double)d->win_info.height);
+	calcul_viewport(cam, (double)d->win_info.width
+		/ (double)d->win_info.height);
 }

@@ -58,13 +58,6 @@ static void	free_obj_and_light(t_world *w)
 	free(w->objects);
 }
 
-void	print_error(char *message)
-{
-	ft_putstr_fd("Error: ", 2);
-	ft_putstr_fd(message, 2);
-	ft_putstr_fd("\n", 2);
-}
-
 void	free_parsing(t_parsing *p)
 {
 	if (p->line)

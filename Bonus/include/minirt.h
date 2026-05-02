@@ -153,6 +153,7 @@ double	hit_sphere(t_sphere sphere, t_ray ray);
 double	hit_plane(t_plane plane, t_ray ray);
 double	hit_cylinder(t_cylinder cylinder, t_ray ray);
 double	hit_cone(t_cone cone, t_ray ray);
+t_hit	find_closest_hit(t_world *w, t_ray ray, int flag_dist);
 
 void	calc_one_light(t_world *w, t_hit *hit, t_light *light,
 			t_light_managment *l);

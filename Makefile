@@ -67,6 +67,7 @@ SRC_SCENE	+= textures_uv.c \
 			   fill_hit.c \
 			   calc_acc.c \
 			   snap_cam.c \
+			   find_closest_hit.c \
 			   hit_cone.c
 
 SRC_PARSING	+= format_form_solar.c \
