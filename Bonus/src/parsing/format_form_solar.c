@@ -31,22 +31,20 @@ static void	pars_solar(t_parsing *p, t_object *o, char *mass, char *velocity)
 
 void	add_sp_solar(t_parsing *p, t_object *o, char **l_split)
 {
-	if (check_idx_string_tab(l_split, 3) || check_idx_string_tab(l_split, 4)
-		|| check_idx_string_tab(l_split, 5) || check_idx_string_tab(l_split, 6))
+	if (check_idx_string_tab(l_split, 7))
 	{
-		if (!double_valid(l_split[2]))
+		if (!double_valid(l_split[2]) || !double_valid(l_split[5]))
 			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);
 		o->type = OBJ_SPHERE;
 		o->physics_enabled = false;
 		o->shape.sphere.center = get_vec(p, l_split[1]);
 		o->shape.sphere.radius = ft_atod(l_split[2]) / 2.0;
 		o->color = get_color(p, l_split[3]);
-		if ((l_split[4] && ! l_split[5]) || (l_split[4] && l_split[5] && l_split[6]))
+		if (ft_strncmp(l_split[4], "NULL", 5))
 			pars_texture_map(p, &(o->texture), l_split[4], NULL);
-		if (l_split[4] && l_split[5] && !l_split[6])
-			pars_solar(p, o, l_split[4], l_split[5]);
-		else if (l_split[4] && l_split[5])
-			pars_solar(p, o, l_split[5], l_split[6]);
+		o->shape.sphere.rotation = 0.0;
+		o->shape.sphere.rotation_speed = ft_atod(l_split[5]);
+		pars_solar(p, o, l_split[6], l_split[7]);
 	}
 	else
 		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);

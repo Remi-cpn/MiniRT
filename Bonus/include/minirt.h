@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/02 10:39:44 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/02 12:12:51 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ typedef struct s_input
 	bool	ctrl;
 	bool	space;
 	bool	r;
+    bool    n;
+    bool    p;
 }	t_input;
 
 typedef struct s_data
@@ -101,6 +103,7 @@ typedef struct s_data
 	char					*filename;
 	bool					solar_file;
 	t_threading				pool;
+	int						cam_target;
 }	t_data;
 
 typedef struct s_ray
@@ -126,7 +129,9 @@ typedef enum e_key
 	SPACE = 44,
 	WHEEL_F = 1,
 	WHEEL_B = 2,
-	_R = 21
+	_R = 21,
+	N = 17,
+	P = 19,
 }	t_key;
 
 typedef enum e_event
@@ -159,7 +164,8 @@ void	mouse_hook_wheel(int event, void *param);
 void	mouse_hook(int event, void *param);
 
 bool	update_cam(t_data *d, double speed, double speed_rot);
-
+void	snap_cam_to_planet(t_data *d, int dir);
+void	follow_cam(t_data *d);
 
 void	*routine(void *params);
 void	render_tile(t_data *d, t_world *w, int x, int y);

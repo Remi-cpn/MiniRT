@@ -104,7 +104,8 @@ t_uv	get_uv_sp(t_hit hit)
 		uv.tangent = vec_vectoriel(hit.normal, depth);
 	vec_normalize(&uv.tangent);
 	uv.bitangent = vec_vectoriel(hit.normal, uv.tangent);
-	uv.u = 0.5 + atan2(hit.normal.z, hit.normal.x) / (2 * PI);
+	uv.u = 0.5 + atan2(hit.normal.z, hit.normal.x) / (2 * PI)
+		+ hit.object->shape.sphere.rotation / (2 * PI);
 	uv.v = 0.5 + asin(hit.normal.y) / PI;
 	if (hit.object->texture.type == TEX_IMG)
 		return (uv);

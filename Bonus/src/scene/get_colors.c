@@ -71,12 +71,22 @@ t_hit	find_closest_hit(t_world *w, t_ray ray, int flag_dist)
 		fill_hit_details(&closest, ray);
 	else if (closest.hit == 2)
 	{
-		closest.point = vec_add(ray.origin, vec_mult_scalar(ray.dir, closest.t));
+		closest.point = vec_add(ray.origin,
+				vec_mult_scalar(ray.dir, closest.t));
 		closest.normal = vec_sub(closest.point,
 				w->suns[closest.sun_idx].param.cur_pos);
 		vec_normalize(&closest.normal);
 	}
 	return (closest);
+}
+
+static void	init_sun_obj(t_object *sun_obj, t_sun *sun)
+{
+	sun_obj->type = OBJ_SPHERE;
+	sun_obj->color = sun->color;
+	sun_obj->texture = sun->texture;
+	sun_obj->shape.sphere.center = sun->param.cur_pos;
+	sun_obj->shape.sphere.radius = sun->radius;
 }
 
 void	pixel_color(t_world *w, t_ray ray, mlx_color *color)
@@ -85,19 +95,13 @@ void	pixel_color(t_world *w, t_ray ray, mlx_color *color)
 	t_object	sun_obj;
 
 	hit = find_closest_hit(w, ray, 0);
+	color->rgba = 0x00000000;
 	if (!hit.hit)
-	{
-		color->rgba = 0x81CEFAFF;
 		return ;
-	}
 	if (hit.hit == 2)
 	{
 		ft_memset(&sun_obj, 0, sizeof(t_object));
-		sun_obj.type                  = OBJ_SPHERE;
-		sun_obj.color                 = w->suns[hit.sun_idx].color;
-		sun_obj.texture               = w->suns[hit.sun_idx].texture;
-		sun_obj.shape.sphere.center   = w->suns[hit.sun_idx].param.cur_pos;
-		sun_obj.shape.sphere.radius   = w->suns[hit.sun_idx].radius;
+		init_sun_obj(&sun_obj, &w->suns[hit.sun_idx]);
 		hit.object = &sun_obj;
 		if (sun_obj.texture.type != TEX_NONE)
 			*color = get_texture(&hit);

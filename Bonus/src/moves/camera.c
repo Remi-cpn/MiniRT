@@ -17,6 +17,7 @@
 
 static void	linear_movement(t_data *d, t_camera *cam, double speed)
 {
+	d->cam_target = -1;
 	if (d->input.w == true)
 		cam->origin = vec_add(cam->origin, vec_mult_scalar(cam->dir, speed));
 	if (d->input.s == true)
@@ -35,7 +36,12 @@ static void	rotate_movement(t_data *d, t_camera *cam, double speed_init)
 {
 	double	speed;
 
+<<<<<<< HEAD
 	speed = speed_init;
+=======
+	d->cam_target = -1;
+	speed = speed_init / 1500;
+>>>>>>> dev
 	if (d->input.up == true)
 		cam->dir = vec_add(vec_mult_scalar(cam->dir, cos(speed)),
 				vec_mult_scalar(cam->ver_n, -sin(speed)));
@@ -81,6 +87,10 @@ bool	update_cam(t_data *d, double speed, double speed_rot)
 		update_fov(d, &(d->map.camera), speed);
 	else if (d->input.r == true)
 		reparse(d);
+	else if (d->input.n == true)
+		snap_cam_to_planet(d, +1);
+	else if (d->input.p == true)
+		snap_cam_to_planet(d, -1);
 	else
 		return (false);
 	calcul_viewport(&d->map.camera, (double)d->win_info.width
