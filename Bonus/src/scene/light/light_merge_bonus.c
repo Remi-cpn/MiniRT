@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light_merge.c                                      :+:      :+:    :+:   */
+/*   light_merge_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 09:46:02 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/02 17:07:39 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/03 09:43:35 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	shadow_ray(t_world *w, t_hit *hit_origin, t_vec light_dir,
 		if (hit.object->texture.type != TEX_IMG)
 			return (1);
 		hit.pixel_color = get_texture(&hit);
-		if (hit.pixel_color.a > 128)
+		if (hit.pixel_color.a > 188)
 			return (1);
 		sray.origin = vec_add(hit.point, vec_mult_scalar(light_dir, 0.001));
 	}
@@ -61,6 +61,8 @@ void	calc_one_light(t_world *w, t_hit *hit, t_light *light,
 	light_norm = vec_norm(light_dir);
 	vec_normalize(&light_dir);
 	coef_d = vec_dot(hit->normal, light_dir);
+	if (hit->object->type == OBJ_RING)
+		coef_d = fabs(coef_d);
 	if (!(coef_d <= 0.001 || shadow_ray(w, hit, light_dir,
 				light_norm)))
 	{

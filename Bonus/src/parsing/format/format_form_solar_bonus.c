@@ -27,6 +27,8 @@ static void	pars_solar(t_parsing *p, t_object *o, char *mass, char *velocity)
 	vec_init(&o->shape.sphere.param.acc, 0, 0, 0);
 	if (o->shape.sphere.param.mass < 0)
 		exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_SP_ARGS_MSG);
+	if (o->shape.sphere.param.mass == 0.0)
+		o->physics_enabled = false;
 }
 
 void	add_sp_solar(t_parsing *p, t_object *o, char **l_split)
@@ -65,8 +67,9 @@ void	add_ri(t_parsing *p, t_object *o, char **l_split, int idx)
 			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_RI_ARGS_MSG);
 		o->shape.ring.center = &p->world->objects[idx - 1].shape.sphere.center;
 		o->shape.ring.normal = get_vec(p, l_split[1]);
-		if (fabs(vec_norm(o->shape.ring.normal) - 1.0) > 0.001)
+		if (vec_norm(o->shape.ring.normal) < 0.0001)
 			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_RI_ARGS_MSG);
+		vec_normalize(&o->shape.ring.normal);
 		o->shape.ring.inner_rad = ft_atod(l_split[2]);
 		o->shape.ring.outer_rad = ft_atod(l_split[3]);
 		o->color = get_color(p, l_split[4]);
