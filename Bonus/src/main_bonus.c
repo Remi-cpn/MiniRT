@@ -28,7 +28,7 @@ static void	update(void *param)
 	}
 	i = -1;
 	update_cam(d, 150, 0.1);
-	speed_sim = 1;
+	speed_sim = 60;
 	while (++i < speed_sim)
 		recalcul_physics(d, &d->map);
 	follow_cam(d);

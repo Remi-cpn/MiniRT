@@ -1,0 +1,31 @@
+A 0.05 255,255,255
+C 0,20000,0 0,-1,0 60
+
+# ================================================================
+# Problème à 3 corps - Chorégraphie en 8 de MOORE
+# Moore (1993), Chenciner & Montgomery (2000)
+# 3 masses égales m = 1.0 M☉
+# Conditions normalisées (G=m=1) mises à l'échelle L = 5000 unités
+# V = √(Gm/L) = 243.3 unités/t | Période T ≈ 130 t
+#
+# Positions normalisées :
+#   r1 = ( 0.97000436, -0.24308753)  →  r1_scaled = ( 4850, -1215)
+#   r2 = ( 0,           0          )  →  r2_scaled = (    0,     0)
+#   r3 = (-0.97000436,  0.24308753 )  →  r3_scaled = (-4850,  1215)
+# Vitesses normalisées :
+#   v1 = v3 = ( 0.46620,  0.43237)  →  v1_scaled = ( 113.4,  105.1)
+#   v2      = (-0.93241, -0.86473)  →  v2_scaled = (-226.8, -210.2)
+# (axes xz, y=0 pour le plan orbital)
+# ================================================================
+
+# Étoile 1
+so 4850,0,-1215 800 150,190,255 0.5 1.0 113.4,0,105.1 texture_map/2k_sun.png
+
+# Étoile 2 (au centre à t=0)
+so 0,0,0 800 255,240,200 0.5 1.0 -226.8,0,-210.2 texture_map/2k_sun.png
+
+# Étoile 3 (symétrique de 1 par rapport à l'origine)
+so -4850,0,1215 800 255,160,80 0.5 1.0 113.4,0,105.1 texture_map/2k_sun.png
+
+# Fond étoilé
+sp 0,0,0 960000 0,0,0 texture_map/2k_stars_milky_way.jpg NULL 0.0 0.0 0,0,0
