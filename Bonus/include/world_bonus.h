@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   world.h                                            :+:      :+:    :+:   */
+/*   world_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:17:11 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/02 14:17:57 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/03 17:10:14 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WORLD_H
-# define WORLD_H
+#ifndef WORLD_BONUS_H
+# define WORLD_BONUS_H
 
 # include "../../librt/librt.h"
 # include "../../MacroLibX/includes/mlx.h"

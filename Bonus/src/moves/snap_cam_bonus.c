@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 14:17:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/03 14:36:05 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/03 16:54:25 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	follow_cam(t_data *d)
 		return ;
 	sp = &d->map.objects[d->cam_target].shape.sphere;
 	cam = &d->map.camera;
-	cam->origin.x = sp->center.x;
-	cam->origin.y = sp->center.y + sp->radius * 10.0;
+	cam->origin.x = sp->center.x + sp->radius * -2.0;
+	cam->origin.y = sp->center.y ;
 	cam->origin.z = sp->center.z + sp->radius * 3.0;
 	cam->dir = vec_sub(sp->center, cam->origin);
 	vec_normalize(&cam->dir);
@@ -69,7 +69,7 @@ void	snap_cam_to_planet(t_data *d, int dir)
 	d->cam_target = target;
 	sp = &d->map.objects[target].shape.sphere;
 	cam = &d->map.camera;
-	vec_init(&cam->origin, sp->center.x, sp->center.y + sp->radius * 10.0,
+	vec_init(&cam->origin, sp->center.x + sp->radius * -2.0, sp->center.y,
 			sp->center.z + sp->radius * 3.0);
 	cam->dir = vec_sub(sp->center, cam->origin);
 	vec_normalize(&cam->dir);

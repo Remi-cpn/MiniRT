@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   parsing_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 15:11:23 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/02 12:28:02 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/03 17:09:52 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#ifndef PARSING_BONUS_H
+# define PARSING_BONUS_H
 
 /* ——— Lib Extern ——————————————————————————————————————————————————————————— */
 # include <fcntl.h>
