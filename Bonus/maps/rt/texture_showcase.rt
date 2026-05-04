@@ -32,14 +32,14 @@ sp 6,0,2 3 255,255,255 texture_map/jupiter/jupiter.png
 
 # ---- CYLINDRES ----
 # Cylindre gauche — damier rouge/blanc
-cy -6,0,7 0,1,0 2 5 230,230,230 1.0 180,50,50
+cy -6,0,7 0,1,0 2 5 230,230,230 2 180,50,50
 
 # Cylindre droite — texture image (Saturne)
 cy 6,0,7 0,1,0 2 5 255,255,255 texture_map/saturn/saturn.png
 
 # ---- CONES ----
 # Cone gauche — damier
-co -2,-3,6 0,1,0 44 100 230,230,230 1.0 50,50,180
+co -2,-3,6 0,1,0 0.5 10 230,230,230 1.0 50,50,180
 
 # Cone droite — texture image (Venus)
 co 2,-3,6 0,1,0 44 100 255,255,255 texture_map/venus/venus_surface.png

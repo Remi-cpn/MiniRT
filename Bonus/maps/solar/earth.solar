@@ -10,7 +10,7 @@ C 10000,15,-60 0,-0.2,1 70
 so 0,0,0 930 255,240,200 0.8 1.0 0,0,0 texture_map/sun/sun.png
 
 # TERRE — diametre 20, rotation, texture + bump
-sp 10000,0,0 20 100,150,255 texture_map/earth/earthmap2k.png texture_map/earth/earthbump2k.png 0.006283 3.003e-6 0,172.1,0
+sp 10000,0,0 20 100,150,255 texture_map/earth/earthmap2k.png texture_map/earth/earthbump2k.png 0.006283 6e-5 0,172.1,0
 
 # NUAGES — diametre 20.2, texture avec alpha
 sp 10000,0,0 20.1 255,255,255 texture_map/earth/earth_clouds.png NULL 0.009383 3.003e-6 0,172.1,0
@@ -18,8 +18,8 @@ sp 10000,0,0 20.1 255,255,255 texture_map/earth/earth_clouds.png NULL 0.009383 3
 # ATMOSPHERE — diametre 20.3, couche d'ozone transparente
 sp 10000,0,0 20.3 100,180,255 texture_map/earth/ozone_layer.png NULL 0.0 3.003e-6 0,172.1,0
 
-# LUNE — r_orb=25.7
-sp 10025.7,0,0 4 210,210,215 texture_map/earth/moon.png NULL 0.0 3.69e-8 0,177.98,0
+# LUNE — r_orb=60 (triche x2.3, dans Hill sphere ~100u), v_rel=sqrt(888.87/60)=3.85
+sp 10060,0,0 4 210,210,215 texture_map/earth/moon.png NULL 0.002299 3.69e-8 0,189.3,0
 
 # FOND
 sp 0,0,0 960000 0,0,0 texture_map/stars_milky_way.jpg NULL 0.0 0.0 0,0,0
