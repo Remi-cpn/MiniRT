@@ -23,6 +23,8 @@ static double	get_intersection_t(t_object *obj, t_ray ray)
 		return (hit_cylinder(obj->shape.cylinder, ray));
 	else if (obj->type == OBJ_CONE)
 		return (hit_cone(obj->shape.cone, ray));
+	else if (obj->type == OBJ_RING)
+		return (hit_ring(obj->shape.ring, ray));
 	return (-1.0);
 }
 

@@ -1,33 +1,38 @@
-A 0.2 255,255,255
-C 0,1,2 0,-0.3,-1 70
+A 0.1 255,255,255
+C 0,15000,2000 0,-1,-0.1 70
 
-# so  <position_x,y,z>  <diameter>  <R,G,B> <intensity>  <mass>  <velocity_x,y,z> <texture> 
-# Sun
-so 0,0,0 0.5 255,240,200 0.8 1.0 0,0,0 texture_map/2k_sun.png 
+# ================================================================
+# SYSTEME SOLAIRE — unites corrigees (1 unite = 0.0001 AU)
+# v = sqrt(G * M_soleil / r) | G = 2.959122e8 | M = 1.0
+# Orbites dans XZ, velocite en Z
+# ================================================================
 
-# Mercury
-sp 0.387,0,0 0.02 200,200,200 texture_map/2k_mercury.png NULL 1.65e-7 0,0.0274,0
+# SOLEIL
+so 0,0,0 930 255,240,200 0.8 1.0 0,0,0 texture_map/2k_sun.png
 
-# Venus
-sp 0.723,0,0 0.04 255,180,120 texture_map/2k_venus_surface.png NULL 2.45e-6 0,0.0202,0
+# MERCURE — r=3870
+sp 3870,0,0 200 200,200,200 texture_map/2k_mercury.png NULL 0.001072 1.65e-7 0,0,276.5
 
-# Earth
-sp 1,0,0 0.05 100,150,255 texture_map/2k_earth.png NULL 3.003e-6 0,0.0172,0
+# VENUS — r=7230
+sp 7230,0,0 300 255,180,120 texture_map/2k_venus_surface.png NULL -0.000259 2.45e-6 0,0,202.3
 
-# Mars
-sp 1.524,0,0 0.03 255,100,80 texture_map/2k_mars.png NULL 3.21e-7 0,0.0139,0
+# TERRE — r=10000
+sp 10000,0,0 400 100,150,255 texture_map/2k_earth.png NULL 0.06283 3.003e-6 0,0,172.1
 
-# Jupiter
-sp 5.203,0,0 0.2 255,200,150 texture_map/2k_jupiter.png NULL 0.0009543 0,0.00754,0
+# MARS — r=15240
+sp 15240,0,0 500 220,100,70 texture_map/2k_mars.png NULL 0.06100 3.21e-7 0,0,139.4
 
-# Saturn
-sp 9.537,0,0 0.18 255,220,180 texture_map/2k_saturn.png NULL 0.0002857 0,0.00558,0
+# JUPITER — r=52030
+sp 52030,0,0 2000 255,200,150 texture_map/2k_jupiter.png NULL 0.15324 9.543e-4 0,0,75.4
 
-# Uranus
-sp 19.191,0,0 0.12 180,220,255 texture_map/2k_uranus.png NULL 4.37e-5 0,0.00392,0
+# SATURNE — r=95370
+sp 95370,0,0 3000 255,220,180 texture_map/saturn/saturn.png NULL 0.14280 2.857e-4 0,0,55.7
 
-# Neptune
-sp 30.07,0,0 0.12 100,150,255 texture_map/2k_neptune.png NULL 5.15e-5 0,0.00313,0
+# URANUS — r=191910
+sp 191910,0,0 4000 180,220,255 texture_map/2k_uranus.png NULL 0.0 4.37e-5 0,0,39.3
 
-# Backgroud
-sp 0,0,0 900 255,255,255 texture_map/2k_stars_milky_way.jpg
+# NEPTUNE — r=300700
+sp 300700,0,0 5000 100,150,255 texture_map/2k_neptune.png NULL 0.0 5.15e-5 0,0,31.4
+
+# FOND
+sp 0,0,0 960000 0,0,0 texture_map/2k_stars_milky_way.jpg NULL 0.0 0.0 0,0,0

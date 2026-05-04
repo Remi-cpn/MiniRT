@@ -40,10 +40,10 @@ static void	rotate_movement(t_data *d, t_camera *cam, double speed_init)
 	speed = speed_init;
 	if (d->input.up == true)
 		cam->dir = vec_add(vec_mult_scalar(cam->dir, cos(speed)),
-				vec_mult_scalar(cam->ver_n, -sin(speed)));
+				vec_mult_scalar(cam->ver_n, sin(speed)));
 	else if (d->input.down == true)
 		cam->dir = vec_add(vec_mult_scalar(cam->dir, cos(speed)),
-				vec_mult_scalar(cam->ver_n, sin(speed)));
+				vec_mult_scalar(cam->ver_n, -sin(speed)));
 	if (d->input.left == true)
 		cam->dir = vec_add(vec_mult_scalar(cam->dir, cos(speed)),
 				vec_mult_scalar(cam->hor_n, -sin(speed)));

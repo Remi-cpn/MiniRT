@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/02 17:21:20 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/03 17:12:05 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef MINIRT_BONUS_H
+# define MINIRT_BONUS_H
 
 /* ——— Lib Extern ——————————————————————————————————————————————————————————— */
 # include <stdlib.h>
@@ -42,7 +42,7 @@ typedef struct s_object t_object;
 # define RENDER_DIST 5000000.0
 # define SHADOW_DIST 200000.0
 # define TILE_SIZE 128
-# define GAMMA 0.8
+# define GAMMA 0.75
 
 /* ——— Multi Threading —————————————————————————————————————————————————————— */
 typedef enum e_mod

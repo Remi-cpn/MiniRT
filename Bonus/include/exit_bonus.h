@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.h                                             :+:      :+:    :+:   */
+/*   exit_bonus.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:24:21 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/28 15:18:05 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/03 17:09:29 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXIT_H
-# define EXIT_H
+#ifndef EXIT_BONUS_H
+# define EXIT_BONUS_H
 
 /* ——— Define exit messages (negative values is personal error codes) ——————— */
 /* Exit codes */
