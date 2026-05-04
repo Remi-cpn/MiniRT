@@ -63,10 +63,10 @@ static void	update_fov(t_data *d, t_camera *cam, double speed)
 bool	update_cam_free(t_data *d, double speed, double speed_rot)
 {
 	if (d->input.a || d->input.w || d->input.d || d->input.s
-			|| d->input.ctrl || d->input.space)
+		|| d->input.ctrl || d->input.space)
 		linear_movement(d, &d->map.camera, speed);
 	else if (d->input.left || d->input.right
-			|| d->input.down || d->input.up)
+		|| d->input.down || d->input.up)
 		rotate_movement(d, &d->map.camera, speed_rot);
 	else if (d->input.i || d->input.o)
 		update_fov(d, &d->map.camera, speed);
@@ -79,6 +79,6 @@ bool	update_cam_free(t_data *d, double speed, double speed_rot)
 	else
 		return (false);
 	calcul_viewport(&d->map.camera, (double)d->win_info.width
-			/ (double)d->win_info.height);
+		/ (double)d->win_info.height);
 	return (true);
 }

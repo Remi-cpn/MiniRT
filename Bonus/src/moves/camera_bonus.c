@@ -30,7 +30,7 @@ static bool	update_cam_orbit(t_data *d, double speed)
 		|| d->input.up || d->input.down)
 		orbit_movement(d, ORBIT_SPEED);
 	else if (d->input.w || d->input.s)
-		orbit_zoom(d, speed/50);
+		orbit_zoom(d, speed / 50);
 	else if (d->input.a || d->input.d
 		|| d->input.ctrl || d->input.space)
 	{
@@ -48,7 +48,6 @@ static bool	update_cam_orbit(t_data *d, double speed)
 	follow_cam(d);
 	return (true);
 }
-
 
 bool	update_cam(t_data *d, double speed, double speed_rot)
 {

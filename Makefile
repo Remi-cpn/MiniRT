@@ -80,6 +80,7 @@ SRC_SCENE	= draw_bonus.c \
 			  light_calc_bonus.c \
 			  ray_bonus.c \
 			  textures_uv_bonus.c \
+			  textures_uv2_bonus.c \
 			  textures_manager_bonus.c \
 			  textures_bump_map_bonus.c \
 			  light_merge_bonus.c \

@@ -105,7 +105,6 @@ typedef struct s_world {
 	double		ambient_ratio;
 }   t_world;
 
-
 /* ——— Function prototypes —————————————————————————————————————————————————— */
 void	calcul_viewport(t_camera *cam, double ratio);
 void	init_world(t_data *d, t_world *w);

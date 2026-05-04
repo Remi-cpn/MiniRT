@@ -19,18 +19,17 @@
 # include "../../MacroLibX/includes/mlx.h"
 # include "../../librt/librt.h"
 
-
 /* ——— Define ——————————————————————————————————————————————————————————————— */
 # define TYPE 1
 # define COLOR 2
 # define POS 3
 
 /* ——— Forward declare —————————————————————————————————————————————————— */
-typedef struct s_data t_data;
-typedef struct s_world t_world;
-typedef struct s_object t_object;
-typedef struct s_sun t_sun;
-typedef struct s_texture t_texture;
+typedef struct s_data		t_data;
+typedef struct s_world		t_world;
+typedef struct s_object		t_object;
+typedef struct s_sun		t_sun;
+typedef struct s_texture	t_texture;
 
 /* ——— Struct prototypes ———————————————————————————————————————————————————— */
 typedef struct s_parsing

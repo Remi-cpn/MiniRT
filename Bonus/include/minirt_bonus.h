@@ -34,9 +34,9 @@
 # include "../../MacroLibX/includes/mlx_extended.h"
 
 /* ——— Forward Declare —————————————————————————————————————————————————— */
-typedef struct s_world t_world;
-typedef struct s_data t_data;
-typedef struct s_object t_object;
+typedef struct s_world	t_world;
+typedef struct s_data	t_data;
+typedef struct s_object	t_object;
 
 /* ——— DEFINE     ——————————————————————————————————————————————————————————— */
 # define RENDER_DIST 5000000.0
@@ -89,16 +89,16 @@ typedef struct s_input
 	bool	ctrl;
 	bool	space;
 	bool	r;
-    bool    n;
-    bool    p;
+	bool	n;
+	bool	p;
 }	t_input;
 
 typedef struct s_cam_orbit
 {
-	double  r;
-	double  theta;
-	double  phi;
-}   t_cam_orbit;
+	double	r;
+	double	theta;
+	double	phi;
+}	t_cam_orbit;
 
 typedef struct s_data
 {
@@ -113,7 +113,7 @@ typedef struct s_data
 	bool					solar_file;
 	t_threading				pool;
 	int						cam_target;
-    t_cam_orbit				orbit;
+	t_cam_orbit				orbit;
 }	t_data;
 
 typedef struct s_ray

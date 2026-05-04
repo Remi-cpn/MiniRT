@@ -61,17 +61,22 @@ static void	pars_file(t_parsing *p, t_world *w, char *file_name, bool solar)
 	p->fd = -1;
 }
 
+static void	init_wrapper(t_data *d, t_parsing *p, t_world *w)
+{
+	p->fd = -1;
+	p->mlx = d->mlx;
+	ft_memset(w, 0, sizeof(t_world));
+	p->world = w;
+	p->data = d;
+}
+
 t_world	parsing(t_data *d, char *file_name)
 {
 	t_parsing	p;
 	t_world		w;
 
 	ft_memset(&p, 0, sizeof(t_parsing));
-	p.fd = -1;
-	p.mlx = d->mlx;
-	ft_memset(&w, 0, sizeof(t_world));
-	p.world = &w;
-	p.data = d;
+	init_wrapper(d, &p, &w);
 	if (!check_file_name(d, file_name))
 		exit_prog_pars(&p, ERROR_FILE_NAME, ERROR_FILE_NAME_MSG);
 	p.count_line = count_line(&p, file_name, &w);

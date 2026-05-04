@@ -38,10 +38,8 @@ static void	pars_line_solar(t_parsing *p, t_world *w, char *line)
 	else
 		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
 	ft_free_array(p->line_split);
-	if (i == w->nb_obj)
-		i = 0;
-	if (j == w->nb_sun)
-		j = 0;
+	i = (i != w->nb_obj) * i;
+	j = (j != w->nb_sun) * j;
 	p->line_split = NULL;
 }
 
