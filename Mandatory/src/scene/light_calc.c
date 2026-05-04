@@ -52,9 +52,9 @@ static void	set_light(double *light, double *ambient, double *diffuse)
 
 void	light(t_world *w, t_hit *hit, mlx_color *color)
 {
-	t_vec	light_dir;
-	double	coef_diffuse;
-	double	light_norm;
+	t_vec				light_dir;
+	double				coef_diffuse;
+	double				light_norm;
 	t_light_managment	l;
 
 	init_vars(w, l.ambient, l.diffuse);

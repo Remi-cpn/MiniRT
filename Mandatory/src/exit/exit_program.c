@@ -40,6 +40,11 @@ void	exit_prog_pars(t_parsing *p, int exit_code, char *error_message)
 	if (error_message)
 		print_error(error_message);
 	free_parsing(p);
+	if (p->data)
+	{
+		exit_prog(p->data, exit_code, NULL);
+		return ;
+	}
 	if (p->mlx)
 		mlx_destroy_context(p->mlx);
 	if (exit_code < 0)

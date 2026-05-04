@@ -41,6 +41,7 @@ typedef struct s_parsing
 	bool		al;
 	bool		light;
 	mlx_context	mlx;
+	t_data		*data;
 }	t_parsing;
 
 typedef enum e_type

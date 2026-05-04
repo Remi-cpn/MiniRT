@@ -1,0 +1,36 @@
+A 0.1 255,255,255
+C 95370,250,80 0,-0.95,-0.3 70
+
+# ================================================================
+# G = 2.959122e8, 1 unite = 0.0001 AU = 14 960 km
+# Echelle x2.5 sur tailles/orbites — proportions reelles preservees
+# v_abs = v_saturne + sqrt(G * M_saturne / r_orbitale_scale)
+# M_saturne = 2.857e-4
+# ================================================================
+
+# SOLEIL (source lumineuse distante)
+so 0,0,0 930 255,240,200 0.8 1.0 0,0,0 texture_map/2k_sun.png
+
+# SATURNE — rayon reel ~3.9u, echelle x2.5 → rayon 10 (diametre 20)
+sp 95370,0,0 20 255,220,180 texture_map/saturn/saturn.png NULL 0.14280 2.857e-4 0,55.65,2.420
+
+# ANNEAUX — inner=11 outer=23 (proportionnel rayon Saturn x2.5)
+ri 1.5,-3.894,0.449 11 23 200,180,140 texture_map/saturn/saturn_ring.png
+
+# MIMAS — r_orb=31 (12.4x2.5), v_rel=52.2
+sp 95401.0,0,0 2 200,195,190 NULL NULL 0.0 2.09e-9 0,107.88,2.420
+
+# ENCELADE — r_orb=40 (16x2.5), v_rel=46.0
+sp 95410.0,0,0 2 240,245,255 NULL NULL 0.0 1.61e-9 0,101.63,2.420
+
+# DIONE — r_orb=63 (25.2x2.5), v_rel=36.6
+sp 95433.0,0,0 3 210,205,200 NULL NULL 0.0 1.09e-8 0,92.29,2.420
+
+# RHEA — r_orb=88 (35.2x2.5), v_rel=31.0
+sp 95458.0,0,0 4 200,195,190 NULL NULL 0.0 2.31e-8 0,86.64,2.420
+
+# TITAN — r_orb=204 (81.7x2.5), v_rel=20.4
+sp 95574.0,0,0 5 220,180,120 NULL NULL 0.0 6.76e-8 0,76.01,2.420
+
+# FOND
+sp 0,0,0 960000 0,0,0 texture_map/2k_stars_milky_way.jpg NULL 0.0 0.0 0,0,0

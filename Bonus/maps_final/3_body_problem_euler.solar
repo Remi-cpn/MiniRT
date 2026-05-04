@@ -1,0 +1,27 @@
+
+
+
+A 0.05 255,255,255
+C 0,20000,0 0,-1,0 60
+
+# ================================================================
+# Problème à 3 corps - Configuration d'EULER (colinéaire)
+# 3 masses égales m = 1.0 M☉ alignées sur l'axe Z
+# Demi-séparation d = 5000 unités
+# ω = √(5Gm/4d³) = 0.05440 rad/t
+# v_ext = ω·d = 272 unités/t, v_centre = 0
+# Période T = 2π/ω ≈ 116 t
+# Note : configuration instable, diverge rapidement
+# ================================================================
+
+# Étoile 1 — gauche (z = -d)
+so 0,0,-5000 1000 150,190,255 0.5 1.0 -272,0,0 texture_map/2k_sun.png
+
+# Étoile 2 — centre (au barycentre, vitesse nulle)
+so 0,0,0 1000 255,240,200 0.5 1.0 0,0,0 texture_map/2k_sun.png
+
+# Étoile 3 — droite (z = +d)
+so 0,0,5000 1000 255,160,80 0.5 1.0 272,0,0 texture_map/2k_sun.png
+
+# Fond étoilé
+sp 0,0,0 960000 0,0,0 texture_map/2k_stars_milky_way.jpg NULL 0.0 0.0 0,0,0
