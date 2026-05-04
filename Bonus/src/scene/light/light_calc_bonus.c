@@ -6,11 +6,29 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 09:46:02 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/04 09:33:59 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/04 16:03:57 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minirt_bonus.h"
+
+static void	apply_light_gamma(t_world *w, t_hit *hit, mlx_color *color,
+	t_light_managment *l)
+{
+	if (w->solar_file == true && hit->object->physics_enabled == false)
+	{
+		color->r = hit->pixel_color.r * l->light[R];
+		color->g = hit->pixel_color.g * l->light[G];
+		color->b = hit->pixel_color.b * l->light[B];
+	}
+	else
+	{
+		color->r = 255 * pow((hit->pixel_color.r / 255.0) * l->light[R], GAMMA);
+		color->g = 255 * pow((hit->pixel_color.g / 255.0) * l->light[G], GAMMA);
+		color->b = 255 * pow((hit->pixel_color.b / 255.0) * l->light[B], GAMMA);
+	}
+	color->a = 255;
+}
 
 static void	init_vars(t_world *w, double *ambient,
 		double *diffuse, double *specular)
@@ -59,8 +77,5 @@ void	light(t_world *w, t_hit *hit, mlx_color *color)
 		calc_one_light(w, hit, &sun, &l);
 	}
 	set_light(l.light, l.ambient, l.diffuse, l.specular);
-	color->r = 255 * pow((hit->pixel_color.r / 255.0) * l.light[R], GAMMA);
-	color->g = 255 * pow((hit->pixel_color.g / 255.0) * l.light[G], GAMMA);
-	color->b = 255 * pow((hit->pixel_color.b / 255.0) * l.light[B], GAMMA);
-	color->a = 255;
+	apply_light_gamma(w, hit, color, &l);
 }

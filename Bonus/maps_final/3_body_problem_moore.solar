@@ -19,13 +19,13 @@ C 0,20000,0 0,-1,0 60
 # ================================================================
 
 # Étoile 1
-so 4850,0,-1215 800 150,190,255 0.5 1.0 113.4,0,105.1 texture_map/2k_sun.png
+so 4850,0,-1215 800 150,190,255 0.5 1.0 113.4,0,105.1 texture_map/sun/sun.png
 
 # Étoile 2 (au centre à t=0)
-so 0,0,0 800 255,240,200 0.5 1.0 -226.8,0,-210.2 texture_map/2k_sun.png
+so 0,0,0 800 255,240,200 0.5 1.0 -226.8,0,-210.2 texture_map/sun/sun.png
 
 # Étoile 3 (symétrique de 1 par rapport à l'origine)
-so -4850,0,1215 800 255,160,80 0.5 1.0 113.4,0,105.1 texture_map/2k_sun.png
+so -4850,0,1215 800 255,160,80 0.5 1.0 113.4,0,105.1 texture_map/sun/sun.png
 
 # Fond étoilé
-sp 0,0,0 960000 0,0,0 texture_map/2k_stars_milky_way.jpg NULL 0.0 0.0 0,0,0
+sp 0,0,0 960000 0,0,0 texture_map/stars_milky_way.jpg NULL 0.0 0.0 0,0,0

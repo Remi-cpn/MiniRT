@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:17:11 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/03 17:10:14 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/04 15:48:27 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,7 @@ typedef struct s_world
 	int			nb_sun;
 	mlx_color	ambient;
 	double		ambient_ratio;
+	bool		solar_file;
 }	t_world;
 
 typedef struct s_light_ctx
