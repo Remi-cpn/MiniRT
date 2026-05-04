@@ -2,7 +2,7 @@
 
 ---
 
-![MiniRT render](screenshots/your_screenshot_here.png)
+![MiniRT render](screenshots/overview.png)
 
 ---
 
