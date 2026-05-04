@@ -25,4 +25,4 @@ so -965,0,0 1150 255,240,150 0.8 3.0 0,0,87
 so 4298,0,0 1000 255,160,80 0.6 2.0 0,0,-384
 
 # Fond étoilé
-sp 0,0,0 960000 0,0,0 texture_map/2k_stars_milky_way.jpg NULL 0.0 0.0 0,0,0
+sp 0,0,0 960000 0,0,0 texture_map/stars_milky_way.jpg NULL 0.0 0.0 0,0,0

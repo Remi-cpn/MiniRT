@@ -1,0 +1,38 @@
+# ================================================================
+# specular.rt — Modele de Phong complet
+# Illustration : ambient + diffuse + specular highlights
+# 5 spheres de gaucheà droite, meme matiere, angle de vue progressif
+# Lumiere unique forte et blanche pour faire ressortir le lobe speculaire
+# ================================================================
+
+A 0.04 10,10,10
+
+C 0,1.5,-9 0,-0.1,1 65
+
+# Lumiere forte positionnee haut-droite pour highlight visible
+L 4,8,-2 1.0 255,255,255
+
+# ================================================================
+# SOL sombre — reflet speculaire visible dessus
+# ================================================================
+pl 0,-1.5,0 0,1,0 30,30,35
+
+# ================================================================
+# MUR FOND sombre
+# ================================================================
+pl 0,0,12 0,0,-1 20,20,25
+
+# ================================================================
+# 5 SPHERES — meme couleur gris metallique, eclairage progressif
+# La sphere centrale recoit le highlight le plus fort
+# ================================================================
+sp -4,0,0 1.8 180,185,195
+sp -2,0,0 1.8 180,185,195
+sp  0,0,0 1.8 180,185,195
+sp  2,0,0 1.8 180,185,195
+sp  4,0,0 1.8 180,185,195
+
+# ================================================================
+# SPHERE COLOREE — montre le lobe speculaire blanc sur couleur
+# ================================================================
+sp  0,0,5 2.5 180,60,40

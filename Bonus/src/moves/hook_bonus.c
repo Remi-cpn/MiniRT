@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hook.c                                             :+:      :+:    :+:   */
+/*   hook_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 15:32:17 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 16:03:36 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/04 10:38:42 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@ void	key_hook_up(int key, void *param)
 		((t_data *)param)->input.space = false;
 	else if (key == _R)
 		((t_data *)param)->input.r = false;
+	else if (key == LESS)
+		((t_data *)param)->input.less = false;
+	else if (key == MOST)
+		((t_data *)param)->input.most = false;
 }
 
 void	key_hook_down(int key, void *param)
@@ -82,4 +86,8 @@ void	key_hook_down(int key, void *param)
 		((t_data *)param)->input.n = true;
 	else if (key == P)
 		((t_data *)param)->input.p = true;
+	else if (key == LESS)
+		((t_data *)param)->input.less = true;
+	else if (key == MOST)
+		((t_data *)param)->input.most = true;
 }

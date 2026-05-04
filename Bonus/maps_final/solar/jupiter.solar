@@ -1,0 +1,33 @@
+A 0.1 255,255,255
+C 52026,250,80 0,-0.95,-0.3 70
+
+# ================================================================
+# G = 2.959122e8, 1 unite = 0.0001 AU = 14 960 km
+# Echelle x2.5 sur tailles/orbites — proportions reelles preservees
+# v_abs = v_jupiter + sqrt(G * M_jupiter / r_orbitale_scale)
+# M_jupiter = 9.543e-4
+# v_jupiter = sqrt(G * M_soleil / r_jupiter) = sqrt(2.959122e8 / 52026) = 75.40
+# inclinaison orbitale Jupiter = 1.303 deg → vz = 1.714
+# Lunes retrograde : v_abs = v_jupiter - v_lune
+# ================================================================
+
+# SOLEIL (source lumineuse distante)
+so 0,0,0 930 255,240,200 0.8 1.0 0,0,0 texture_map/sun/sun.png
+
+# JUPITER — rayon reel ~4.78u, echelle x2.5 → rayon 11.95 (diametre 24)
+sp 52026,0,0 24 210,165,115 texture_map/jupiter/jupiter.png NULL 0.35 9.543e-4 0,75.40,1.714
+
+# IO — r_orb=70.5 (28.19x2.5), v_rel=63.3
+sp 52096.5,0,0 6 255,210,80 texture_map/jupiter/io.jpg NULL 0.0 4.49e-8 0,138.7,1.714
+
+# EUROPA — r_orb=112.1 (44.86x2.5), v_rel=50.2
+sp 52138.1,0,0 5 200,210,230 texture_map/jupiter/europa.jpg NULL 0.0 2.41e-8 0,125.6,1.714
+
+# GANYMEDE — r_orb=178.9 (71.55x2.5), v_rel=39.7
+sp 52204.9,0,0 8 165,158,142 texture_map/jupiter/ganymede.jpg NULL 0.0 7.44e-8 0,115.1,1.714
+
+# CALLISTO — r_orb=314.6 (125.85x2.5), v_rel=30.0
+sp 52340.6,0,0 7 128,118,108 texture_map/jupiter/callisto.jpg NULL 0.0 5.43e-8 0,105.4,1.714
+
+# FOND
+sp 0,0,0 960000 0,0,0 texture_map/stars_milky_way.jpg NULL 0.0 0.0 0,0,0
