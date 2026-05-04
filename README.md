@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by Minipl0p, rcompain.*
+*This project has been created as part of the 42 curriculum by <pchazalm>, <rcompain>.*
 
 <div align="center">
 
