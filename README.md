@@ -71,13 +71,14 @@ The graphics window is provided by **MacroLibX**, a custom lightweight graphics 
 
 ### Mandatory
 
-- **3 geometric primitives**: sphere, plane, infinite cylinder (with caps)
+- **3 geometric primitives**: sphere, infinite plane, cylinder
 - **Camera**: configurable position, orientation, and horizontal field of view (FOV)
 - **Ambient light**: uniform background illumination
 - **Point light**: one positional light source with intensity and color
 - **Diffuse (Lambertian) shading**: light intensity proportional to the angle of incidence
 - **Scene parsing**: custom `.rt` file format with strict validation and descriptive error messages
 - **Interactive camera**: real-time navigation with keyboard
+- **resize and moove**: real-time resize and moove objects with R
 
 ### Bonus
 
@@ -104,11 +105,7 @@ Units used internally:
 | Mass | 1 Solar mass (1.989×10³⁰ kg) |
 | Time | 1 day (86400 s) |
 
-Pre-built maps are provided:
-- `solar_system.solar` — All 8 planets with NASA-grade textures
-- `Double_sun.solar` — Binary star system
-- `with_mune.solar` — Solar system with major moons
-
+Pre-built maps are provided.
 ---
 
 ## How Ray Tracing Works
