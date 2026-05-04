@@ -29,16 +29,16 @@ sp 15240,0,0 10 220,100,70 texture_map/mars/mars.png NULL 0.06100 3.21e-7 0,4.50
 sp 52030,0,0 50 255,200,150 texture_map/jupiter/jupiter.png NULL 0.15324 9.543e-4 0,1.710,75.39
 
 # IO
-sp 52058.2,0,0 5 255,210,80 NULL NULL 0.0 4.49e-8 0,1.710,175.49
+sp 52058.2,0,0 5 255,210,80 texture_map/jupiter/io.jpg NULL 0.0 4.49e-8 0,1.710,175.49
 
 # EUROPA
-sp 52074.8,0,0 4 200,185,170 NULL NULL 0.0 2.41e-8 0,1.710,154.79
+sp 52074.8,0,0 4 200,185,170 texture_map/jupiter/europa.jpg NULL 0.0 2.41e-8 0,1.710,154.79
 
 # GANYMEDE
-sp 52101.6,0,0 6 160,155,150 NULL NULL 0.0 7.44e-8 0,1.710,138.19
+sp 52101.6,0,0 6 160,155,150 texture_map/jupiter/ganymede.jpg NULL 0.0 7.44e-8 0,1.710,138.19
 
 # CALLISTO
-sp 52155.8,0,0 5 130,120,110 NULL NULL 0.0 5.43e-8 0,1.710,122.79
+sp 52155.8,0,0 5 130,120,110 texture_map/jupiter/callisto.jpg NULL 0.0 5.43e-8 0,1.710,122.79
 
 # SATURNE (i=2.49°)
 sp 95370,0,0 60 255,220,180 texture_map/saturn/saturn.png NULL 0.14280 2.857e-4 0,2.420,55.65
@@ -47,7 +47,7 @@ sp 95370,0,0 60 255,220,180 texture_map/saturn/saturn.png NULL 0.14280 2.857e-4 
 ri 1.5,-3.894,0.449 36 66 200,180,140 texture_map/saturn/saturn_ring.png
 
 # TITAN
-sp 95451.7,0,0 7 220,180,120 NULL NULL 0.0 6.76e-8 0,2.420,87.85
+sp 95451.7,0,0 7 220,180,120 texture_map/saturn/titan.jpg NULL 0.0 6.76e-8 0,2.420,87.85
 
 # URANUS (i=0.77°)
 sp 191910,0,0 40 180,220,255 texture_map/uranus/uranus.png NULL 0.0 4.37e-5 0,0.528,39.27
