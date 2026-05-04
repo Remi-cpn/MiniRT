@@ -117,17 +117,7 @@ The camera is defined by a position in 3D space, a direction it looks toward, an
 
 To render an image, we build an invisible rectangle in front of the camera called the **viewport**. It represents the "window" through which we look at the scene. Every pixel on screen corresponds to one point on this viewport.
 
-```
-                      VIEWPORT
-                   _______________
-                  |       |       |
-         FOV -->  |  pixel|       |
-    [CAMERA] -----+-------+-------+-----> (into the scene)
-                  |               |
-                  |_______________|
-
-           <------- focal length ------->
-```
+![MiniRT render](screenshots/viewport_explain.png)
 
 The size and shape of the viewport is computed from the FOV and the aspect ratio of the window:
 
