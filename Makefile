@@ -66,6 +66,8 @@ SRC_INIT	= init_program_bonus.c \
 
 SRC_MOVE	= hook_bonus.c \
 			  camera_bonus.c \
+			  cam_fix_bonus.c \
+			  cam_relativ_bonus.c \
 
 SRC_EXIT	= exit_program_bonus.c
 
@@ -84,7 +86,6 @@ SRC_SCENE	= draw_bonus.c \
 			  fill_hit_bonus.c \
 			  calc_acc_bonus.c \
 			  hit_ring_bonus.c \
-			  snap_cam_bonus.c \
 			  find_closest_hit_bonus.c \
 			  hit_cone_bonus.c
 

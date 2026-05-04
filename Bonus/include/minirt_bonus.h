@@ -43,6 +43,8 @@ typedef struct s_object t_object;
 # define SHADOW_DIST 200000.0
 # define TILE_SIZE 128
 # define GAMMA 0.75
+# define ORBIT_SPEED 0.03
+# define THETA_CLAMP 1.55
 
 /* ——— Multi Threading —————————————————————————————————————————————————————— */
 typedef enum e_mod
@@ -91,6 +93,13 @@ typedef struct s_input
     bool    p;
 }	t_input;
 
+typedef struct s_cam_orbit
+{
+	double  r;
+	double  theta;
+	double  phi;
+}   t_cam_orbit;
+
 typedef struct s_data
 {
 	mlx_context				mlx;
@@ -104,6 +113,7 @@ typedef struct s_data
 	bool					solar_file;
 	t_threading				pool;
 	int						cam_target;
+    t_cam_orbit				orbit;
 }	t_data;
 
 typedef struct s_ray
@@ -166,6 +176,11 @@ void	mouse_hook_wheel(int event, void *param);
 void	mouse_hook(int event, void *param);
 
 bool	update_cam(t_data *d, double speed, double speed_rot);
+void	orbit_movement(t_data *d, double speed);
+void	orbit_zoom(t_data *d, double speed);
+bool	update_cam_free(t_data *d, double speed, double speed_rot);
+void	reparse(t_data *d);
+void	linear_movement(t_data *d, t_camera *cam, double speed);
 void	snap_cam_to_planet(t_data *d, int dir);
 void	follow_cam(t_data *d);
 
