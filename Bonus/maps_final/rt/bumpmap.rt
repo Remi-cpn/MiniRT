@@ -1,0 +1,14 @@
+# Ambiante Light
+A 0.1 97,79,41
+
+# Camera
+C 0,0,-5 0,0,1 70
+
+# Light
+L -25,0,-25 0.8 255,240,200
+
+# Earth
+sp 0,0,0 0.7 0,255,0 texture_map/earth/earth.png texture_map/earth/earth_specular_map.png
+
+# Backgroud
+sp 0,0,0 900 255,0,0 texture_map/stars_milky_way.jpg

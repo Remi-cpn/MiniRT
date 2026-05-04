@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+         #
+#    By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/13 11:16:05 by rcompain          #+#    #+#              #
-#    Updated: 2026/05/02 12:13:21 by rcompain         ###   ########.fr        #
+#    Updated: 2026/05/04 10:14:06 by rcompain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ SRC_THREADS	=
 
 ifeq ($(MAKECMDGOALS),bonus)
 SRC_INIT	= init_program_bonus.c \
+			  init_speed_sim_bonus.c \
 			  init_world_bonus.c
 
 SRC_MOVE	= hook_bonus.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/03 17:12:05 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/04 10:39:01 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ typedef struct s_input
 	bool	r;
     bool    n;
     bool    p;
+	bool	most;
+	bool	less;
 }	t_input;
 
 typedef struct s_data
@@ -104,6 +106,7 @@ typedef struct s_data
 	bool					solar_file;
 	t_threading				pool;
 	int						cam_target;
+	int						speed_sim;
 }	t_data;
 
 typedef struct s_ray
@@ -132,6 +135,8 @@ typedef enum e_key
 	_R = 21,
 	N = 17,
 	P = 19,
+	MOST = 87,
+	LESS = 86,
 }	t_key;
 
 typedef enum e_event
@@ -142,6 +147,7 @@ typedef enum e_event
 /* ——— Function prototypes —————————————————————————————————————————————————— */
 t_data	init_program(void);
 void	init_threads(t_data *d);
+void	init_speed_sim(t_data *d, int ac, char **av);
 
 t_ray	get_ray(t_camera cam, double i_hor, double i_ver);
 void	draw(t_data *d);

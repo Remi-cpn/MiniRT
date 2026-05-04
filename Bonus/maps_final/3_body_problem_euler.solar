@@ -15,13 +15,13 @@ C 0,20000,0 0,-1,0 60
 # ================================================================
 
 # Étoile 1 — gauche (z = -d)
-so 0,0,-5000 1000 150,190,255 0.5 1.0 -272,0,0 texture_map/2k_sun.png
+so 0,0,-5000 1000 150,190,255 0.5 1.0 -272,0,0 texture_map/sun/sun.png
 
 # Étoile 2 — centre (au barycentre, vitesse nulle)
-so 0,0,0 1000 255,240,200 0.5 1.0 0,0,0 texture_map/2k_sun.png
+so 0,0,0 1000 255,240,200 0.5 1.0 0,0,0 texture_map/sun/sun.png
 
 # Étoile 3 — droite (z = +d)
-so 0,0,5000 1000 255,160,80 0.5 1.0 272,0,0 texture_map/2k_sun.png
+so 0,0,5000 1000 255,160,80 0.5 1.0 272,0,0 texture_map/sun/sun.png
 
 # Fond étoilé
-sp 0,0,0 960000 0,0,0 texture_map/2k_stars_milky_way.jpg NULL 0.0 0.0 0,0,0
+sp 0,0,0 960000 0,0,0 texture_map/stars_milky_way.jpg NULL 0.0 0.0 0,0,0

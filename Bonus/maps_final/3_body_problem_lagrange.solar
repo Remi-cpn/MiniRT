@@ -10,13 +10,13 @@ C 0,25000,0 0,-1,0 60
 # ================================================================
 
 # Étoile A — sommet haut
-so 0,0,5774 1200 150,190,255 0.5 1.0 172,0,0 texture_map/2k_sun.png
+so 0,0,5774 1200 150,190,255 0.5 1.0 172,0,0 texture_map/sun/sun.png
 
 # Étoile B — bas gauche
-so -5000,0,-2887 1200 255,240,200 0.5 1.0 -86,0,149 texture_map/2k_sun.png
+so -5000,0,-2887 1200 255,240,200 0.5 1.0 -86,0,149 texture_map/sun/sun.png
 
 # Étoile C — bas droite
-so 5000,0,-2887 1200 255,160,80 0.5 1.0 -86,0,-149 texture_map/2k_sun.png
+so 5000,0,-2887 1200 255,160,80 0.5 1.0 -86,0,-149 texture_map/sun/sun.png
 
 # Fond étoilé (masse nulle, immobile)
-sp 0,0,0 960000 0,0,0 texture_map/2k_stars_milky_way.jpg NULL 0.0 0.0 0,0,0
+sp 0,0,0 960000 0,0,0 texture_map/stars_milky_way.jpg NULL 0.0 0.0 0,0,0
