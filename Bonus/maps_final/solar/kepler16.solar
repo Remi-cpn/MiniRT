@@ -16,11 +16,11 @@ so -509,0,0 121 255,220,160 0.9 0.6897 0,0,77.9 texture_map/sun/sun.png
 
 # Etoile B — M-type, rouge-orange | position=+1732
 # v_B = 0.1531 * 1732 = 265.0
-so 1732,0,0 42 255,140,60 0.4 0.2026 0,0,-265.0
+so 1732,0,0 42 255,140,60 0.4 0.2026 0,0,-265.0 texture_map/sun/sun.png
 
 # Kepler-16b — geante gazeuse circumbinaire
 # r=7048 depuis CoM | v=sqrt(G*M_total/r)=sqrt(2.6405e8/7048)=193.6
-sp 7048,0,0 80 150,180,220 texture_map/neptune/neptune.png NULL 0.0 3.2e-4 0,0,193.6
+sp 7048,0,0 80 150,180,220 texture_map/kelper/16b.png NULL 0.14280 3.2e-4 0,0,193.6
 
 # Fond
 sp 0,0,0 960000 0,0,0 texture_map/stars_milky_way.jpg NULL 0.0 0.0 0,0,0
