@@ -155,6 +155,8 @@ where `t` is a scalar representing "how far along the ray". `t = 0` is the camer
 
 The goal is to find, for each ray, the smallest positive value of `t` at which the ray touches an object.
 
+![MiniRT render](screenshots/one_ray_per_pixel.png)
+
 ---
 
 ### Intersections
@@ -194,16 +196,7 @@ c = oc · oc - r²
 
 The **discriminant** `Δ = b² - ac` tells us how many intersections exist:
 
-```
-        Δ < 0          Δ = 0           Δ > 0
-    (no intersection) (tangent)    (two intersections)
-
-         \   /           |              \ /
-          \ /            |           ___X___
-           X             |          /   |   \
-          / \           _|_        /    |    \
-         /   \         / | \      /     |     \
-```
+![MiniRT render](screenshots/discriminant.png)
 
 If `Δ ≥ 0`, the two solutions are:
 
@@ -246,15 +239,6 @@ Once we know which object a ray hits, and at what point, we compute the color of
 #### Ambient Light
 
 Ambient light represents indirect illumination — light that has bounced around the environment so many times that it comes equally from all directions. It is a flat, uniform addition to every surface regardless of its orientation.
-
-```
-         Scene without ambient          Scene with ambient
-         ____________________           ____________________
-        |                    |         |                    |
-        |    ( sphere )      |         |    ( sphere )      |
-        |   dark side = BLACK|         |   dark side = dim  |
-        |____________________|         |____________________|
-```
 
 In our implementation, ambient light has a color and a ratio (intensity):
 
@@ -357,18 +341,6 @@ shadow_ray.direction = normalize(light_pos - hit_point)
 
 If this ray hits any object at a distance smaller than the distance to the light, the point is in shadow.
 
-```
-           *  Light
-          /|
-         / |
-        /  |              [Shadow Ray] blocked → point is in shadow
-  [OBJ A]  |               *light
-            \             /|
-             \      [B]--X |     (X = blocked by object A)
-              \    /      \|
-               \  /     [OBJ B] in shadow
-                \/
-```
 
 The `0.001` epsilon offset on the origin is essential. Without it, the shadow ray would immediately re-intersect the surface it just hit (due to floating-point imprecision), causing every point to incorrectly shadow itself — a visual artifact known as **shadow acne**.
 
@@ -857,7 +829,7 @@ Wikipedia was used extensively for mathematical definitions and formulas, includ
 
 **AI Usage**
 
-AI assistants (ChatGPT, GitHub Copilot) were used during development for:
+AI assistants (Claude code, GitHub Copilot) were used during development for:
 - Generating repetitive boilerplate code (parsing validators, error message structures)
 - Finding and verifying mathematical equations (UV sphere mapping, bump map gradient estimation, gravitational constant scaling in AU/day units)
 - Guidance on good implementation practices (shadow acne epsilon offset, Verlet energy conservation, Phong specular clamping)
