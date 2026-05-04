@@ -24,7 +24,6 @@
 # define G 1
 # define B 2
 
-
 /* ——— Forward Declare —————————————————————————————————————————————————— */
 typedef struct s_data		t_data;
 typedef struct s_ray		t_ray;
@@ -193,6 +192,17 @@ typedef struct s_world
 	bool		solar_file;
 }	t_world;
 
+typedef struct s_light_ctx
+{
+	t_world				*w;
+	t_hit				*hit;
+	t_light				*light;
+	t_light_managment	*l;
+	t_vec				light_dir;
+	double				light_norm;
+	double				coef_d;
+}	t_light_ctx;
+
 /* ——— Function prototypes —————————————————————————————————————————————————— */
 void		calcul_viewport(t_camera *cam, double ratio);
 void		init_world(t_data *d, t_world *w);
@@ -203,7 +213,7 @@ mlx_color	get_texture(t_hit *hit);
 t_uv		get_uv_sp(t_hit hit);
 t_uv		get_uv_pl(t_hit hit);
 t_uv		get_uv_cy(t_hit hit);
-t_uv 		get_uv_co(t_hit hit);
+t_uv		get_uv_co(t_hit hit);
 t_uv		get_uv_caps(t_hit hit);
 t_uv		get_uv_ring(t_hit hit);
 mlx_color	get_pixel_img(t_img *img, t_uv uv);

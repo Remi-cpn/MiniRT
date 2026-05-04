@@ -47,7 +47,7 @@ void	init_world(t_data *d, t_world *w)
 {
 	if (!d->pixels)
 		d->pixels = ft_calloc(d->win_info.width * d->win_info.height,
-			sizeof(mlx_color));
+				sizeof(mlx_color));
 	if (!d->pixels)
 		exit_prog(d, ERROR_MALLOC, ERROR_MALLOC_MSG);
 	vec_normalize(&(w->camera.dir));

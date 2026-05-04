@@ -51,41 +51,45 @@ static double	calc_specular(t_hit *hit, double coef_diffuse,
 	return (vec_dot(reflect, view_dir));
 }
 
-static void	apply_light(t_world *w, t_hit *hit, t_light *light,
-		t_light_managment *l, double coef_d, t_vec light_dir, double light_n)
+static void	apply_light(t_light_ctx *ctx)
 {
 	double	shadow;
 	double	factor;
 	double	coef_s;
 
-	shadow = shadow_ray(w, hit, light_dir, light_n);
-	factor = coef_d * light->intensity * (1.0 - shadow);
-	l->diffuse[R] += (light->color.r / 255.0) * factor;
-	l->diffuse[G] += (light->color.g / 255.0) * factor;
-	l->diffuse[B] += (light->color.b / 255.0) * factor;
-	coef_s = calc_specular(hit, coef_d, light_dir, w->camera.origin);
+	shadow = shadow_ray(ctx->w, ctx->hit,
+			ctx->light_dir, ctx->light_norm);
+	factor = ctx->coef_d * ctx->light->intensity * (1.0 - shadow);
+	ctx->l->diffuse[R] += (ctx->light->color.r / 255.0) * factor;
+	ctx->l->diffuse[G] += (ctx->light->color.g / 255.0) * factor;
+	ctx->l->diffuse[B] += (ctx->light->color.b / 255.0) * factor;
+	coef_s = calc_specular(ctx->hit, ctx->coef_d,
+			ctx->light_dir, ctx->w->camera.origin);
 	if (coef_s > EPS)
 	{
-		coef_s = pow(coef_s, SHINY) * KS * light->intensity * (1.0 - shadow);
-		l->specular[R] += (light->color.r / 255.0) * coef_s;
-		l->specular[G] += (light->color.g / 255.0) * coef_s;
-		l->specular[B] += (light->color.b / 255.0) * coef_s;
+		coef_s = pow(coef_s, SHINY) * KS
+			* ctx->light->intensity * (1.0 - shadow);
+		ctx->l->specular[R] += (ctx->light->color.r / 255.0) * coef_s;
+		ctx->l->specular[G] += (ctx->light->color.g / 255.0) * coef_s;
+		ctx->l->specular[B] += (ctx->light->color.b / 255.0) * coef_s;
 	}
 }
 
 void	calc_one_light(t_world *w, t_hit *hit, t_light *light,
 		t_light_managment *l)
 {
-	t_vec	light_dir;
-	double	light_norm;
-	double	coef_d;
+	t_light_ctx	ctx;
 
-	light_dir = vec_sub(light->position, hit->point);
-	light_norm = vec_norm(light_dir);
-	vec_normalize(&light_dir);
-	coef_d = vec_dot(hit->normal, light_dir);
+	ctx.w = w;
+	ctx.hit = hit;
+	ctx.light = light;
+	ctx.l = l;
+	ctx.light_dir = vec_sub(light->position, hit->point);
+	ctx.light_norm = vec_norm(ctx.light_dir);
+	vec_normalize(&ctx.light_dir);
+	ctx.coef_d = vec_dot(hit->normal, ctx.light_dir);
 	if (hit->object->type == OBJ_RING)
-		coef_d = fabs(coef_d);
-	if (coef_d > 0.001)
-		apply_light(w, hit, light, l, coef_d, light_dir, light_norm);
+		ctx.coef_d = fabs(ctx.coef_d);
+	if (ctx.coef_d > 0.001)
+		apply_light(&ctx);
 }

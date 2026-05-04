@@ -43,8 +43,12 @@ void	add_sp_solar(t_parsing *p, t_object *o, char **l_split)
 		o->shape.sphere.radius = ft_atod(l_split[2]) / 2.0;
 		o->color = get_color(p, l_split[3]);
 		if (ft_strncmp(l_split[4], "NULL", 5))
-			pars_texture_map(p, &(o->texture), l_split[4],
-				ft_strncmp(l_split[5], "NULL", 5) ? l_split[5] : NULL);
+		{
+			if (ft_strncmp(l_split[5], "NULL", 5))
+				pars_texture_map(p, &(o->texture), l_split[4], l_split[5]);
+			else
+				pars_texture_map(p, &(o->texture), l_split[4], NULL);
+		}
 		o->shape.sphere.rotation = 0.0;
 		o->shape.sphere.rotation_speed = ft_atod(l_split[6]);
 		pars_solar(p, o, l_split[7], l_split[8]);
