@@ -169,7 +169,7 @@ $(LIBRT_A):
 
 $(MLX):
 	@printf "$(DIM)$(CYAN)⚙  Building MacroLibX...$(R)\n"
-	@make -s -C $(MLX_DIR)
+	@make -s -j -C $(MLX_DIR)
 	@printf "\r\033[2K$(CYAN)🖼  MacroLibX   $(BOLD)$(GREEN)[OK]$(R)\n"
 
 banner:
