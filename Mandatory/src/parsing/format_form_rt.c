@@ -56,7 +56,7 @@ void	add_cy(t_parsing *p, t_object *o, char **line_split)
 		o->shape.cylinder.center = get_vec(p, line_split[1]);
 		o->shape.cylinder.axis = get_vec(p, line_split[2]);
 		if (fabs(vec_norm(o->shape.cylinder.axis) - 1.0) > 0.001)
-			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_PL_ARGS_MSG);
+			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_CY_ARGS_MSG);
 		o->shape.cylinder.radius = ft_atod(line_split[3]) / 2.0;
 		o->shape.cylinder.height = ft_atod(line_split[4]);
 		o->color = get_color(p, line_split[5]);

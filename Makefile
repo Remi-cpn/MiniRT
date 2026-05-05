@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= minirt
+NAME		= miniRT
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -g -I MacroLibX/includes -O3
 RM			= rm -f

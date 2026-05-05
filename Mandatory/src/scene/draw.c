@@ -35,19 +35,19 @@ static void	set_pixel(t_data *d, t_world *w, mlx_color *pixels)
 {
 	int			x;
 	int			y;
-	double		inv_x;
-	double		norm_y;
+	double		u;
+	double		v;
 	t_ray		ray;
 
 	y = -1;
-	inv_x = 1.0 / d->win_info.width;
 	while (++y < d->win_info.height)
 	{
 		x = -1;
-		norm_y = 1.0 - (double)y / d->win_info.height;
+		v = 1.0 - (((double)y + 0.5) / (double)d->win_info.height);
 		while (++x < d->win_info.width)
 		{
-			ray = get_ray(w->camera, (double)x * inv_x, norm_y);
+			u = ((double)x + 0.5) / (double)d->win_info.width;
+			ray = get_ray(w->camera, u, v);
 			pixel_color(w, ray, &pixels[(y * d->win_info.width + x)]);
 		}
 	}

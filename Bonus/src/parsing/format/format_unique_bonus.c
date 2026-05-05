@@ -24,6 +24,9 @@ void	add_cam(t_parsing *p, t_world *w, char **line_split)
 			exit_prog_pars(p, ERROR_FILE_CAM, ERROR_FILE_CAM_ARGS_MSG);
 		w->camera.origin = get_vec(p, line_split[1]);
 		w->camera.dir = get_vec(p, line_split[2]);
+		if (w->camera.dir.x == 0.0 && w->camera.dir.y == 0.0
+			&& w->camera.dir.z == 0.0)
+			exit_prog_pars(p, ERROR_FILE_CAM, ERROR_FILE_CAM_ARGS_MSG);
 		w->camera.fov = ft_atod(line_split[3]);
 	}
 	else

@@ -12,6 +12,7 @@
 
 #include "../include/minirt.h"
 #include "../../MacroLibX/includes/mlx.h"
+#include <stdio.h>
 
 static void	update(void *param)
 {

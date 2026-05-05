@@ -16,18 +16,18 @@ void	render_tile(t_data *d, t_world *w, int x, int y)
 {
 	const int	x_max = x + TILE_SIZE;
 	const int	y_max = y + TILE_SIZE;
-	double		inv_x;
-	double		norm_y;
+	double		u;
+	double		v;
 	t_ray		ray;
 
-	inv_x = 1.0 / d->win_info.width;
 	while (y < d->win_info.height && y < y_max)
 	{
 		x = x_max - TILE_SIZE;
-		norm_y = 1.0 - (double)y / d->win_info.height;
+		v = 1.0 - (((double)y + 0.5) / (double)d->win_info.height);
 		while (x < d->win_info.width && x < x_max)
 		{
-			ray = get_ray(w->camera, (double)x * inv_x, norm_y);
+			u = ((double)x + 0.5) / (double)d->win_info.width;
+			ray = get_ray(w->camera, u, v);
 			pixel_color(w, ray, &d->pixels[(y * d->win_info.width + x)]);
 			x++;
 		}
