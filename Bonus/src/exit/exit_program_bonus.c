@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_program.c                                     :+:      :+:    :+:   */
+/*   exit_program_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:22:44 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/01 16:55:16 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/05 11:35:56 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,41 +36,6 @@ static void	destroy_pool(t_data *d)
 	if (d->pool.mutex_ready)
 		pthread_mutex_destroy(&d->pool.queue);
 	free(d->pool.threads);
-}
-
-static void	free_obj_and_light(t_world *w)
-{
-	int	i;
-
-	i = 0;
-	while (i < w->nb_obj)
-	{
-		if (w->objects[i].texture.img.pixels)
-			free(w->objects[i].texture.img.pixels);
-		if (w->objects[i].texture.bump_map.pixels)
-			free(w->objects[i].texture.bump_map.pixels);
-		i++;
-	}
-	if (w->lights)
-		free(w->lights);
-	if (w->suns)
-		free(w->suns);
-	free(w->objects);
-}
-
-void	free_parsing(t_parsing *p)
-{
-	if (p->line)
-	{
-		while (p->line)
-		{
-			p->line = ft_freenull(p->line);
-			p->line = ft_get_next_line(p->fd);
-		}
-		close(p->fd);
-	}
-	if (p->line_split)
-		ft_free_array(p->line_split);
 }
 
 void	exit_prog_pars(t_parsing *p, int exit_code, char *error_message)

@@ -6,7 +6,7 @@
 #    By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/13 11:16:05 by rcompain          #+#    #+#              #
-#    Updated: 2026/05/04 10:14:06 by rcompain         ###   ########.fr        #
+#    Updated: 2026/05/05 11:42:15 by rcompain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,8 @@ SRC_MOVE	= hook_bonus.c \
 			  cam_fix_bonus.c \
 			  cam_relativ_bonus.c \
 
-SRC_EXIT	= exit_program_bonus.c
+SRC_EXIT	= exit_program_bonus.c \
+			  free_bonus.c
 
 SRC_SCENE	= draw_bonus.c \
 			  get_colors_bonus.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_bonus.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:24:21 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/03 17:09:29 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/05 11:41:47 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ typedef struct s_parsing	t_parsing;
 void	exit_prog(t_data *data, int exit_code, char *error_message);
 void	exit_prog_pars(t_parsing *p, int exit_code, char *error_message);
 void	free_parsing(t_parsing *p);
+void	free_obj_and_light(t_world *w);
 
 #endif
