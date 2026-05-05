@@ -12,7 +12,6 @@
 
 #include "../../include/minirt_bonus.h"
 #include "../../include/parsing_bonus.h"
-#include <stdio.h>
 
 double	get_mass(char *s)
 {
@@ -30,12 +29,12 @@ t_vec	get_vec(t_parsing *p, char *s)
 	sp = ft_split(s, ',');
 	if (!sp || !sp[0] || !sp[1] || !sp[2] || sp[3])
 	{
-		printf("get_vec1\n");
+		ft_free_array(sp);
 		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
 	}
 	if (!double_valid(sp[0]) || !double_valid(sp[1]) || !double_valid(sp[2]))
 	{
-		printf("get_vec1\n");
+		ft_free_array(sp);
 		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
 	}
 	vec_init(&vec, ft_atod(sp[0]), ft_atod(sp[1]), ft_atod(sp[2]));
@@ -50,10 +49,13 @@ mlx_color	get_color(t_parsing *p, char *s)
 	int			v[3];
 
 	sp = ft_split(s, ',');
-	if (!sp || !sp[0] || !sp[1] || !sp[2] || sp[3])
+	if (!sp || !sp[0] || !sp[1] || !sp[2] || sp[3]
+		|| (sp[0] && !int_valid(sp[0])) || (sp[1] && !int_valid(sp[1]))
+		|| (sp[3] && !int_valid(sp[2])))
+	{
+		ft_free_array(sp);
 		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
-	if (!int_valid(sp[0]) || !int_valid(sp[1]) || !int_valid(sp[2]))
-		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
+	}
 	v[0] = ft_atoi(sp[0]);
 	v[1] = ft_atoi(sp[1]);
 	v[2] = ft_atoi(sp[2]);

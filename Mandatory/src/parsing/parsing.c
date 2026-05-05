@@ -66,6 +66,7 @@ t_world	parsing(t_data *d, char *file_name)
 	p.mlx = d->mlx;
 	p.data = d;
 	ft_memset(&w, 0, sizeof(t_world));
+	p.w = &w;
 	if (!check_file_name(file_name))
 		exit_prog_pars(&p, ERROR_FILE_NAME, ERROR_FILE_NAME_MSG);
 	p.count_line = count_line(&p, file_name);
