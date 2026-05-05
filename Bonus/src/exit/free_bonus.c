@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:35:32 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/05 11:41:34 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/05 12:49:56 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 static void	free_suns(t_world *w)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (i < w->nb_sun)
 	{
@@ -26,7 +26,7 @@ static void	free_suns(t_world *w)
 			w->suns[i].texture.img.pixels = NULL;
 		}
 		i++;
-	}	
+	}
 }
 
 void	free_obj_and_light(t_world *w)
