@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures_manager.c                                 :+:      :+:    :+:   */
+/*   textures_manager_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 16:08:04 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/02 17:26:54 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/05 11:21:23 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static t_uv	get_uv(t_hit hit)
 {
 	t_uv		uv;
 
+	ft_memset(&uv, 0, sizeof(t_uv));
 	if (hit.object->type == OBJ_SPHERE)
 		uv = get_uv_sp(hit);
 	else if (hit.object->type == OBJ_PLANE)
@@ -58,6 +59,7 @@ mlx_color	get_texture(t_hit *hit)
 	mlx_color	pixel;
 
 	uv = get_uv(*hit);
+	ft_memset(&pixel, 0, sizeof(mlx_color));
 	if (hit->object->texture.type == TEX_IMG)
 	{
 		pixel = get_pixel_img(&(hit->object->texture.img), uv);
