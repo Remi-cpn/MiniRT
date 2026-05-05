@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 08:42:27 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/04 15:49:07 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/05 10:01:52 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ void	init_world(t_data *d, t_world *w)
 	calcul_viewport(&(w->camera), (double)d->win_info.width
 		/ (double)d->win_info.height);
 	if (d->solar_file == true)
-			w->solar_file = true;
+		w->solar_file = true;
 }

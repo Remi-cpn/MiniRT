@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:34:10 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 11:40:13 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/05 10:06:42 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	float_valid(char *s)
 	int		dot_count;
 	float	f;
 
-	if (!s || ft_strlen(s) > 20 || ft_strlen(s) == 0 ||
-		(s[0] == '-' && ft_strlen(s) == 1))
+	if (!s || ft_strlen(s) > 20 || ft_strlen(s) == 0
+		|| (s[0] == '-' && ft_strlen(s) == 1))
 		return (0);
 	i = 0;
 	dot_count = 0;

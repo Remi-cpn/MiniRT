@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 14:07:20 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/21 14:22:25 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/05 10:05:18 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_vec
 	double	z;
 }	t_vec;
 
-typedef t_vec t_point;
+typedef t_vec	t_point;
 
 /* ——— Function prototypes —————————————————————————————————————————————————— */
 /* Vec functions */
@@ -52,7 +52,7 @@ int		long_valid(char *s);
 int		float_valid(char *s);
 int		double_valid(char *s);
 
-bool 	check_idx_string_tab(char **s, int idx);
+bool	check_idx_string_tab(char **s, int idx);
 
 void	print_error(char *message);
 

@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:34:32 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 11:39:33 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/05 10:07:00 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	int_valid(char *s)
 {
 	int	i;
 
-	if (!s || ft_strlen(s) > 11 || ft_strlen(s) == 0 ||
-		(s[0] == '-' && ft_strlen(s) == 1))
+	if (!s || ft_strlen(s) > 11 || ft_strlen(s) == 0
+		|| (s[0] == '-' && ft_strlen(s) == 1))
 		return (0);
 	i = 0;
 	if (s[i] == '-')

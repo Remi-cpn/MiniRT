@@ -6,14 +6,14 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 15:20:07 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/04 17:29:46 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/05 10:02:09 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minirt_bonus.h"
 #include <math.h>
 
-static void	get_coeff(t_cone cone, t_ray ray, double coeff[3])
+static double	get_coeff(t_cone cone, t_ray ray, double coeff[3])
 {
 	t_vec	oc;
 	t_vec	d_normal;
@@ -30,47 +30,44 @@ static void	get_coeff(t_cone cone, t_ray ray, double coeff[3])
 		* vec_dot(oc, cone.axis);
 	coeff[2] = vec_dot(oc_normal, oc_normal) - k * vec_dot(oc, cone.axis)
 		* vec_dot(oc, cone.axis);
+	return (coeff[1] * coeff[1] - coeff[0] * coeff[2]);
 }
 
-static int	valid_cone_hit(t_cone cone, t_ray ray, double t, double *out)
+static double	valid_cone_hit(t_cone cone, t_ray ray)
 {
 	t_vec	hit;
 	double	dot;
+	double	coeff[3];
+	double	disc;
+	double	t;
 
-	if (t < 0.001)
-		return (0);
-	hit = vec_add(ray.origin, vec_mult_scalar(ray.dir, t));
-	dot = vec_dot(vec_sub(hit, cone.apex), cone.axis);
-	if (dot < 0 || dot > cone.height)
-		return (0);
-	*out = t;
-	return (1);
+	t = -1.0;
+	disc = get_coeff(cone, ray, coeff);
+	if (disc >= 0)
+	{
+		disc = sqrt(disc);
+		t = (-coeff[1] - disc) / coeff[0];
+		if (t < 0.001)
+			t = (-coeff[1] + disc) / coeff[0];
+		hit = vec_add(ray.origin, vec_mult_scalar(ray.dir, t));
+		dot = vec_dot(vec_sub(hit, cone.apex), cone.axis);
+		if (dot < 0 || dot > cone.height)
+			t = (-coeff[1] + disc) / coeff[0];
+		hit = vec_add(ray.origin, vec_mult_scalar(ray.dir, t));
+		dot = vec_dot(vec_sub(hit, cone.apex), cone.axis);
+		if (dot < 0 || dot > cone.height)
+			t = -1.0;
+	}
+	return (t);
 }
 
 double	hit_cone(t_cone cone, t_ray ray)
 {
-	double	coeff[3];
-	double	disc;
 	double	t1;
 	double	t2;
 	t_plane	cap;
 
-	get_coeff(cone, ray, coeff);
-	disc = coeff[1] * coeff[1] - coeff[0] * coeff[2];
-	t1 = -1.0;
-	t2 = -1.0;
-	if (disc >= 0)
-	{
-		disc = sqrt(disc);
-		t1 = (-coeff[1] - disc) / coeff[0];
-		t2 = (-coeff[1] + disc) / coeff[0];
-		if (!valid_cone_hit(cone, ray, t1, &t1))
-			t1 = -1.0;
-		if (!valid_cone_hit(cone, ray, t2, &t2))
-			t2 = -1.0;
-	}
-	if (t2 != -1.0 && (t1 == -1.0 || t2 < t1))
-		t1 = t2;
+	t1 = valid_cone_hit(cone, ray);
 	cap.normal = cone.axis;
 	cap.point = vec_add(cone.apex, vec_mult_scalar(cone.axis, cone.height));
 	t2 = hit_cap(cap, ray, cone.height * tan(cone.angle));

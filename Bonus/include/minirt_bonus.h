@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/04 16:08:50 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/05 10:03:00 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ typedef struct s_input
 	bool	ctrl;
 	bool	space;
 	bool	r;
-    bool    n;
-    bool    p;
+	bool	n;
+	bool	p;
 	bool	most;
 	bool	less;
 }	t_input;
