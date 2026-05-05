@@ -13,21 +13,6 @@
 #include "../../../include/minirt_bonus.h"
 #include <math.h>
 
-static int	solve_quadratic(double a, double b, double c, double *t)
-{
-	double	disc;
-	double	sqrt_disc;
-
-	disc = b * b - a * c;
-	if (disc < 0)
-		return (0);
-	sqrt_disc = sqrt(disc);
-	*t = (-b - sqrt_disc) / a;
-	if (*t < 0.001)
-		*t = (-b + sqrt_disc) / a;
-	return (*t >= 0.001);
-}
-
 static void	get_coeff(t_cone cone, t_ray ray, double coeff[3])
 {
 	t_vec	oc;
@@ -47,27 +32,49 @@ static void	get_coeff(t_cone cone, t_ray ray, double coeff[3])
 		* vec_dot(oc, cone.axis);
 }
 
+static int	valid_cone_hit(t_cone cone, t_ray ray, double t, double *out)
+{
+	t_vec	hit;
+	double	dot;
+
+	if (t < 0.001)
+		return (0);
+	hit = vec_add(ray.origin, vec_mult_scalar(ray.dir, t));
+	dot = vec_dot(vec_sub(hit, cone.apex), cone.axis);
+	if (dot < 0 || dot > cone.height)
+		return (0);
+	*out = t;
+	return (1);
+}
+
 double	hit_cone(t_cone cone, t_ray ray)
 {
 	double	coeff[3];
-	double	t;
-	double	t_cap;
-	t_vec	hit;
+	double	disc;
+	double	t1;
+	double	t2;
 	t_plane	cap;
 
-	t = -1.0;
 	get_coeff(cone, ray, coeff);
-	if (solve_quadratic(coeff[0], coeff[1], coeff[2], &t))
+	disc = coeff[1] * coeff[1] - coeff[0] * coeff[2];
+	t1 = -1.0;
+	t2 = -1.0;
+	if (disc >= 0)
 	{
-		hit = vec_add(ray.origin, vec_mult_scalar(ray.dir, t));
-		if (vec_dot(vec_sub(hit, cone.apex), cone.axis) < EPS
-			|| vec_dot(vec_sub(hit, cone.apex), cone.axis) > cone.height)
-			t = -1.0;
+		disc = sqrt(disc);
+		t1 = (-coeff[1] - disc) / coeff[0];
+		t2 = (-coeff[1] + disc) / coeff[0];
+		if (!valid_cone_hit(cone, ray, t1, &t1))
+			t1 = -1.0;
+		if (!valid_cone_hit(cone, ray, t2, &t2))
+			t2 = -1.0;
 	}
+	if (t2 != -1.0 && (t1 == -1.0 || t2 < t1))
+		t1 = t2;
 	cap.normal = cone.axis;
 	cap.point = vec_add(cone.apex, vec_mult_scalar(cone.axis, cone.height));
-	t_cap = hit_cap(cap, ray, cone.height * tan(cone.angle));
-	if (t_cap != -1.0 && (t == -1.0 || t_cap < t))
-		t = t_cap;
-	return (t);
+	t2 = hit_cap(cap, ray, cone.height * tan(cone.angle));
+	if (t2 != -1.0 && (t1 == -1.0 || t2 < t1))
+		t1 = t2;
+	return (t1);
 }
