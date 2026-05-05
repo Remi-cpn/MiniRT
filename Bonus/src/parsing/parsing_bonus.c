@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 14:58:56 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/23 10:26:39 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/05 16:38:20 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static int	init_nb_obj(t_parsing *p, int nb_light)
 
 static int	check_file_name(t_data *d, char *file_name)
 {
-	if (ft_strnstr(file_name, ".rt", ft_strlen(file_name)))
+	if (check_extention(file_name, ".rt") == true)
 		return (1);
-	if (ft_strnstr(file_name, ".solar", ft_strlen(file_name)))
+	if (check_extention(file_name, ".solar") == true)
 	{
 		d->solar_file = true;
 		return (1);
