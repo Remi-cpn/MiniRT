@@ -23,9 +23,10 @@ void	add_co(t_parsing *p, t_object *o, char **l_split)
 		o->type = OBJ_CONE;
 		o->shape.cone.apex = get_vec(p, l_split[1]);
 		o->shape.cone.axis = get_vec(p, l_split[2]);
-		vec_normalize(&o->shape.cone.axis);
-		if (fabs(vec_norm(o->shape.cone.axis) - 1.0) > 0.001)
+		if (o->shape.cone.axis.x == 0.0 && o->shape.cone.axis.y == 0.0
+				&& o->shape.cone.axis.z == 0.0)
 			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_CO_ARGS_MSG);
+		vec_normalize(&o->shape.cone.axis);
 		o->shape.cone.angle = ft_atod(l_split[3]) / 2.0;
 		o->shape.cone.height = ft_atod(l_split[4]);
 		o->color = get_color(p, l_split[5]);
