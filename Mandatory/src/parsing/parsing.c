@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 14:58:56 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/14 13:43:51 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/05 16:36:38 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@ static int	init_nb_obj(t_parsing *p)
 	else
 		nb_obj = p->count_line - 3;
 	return (nb_obj);
-}
-
-static int	check_file_name(char *file_name)
-{
-	if (ft_strnstr(file_name, ".rt", ft_strlen(file_name)) == NULL)
-		return (0);
-	return (1);
 }
 
 static void	pars_file(t_parsing *p, t_world *w, char *file_name)
@@ -67,7 +60,7 @@ t_world	parsing(t_data *d, char *file_name)
 	p.data = d;
 	ft_memset(&w, 0, sizeof(t_world));
 	p.w = &w;
-	if (!check_file_name(file_name))
+	if (check_extention(file_name, ".rt") == false)
 		exit_prog_pars(&p, ERROR_FILE_NAME, ERROR_FILE_NAME_MSG);
 	p.count_line = count_line(&p, file_name);
 	w.nb_obj = init_nb_obj(&p);

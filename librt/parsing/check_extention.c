@@ -1,20 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
+/*   check_extention.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/13 11:35:09 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/05 16:42:29 by rcompain         ###   ########.fr       */
+/*   Created: 2026/05/05 15:47:00 by rcompain          #+#    #+#             */
+/*   Updated: 2026/05/05 16:28:23 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../librt.h"
 
-void	print_error(char *message)
+bool	check_extention(char *str, char *key)
 {
-	ft_putstr_fd("Error\n", 2);
-	ft_putstr_fd(message, 2);
-	ft_putstr_fd("\n", 2);
+	int	size_str;
+	int	size_key;
+
+	if (!str || (!key || !key[0]))
+		return (false);
+	size_str = ft_strlen(str);
+	size_key = ft_strlen(key);
+	if (size_str < size_key)
+		return (false);
+	while (size_key > 0)
+	{
+		if (str[size_str - 1] != key[size_key - 1])
+			return (false);
+		size_key--;
+		size_str--;
+	}
+	return (true);
 }
