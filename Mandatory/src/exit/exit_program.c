@@ -39,6 +39,8 @@ void	exit_prog_pars(t_parsing *p, int exit_code, char *error_message)
 {
 	if (error_message)
 		print_error(error_message);
+	if (p->w->objects)
+		free(p->w->objects);
 	free_parsing(p);
 	if (p->data)
 	{

@@ -40,6 +40,7 @@ typedef struct s_parsing
 	bool		cam;
 	bool		al;
 	bool		light;
+	t_world		*w;
 	mlx_context	mlx;
 	t_data		*data;
 }	t_parsing;

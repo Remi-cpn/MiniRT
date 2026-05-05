@@ -42,9 +42,9 @@
 # define ERROR_FILE_LIGHT_MSG "Only one light needs to be defined in the file"
 # define ERROR_FILE_LIGHT_ARGS_MSG "Light must be defined with valid arguments"
 # define ERROR_FILE_AL_MSG "Only one ambient light needs to be defined in the \
-	file"
+file"
 # define ERROR_FILE_AL_ARGS_MSG "Ambient light must be defined with valid \
-	arguments"
+arguments"
 # define ERROR_FILE_SP_ARGS_MSG "Sphere must be defined with valid arguments"
 # define ERROR_FILE_SO_ARGS_MSG "Solars must be defined with valid arguments"
 # define ERROR_FILE_PL_ARGS_MSG "Plane must be defined with valid arguments"

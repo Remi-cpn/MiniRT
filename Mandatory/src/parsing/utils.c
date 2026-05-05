@@ -12,6 +12,7 @@
 
 #include "../../include/minirt.h"
 #include "../../include/parsing.h"
+#include <stdlib.h>
 
 t_vec	get_vec(t_parsing *p, char *s)
 {
@@ -20,9 +21,15 @@ t_vec	get_vec(t_parsing *p, char *s)
 
 	sp = ft_split(s, ',');
 	if (!sp || !sp[0] || !sp[1] || !sp[2] || sp[3])
+	{
+		ft_free_array(sp);
 		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
+	}
 	if (!double_valid(sp[0]) || !double_valid(sp[1]) || !double_valid(sp[2]))
+	{
+		ft_free_array(sp);
 		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
+	}
 	vec_init(&vec, ft_atod(sp[0]), ft_atod(sp[1]), ft_atod(sp[2]));
 	ft_free_array(sp);
 	return (vec);
@@ -36,7 +43,10 @@ mlx_color	get_color(t_parsing *p, char *s)
 
 	sp = ft_split(s, ',');
 	if (!sp || !sp[0] || !sp[1] || !sp[2] || sp[3])
+	{
+		ft_free_array(sp);
 		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
+	}
 	if (!int_valid(sp[0]) || !int_valid(sp[1]) || !int_valid(sp[2]))
 		exit_prog_pars(p, ERROR_FILE_ARGS, ERROR_FILE_ARGS_MSG);
 	v[0] = ft_atoi(sp[0]);
