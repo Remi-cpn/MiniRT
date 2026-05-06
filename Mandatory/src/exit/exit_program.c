@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_program.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:22:44 by rcompain          #+#    #+#             */
-/*   Updated: 2026/04/13 11:44:46 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/06 09:58:56 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ void	exit_prog_pars(t_parsing *p, int exit_code, char *error_message)
 		free(p->w->objects);
 	free_parsing(p);
 	if (p->data)
-	{
 		exit_prog(p->data, exit_code, NULL);
-		return ;
-	}
 	if (p->mlx)
 		mlx_destroy_context(p->mlx);
 	if (exit_code < 0)
