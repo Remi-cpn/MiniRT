@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   format_form_rt_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/11 12:40:03 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/04 17:08:10 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/06 09:48:16 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	add_co(t_parsing *p, t_object *o, char **l_split)
 		o->shape.cone.apex = get_vec(p, l_split[1]);
 		o->shape.cone.axis = get_vec(p, l_split[2]);
 		if (o->shape.cone.axis.x == 0.0 && o->shape.cone.axis.y == 0.0
-				&& o->shape.cone.axis.z == 0.0)
+			&& o->shape.cone.axis.z == 0.0)
 			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_CO_ARGS_MSG);
 		vec_normalize(&o->shape.cone.axis);
 		o->shape.cone.angle = ft_atod(l_split[3]) / 2.0;
@@ -71,8 +71,10 @@ void	add_pl(t_parsing *p, t_object *o, char **l_split)
 		o->type = OBJ_PLANE;
 		o->shape.plane.point = get_vec(p, l_split[1]);
 		o->shape.plane.normal = get_vec(p, l_split[2]);
-		if (fabs(vec_norm(o->shape.plane.normal) - 1.0) > 0.001)
+		if (o->shape.plane.normal.x == 0.0 && o->shape.plane.normal.y == 0.0
+			&& o->shape.plane.normal.z == 0.0)
 			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_PL_ARGS_MSG);
+		vec_normalize(&o->shape.plane.normal);
 		o->color = get_color(p, l_split[3]);
 		if (l_split[4] && double_valid(l_split[4]) && l_split[5])
 			pars_chessboard(p, o, l_split[4], l_split[5]);
@@ -93,8 +95,10 @@ void	add_cy(t_parsing *p, t_object *o, char **l_split)
 		o->type = OBJ_CYLINDER;
 		o->shape.cylinder.center = get_vec(p, l_split[1]);
 		o->shape.cylinder.axis = get_vec(p, l_split[2]);
-		if (fabs(vec_norm(o->shape.cylinder.axis) - 1.0) > 0.001)
+		if (o->shape.cylinder.axis.x == 0.0 && o->shape.cylinder.axis.y == 0.0
+			&& o->shape.cylinder.axis.z == 0.0)
 			exit_prog_pars(p, ERROR_FILE_OBJ, ERROR_FILE_CY_ARGS_MSG);
+		vec_normalize(&o->shape.cylinder.axis);
 		o->shape.cylinder.radius = ft_atod(l_split[3]) / 2.0;
 		o->shape.cylinder.height = ft_atod(l_split[4]);
 		o->color = get_color(p, l_split[5]);
