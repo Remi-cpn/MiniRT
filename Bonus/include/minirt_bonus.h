@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcompain <rcompain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/05 10:03:00 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/06 10:10:11 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,8 +178,6 @@ void	calc_one_light(t_world *w, t_hit *hit, t_light *light,
 void	window_hook(int event, void *param);
 void	key_hook_up(int key, void *param);
 void	key_hook_down(int key, void *param);
-void	mouse_hook_wheel(int event, void *param);
-void	mouse_hook(int event, void *param);
 
 bool	update_cam(t_data *d, double speed, double speed_rot);
 void	orbit_movement(t_data *d, double speed);

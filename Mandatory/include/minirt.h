@@ -6,7 +6,7 @@
 /*   By: rcompain <rcompain@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:33:52 by rcompain          #+#    #+#             */
-/*   Updated: 2026/05/02 11:54:21 by rcompain         ###   ########.fr       */
+/*   Updated: 2026/05/06 10:10:25 by rcompain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,6 @@ double	hit_cap(t_plane plane, t_ray ray, double radius);
 void	window_hook(int event, void *param);
 void	key_hook_up(int key, void *param);
 void	key_hook_down(int key, void *param);
-void	mouse_hook_wheel(int event, void *param);
-void	mouse_hook(int event, void *param);
 
 bool	update_cam(t_data *d, double speed);
 
